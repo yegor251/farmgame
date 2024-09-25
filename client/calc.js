@@ -45,6 +45,22 @@ export default class Calc{
         }
         return cameraIndexBoundingBox;
     }
+    static screenToIndexFloat(mousePos, offsetPos, scale, tileSide, outlineWidth) {
+        return{
+            i: (mousePos.x+offsetPos.x)/ ((tileSide + outlineWidth)*scale),
+            j: (mousePos.y+offsetPos.y)/ ((tileSide + outlineWidth)*scale)
+        }
+    }
+    static getWindowSize(cameraPos, screenValues, scale, tileSide, outlineWidth)
+    {
+        const topLeftCorner = this.screenToIndexFloat(cameraPos, {x: 0, y: 0}, scale, tileSide, outlineWidth);
+        const bottomRightCorner = this.screenToIndexFloat({x: cameraPos.x + screenValues.width, y: cameraPos.y + screenValues.height}, {x: 0, y:0}, scale, tileSide, outlineWidth);
+        const windowSize = {
+            width: bottomRightCorner.i - topLeftCorner.i + 1,
+            height: bottomRightCorner.j - topLeftCorner.j + 1
+        }
+        return windowSize;
+    }
     static getTouchesDistance(e)
     {
         const pos1 = {x: e.touches[0].clientX, y: e.touches[0].clientY};
@@ -58,7 +74,6 @@ export default class Calc{
     {
         const pos1 = {x: e.touches[0].clientX, y: e.touches[0].clientY};
         const pos2 = {x: e.touches[1].clientX, y: e.touches[1].clientY};
-        console.log(pos1,pos2)
         return {x: (pos1.x + pos2.x)/2,y: (pos1.y + pos2.y)/2}
     }
     static worldToScreen(x, y, camera, scale)

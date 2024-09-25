@@ -109,7 +109,7 @@ class Mouse{
                     GVAR.phantomStructureArr.push(el)
                 }
             }   
-        }, 300); // time
+        }, 200);
     }
     onMouseUp(e)
     {
@@ -172,6 +172,18 @@ class Mouse{
         this._movedDist = 0;
         this._isOnBorder = false
     }
+    moveBuildablePrevPos(){
+        GVAR.buildableArr.forEach((el) => {
+            if (el._isMoving)
+            {
+                let prevPos = Calc.indexToCanvas(el._prevPosition.i, el._prevPosition.j, CVAR.tileSide, CVAR.outlineWidth);
+                el.move(prevPos)
+                el._isMoving=false;
+                GVAR.phantomStructureArr.pop()
+            }
+        })
+        GVAR.redraw = true
+    }
     onClick()
     {
         if (this._mapPos.i<0 || this._mapPos.j<0 || this._mapPos.j>=CVAR.tileRows || this._mapPos.i>=CVAR.tileCols)
@@ -200,19 +212,30 @@ class Mouse{
             GVAR.scale = GVAR.scale + this._deltaScale
             camera.updateMapBoundingBox()
         } else if ((GVAR.scale + this._deltaScale) < CVAR.minScale){
-            GVAR.scale = CVAR.minScale
-            camera.updateMapBoundingBox()
-            return
-        } else{
-            GVAR.scale = CVAR.maxScale
-            camera.updateMapBoundingBox()
-            return
+            if (GVAR.scale > CVAR.minScale){
+                otn = CVAR.minScale / GVAR.scale
+                GVAR.scale = CVAR.minScale
+                camera.updateMapBoundingBox()
+                GVAR.redraw = true;
+            } else{
+                return
+            }
+        } else {
+            if (GVAR.scale < CVAR.maxScale){
+                otn = CVAR.maxScale / GVAR.scale
+                GVAR.scale = CVAR.maxScale
+                camera.updateMapBoundingBox()
+                GVAR.redraw = true;
+            } else{
+                return
+            }
         }
         const approximationCenter = Calc.getApproximationCenter(e);
         let d = Math.sqrt((approximationCenter.x)*(approximationCenter.x) + (approximationCenter.y)*(approximationCenter.y))
         let s = d - d/(otn)
-        camera._x = (camera._x + s * (approximationCenter.x) /(d))*otn
-        camera._y = (camera._y + s * (approximationCenter.y ) /(d))*otn
+        const newX = (camera._x + s * (approximationCenter.x) / d)*otn
+        const newY = (camera._y + s * (approximationCenter.y) / d)*otn
+        camera.move(camera._x - newX, camera._y - newY)
         camera.updateBoundingBox();
         GVAR.redraw = true;
     }

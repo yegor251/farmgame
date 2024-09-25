@@ -81,21 +81,17 @@ class Camera{
         return this._cameraIndexBoundingBox;
     }
     updateMapBoundingBox(){
-        const boundingBox = Calc.getCameraIndexBoundingBox(
+        const windowSize = Calc.getWindowSize(
          this.getPos(),
          {width: window.innerWidth, height: window.innerHeight},
-         GVAR.scale, CVAR.tileSide, CVAR.outlineWidth,
-         {width: 100, height: 100}
+         GVAR.scale, CVAR.tileSide, CVAR.outlineWidth
         )
-        const screenW = boundingBox.right - boundingBox.left
-        const screenH = boundingBox.bottom - boundingBox.top
         this.mapBoundingBox = {
             top: -1 * (CVAR.tileSide+CVAR.outlineWidth) * GVAR.scale,
-            bottom: (CVAR.tileCols+2-screenH) * (CVAR.tileSide+CVAR.outlineWidth) * GVAR.scale,
+            bottom: (CVAR.tileCols+2-windowSize.height) * (CVAR.tileSide+CVAR.outlineWidth) * GVAR.scale,
             left: -1 * (CVAR.tileSide+CVAR.outlineWidth) * GVAR.scale,
-            right: (CVAR.tileRows+3-screenW) * (CVAR.tileSide+CVAR.outlineWidth) * GVAR.scale,
+            right: (CVAR.tileRows+3-windowSize.width) * (CVAR.tileSide+CVAR.outlineWidth) * GVAR.scale,
         }
-        console.log(screenW, screenH,boundingBox, this.mapBoundingBox)
     }
 }
 const camera = new Camera();

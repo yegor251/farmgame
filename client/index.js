@@ -83,15 +83,15 @@ document.addEventListener('touchmove', (e) => {
 
 canvas.addEventListener('touchstart', (e) => {
     preventCollapse(e);
-    if (e.touches.length == 1 && !isScaling) {
+    if (e.touches.length == 1) {
         singleTouchTimeout = setTimeout(() => {
             if (!isScaling) {
                 mouse.onMouseDown(e);
             }
-        }, SINGLE_TOUCH_DELAY);
+        }, SINGLE_TOUCH_DELAY+100);
     } else if (e.touches.length > 1) {
-        clearTimeout(singleTouchTimeout);
         isScaling = true;
+        clearTimeout(singleTouchTimeout);
         mouse.onScaleStart(e);
     }
 }, false);
@@ -102,12 +102,11 @@ document.addEventListener('touchend', (e) => {
     const touchedElement = document.elementFromPoint(touchX, touchY);
 
     if (e.touches.length === 0) {
+        mouse.moveBuildablePrevPos()
         clearTimeout(singleTouchEndTimeout);
         singleTouchEndTimeout = setTimeout(() => {
-            if (!isScaling) {
-                if (canvas === touchedElement) {
-                    mouse.onMouseUp(e);
-                }
+            if (canvas === touchedElement && !isScaling) {
+                mouse.onMouseUp(e);
             }
             isScaling = false;
         }, SINGLE_TOUCH_DELAY);
