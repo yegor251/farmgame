@@ -183,6 +183,7 @@ class Mouse{
             }
         })
         GVAR.redraw = true
+        this._isOnBorder = false
     }
     onClick()
     {

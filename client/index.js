@@ -102,7 +102,8 @@ document.addEventListener('touchend', (e) => {
     const touchedElement = document.elementFromPoint(touchX, touchY);
 
     if (e.touches.length === 0) {
-        mouse.moveBuildablePrevPos()
+        if (isScaling)
+            mouse.moveBuildablePrevPos()
         clearTimeout(singleTouchEndTimeout);
         singleTouchEndTimeout = setTimeout(() => {
             if (canvas === touchedElement && !isScaling) {
