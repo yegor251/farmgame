@@ -54,10 +54,10 @@ class Mouse{
         if (GVAR.phantomStructureArr.length != 0){
             let pos = Calc.indexToCanvas(this._mapPos.i, this._mapPos.j, CVAR.tileSide, CVAR.outlineWidth);
             if (
-                Math.abs(this._mapPos.i - camera._cameraIndexBoundingBox.left) <= 2 ||
-                Math.abs(this._mapPos.i - camera._cameraIndexBoundingBox.right) <= 2 ||
-                Math.abs(this._mapPos.j - camera._cameraIndexBoundingBox.top) <= 2 ||
-                Math.abs(this._mapPos.j - camera._cameraIndexBoundingBox.bottom) <= 2
+                mouse._screenPos.x >= window.innerWidth * 0.9 ||
+                mouse._screenPos.x <= window.innerWidth * 0.1 ||
+                mouse._screenPos.y >= window.innerHeight * 0.9 ||
+                mouse._screenPos.y <= window.innerHeight * 0.1
             ){
                 this._isOnBorder = true
                 const cameraCenter = {
@@ -105,7 +105,6 @@ class Mouse{
                     GVAR.redraw = true;
                     this._isDragging = true;
                     el._prevPosition = Calc.CanvasToIndex(el._x, el._y, CVAR.tileSide, CVAR.outlineWidth);
-                    console.log(el._prevPosition, el._x, el._y)
                     GVAR.phantomStructureArr.push(el)
                 }
             }   
@@ -145,7 +144,6 @@ class Mouse{
             if (el._isMoving)
             {
                 if (el._x>=0 && el._y>=0 && el._x<CVAR.tileSide*CVAR.tileCols && el._y<CVAR.tileSide*CVAR.tileRows && tiles[this._mapPos.i][this._mapPos.j].isCanPut(el)){
-                    console.log(el._prevPosition.i, el._prevPosition.j)
                     tiles[el._prevPosition.i][el._prevPosition.j].moveStructure(this._mapPos)
                 }
                 else {
