@@ -188,8 +188,8 @@ async function animate(delta){
     if (mouse._isOnBorder && !mouse._isBlockAfterShop){
         camera.newMove(mouse._dirX * 1.5, mouse._dirY * 1.5)
         let pos = {
-            x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX/GVAR.scale * 1.5,
-            y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY/GVAR.scale * 1.5
+            x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX/GVAR.scale * 3,
+            y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY/GVAR.scale * 3
         }
         if (camera._cameraIndexBoundingBox.top == 0)
             pos.y = GVAR.phantomStructureArr[0]._floatY
@@ -199,8 +199,7 @@ async function animate(delta){
             pos.x = GVAR.phantomStructureArr[0]._floatX
         if (camera._cameraIndexBoundingBox.bottom == 40)
             pos.y = GVAR.phantomStructureArr[0]._floatY
-        if (GVAR.phantomStructureArr[0]._x > 2 * CVAR.tileSide && GVAR.phantomStructureArr[0]._y > 2 * CVAR.tileSide)
-            GVAR.phantomStructureArr[0].move(pos)
+        GVAR.phantomStructureArr[0].move(pos)
     }
     if (GVAR.redraw || mouse._isOnBorder)
     {
