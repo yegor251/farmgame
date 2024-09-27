@@ -10,7 +10,7 @@ export default class Bush extends Buildable{
     constructor(x, y, type)
     {
         super(x, y, type);
-        this._image = RES.buildings[type].image
+        this._image = RES.buildings[type].image[0]
         this._timeStamp = RES.buildings[this._type].speed * 1000;
         this._freeze = false;
         this._collectedAmountLimit = RES.buildings[this._type].productLimit;
@@ -61,6 +61,7 @@ export default class Bush extends Buildable{
         this._collectedAmount = 0;
         player.buy(this._resetPrice)
         this.startWork()
+        this._image = RES.buildings[type].image[0]
         console.log('reset')
     }
     canStartWork(){
@@ -92,7 +93,7 @@ export default class Bush extends Buildable{
             : 0);
             if (this._finishTime - Date.now() < 0){
                 this._timeToFinish = 0
-                this._image = RES.plants['wheat'].image.stages[0]
+                this._image = RES.buildings[this._type].image[1]
                 this._isWork = false;
                 bushMenu.close()
             }
@@ -113,7 +114,9 @@ export default class Bush extends Buildable{
         } else
             console.log('недостаточно места в инвенторе')
         if (this._collectedAmount == this._collectedAmountLimit)
-            this._image = RES.plants['pizdec'].image.stages[0]
+            this._image = RES.buildings[this._type].image[2]
+        else
+            this._image = RES.buildings[this._type].image[0]
     }
     onClick()
     {

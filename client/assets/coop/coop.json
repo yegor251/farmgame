@@ -1,13 +1,23 @@
 {
   "name": "coop",
   "price": 30,
-  "size": {
-    "w": 3,
-    "h": 3
+  "speed": 50,
+  "maxAnimalAmount": 10,
+  "animalPrice": 13,
+  "sizex": 3,
+  "sizey": 3,
+  "maxLevel": 5,
+  "mapLimit": 2,
+  "intake":
+  {
+    "millet": 1
   },
-  "animal": "chicken",
-  "maxCount": 5,
-  "workTime": 50,
-  "product": "egg",
-  "feedType": "chickenFeed"
+  "products":
+  {
+      "egg": 1
+  },
+  "upgradesPrice":
+  [
+        100, 200, 300, 400
+  ]
 }

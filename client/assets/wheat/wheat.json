@@ -1,8 +1,13 @@
 {
   "name": "wheat",
-  "growTime": 10,
-  "moneyReward": 5,
-  "shopCost": 3,
-  "collectAmount": 2,
-  "price": 5
+  "orderPrice": 6,
+  "orderTokenPrice": 10,
+  "orderAmountMin": 38,
+  "orderAmountMax": 50,
+  "seed":{
+      "price": 2,
+      "amount": 3,
+      "minimumLvl": 0,
+      "timeToGrow": 10
+  }
 }

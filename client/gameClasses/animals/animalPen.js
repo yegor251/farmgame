@@ -16,8 +16,9 @@ export default class AnimalPen extends Buildable{
         this._isWork = false;
         this._image = RES.buildings[type].image
         this._frontImage = RES.buildings[type].frontImage
-        this._timeStamp = RES.buildings[this._type].workTime * 1000;
+        this._timeStamp = RES.buildings[this._type].speed * 1000;
         this._freeze = false
+        this._feedType = Object.keys(RES.buildings[type].intake)[0]
     }
     activateBooster(){
         if (this._timeToFinish){
@@ -53,12 +54,12 @@ export default class AnimalPen extends Buildable{
         ctx.drawImage(this._frontImage, this._x, this._y + (this._h + out) * perc, this._w, this._frontImage.height * CVAR.tileSide / 16);
     }
     canStartWork(){
-        return !this._isWork && this._animals.length!=0 && player._inventory[RES.buildings[this._type].feedType] >= this._animals.length
+        return !this._isWork && this._animals.length!=0 && player._inventory[this._feedType] >= this._animals.length
     }
     startWork(){
         this._freeze = true
         socketClient.send(`use/start/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
-        player._inventory[RES.buildings[this._type].feedType] -= this._animals.length;
+        player._inventory[this._feedType] -= this._animals.length;
         this._timeToFinish = this._timeStamp;
         this._isWork = true;
     }
@@ -77,9 +78,9 @@ export default class AnimalPen extends Buildable{
     canAddAnimal(animal){
         if (animal !== RES.buildings[this._type].animal)
             console.log('животное не подходит')
-        if (this._animals.length == RES.buildings[this._type].maxCount)
+        if (this._animals.length == RES.buildings[this._type].maxAnimalAmount)
             console.log('слоты для животных заняты')
-        return (this._animals.length < RES.buildings[this._type].maxCount && animal === RES.buildings[this._type].animal)
+        return (this._animals.length < RES.buildings[this._type].maxAnimalAmount && animal === RES.buildings[this._type].animal)
     }
     addAnimal(){
         this._animals.push(new Animal(this._x + this._w/2, this._y + this._h/2,RES.buildings[this._type].animal,{x: this._x, y: this._y, w: this._w, h: this._h}))
@@ -109,7 +110,8 @@ export default class AnimalPen extends Buildable{
     }
     collect(){
         if (player.getInvFullness() >= this._animals.length){
-            player.pushInventory(RES.buildings[this._type].product, this._animals.length);
+            const product = Object.keys(RES.buildings[this._type].products)[0]
+            player.pushInventory(product, this._animals.length);
             this._timeToFinish = undefined;
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
         } else{

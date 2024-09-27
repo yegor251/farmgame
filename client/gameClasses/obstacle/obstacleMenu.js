@@ -29,19 +29,30 @@ class ObstacleMenu {
 
         const obstacleDelete = document.getElementById('obstacle-button');
         obstacleDelete.className = 'booster-button'; //заменить
-        if (player._money >= this.obstacle._deletePrice) {
+        if ((this.obstacle._deletePrice && this.obstacle._deleteTokenPrice && 
+         player._money >= this.obstacle._deletePrice && player._tokenBalance >= this.obstacle._deleteTokenPrice) || 
+         (this.obstacle._deleteTokenPrice && player._tokenBalance >= this.obstacle._deleteTokenPrice) || 
+         (this.obstacle._deletePrice && player._money >= this.obstacle._deletePrice)
+        ) {
             obstacleDelete.disabled = false;
         } else {
             obstacleDelete.disabled = true;
         }
         obstacleDelete.addEventListener('click', () => {
             const tileIndex = Calc.CanvasToIndex(this.obstacle._x, this.obstacle._y, CVAR.tileSide, CVAR.outlineWidth);
-            for (let i = tileIndex.i; i < this.obstacle._w; i++) {
-                for (let j = tileIndex.j; j < this.obstacle._h; j++) {
+            for (let i = tileIndex.i; i < this.obstacle._w / CVAR.tileSide; i++) {
+                for (let j = tileIndex.j; j < this.obstacle._h / CVAR.tileSide; j++) {
                     tiles[i][j]._structure = "none"
                 }
             }
-            player.buy(this.obstacle._deletePrice)
+            if (this.obstacle._deletePrice && this.obstacle._deleteTokenPrice){
+                player.buy(this.obstacle._deletePrice)
+                player.spendToken(this.obstacle._deleteTokenPrice)
+            } else if (this.obstacle._deleteTokenPrice){
+                player.spendToken(this.obstacle._deleteTokenPrice)
+            } else {
+                player.buy(this.obstacle._deletePrice)
+            }
             this.obstacle.delete()
             this.close()
         });

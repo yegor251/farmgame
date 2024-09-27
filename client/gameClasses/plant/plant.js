@@ -13,7 +13,7 @@ export default class Plant extends Sprite{
         console.log(plantType)
         this._image = RES.plants[plantType].image.stages[0]
         this._plantType = plantType;
-        this._plantTimeStamp = RES.plants[plantType].growTime * 1000;
+        this._plantTimeStamp = RES.plants[plantType].seed.timeToGrow * 1000;
         this._timeToGrow = this._plantTimeStamp;
         this._grown = false;
     }
@@ -43,7 +43,7 @@ export default class Plant extends Sprite{
         if (this._grown)
         {
             const index = Calc.CanvasToIndex(this._x, this._y, CVAR.tileSide, CVAR.outlineWidth);
-            player.pushInventory(this._plantType, RES.plants[this._plantType].collectAmount);
+            player.pushInventory(this._plantType, RES.plants[this._plantType].seed.amount);
             tiles[player._chosenTile.i][player._chosenTile.j]._structure._plant = 'none';
         }
     }

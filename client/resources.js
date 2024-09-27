@@ -20,7 +20,7 @@ class Resources {
       });
     }
     this.names.plants = ["wheat", "pizdec"];
-    this.names.items = ["bread"];
+    this.names.items = ["bread"]; //только крафты
     this.names.animals = ["chicken"];
     this.names.obstacles = ["small_swamp"];
     this.mapImgNames = ["grass_1", "grass_2"];

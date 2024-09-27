@@ -1,10 +1,5 @@
 {
   "name": "garden",
   "price": 10,
-  "maxSlots": 1,
-  "mapLimit": 5,
-  "size": {
-    "w": 1,
-    "h": 1
-  }
+  "mapLimit": 5
 }

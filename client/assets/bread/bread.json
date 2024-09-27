@@ -1,5 +1,7 @@
 {
   "name": "bread",
-  "minCost": 2,
-  "maxCost": 6
+  "orderPrice": 30,
+  "orderTokenPrice": 10,
+  "orderAmountMin": 3,
+  "orderAmountMax": 10
 }

@@ -14,7 +14,8 @@ export default class Obstacle extends Sprite{
         this._type = type;
         this._w = RES.obstacles[type].size.w * CVAR.tileSide;
         this._h = RES.obstacles[type].size.h * CVAR.tileSide;
-        this._deletePrice = RES.obstacles[type].moneyCost
+        this._deletePrice = RES.obstacles[type].removePrice
+        this._deleteTokenPrice = RES.obstacles[type].removeTokenPrice
     }
     draw(){
         const out = (this._image.height - 16 * this._h/CVAR.tileSide)*CVAR.tileSide/16 //смещение вверх из-за размера картинки

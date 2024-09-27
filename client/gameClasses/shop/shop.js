@@ -158,7 +158,7 @@ class Shop{
             img.src = `client/assets/${plant}/${plant}.png`
             img.className = "item-image"
             const price = document.createElement('h3');
-            price.innerText = `${RES.plants[plant].price}$`;
+            price.innerText = `${RES.plants[plant].seed.price}$`;
 
             // Создаем элемент для выпадающего описания
             const description = document.createElement('div');
@@ -388,7 +388,7 @@ class Shop{
         RES.buildingNames.bush.forEach(building => {
             const shopItem = document.createElement('div');
             const img = document.createElement('img');
-            img.src = `client/assets/${building}/${building}.png`
+            img.src = `client/assets/${building}/${building}_bush.png`
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
@@ -439,7 +439,7 @@ class Shop{
                                 structureType: 'building'
                             }
                             let pos = Calc.indexToCanvas(mouse._mapPos.i, mouse._mapPos.j, CVAR.tileSide, CVAR.outlineWidth)
-                            player._phantomStructure.structure = new Phantom(pos.x, pos.y, RES.buildings[building].size, building, RES.buildings[building].image)
+                            player._phantomStructure.structure = new Phantom(pos.x, pos.y, RES.buildings[building].size, building, RES.buildings[building].image[0])
                             player._phantomStructure.structure._isMoving = true
                             GVAR.phantomStructureArr.push(player._phantomStructure.structure)
                             mouse._isDragging = true

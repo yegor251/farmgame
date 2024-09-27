@@ -3,12 +3,10 @@
     "price": 30,
     "productLimit": 5,
     "speed": 8,
-    "size": {
-      "w": 1,
-      "h": 1
-    },
+    "sizex": 1,
+    "sizey": 1,
+    "mapLimit": 2,
     "products": {
       "cranberry": 1
     }
-  }
-  
+}

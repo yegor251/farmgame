@@ -151,7 +151,7 @@ class FieldMenu{
                 dropList.appendChild(dropName)
 
                 const dropTime =  document.createElement("h3")
-                dropTime.innerText = this._formatTime(RES.plants[plant].growTime)
+                dropTime.innerText = this._formatTime(RES.plants[plant].seed.timeToGrow)
                 dropTime.className = 'drop-list-text'
                 dropList.appendChild(dropTime)
 

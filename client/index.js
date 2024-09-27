@@ -74,6 +74,7 @@ document.addEventListener('touchmove', (e) => {
         if (e.touches.length == 1 && !isScaling) {
             mouse.onMouseMove(e);
         } else if (e.touches.length > 1) {
+            mouse.moveBuildablePrevPos()
             clearTimeout(singleTouchTimeout);
             isScaling = true;
             mouse.onScale(e);
@@ -88,8 +89,9 @@ canvas.addEventListener('touchstart', (e) => {
             if (!isScaling) {
                 mouse.onMouseDown(e);
             }
-        }, SINGLE_TOUCH_DELAY+100);
+        }, SINGLE_TOUCH_DELAY+50);
     } else if (e.touches.length > 1) {
+        mouse.moveBuildablePrevPos()
         isScaling = true;
         clearTimeout(singleTouchTimeout);
         mouse.onScaleStart(e);

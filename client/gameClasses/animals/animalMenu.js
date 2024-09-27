@@ -86,7 +86,8 @@ class AnimalMenu{
         const animalPen = this.animalPen;
         const startButton = document.getElementById("animal-start-button");
         startButton.className = 'item-image';
-        startButton.src = `client/assets/${RES.buildings[type].feedType}/${RES.buildings[type].feedType}.png`;
+        const feedType = Object.keys(RES.buildings[type].intake)[0]
+        startButton.src = `client/assets/${feedType}/${feedType}.png`;
         if (this.animalPen.canStartWork()) {
             if (startButton.dataset.handlerAdded !== 'true') {
                 startButton.style.filter = 'grayscale(0%)';
