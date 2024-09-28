@@ -134,6 +134,7 @@ class SocketClient{
     }
   	regenPlayer(data){
 		player._inventory = data.player.Inventory.map
+        player._inventorySize = 50 + 10 * data.player.Inventory.level
 		player._money = data.player.money
         player._networth = data.player.networth
 		player.updateMoney()
@@ -210,7 +211,7 @@ class SocketClient{
               	el.slots.forEach(slot => {
                   	tiles[el.x][el.y]._structure.addSlot(slot)
               	});
-              	tiles[el.x][el.y]._structure.update()
+              	tiles[el.x][el.y]._structure._slotsAmount = 2 //количество слотов
           	} else if (RES.buildingNames.garden.includes(el.name)){
 				if (el.slots[0].workName != 'none')
 					tiles[el.x][el.y]._structure.addSlot(el.slots[0])
@@ -426,11 +427,13 @@ class Init {
   
 const init = new Init();
   
-init.loadRes().then(() => {
+init.loadRes().then(async () => {
     const script = document.createElement('script'); // Динамически загружаем основной скрипт после загрузки ресурсов
     script.src = 'client/index.js';
     script.type = 'module'
     document.body.appendChild(script);
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
+    await sleep(1000);
     document.getElementById('loading-screen').style.display = 'none';
 }).catch((error) => {
     console.error('Failed to load resources:', error);

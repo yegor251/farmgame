@@ -1,6 +1,7 @@
 import player from "../player/player.js";
 import GVAR from "../../globalVars/global.js";
 import RES from "../../resources.js";
+import CVAR from "../../globalVars/const.js";
 
 class BuildingMenu {
     constructor() {
@@ -34,7 +35,7 @@ class BuildingMenu {
     }
     renderQueue() {
         const queue = this.building._craftingItems;
-        const size = RES.buildings[this.building._type].maxSlots;
+        const size = this.building._slotsAmount;
         const buildingQueue = document.getElementById('building-queue');
         buildingQueue.innerHTML = '';
         for (let i = 0; i < size; i++) {
@@ -52,6 +53,53 @@ class BuildingMenu {
                 time.innerText = this._formatTime(Math.trunc(queue[i].timeToFinish / 1000));
                 queueElem.appendChild(time);
             }
+            buildingQueue.appendChild(queueElem);
+        }
+
+        if (this.building._slotsAmount < RES.buildings[this.building._type].maxSlots + CVAR.extraSlotsCount){
+            const queueElem = document.createElement("div");
+            queueElem.className = "queue-elem";
+            queueElem.innerText = '+'
+            queueElem.onclick = () => {
+                const overlay = document.createElement('div');
+                overlay.id = 'menu-overlay';
+                
+                const menu = document.createElement('div');
+                menu.id = 'menu';
+
+                const extraSlotCount = this.building._slotsAmount - RES.buildings[this.building._type].maxSlots
+                const price = CVAR.extraSlotPrice * Math.pow(CVAR.extraSlotCoef, extraSlotCount)
+                const question = document.createElement('p');
+                question.innerText = `Хотите ли купить улучшение за ${price} токенов?`;
+                
+                const yesButton = document.createElement('button');
+                yesButton.innerText = 'Да';
+                yesButton.className = 'menu-button yes-button';
+                yesButton.onclick = () => {
+                    if (player._tokenBalance >= price){
+                        this.building.incSlotsAmount()
+                        player.spendToken(price)
+                        this.renderQueue()
+                    }
+                    document.body.removeChild(menu);
+                    document.body.removeChild(overlay);
+                };
+
+                const noButton = document.createElement('button');
+                noButton.innerText = 'Нет';
+                noButton.className = 'menu-button no-button';
+                noButton.onclick = () => {
+                    document.body.removeChild(menu);
+                    document.body.removeChild(overlay);
+                };
+
+                menu.appendChild(question);
+                menu.appendChild(yesButton);
+                menu.appendChild(noButton);
+
+                document.body.appendChild(overlay);
+                document.body.appendChild(menu);
+            };
             buildingQueue.appendChild(queueElem);
         }
     }

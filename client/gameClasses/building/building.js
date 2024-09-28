@@ -15,7 +15,11 @@ export default class Building extends Buildable{
         this._craftingItems = new Array()
         this._level = 1;
         this._freeze = false
-        this._slotsAmount = 3;
+        this._slotsAmount = RES.buildings[type].maxSlots;
+    }
+    incSlotsAmount(){
+        this._slotsAmount += 1
+        socketClient.send(`buyslot/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
     }
     activateBooster(){
         if (this._craftingItems.length == 0){
@@ -70,7 +74,7 @@ export default class Building extends Buildable{
         this._craftingItems.push(item)
     }
     canStartWork(item){
-        return this._craftingItems.length < this._slotsAmount && player.canCraft(item) && item.minLevel <= this._level // && item.level <= this._level
+        return this._craftingItems.length < this._slotsAmount && player.canCraft(item) && item.minLevel <= this._level
     }
     startWork(item){
         this._freeze = true
