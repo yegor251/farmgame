@@ -218,6 +218,8 @@ class SocketClient{
 				for (let i = 0; i < el.integerData; i++) {
 					tiles[el.x][el.y]._structure.addAnimal()
 				}
+                console.log(el.level)
+                tiles[el.x][el.y]._structure.setLevel(el.level)
 				if (el.slots[0])
 					tiles[el.x][el.y]._structure.setTime(el.slots[0].workStartTimeStamp)
 			} else if (RES.buildingNames.bush.includes(el.name)){
@@ -225,9 +227,9 @@ class SocketClient{
 			}
 		});
         RES.buildingNames.bakery.concat(RES.buildingNames.animalPen).forEach(name => {
-            RES.buildings[name].price *= Math.pow(100, GVAR.countBuilding(name))
+            RES.buildings[name].price *= Math.pow(CVAR.nextBuildingPriceCoef, GVAR.countBuilding(name))
         });
-        RES.buildings['garden'].floatPrice = RES.buildings['garden'].price * Math.pow(1.1, GVAR.countBuilding('garden'))
+        RES.buildings['garden'].floatPrice = RES.buildings['garden'].price * Math.pow(CVAR.nextGardenPriceCoef, GVAR.countBuilding('garden'))
         RES.buildings['garden'].price = Math.floor(RES.buildings['garden'].floatPrice)
 		this.regenPlayer(data)
 		this.gameSessionPromiseResolve()

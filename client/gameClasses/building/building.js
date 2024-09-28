@@ -120,7 +120,10 @@ export default class Building extends Buildable{
         }
         ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
         ctx.shadowBlur = 0;
-        if (this._craftingItems.length != 0 && this._craftingItems[0].timeToFinish == 0){
+        if (this._craftingItems.length != 0 && 
+            this._craftingItems[0].workingTimeStamp - Date.now() <= 0 && 
+            this._craftingItems[0].timeToFinish == 0)
+        {
             let key = Object.keys(this._craftingItems[0])[0]
             ctx.drawImage(RES.items[key].image, this._x + RES.buildings[this._type].productx, this._y + RES.buildings[this._type].producty, CVAR.itemMapSize, CVAR.itemMapSize)
         }
@@ -128,8 +131,6 @@ export default class Building extends Buildable{
     update()
     {
         if (!this._freeze && this._nowWorkIndex < this._craftingItems.length){
-            // if (this._craftingItems.length > 1)
-            //     console.log(Date.now(), this._craftingItems)
             this._craftingItems[this._nowWorkIndex].timeToFinish = (this._craftingItems[this._nowWorkIndex].timeToFinish > 0 
             ? 
             (this._craftingItems[this._nowWorkIndex].timeToFinish - 1000)
@@ -144,7 +145,9 @@ export default class Building extends Buildable{
     }
     collect()
     {
-        if (this._craftingItems.length>0 && this._craftingItems[0].timeToFinish == 0)
+        if (this._craftingItems.length>0 && 
+            this._craftingItems[0].workingTimeStamp - Date.now() <= 0 && 
+            this._craftingItems[0].timeToFinish == 0)
         {
             const key = Object.keys(this._craftingItems[0])[0];
             if (player.getInvFullness()>=this._craftingItems[0][key]){

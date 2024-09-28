@@ -43,13 +43,13 @@ class AnimalMenu{
     renderTimer(){
         const textTime = document.getElementById("animal-timeToFinish")
         console.log(this.animalPen)
-        if (this.animalPen._timeToFinish == undefined)
+        if (!this.animalPen._timeToFinish)
             textTime.innerText = '-'
         else
             textTime.innerText = this._formatTime(Math.floor(this.animalPen._timeToFinish / 1000))
         let a = this.animalPen._timeToFinish
         let b = this.animalPen._timeStamp
-        if (this.animalPen._timeToFinish == undefined)
+        if (!this.animalPen._timeToFinish)
             a = 0;
         var progressLine = document.getElementById('animal-process-line');
         var progressBar = progressLine.querySelector('.progress');
@@ -73,6 +73,11 @@ class AnimalMenu{
         animalImage.className = 'menu-big-img';
         animalImage.src = `client/assets/${type}/${type}.png`;
         this.renderTimer();
+        const upgradeButton = document.getElementById('animal-upgrade');
+        upgradeButton.disabled = !(this.animalPen.canUpgrade())
+        upgradeButton.onclick = () => {
+            this.animalPen.upgrade()
+        };
     
         const isIntersecting = (rect1, rect2) => {
             return (

@@ -45,7 +45,7 @@ export default class Bush extends Buildable{
             ctx.shadowBlur = 30;
             ctx.shadowColor = "rgb(0,230,0)";
         }
-        if (this._timeToFinish == 0){ //показатель готовности
+        if (this._timeToFinish == 0 && this._finishTime - Date.now() <= 0){
             ctx.shadowBlur = 30;
             ctx.shadowColor = "rgb(0,0,230)";
         }
@@ -91,7 +91,7 @@ export default class Bush extends Buildable{
             ? 
             (this._timeToFinish - 1000)
             : 0);
-            if (this._finishTime - Date.now() < 0){
+            if (this._finishTime - Date.now() <= 0){
                 this._timeToFinish = 0
                 this._image = RES.buildings[this._type].image[1]
                 this._isWork = false;
@@ -120,7 +120,7 @@ export default class Bush extends Buildable{
     }
     onClick()
     {
-        if (this._timeToFinish == 0){
+        if (this._timeToFinish == 0 && this._finishTime - Date.now() <= 0){
             this.collect()
         } else {
             bushMenu.show(this)

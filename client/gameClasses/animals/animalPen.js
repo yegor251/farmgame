@@ -17,6 +17,8 @@ export default class AnimalPen extends Buildable{
         this._image = RES.buildings[type].image
         this._frontImage = RES.buildings[type].frontImage
         this._timeStamp = RES.buildings[this._type].speed * 1000;
+        this._level = 1;
+        this._speed = RES.buildings[this._type].speed * 1000;
         this._freeze = false
         this._feedType = Object.keys(RES.buildings[type].intake)[0]
     }
@@ -35,12 +37,26 @@ export default class AnimalPen extends Buildable{
         this._isWork = true;
         console.log(this._timeToFinish, Date.now() - this._finishTime)
     }
+    setLevel(level){
+        this._level = level
+        this._timeStamp -= Math.floor(this._speed * (CVAR.animalPenCoef - 1) * (level - 1))
+        console.log(this._timeStamp, this._speed)
+    }
+    canUpgrade(){
+        return player._money >= RES.buildings[this._type].upgradesPrice[this._level-1] && this._level <= RES.buildings[this._type].upgradesPrice.length
+    }
+    upgrade(){
+        player.buy(RES.buildings[this._type].upgradesPrice[this._level-1])
+        this._level += 1
+        this._timeStamp -= Math.floor(this._speed * (CVAR.animalPenCoef - 1))
+        socketClient.send(`upgrade/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
+    }
     draw(){
         if (this._isMoving){
             ctx.shadowBlur = 30;
             ctx.shadowColor = "rgb(0,230,0)";
         }
-        if (this._timeToFinish == 0){ //показатель готовности
+        if (this._timeToFinish == 0 && this._finishTime - Date.now() <= 0){
             ctx.shadowBlur = 30;
             ctx.shadowColor = "rgb(0,0,230)";
         }
@@ -94,7 +110,7 @@ export default class AnimalPen extends Buildable{
             ? 
             (this._timeToFinish - 1000)
             : 0);
-            if (this._finishTime - Date.now() < 0){
+            if (this._finishTime - Date.now() <= 0){
                 console.log(this._finishTime , Date.now())
                 this._timeToFinish = 0
                 console.log('да')
@@ -120,7 +136,7 @@ export default class AnimalPen extends Buildable{
     }
     onClick()
     {
-        if (this._timeToFinish == 0){
+        if (this._timeToFinish == 0 && this._finishTime - Date.now() <= 0){
             this.collect()
         } else {
             animalMenu.show(this)
