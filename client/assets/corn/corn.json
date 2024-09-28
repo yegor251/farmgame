@@ -1,13 +1,13 @@
 {
-  "name": "wheat",
-  "orderPrice": 3,
+  "name": "corn",
+  "orderPrice": 7,
   "orderTokenPrice": 0,
   "orderAmountMin": 3,
   "orderAmountMax": 20,
   "seed":{
-      "price": 10,
+      "price": 150,
       "amount": 3,
       "minimumLvl": 0,
-      "timeToGrow": 60
+      "timeToGrow": 300
   }
 }

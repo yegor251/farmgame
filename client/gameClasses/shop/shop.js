@@ -188,9 +188,9 @@ class Shop{
             shopItem.appendChild(description);
             
             shopItem.addEventListener("click", function(e) {
-                if (player._money >= RES.plants[plant].price && player.getInvFullness() >= 1)
+                if (player._money >= RES.plants[plant].seed.price && player.getInvFullness() >= 1)
                 {
-                    player.buy(RES.plants[plant].price)
+                    player.buy(RES.plants[plant].seed.price)
                     player.pushInventory(plant, 1)
                     socketClient.send(`buy/${plant}/${1}`)
                 }else{

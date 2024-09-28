@@ -61,7 +61,7 @@ export default class Bush extends Buildable{
         this._collectedAmount = 0;
         player.buy(this._resetPrice)
         this.startWork()
-        this._image = RES.buildings[type].image[0]
+        this._image = RES.buildings[this._type].image[0]
         console.log('reset')
     }
     canStartWork(){
