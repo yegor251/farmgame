@@ -71,7 +71,7 @@ class AnimalMenu{
         const type = this.animalPen._type;
         const animalImage = document.getElementById('animal-img');
         animalImage.className = 'menu-big-img';
-        animalImage.src = `client/assets/${type}/${type}.png`;
+        animalImage.src = `client/assets/buildings/${type}/${type}.png`;
         this.renderTimer();
         const upgradeButton = document.getElementById('animal-upgrade');
         upgradeButton.disabled = !(this.animalPen.canUpgrade())

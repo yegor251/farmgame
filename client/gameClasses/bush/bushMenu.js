@@ -79,7 +79,7 @@ class BushMenu{
         const type = this.bush._type;
         const bushImage = document.getElementById('bush-img');
         bushImage.className = 'menu-big-img';
-        bushImage.src = `client/assets/${type}/${type}_bush.png`;
+        bushImage.src = `client/assets/buildings/${type}/${type}_bush.png`;
         this.renderTimer();
     
         const isIntersecting = (rect1, rect2) => {

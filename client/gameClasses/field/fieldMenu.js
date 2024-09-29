@@ -73,7 +73,7 @@ class FieldMenu{
     }
     renderPlants(){
         const fieldImg = document.getElementById('field-img')
-        fieldImg.src = `client/assets/${this.field._type}/${this.field._type}.png`
+        fieldImg.src = `client/assets/buildings/${this.field._type}/${this.field._type}.png`
         fieldImg.className = 'menu-big-img'
         const fieldMenuList = document.getElementById('field-menu-list');
         fieldMenuList.innerHTML = ""

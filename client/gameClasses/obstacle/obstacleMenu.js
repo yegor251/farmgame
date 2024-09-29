@@ -25,7 +25,7 @@ class ObstacleMenu {
         const type = this.obstacle._type;
         const img = document.getElementById('obstacle-img')
         img.className = 'menu-big-img'; //заменить
-        img.src = `client/assets/${type}/${type}0.png`;
+        img.src = `client/assets/obstacles/${type}/${type}0.png`;
 
         const obstacleDelete = document.getElementById('obstacle-button');
         obstacleDelete.className = 'booster-button'; //заменить

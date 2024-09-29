@@ -67,7 +67,7 @@ export default class AnimalPen extends Buildable{
             animal.draw();
         });
         const perc = 1 - this._frontImage.height / this._image.height
-        ctx.drawImage(this._frontImage, this._x, this._y + (this._h + out) * perc, this._w, this._frontImage.height * CVAR.tileSide / 16);
+        ctx.drawImage(this._frontImage, this._x, this._y - out + (this._h + out) * perc, this._w, this._frontImage.height * CVAR.tileSide / 16);
     }
     canStartWork(){
         return !this._isWork && this._animals.length!=0 && player._inventory[this._feedType] >= this._animals.length

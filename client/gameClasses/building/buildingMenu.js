@@ -108,7 +108,7 @@ class BuildingMenu {
         const queue = this.building._craftingItems;
         this.renderQueue();
         const buildingImg = document.getElementById('building-img');
-        buildingImg.src = `client/assets/${type}/${type}.png`;
+        buildingImg.src = `client/assets/buildings/${type}/${type}.png`;
         buildingImg.className = 'menu-big-img';
         const button = document.getElementById('upgrade-building');
         button.onclick = () => {

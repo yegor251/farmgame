@@ -63,7 +63,7 @@ class Shop{
         RES.buildingNames.garden.concat(RES.buildingNames.bakery).forEach(building => {
             const shopItem = document.createElement('div');
             const img = document.createElement('img');
-            img.src = `client/assets/${building}/${building}.png`
+            img.src = `client/assets/buildings/${building}/${building}.png`
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
@@ -207,7 +207,7 @@ class Shop{
         RES.names.animals.forEach(animal => {
             const shopItem = document.createElement('div');
             const img = document.createElement('img');
-            img.src = `client/assets/${animal}/${animal}.png`
+            img.src = `client/assets/animals/${animal}/${animal}.png`
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.animals[animal].price}$`;
@@ -298,7 +298,7 @@ class Shop{
         RES.buildingNames.animalPen.forEach(building => {
             const shopItem = document.createElement('div');
             const img = document.createElement('img');
-            img.src = `client/assets/${building}/${building}.png`
+            img.src = `client/assets/buildings/${building}/${building}.png`
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
@@ -388,7 +388,7 @@ class Shop{
         RES.buildingNames.bush.forEach(building => {
             const shopItem = document.createElement('div');
             const img = document.createElement('img');
-            img.src = `client/assets/${building}/${building}_bush.png`
+            img.src = `client/assets/buildings/${building}/${building}_bush.png`
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;

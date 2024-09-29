@@ -17,8 +17,8 @@ export default class Animal extends Sprite{
         this._w = RES.animals[type].size.w * CVAR.tileSide
         this.range.w -= this._w
         this.range.h -= this._h
-        // this.range.y += 10 //размер запретной зоны переведенный в пиксели игры
-        // this.range.h -= 10
+        this.range.y += 5 //размер запретной зоны переведенный в пиксели игры
+        this.range.h -= 5
         this.nextCoords = this._getRandomPointOnBorder(range)
         this.timer = 0
         this.stopTime = 20 + Math.floor(Math.random() * 20)

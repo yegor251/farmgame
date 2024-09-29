@@ -354,10 +354,10 @@ class Init {
         const loadAssets = async (type, name) => {
             let data = {}
             if (type != 'items'){
-                data = await loadJson(`client/assets/${name}/${name}.json`);
+                data = await loadJson(`client/assets/${type}/${name}/${name}.json`);
 
                 try {
-                    const data_front = await loadJson(`client/assets/${name}/${name}_front.json`);
+                    const data_front = await loadJson(`client/assets/${type}/${name}/${name}_front.json`);
                     Object.assign(data, data_front);
                 } catch (error) {}
                 if (type === "plants") {
@@ -365,28 +365,28 @@ class Init {
                     data.image.stages = {};
             
                     const stagesPromises = Array.from({ length: 4 }).map(async (_, i) => {
-                        data.image.stages[i] = await loadImage(`client/assets/${name}/${name}_stage${i}.png`);
+                        data.image.stages[i] = await loadImage(`client/assets/${type}/${name}/${name}_stage${i}.png`);
                     });
                     await Promise.all(stagesPromises);
                 } else if (type === "obstacles") {
                     data.image = {};
             
                     const stagesPromises = Array.from({ length: 4 }).map(async (_, i) => {
-                        data.image[i] = await loadImage(`client/assets/${name}/${name}${i}.png`);
+                        data.image[i] = await loadImage(`client/assets/${type}/${name}/${name}${i}.png`);
                     });
                     await Promise.all(stagesPromises);
                 } else if (type === "buildings" && RES.buildingNames.animalPen.includes(name)){
-                    data.image = await loadImage(`client/assets/${name}/${name}.png`);
-                    data.frontImage = await loadImage(`client/assets/${name}/${name}_front.png`);
+                    data.image = await loadImage(`client/assets/${type}/${name}/${name}.png`);
+                    data.frontImage = await loadImage(`client/assets/${type}/${name}/${name}_front.png`);
                 } else if (type === "buildings" && RES.buildingNames.bush.includes(name)){
                     data.image = {};
             
                     const stagesPromises = Array.from({ length: 3 }).map(async (_, i) => {
-                        data.image[i] = await loadImage(`client/assets/${name}/${name}${i}.png`);
+                        data.image[i] = await loadImage(`client/assets/${type}/${name}/${name}${i}.png`);
                     });
                     await Promise.all(stagesPromises);
                 } else {
-                    data.image = await loadImage(`client/assets/${name}/${name}.png`);
+                    data.image = await loadImage(`client/assets/${type}/${name}/${name}.png`);
                 }
                 if (!data.size){
                     data.size = {
