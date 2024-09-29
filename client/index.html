@@ -39,6 +39,9 @@
         <button id="open-connect">
             ton-connect
         </button>
+        <button id="open-transactions">
+            transactions
+        </button>
     </div>
     <div id="shop-wrap">
         <div id="shop">
@@ -187,6 +190,23 @@
             <div id="bush-process-line"></div>
         </div>
     </div>
+    <div id="transaction-wrap">
+        <div id="transaction-menu">
+            <div id="transaction-bar">
+                <button id="closeTransaction">X</button>
+            </div>
+            <div class="transaction-content-wrap">
+                <div id="transaction-centered-content">
+                    <div class="transaction-buttons">
+                        <button id="deposits-button">Депозиты</button>
+                        <button id="withdraws-button">Выводы</button>
+                    </div>
+                    <div id="transaction-deposits-list" class="transaction-list"></div>
+                    <div id="transaction-withdraws-list" class="transaction-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>    
     <!-- <script>
         let tg = window.Telegram.WebApp;
         // Дальше вы можете использовать объект tg для взаимодействия с Telegram Web App

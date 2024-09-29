@@ -141,8 +141,6 @@ class SocketClient{
         player._tokenBalance = data.wallet.tokenBalance
         player._tonBalance = data.wallet.tonBalance
         player._usdtBalance = data.wallet.usdtBalance
-        player._deposits = data.deposits
-        player._withdraws = data.withdraws
 
         player._spinItems = data.player.spin.items
         player._isSpinActivated = data.player.spin.activated
@@ -201,7 +199,6 @@ class SocketClient{
                 player._activBoostersArr.push(booster)
             } 
         }
-        player._availableDeals = data.availableDeals
   	}
   	initGameSession(data){
     	console.log(data)
@@ -232,6 +229,10 @@ class SocketClient{
         });
         RES.buildings['garden'].floatPrice = RES.buildings['garden'].price * Math.pow(CVAR.nextGardenPriceCoef, GVAR.countBuilding('garden'))
         RES.buildings['garden'].price = Math.floor(RES.buildings['garden'].floatPrice)
+
+        player._availableDeals = data.availableDeals
+        player._deposits = data.deposits
+        player._withdraws = data.withdraws
 		this.regenPlayer(data)
 		this.gameSessionPromiseResolve()
   	}
@@ -274,7 +275,7 @@ class Init {
         }
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/1890336521`)
+        socketClient.send(`connect/2357325`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
         console.log("map loaded")

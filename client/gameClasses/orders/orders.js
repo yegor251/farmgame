@@ -35,10 +35,6 @@ class Orders {
             order.timeStamp = Math.floor(Date.now()/1000) + 150
             socketClient.send(`order/complete/${order.index}`)
             socketClient.send(`regen`)
-            player.addMoney(order.orderPrice)
-            for (let item in order.orderItems) {
-                player._inventory[item] -= order.orderItems[item]; 
-            }
             this.renderOrders();
             document.getElementById('order-details').innerHTML = "";
             console.log('now', Math.floor(Date.now()/1000))

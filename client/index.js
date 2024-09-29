@@ -9,6 +9,7 @@ import { spin } from './gameClasses/spin/spin.js';
 import { buisnessMenu } from './gameClasses/buisness/buisnessMenu.js';
 import { orderManager } from './gameClasses/orders/orders.js';
 import boosterMenu from './gameClasses/boosterMenu/boosterMenu.js';
+import { transactionsMenu } from './gameClasses/transactionsMenu/transactionsMenu.js';
 // import { dealmenu } from './gameClasses/ton-connect/tonMenu.js';
 import { buildingMenu } from './gameClasses/building/buildingMenu.js';
 import { animalMenu } from './gameClasses/animals/animalMenu.js';
