@@ -38,13 +38,6 @@ export default class Tile extends Sprite{
             this._structure.realStart()
         }
     }
-    onClick()
-    {  
-        if (GVAR.UI[0] != null)
-        {
-            GVAR.UI.pop();
-        }
-    }
     isCanPut(elem){
         let size = RES.buildings[elem._type].size;
         let tileIndex = Calc.CanvasToIndex(this._x, this._y, CVAR.tileSide, CVAR.outlineWidth);

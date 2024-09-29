@@ -22,7 +22,12 @@ export default class Phantom extends Sprite{
         this._y = Math.ceil(this._floatY/CVAR.tileSide)*CVAR.tileSide
     }
     draw () {
-        const out = (this._image.height - 16 * this._size.h)*CVAR.tileSide/16
-        ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
+        let out = (this._image.height - 16 * this._size.h)*CVAR.tileSide/16
+        if (this._size.h < 1){
+            out *= -1
+            const outX = (this._image.width - 16 * this._size.w)*CVAR.tileSide/32
+            ctx.drawImage(this._image, this._x + outX, this._y - out / 2, this._w, this._h);
+        } else
+            ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
     }
 }

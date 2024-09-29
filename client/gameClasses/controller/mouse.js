@@ -194,8 +194,7 @@ class Mouse{
         if (tiles[player._chosenTile.i][player._chosenTile.j]._structure != "none"){
             player._lastStructure = tiles[player._chosenTile.i][player._chosenTile.j]._structure
             tiles[player._chosenTile.i][player._chosenTile.j]._structure.onClick();
-        } else
-            tiles[this._mapPos.i][this._mapPos.j].onClick();
+        }
     }
     onScaleStart(e)
     {

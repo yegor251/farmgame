@@ -259,7 +259,7 @@ class Shop{
                                 structureType: 'animal'
                             };
                             let pos = Calc.indexToCanvas(mouse._mapPos.i, mouse._mapPos.j, CVAR.tileSide, CVAR.outlineWidth);
-                            player._phantomStructure.structure = new Phantom(pos.x, pos.y, RES.animals[animal].size, animal, RES.animals[animal].image);
+                            player._phantomStructure.structure = new Phantom(pos.x, pos.y, RES.animals[animal].size, animal, RES.animals[animal].standImages[0]);
                             player._phantomStructure.structure._isMoving = true;
                             GVAR.phantomStructureArr.push(player._phantomStructure.structure);
                             mouse._isDragging = true;

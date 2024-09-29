@@ -1,14 +1,12 @@
 class GlobalVars{
     constructor()
     {
-        this.UI = new Array(0);    
-
         this.buildableArr = new Array();
         this.penArr = new Array();
         this.phantomStructureArr = new Array(0);
         this.obstacleArr = new Array();
 
-        this.scale = 2.5;
+        this.scale = 12.5;
         this.rescale = true
         this.redraw = true;
     }
@@ -38,7 +36,6 @@ class GlobalVars{
         }
     }
     closeAllWindows(){
-        this.UI.pop()
         document.getElementById("spin-wrap").style.display = "none";
         document.getElementById("orders-wrap").style.display = "none";
         document.getElementById("stash-wrap").style.display = "none";

@@ -247,10 +247,6 @@ async function animate(delta){
         GVAR.phantomStructureArr.forEach((el) => {
             el.draw();
         })
-
-        GVAR.UI.forEach((el) => {
-            el.draw();
-        })
         ctx.setTransform(1, 0, 0, 1, 0, 0);
     }
     prevdelta = delta

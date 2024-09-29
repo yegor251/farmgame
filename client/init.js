@@ -274,7 +274,7 @@ class Init {
         }
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357311`)
+        socketClient.send(`connect/1890336521`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
         console.log("map loaded")
@@ -282,7 +282,47 @@ class Init {
         await socketClient.gameSessionPromise;
         console.log("Game session initialized");
     }
+    async splitImageToBlocks(imageSrc) {
 
+        function loadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = src;
+            });
+        }
+    
+        function createCanvas(width, height) {
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            return canvas;
+        }
+
+        const img = await loadImage(imageSrc);
+        const blocks = [];
+        const blockSize = 16;
+    
+        const canvas = createCanvas(blockSize, blockSize);
+        const ctx = canvas.getContext('2d');
+    
+        const cols = img.width / blockSize;
+        const rows = img.height / blockSize;
+    
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+                ctx.clearRect(0, 0, blockSize, blockSize);
+                ctx.drawImage(img, x * blockSize, y * blockSize, blockSize, blockSize, 0, 0, blockSize, blockSize);
+
+                const blockImg = new Image();
+                blockImg.src = canvas.toDataURL();
+                blocks.push(blockImg);
+            }
+        }
+    
+        return blocks;
+    }
     async loadRes() {
         const loadImage = (src) => {
             return new Promise((resolve, reject) => {
@@ -306,49 +346,8 @@ class Init {
         };
   
         const loadMapImages = async () => {
-            function loadImage(src) {
-                return new Promise((resolve, reject) => {
-                    const img = new Image();
-                    img.onload = () => resolve(img);
-                    img.onerror = reject;
-                    img.src = src;
-                });
-            }
-        
-            function createCanvas(width, height) {
-                const canvas = document.createElement('canvas');
-                canvas.width = width;
-                canvas.height = height;
-                return canvas;
-            }
-        
-            async function splitImageToBlocks(imageSrc) {
-                const img = await loadImage(imageSrc);
-                const blocks = [];
-                const blockSize = 16;
-            
-                const canvas = createCanvas(blockSize, blockSize);
-                const ctx = canvas.getContext('2d');
-            
-                const cols = img.width / blockSize;
-                const rows = img.height / blockSize;
-            
-                for (let y = 0; y < rows; y++) {
-                    for (let x = 0; x < cols; x++) {
-                        ctx.clearRect(0, 0, blockSize, blockSize);
-                        ctx.drawImage(img, x * blockSize, y * blockSize, blockSize, blockSize, 0, 0, blockSize, blockSize);
-        
-                        const blockImg = new Image();
-                        blockImg.src = canvas.toDataURL();
-                        blocks.push(blockImg);
-                    }
-                }
-            
-                return blocks;
-            }
-
-            RES.map.grass = await splitImageToBlocks(`client/assets/map/Grass.png`)
-            RES.map.water = await splitImageToBlocks(`client/assets/map/Water.png`)
+            RES.map.grass = await this.splitImageToBlocks(`client/assets/map/Grass.png`)
+            RES.map.water = await this.splitImageToBlocks(`client/assets/map/Water.png`)
         }
   
         const loadAssets = async (type, name) => {
@@ -385,6 +384,9 @@ class Init {
                         data.image[i] = await loadImage(`client/assets/${type}/${name}/${name}${i}.png`);
                     });
                     await Promise.all(stagesPromises);
+                }  else if (type === "animals"){
+                    data.standImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_stand.png`)
+                    data.goImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_go.png`)
                 } else {
                     data.image = await loadImage(`client/assets/${type}/${name}/${name}.png`);
                 }

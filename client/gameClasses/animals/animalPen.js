@@ -40,7 +40,6 @@ export default class AnimalPen extends Buildable{
     setLevel(level){
         this._level = level
         this._timeStamp -= Math.floor(this._speed * (CVAR.animalPenCoef - 1) * (level - 1))
-        console.log(this._timeStamp, this._speed)
     }
     canUpgrade(){
         return player._money >= RES.buildings[this._type].upgradesPrice[this._level-1] && this._level <= RES.buildings[this._type].upgradesPrice.length
@@ -123,6 +122,7 @@ export default class AnimalPen extends Buildable{
         this._animals.forEach(animal => {
             animal.update();
         });
+        this._animals.sort((a, b) => a._y - b._y);
     }
     collect(){
         if (player.getInvFullness() >= this._animals.length){
