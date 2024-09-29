@@ -65,7 +65,7 @@ class Spin {
             elem.style.transform = `rotate(${(index) * 360 / size}deg)`;
 
             const img = document.createElement("img")
-            img.src = `client/assets/${player._spinItems[index].item}/${player._spinItems[index].item}.png`
+            img.src = `client/assets/items/${player._spinItems[index].item}.png`
             img.className = "spin-image"
             const amount = document.createElement("h3")
             amount.className = "spin-text"

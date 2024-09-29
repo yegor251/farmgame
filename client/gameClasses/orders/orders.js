@@ -106,7 +106,7 @@ class Orders {
             // res.id = `res${item}`;
 
             const resImg = document.createElement("img");
-            resImg.src = `client/assets/${item}/${item}.png`;
+            resImg.src = `client/assets/items/${item}.png`;
             resImg.className = "res-img";
 
             const amount = document.createElement("h3");

@@ -84,7 +84,7 @@ class FieldMenu{
             craft.className = "craft"
 
             const craftImg = document.createElement("div")
-            craftImg.style.backgroundImage = `url(client/assets/${plant}/${plant}.png)`
+            craftImg.style.backgroundImage = `url(client/assets/items/${plant}.png)`
             craftImg.className = "craft-item-image"
             if (player._inventory[plant] == 0)
                 craftImg.style.filter = 'grayscale(100%)';

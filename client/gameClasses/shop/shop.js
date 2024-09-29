@@ -155,7 +155,7 @@ class Shop{
         RES.names.plants.forEach(plant => {
             const shopItem = document.createElement('div');
             const img = document.createElement('img');
-            img.src = `client/assets/${plant}/${plant}.png`
+            img.src = `client/assets/items/${plant}.png`
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.plants[plant].seed.price}$`;
@@ -485,7 +485,7 @@ class Shop{
                 const div = document.createElement('div');
                 div.className = 'stash-item'
                 const img = document.createElement("img")
-                img.src = `client/assets/${item}/${item}.png`
+                img.src = `client/assets/items/${item}.png`
                 img.className = "item-image"
                 div.appendChild(img)
 

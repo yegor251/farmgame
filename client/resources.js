@@ -20,7 +20,11 @@ class Resources {
       });
     }
     this.names.plants = ["wheat", "pizdec"];
-    this.names.items = ["bread"]; //только крафты
+    this.names.items = ["bread", 'cream', 'popcorn', 'sweetPopcorn', 'syrup', 'whiteSugar', 
+    'chilePopcorn', 'brownSugar', 'butter', 'butterPopcorn', 'cheese', 'bread', 'chickenFeed', 
+    'potatoBread', 'blackberryCupcake', 'cookie', 'cornbread', 'pizza', 'raspberryCupcake', 
+    'spicyPizza', 'cowFeed', 'sheepFeed', 'pigFeed', 'sweater', 'cottonFabric', 'blueCap', 
+    'shirt', 'blueSweater', 'shorts', 'purpleDress']; //только крафты
     this.names.animals = ["chicken"];
     this.names.obstacles = ["small_swamp"];
     this.mapImgNames = ["grass_1", "grass_2"];

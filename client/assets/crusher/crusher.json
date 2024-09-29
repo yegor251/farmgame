@@ -8,7 +8,7 @@
   "mapLimit": 3,
   "workTypes":
   {
-      "сhickenFeed":
+      "chickenFeed":
       {
           "minLevel": 1,
           "timeToFinish": 180,

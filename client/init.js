@@ -396,7 +396,7 @@ class Init {
                 }
             } else {
                 data = {}
-                data.image = await loadImage(`client/assets/${name}/${name}.png`);
+                data.image = await loadImage(`client/assets/items/${name}.png`);
             }
             RES[type][name] = data;
         };

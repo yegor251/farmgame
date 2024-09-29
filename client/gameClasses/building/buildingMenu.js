@@ -45,7 +45,7 @@ class BuildingMenu {
                 const img = document.createElement("img");
                 img.className = "item-image";
                 const key = Object.keys(queue[i])[0];
-                img.src = `client/assets/${key}/${key}.png`;
+                img.src = `client/assets/items/${key}.png`;
                 queueElem.appendChild(img);
 
                 const time = document.createElement("h3");
@@ -124,7 +124,7 @@ class BuildingMenu {
             craft.className = "craft";
 
             const craftImg = document.createElement("div");
-            craftImg.style.backgroundImage = `url(client/assets/${product}/${product}.png)`;
+            craftImg.style.backgroundImage = `url(client/assets/items/${product}.png)`;
             craftImg.className = "craft-item-image";
             const buildingQueue = document.getElementById('building-queue');
 
@@ -206,7 +206,7 @@ class BuildingMenu {
                     const dropItem = document.createElement("div");
                     dropItem.className = "drop-item";
                     const img = document.createElement("img");
-                    img.src = `client/assets/${item}/${item}.png`;
+                    img.src = `client/assets/items/${item}.png`;
                     img.className = 'drop-list-img';
 
                     const itemText = document.createElement("h3");
