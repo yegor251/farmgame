@@ -9,6 +9,7 @@ class Spin {
                 if (player.getInvFullness() >= player._spinItems[player._spinDropIndex].amount){
                     this.doSpin()
                     socketClient.send('spin')
+                    socketClient.send('regen')
                 } else{
                     console.log('Недостаточно места в инвентаре')
                 }
@@ -35,7 +36,6 @@ class Spin {
         container.style.transform = `rotate(${number}deg)`;
         container.style.transform = `rotate(${number}deg)`;
         console.log(player._spinItems[player._spinDropIndex])
-        player.pushInventory(player._spinItems[player._spinDropIndex].item,player._spinItems[player._spinDropIndex].amount)
     }
     getRandomColor() {
         var letters = '0123456789ABCDEF';

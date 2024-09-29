@@ -211,7 +211,7 @@ class SocketClient{
               	el.slots.forEach(slot => {
                   	tiles[el.x][el.y]._structure.addSlot(slot)
               	});
-              	tiles[el.x][el.y]._structure._slotsAmount = 2 //количество слотов
+              	// tiles[el.x][el.y]._structure._slotsAmount = el.integerData //количество слотов
           	} else if (RES.buildingNames.garden.includes(el.name)){
 				if (el.slots[0].workName != 'none')
 					tiles[el.x][el.y]._structure.addSlot(el.slots[0])
