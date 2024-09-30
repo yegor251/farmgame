@@ -11,7 +11,7 @@ class Resources {
     this.names.buildings = [];
     this.buildingNames.bakery = ["bakery", 'crusher', 'dairy', 'juicer', 'loom', 'oven', 'popcorn_maker', 'sugar_factory']
     this.buildingNames.garden = ["garden"]
-    this.buildingNames.animalPen = ["coop"]
+    this.buildingNames.animalPen = ['coop', 'cowshed', 'pigsty', 'sheepfold']
     this.buildingNames.bush = ['cranberry']
     this.buildingNames.serviceBuildings = ['barn'];
     for (const type in this.buildingNames) {
@@ -25,7 +25,7 @@ class Resources {
     'potatoBread', 'blackberryCupcake', 'cookie', 'cornbread', 'pizza', 'raspberryCupcake', 
     'spicyPizza', 'cowFeed', 'sheepFeed', 'pigFeed', 'sweater', 'cottonFabric', 'blueCap', 
     'shirt', 'blueSweater', 'shorts', 'purpleDress']; //только крафты
-    this.names.animals = ["chicken"];
+    this.names.animals = ['chicken', 'cow', 'pig', 'sheep'];
     this.names.obstacles = ["small_swamp"];
     this.mapImgNames = ["grass_1", "grass_2"];
   }

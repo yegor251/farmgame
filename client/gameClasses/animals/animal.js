@@ -68,6 +68,10 @@ export default class Animal extends Sprite{
             }
         }
         else {
+            if (this.timer == 1){
+                this._image = this.standImages[this.currStandInd]
+                this.currStandInd = (this.currStandInd + 1) % this.standImages.length
+            }
             this.timer += 1;
             if (this.timer % 20 == 0){
                 this._image = this.standImages[this.currStandInd]

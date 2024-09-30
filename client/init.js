@@ -9,7 +9,7 @@ class SocketClient{
     constructor()
     {
         this.requestQueue = new Array()
-        this.socket = new WebSocket('ws:192.168.123.1:8000');
+        this.socket = new WebSocket('ws:10.37.129.2:8000');
         this.gameSessionPromiseResolve = null;
         this.gameSessionPromise = new Promise((resolve) => {
             this.gameSessionPromiseResolve = resolve;
@@ -283,7 +283,7 @@ class Init {
         await socketClient.gameSessionPromise;
         console.log("Game session initialized");
     }
-    async splitImageToBlocks(imageSrc) {
+    async splitImageToBlocks(imageSrc, flag) {
 
         function loadImage(src) {
             return new Promise((resolve, reject) => {
@@ -303,7 +303,10 @@ class Init {
 
         const img = await loadImage(imageSrc);
         const blocks = [];
-        const blockSize = 16;
+        let blockSize = 16;
+        if (flag){
+            blockSize = img.height
+        }
     
         const canvas = createCanvas(blockSize, blockSize);
         const ctx = canvas.getContext('2d');
@@ -386,8 +389,8 @@ class Init {
                     });
                     await Promise.all(stagesPromises);
                 }  else if (type === "animals"){
-                    data.standImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_stand.png`)
-                    data.goImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_go.png`)
+                    data.standImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_stand.png`, true)
+                    data.goImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_go.png`, true)
                 } else {
                     data.image = await loadImage(`client/assets/${type}/${name}/${name}.png`);
                 }
