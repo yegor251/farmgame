@@ -207,36 +207,6 @@
             </div>
         </div>
     </div>    
-    <!-- <script>
-        let tg = window.Telegram.WebApp;
-        // Дальше вы можете использовать объект tg для взаимодействия с Telegram Web App
-        fetch('https://farmgame-rclc.onrender.com/webapp-data', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: tg.initDataUnsafe.user.id,
-                    tg_data: tg
-                })
-        });
-    </script>
-    <script>
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
-        document.addEventListener('touchmove', function(event) {
-            event.preventDefault();
-        }, { passive: false });
-        // Prevent app from closing on scroll
-        document.addEventListener('scroll', function(event) {
-            Telegram.WebApp.expand();
-        });
-
-        // Обработка событий прокрутки
-        Telegram.WebApp.onEvent('viewportChanged', function() {
-            Telegram.WebApp.expand();
-        });
-    </script> -->
     <div id="deals-wrap">
         <div id="deals">
             <div id="deals-bar">
@@ -274,6 +244,10 @@
             </div>
         </div>
     </div>
+    <script>
+        window.Telegram.WebApp.expand();
+        window.Telegram.WebApp.disableVerticalSwipes()
+    </script>
     <script src="client/tonweb.js"></script>
     <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <script src="client/init.js" type="module"></script>
