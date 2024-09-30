@@ -4,7 +4,7 @@
   "maxSlots": 1,
   "sizex": 2,
   "sizey": 2,
-  "maxLevel": 4,
+  "maxLevel": 5,
   "mapLimit": 2,
   "workTypes":
   {
@@ -106,7 +106,7 @@
       },
       "redScarf":
       {
-          "minLevel": 4,
+          "minLevel": 5,
           "timeToFinish": 4200,
           "items":
           {
@@ -121,6 +121,6 @@
   },
   "upgradesPrice":
   [
-      35000, 50000, 250000
+      35000, 50000, 100000, 250000
   ]
 }

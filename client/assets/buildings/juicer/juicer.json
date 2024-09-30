@@ -4,7 +4,7 @@
   "maxSlots": 1,
   "sizex": 2,
   "sizey": 3,
-  "maxLevel": 3,
+  "maxLevel": 4,
   "mapLimit": 2,
   "workTypes":
   {
@@ -49,7 +49,7 @@
       },
       "tomatoJuice":
       {
-          "minLevel": 2,
+          "minLevel": 3,
           "timeToFinish": 2700,
           "items":
           {
@@ -62,7 +62,7 @@
       },
       "berryJuice":
       {
-          "minLevel": 3,
+          "minLevel": 4,
           "timeToFinish": 5400,
           "items":
           {
@@ -77,6 +77,6 @@
   },
   "upgradesPrice":
   [
-      100000, 200000
+      100000, 200000, 350000
   ]
 }
