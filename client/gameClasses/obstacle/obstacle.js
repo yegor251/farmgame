@@ -16,13 +16,14 @@ export default class Obstacle extends Sprite{
         this._h = RES.obstacles[type].size.h * CVAR.tileSide;
         this._deletePrice = RES.obstacles[type].removePrice
         this._deleteTokenPrice = RES.obstacles[type].removeTokenPrice
+        this._stagesCount = RES.obstacles[type].stages
     }
     draw(){
         const out = (this._image.height - 16 * this._h/CVAR.tileSide)*CVAR.tileSide/16 //смещение вверх из-за размера картинки
         ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
     }
     changeImage(){
-        this._currImageInd = (this._currImageInd + 1) % 4
+        this._currImageInd = (this._currImageInd + 1) % this._stagesCount
         this._image = RES.obstacles[this._type].image[this._currImageInd];
     }
     onClick() {
