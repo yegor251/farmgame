@@ -388,7 +388,7 @@ class Shop{
         RES.buildingNames.bush.forEach(building => {
             const shopItem = document.createElement('div');
             const img = document.createElement('img');
-            img.src = `client/assets/buildings/${building}/${building}_bush.png`
+            img.src = `client/assets/buildings/${building}/${building}1.png`
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;

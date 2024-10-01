@@ -76,10 +76,9 @@ class BushMenu{
         temp.innerText = this.bush._collectedAmount
         document.getElementById('temp').innerText = this.bush._collectedAmount
 
-        const type = this.bush._type;
         const bushImage = document.getElementById('bush-img');
         bushImage.className = 'menu-big-img';
-        bushImage.src = `client/assets/buildings/${type}/${type}_bush.png`;
+        bushImage.src = this.bush._image.src
         this.renderTimer();
     
         const isIntersecting = (rect1, rect2) => {
