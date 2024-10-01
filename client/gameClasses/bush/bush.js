@@ -27,11 +27,18 @@ export default class Bush extends Buildable{
             }
         }
     }
-    setProperties(startTime, intData){
+    setProperties(endTime, intData){
         this._collectedAmount = intData
         if (intData != this._collectedAmountLimit){
-            this._finishTime = startTime * 1000 + this._timeStamp
-            this._timeToFinish = Date.now() < this._finishTime ? this._finishTime - Date.now() : 0
+            this._finishTime = endTime * 1000
+            if (Date.now() < this._finishTime){
+                const time = this._finishTime - Date.now() < player._growBooster.timeToEnd 
+                ? this._finishTime - Date.now() 
+                : player._growBooster.timeToEnd
+                this._timeToFinish = this._finishTime - Date.now() + (player._growBooster.boosterAmount-1)*time
+            } else {
+                this._timeToFinish = 0
+            }
             this._isWork = true;
             this._freeze = false
         } else{

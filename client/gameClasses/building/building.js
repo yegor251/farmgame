@@ -59,13 +59,29 @@ export default class Building extends Buildable{
     }
     addSlot(slot){
         const item = {[slot.workName]: 1}
-        item.workingTimeStamp = (slot.workStartTimeStamp + RES.buildings[this._type].workTypes[slot.workName].timeToFinish) * 1000 //если время в секундах то переводим в милли
+        item.workingTimeStamp = slot.workEndTimeStamp * 1000
         if (item.workingTimeStamp > Date.now()){
-            if (this._craftingItems.length == 0 || this._craftingItems[this._craftingItems.length-1].timeToFinish == 0){
-                item.timeToFinish = item.workingTimeStamp - Date.now()
-            } else{
-                item.timeToFinish = RES.buildings[this._type].workTypes[slot.workName].timeToFinish * 1000
+            let timeCounter = 0
+            if (this._craftingItems.length > 0){
+                timeCounter += this._craftingItems[this._craftingItems.length - 1].workingTimeStamp > Date.now() 
+                ? this._craftingItems[this._craftingItems.length - 1].workingTimeStamp - Date.now()
+                : 0
             }
+            const maxTime = timeCounter < player._workBooster.timeToEnd
+            ? player._workBooster.timeToEnd - timeCounter
+            : 0
+
+            const start = slot.workStartTimeStamp * 1000 > Date.now()
+            ? slot.workStartTimeStamp * 1000
+            : Date.now()
+
+            const delta = item.workingTimeStamp - start
+
+            const time = maxTime > delta 
+            ? delta
+            : maxTime
+            
+            item.timeToFinish = delta + (player._workBooster.boosterAmount-1)*time
         } else{
             item.timeToFinish = 0
             this._nowWorkIndex += 1

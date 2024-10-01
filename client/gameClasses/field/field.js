@@ -53,8 +53,15 @@ export default class Field extends Buildable{
     }
     addSlot(slot){
         this._plant = new Plant(this._x, this._y, this._w, this._h, slot.workName)
-        this._plant._growTimeStamp = slot.workStartTimeStamp * 1000 + this._plant._plantTimeStamp //позже изменить в соответствии с временнеи json
-        this._plant._timeToGrow = Date.now() < this._growTimeStamp ? this._growTimeStamp - Date.now() : 0
+        this._plant._growTimeStamp = slot.workEndTimeStamp * 1000
+        if (Date.now() < this._plant._growTimeStamp){
+            const time = this._plant._growTimeStamp - Date.now() < player._growBooster.timeToEnd 
+            ? this._plant._growTimeStamp - Date.now() 
+            : player._growBooster.timeToEnd
+            this._plant._timeToGrow = this._plant._growTimeStamp - Date.now() + (player._growBooster.boosterAmount-1)*time
+        } else {
+            this._plant._timeToGrow = 0
+        }
     }
     canCreatePlant(plant){
         return player._inventory[plant] > 0 && this._plant == "none"

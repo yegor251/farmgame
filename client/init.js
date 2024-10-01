@@ -202,6 +202,7 @@ class SocketClient{
   	}
   	initGameSession(data){
     	console.log(data)
+        this.regenPlayer(data)
       	data.world.tileArray.forEach(el => {
           	tiles[el.x][el.y].createBuilding(el.name)
           	if (RES.buildingNames.bakery.includes(el.name)){
@@ -219,9 +220,9 @@ class SocketClient{
                 console.log(el.level)
                 tiles[el.x][el.y]._structure.setLevel(el.level)
 				if (el.slots[0])
-					tiles[el.x][el.y]._structure.setTime(el.slots[0].workStartTimeStamp)
+					tiles[el.x][el.y]._structure.setTime(el.slots[0].workEndTimeStamp)
 			} else if (RES.buildingNames.bush.includes(el.name)){
-				tiles[el.x][el.y]._structure.setProperties(el.slots[0].workStartTimeStamp, el.integerData)
+				tiles[el.x][el.y]._structure.setProperties(el.slots[0].workEndTimeStamp, el.integerData)
 			}
 		});
         RES.buildingNames.bakery.concat(RES.buildingNames.animalPen).forEach(name => {
@@ -233,7 +234,6 @@ class SocketClient{
         player._availableDeals = data.availableDeals
         player._deposits = data.deposits
         player._withdraws = data.withdraws
-		this.regenPlayer(data)
 		this.gameSessionPromiseResolve()
   	}
 }
@@ -275,7 +275,7 @@ class Init {
         }
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357325`)
+        socketClient.send(`connect/2357331`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
         console.log("map loaded")

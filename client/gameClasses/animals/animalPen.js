@@ -31,9 +31,16 @@ export default class AnimalPen extends Buildable{
             }
         }
     }
-    setTime(startTime){
-        this._finishTime = startTime * 1000 + this._timeStamp
-        this._timeToFinish = Date.now() < this._finishTime ? this._finishTime - Date.now() : 0
+    setTime(endTime){
+        this._finishTime = endTime * 1000
+        if (Date.now() < this._finishTime){
+            const time = this._finishTime - Date.now() < player._workBooster.timeToEnd 
+            ? this._finishTime - Date.now() 
+            : player._workBooster.timeToEnd
+            this._timeToFinish = this._finishTime - Date.now() + (player._workBooster.boosterAmount-1)*time
+        } else {
+            this._timeToFinish = 0
+        }
         this._isWork = true;
         console.log(this._timeToFinish, Date.now() - this._finishTime)
     }
