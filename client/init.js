@@ -391,6 +391,7 @@ class Init {
                 }  else if (type === "animals"){
                     data.standImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_stand.png`, true)
                     data.goImages = await this.splitImageToBlocks(`client/assets/${type}/${name}/${name}_go.png`, true)
+                    data.finalImage = await loadImage(`client/assets/${type}/${name}/${name}_final.png`);
                 } else {
                     data.image = await loadImage(`client/assets/${type}/${name}/${name}.png`);
                 }

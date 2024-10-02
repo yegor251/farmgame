@@ -26,9 +26,13 @@ export default class Animal extends Sprite{
         this.stopTime = 10
         this.direction = 1
         this.isChange = false
+        this.isBlock = false
+        this.finalImage = RES.animals[type].finalImage
     }
     draw(){
-        if (this.direction == 1){
+        if (this.isBlock){
+            ctx.drawImage(this.finalImage, this._x, this._y, this._w, this._h);
+        }else if (this.direction == 1){
             ctx.drawImage(this._image, this._x, this._y, this._w, this._h);
         }else {
             ctx.save();
@@ -39,6 +43,8 @@ export default class Animal extends Sprite{
         }
     }
     update() {
+        if (this.isBlock)
+            return
         if (this.timer == 0){
             if (this.isChange){
                 this._image = this.goImages[this.currGoInd]

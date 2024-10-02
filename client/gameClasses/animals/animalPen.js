@@ -62,10 +62,6 @@ export default class AnimalPen extends Buildable{
             ctx.shadowBlur = 30;
             ctx.shadowColor = "rgb(0,230,0)";
         }
-        if (this._timeToFinish == 0 && this._finishTime - Date.now() <= 0){
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = "rgb(0,0,230)";
-        }
         const out = (this._image.height - 16 * this._size.h)*CVAR.tileSide/16
         ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
         ctx.shadowBlur = 0;
@@ -122,6 +118,9 @@ export default class AnimalPen extends Buildable{
                 console.log('да')
                 this._isWork = false;
                 animalMenu.close()
+                this._animals.forEach(animal => {
+                    animal.isBlock = true
+                });
             }
         }
     }
@@ -133,6 +132,9 @@ export default class AnimalPen extends Buildable{
     }
     collect(){
         if (player.getInvFullness() >= this._animals.length){
+            this._animals.forEach(animal => {
+                animal.isBlock = false
+            });
             const product = Object.keys(RES.buildings[this._type].products)[0]
             player.pushInventory(product, this._animals.length);
             this._timeToFinish = undefined;
