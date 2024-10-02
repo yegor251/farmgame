@@ -189,10 +189,10 @@ setInterval(() => {
 
 async function animate(delta){    
     if (mouse._isOnBorder && !mouse._isBlockAfterShop){
-        camera.newMove(mouse._dirX * 1.5, mouse._dirY * 1.5)
+        camera.newMove(mouse._dirX * 0.25 * GVAR.scale, mouse._dirY * 0.25 * GVAR.scale)
         let pos = {
-            x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX/GVAR.scale * 3,
-            y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY/GVAR.scale * 3
+            x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX * 0.5,
+            y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY * 0.5
         }
         if (camera._cameraIndexBoundingBox.top == 0)
             pos.y = GVAR.phantomStructureArr[0]._floatY

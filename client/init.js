@@ -8,6 +8,8 @@ import GVAR from "./globalVars/global.js";
 class SocketClient{
     constructor()
     {
+        window.Telegram.WebApp.expand();
+        window.Telegram.WebApp.disableVerticalSwipes();
         this.requestQueue = new Array()
         this.socket = new WebSocket('ws:10.37.129.2:8000');
         this.gameSessionPromiseResolve = null;

@@ -1,7 +1,7 @@
 class Player{
     constructor()
     {
-        this._money = 0;
+        this._money = 100000;
         this._networth = 0;
         this._tokenBalance = 0;
         this._tonBalance = 0
