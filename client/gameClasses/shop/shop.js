@@ -62,8 +62,8 @@ class Shop{
         shop.innerHTML = '';
         RES.buildingNames.garden.concat(RES.buildingNames.bakery).forEach(building => {
             const shopItem = document.createElement('div');
-            const img = document.createElement('img');
-            img.src = `client/assets/buildings/${building}/${building}.png`
+            const img = document.createElement('div');
+            img.style.backgroundImage = `url('client/assets/buildings/${building}/${building}.png')`;
             img.className = "item-image"
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
