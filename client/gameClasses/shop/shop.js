@@ -65,6 +65,10 @@ class Shop{
             const img = document.createElement('div');
             img.style.backgroundImage = `url('client/assets/buildings/${building}/${building}.png')`;
             img.className = "item-image"
+            img.style.width = '100px';  // Укажите желаемую ширину
+            img.style.height = '100px'; // Укажите желаемую высоту
+            img.style.backgroundSize = 'cover';  // Убедитесь, что изображение занимает весь div
+
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
     
@@ -107,7 +111,9 @@ class Shop{
                     isScrolling = false;
 
                     touchTimer = setTimeout(function() {
+                        console.log(123)
                         if (!isScrolling) {
+                            console.log(124)
                             document.getElementById("shop-wrap").style.display = "none";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,

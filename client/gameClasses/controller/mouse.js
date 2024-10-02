@@ -139,6 +139,7 @@ class Mouse{
             this._isBlockAfterShop = false;
         }
         GVAR.phantomStructureArr.pop()
+        player._phantomStructure = "none"
 
         GVAR.buildableArr.forEach((el) => {
             if (el._isMoving)

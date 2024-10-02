@@ -134,6 +134,7 @@ class SocketClient{
     }
   	regenPlayer(data){
 		player._inventory = data.player.Inventory.map
+        player._inventory['chickenFeed'] = 10
         player._inventorySize = 50 + 10 * data.player.Inventory.level
 		player._money = data.player.money
         player._networth = data.player.networth
@@ -275,7 +276,7 @@ class Init {
         }
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357331`)
+        socketClient.send(`connect/2357347`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
         console.log("map loaded")
