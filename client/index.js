@@ -68,7 +68,7 @@ let prevdelta = 0.001;
 let isScaling = false;
 let singleTouchTimeout = null;
 let singleTouchEndTimeout = null;
-const SINGLE_TOUCH_DELAY = 20;
+const SINGLE_TOUCH_DELAY = 50;
 
 document.addEventListener('touchmove', (e) => {
     if (canvas === document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)) {
@@ -90,7 +90,7 @@ canvas.addEventListener('touchstart', (e) => {
             if (!isScaling) {
                 mouse.onMouseDown(e);
             }
-        }, SINGLE_TOUCH_DELAY+50);
+        }, SINGLE_TOUCH_DELAY);
     } else if (e.touches.length > 1) {
         mouse.moveBuildablePrevPos()
         isScaling = true;
