@@ -111,14 +111,13 @@ class Shop{
                     isScrolling = false;
 
                     touchTimer = setTimeout(function() {
-                        console.log(123)
                         if (!isScrolling) {
-                            console.log(124)
                             document.getElementById("shop-wrap").style.display = "none";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,
                                 structureType: 'building'
                             };
+                            mouse.onMouseMove(e);
                             let pos = Calc.indexToCanvas(mouse._mapPos.i, mouse._mapPos.j, CVAR.tileSide, CVAR.outlineWidth);
                             player._phantomStructure.structure = new Phantom(pos.x, pos.y, RES.buildings[building].size, building, RES.buildings[building].image);
                             player._phantomStructure.structure._isMoving = true;
@@ -128,7 +127,9 @@ class Shop{
                             setTimeout(() => {
                                 mouse._isBlockAfterShop = false
                             }, 1000);
-                            mouse.onMouseMove(e);
+                            console.log('AAAAA')
+                            // mouse.onMouseMove(e);
+                            // mouse.onMouseMove(e);
                         }
                     }, 300);
                 });

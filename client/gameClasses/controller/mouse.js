@@ -22,6 +22,10 @@ class Mouse{
             x: 0,
             y: 0
         }
+        this._prevPos = {
+            i: 0,
+            j: 0
+        }
         this._scale = 0;
         this._deltaScale = 0;
         this._movedDist = 0;
@@ -38,21 +42,32 @@ class Mouse{
         this._deltaMove.y = mousePos.y - this._screenPos.y;
         this._movedDist += Math.sqrt((this._deltaMove.x) * (this._deltaMove.x) + (this._deltaMove.y) * (this._deltaMove.y))
         this._screenPos = mousePos;
+        this._prevPos = this._mapPos
+        console.log(this._prevPos, this._mapPos)
         this._mapPos = index;
         if (this._LMBdown && !this._isDragging)
         {
             camera.move(this._deltaMove.x, this._deltaMove.y);
             camera.updateBoundingBox();
         }
+        let isBuildableMove = false
+        let i = 0
         GVAR.buildableArr.forEach((el) => {
-            if (el._isMoving)
+            if (el._isMoving && !isBuildableMove)
             {
-                let pos = Calc.indexToCanvas(this._mapPos.i, this._mapPos.j, CVAR.tileSide, CVAR.outlineWidth);
+                const delta = Calc.indexToCanvas(this._mapPos.i - this._prevPos.i, this._mapPos.j - this._prevPos.j, CVAR.tileSide, CVAR.outlineWidth);
+                const pos = {
+                    x: el._x + delta.x,
+                    y: el._y + delta.y
+                }
                 el.move(pos)
+                console.log(delta, pos, this._mapPos, this._prevPos, i)
+                i += 1  
+                isBuildableMove = true
             }
         })
         if (GVAR.phantomStructureArr.length != 0){
-            let pos = Calc.indexToCanvas(this._mapPos.i, this._mapPos.j, CVAR.tileSide, CVAR.outlineWidth);
+            let delta = Calc.indexToCanvas(this._mapPos.i - this._prevPos.i, this._mapPos.j - this._prevPos.i, CVAR.tileSide, CVAR.outlineWidth);
             if (
                 mouse._screenPos.x >= window.innerWidth * 0.9 ||
                 mouse._screenPos.x <= window.innerWidth * 0.1 ||
@@ -80,8 +95,13 @@ class Mouse{
             } else{
                 this._isOnBorder = false;
             }
-
-            GVAR.phantomStructureArr[0].move(pos)
+            if (!isBuildableMove){
+                const pos = {
+                    x: GVAR.phantomStructureArr[0]._x + delta.x,
+                    y: GVAR.phantomStructureArr[0]._y + delta.y
+                }
+                GVAR.phantomStructureArr[0].move(pos)
+            }
         }
     }
     onMouseDown(e)
@@ -145,7 +165,8 @@ class Mouse{
             if (el._isMoving)
             {
                 if (el._x>=0 && el._y>=0 && el._x<CVAR.tileSide*CVAR.tileCols && el._y<CVAR.tileSide*CVAR.tileRows && tiles[this._mapPos.i][this._mapPos.j].isCanPut(el)){
-                    tiles[el._prevPosition.i][el._prevPosition.j].moveStructure(this._mapPos)
+                    const pos = Calc.CanvasToIndex(el._x, el._y, CVAR.tileSide, CVAR.outlineWidth)
+                    tiles[el._prevPosition.i][el._prevPosition.j].moveStructure(pos)
                 }
                 else {
                     let prevPos = Calc.indexToCanvas(el._prevPosition.i, el._prevPosition.j, CVAR.tileSide, CVAR.outlineWidth);
