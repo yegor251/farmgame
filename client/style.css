@@ -3,9 +3,12 @@
     margin: 0;
 }
 * {
-    user-select: none
+    user-select: none;
+    overflow-x: hidden;
 }
-    
+html{
+    overflow-x: hidden;
+}
 @font-face {
     font-family: VCR;
     src: url("assets/fonts/VCR_OSD_MONO_1.001.ttf");
