@@ -1,5 +1,5 @@
 {
   "name": "garden",
   "price": 10,
-  "mapLimit": 5
+  "mapLimit": 2000
 }
