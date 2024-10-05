@@ -1,6 +1,7 @@
 import player from "../player/player.js";
 import GVAR from "../../globalVars/global.js";
 import socketClient from "../../init.js";
+import CVAR from "../../globalVars/const.js";
 
 class Orders {
     constructor() {
@@ -11,16 +12,26 @@ class Orders {
         document.getElementById("open-orders").onclick = () => {
             GVAR.closeAllWindows()
             document.getElementById("orders-wrap").style.display = "flex";
-            this.chosenOrder = 'none'
+            this.chosenOrderInd = 'none'
+            this.clear()
             this._intervalId = setInterval(() => {
-                this.showOrderDetails()
+                if (this.chosenOrderInd != 'none'){
+                    this.showOrderDetails()
+                    this.renderOrders();
+                }
             }, 1000);
             this.renderOrders();
         }
-        this.chosenOrder = 'none'
+        this.chosenOrderInd = 'none'
+    }
+    clear(){
+        document.getElementById('order-details').innerHTML = "";
+        document.getElementById('order-buttons-bar').innerHTML = "";
+        document.getElementById('order-money').innerHTML = "";
+        document.getElementById('order-token').innerHTML = "";
     }
     close(){
-        this.chosenOrder = 'none'
+        this.chosenOrderInd = 'none'
         clearInterval(this._intervalId)
         document.getElementById("orders-wrap").style.display = "none";
     }
@@ -32,22 +43,23 @@ class Orders {
     }
     completeOrder(order) {
         if (this.verifyOrder(order)) {
-            order.timeStamp = Math.floor(Date.now()/1000) + 150
+            order.timeStamp = Math.floor(Date.now()/1000) + CVAR.orderCompleteTime
             socketClient.send(`order/complete/${order.index}`)
             socketClient.send(`regen`)
+            this.showTimer(order);
             this.renderOrders();
-            document.getElementById('order-details').innerHTML = "";
+            this.clear()
             console.log('now', Math.floor(Date.now()/1000))
         }
     }
     rerollOrder(order){
-        order.timeStamp = Math.floor(Date.now()/1000) + 150
-        socketClient.send(`order/reroll/${order.index}`)
+        order.timeStamp = Math.floor(Date.now()/1000) + CVAR.orderRerollTime
+        socketClient.send(`order/reroll/${this.chosenOrderInd}`)
         socketClient.send(`regen`)
         this.showTimer(order);
         this.renderOrders()
         console.log('now', Math.floor(Date.now()/1000), this._intervalId)
-        document.getElementById('order-details').innerHTML = "";
+        this.clear()
     }
     _formatTime(seconds) {
         let hours = Math.floor(seconds / 3600);
@@ -56,13 +68,13 @@ class Orders {
     
         let result = [];
         if (hours > 0) {
-            result.push(hours + 'ч');
+            result.push(hours + 'h');
         }
         if (minutes > 0) {
-            result.push(minutes + 'м');
+            result.push(minutes + 'm');
         }
         if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
-            result.push(secs + 'с');
+            result.push(secs + 's');
         }
         return result.join(' ');
     }
@@ -70,7 +82,7 @@ class Orders {
         const orderDetails = document.getElementById('order-details');
         orderDetails.innerHTML = "";
         const timer = document.createElement('h3')
-        timer.className = 'drop-list-text'
+        timer.className = 'order-timer'
         orderDetails.appendChild(timer)
         if (order.timeStamp > Math.floor(Date.now()/1000))
             timer.innerText = this._formatTime(order.timeStamp - Math.floor(Date.now()/1000))
@@ -78,11 +90,7 @@ class Orders {
             this.showOrderDetails(order)
     }
     showOrderDetails() {
-        console.log(this._intervalId)
-        const order = this.chosenOrder
-        if (order === 'none')
-            return
-        console.log(order.timeStamp , Math.floor(Date.now()/1000))
+        const order = player._orderArr[this.chosenOrderInd]
         if (order.timeStamp > Math.floor(Date.now()/1000)){
             this.showTimer(order)
             return
@@ -90,51 +98,65 @@ class Orders {
         const orderDetails = document.getElementById('order-details');
         orderDetails.innerHTML = "";
 
-        const orderPrice = document.createElement("h3");
-        orderPrice.className = "order-price";
+        const orderPrice = document.getElementById('order-money');
         orderPrice.innerText = `Cost: ${order.orderPrice}`;
 
-        const orderRes = document.createElement("div");
-        orderRes.className = "order-res";
+        const orderTokenPrice = document.getElementById('order-token');
+        orderTokenPrice.innerText = `Cost: ${order.orderTokenPrice}`;
+
         for (let item in order.orderItems) {
             const res = document.createElement("div");
-            res.className = "res-wrap";
-            // res.id = `res${item}`;
+            res.className = "order-res";
 
-            const resImg = document.createElement("img");
-            resImg.src = `client/assets/items/${item}.png`;
-            resImg.className = "res-img";
+            const resImg = document.createElement("div");
+            resImg.style.backgroundImage = `url('client/assets/items/${item}.png')`;
+            resImg.className = "order-res-img";
 
             const amount = document.createElement("h3");
             amount.innerText = `${player._inventory[item]}/${order.orderItems[item]}`;
-            amount.className = `${player._inventory[item] >= order.orderItems[item] ? "unlocked-item" : ""}`;
+            amount.className = 'order-res-amount'
+            if (player._inventory[item] >= order.orderItems[item])
+                amount.classList.add("unlocked")
+            else
+                amount.classList.add("locked")
 
             res.appendChild(resImg);
             res.appendChild(amount);
-            orderRes.appendChild(res);
+            orderDetails.appendChild(res);
         }
 
-        const completeButton = document.createElement("button");
-        completeButton.className = `complete-order ${this.verifyOrder(order) ? "unlocked" : ""}`;
-        completeButton.innerText = "Complete";
-        completeButton.onclick = () => {
-            this.completeOrder(order);
-        };
+        const completeButton = document.createElement("div");
+        completeButton.className = `complete-order`;
+        if (this.verifyOrder(order))
+            completeButton.onclick = () => {
+                console.log(GVAR.confirmFlag)
+                if (GVAR.confirmFlag)
+                    this.completeOrder(order);
+                else {
+                    GVAR.setConfirm()
+                    GVAR.showFloatingText('Нажмите ещё раз для подтверждения')
+                }
+            };
+        else
+            completeButton.style.filter = 'grayscale(100%)';
 
-        const rerollButton = document.createElement("button");
-        rerollButton.className = `complete-order ${this.verifyOrder(order) ? "unlocked" : ""}`;
-        rerollButton.innerText = "reroll";
+        const rerollButton = document.createElement("div");
+        rerollButton.className = `reroll-order`;
         rerollButton.onclick = () => {
-            this.rerollOrder(order);
+            console.log(GVAR.confirmFlag)
+            if (GVAR.confirmFlag)
+                this.rerollOrder(order);
+            else {
+                GVAR.setConfirm()
+                console.log(GVAR.confirmFlag)
+                GVAR.showFloatingText('Нажмите ещё раз для подтверждения')
+            }
         };
-
-        orderDetails.appendChild(orderPrice);
-        orderDetails.appendChild(orderRes);
-        orderDetails.appendChild(completeButton);
-        orderDetails.appendChild(rerollButton);
+        document.getElementById('order-buttons-bar').innerHTML = ''
+        document.getElementById('order-buttons-bar').appendChild(completeButton)
+        document.getElementById('order-buttons-bar').appendChild(rerollButton)
     }
     renderOrders() {
-        console.log(player._orderArr)
         const ordersList = document.getElementById('orders-list');
         ordersList.innerHTML = "";
         for (let i in player._orderArr) {
@@ -142,10 +164,13 @@ class Orders {
             ord.index = i
             const order = document.createElement("div");
             order.className = "order";
-            order.style.backgroundImage = `url(client/assets/pizdec/pizdec.png)`; // Устанавливаем фоновое изображение
-
+            if (ord.timeStamp > Math.floor(Date.now()/1000))
+                order.style.backgroundImage = `url(client/assets/design/order_wait${i % 3}.png)`;
+            else
+                order.style.backgroundImage = `url(client/assets/design/order${i % 3}.png)`;
             order.onclick = () => {
-                this.chosenOrder = ord
+                GVAR.deleteConfirm()
+                this.chosenOrderInd = i
                 this.showOrderDetails();
             };
 

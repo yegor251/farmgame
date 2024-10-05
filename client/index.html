@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="client/style.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/shop.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/stash.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/orders.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -43,19 +46,13 @@
             transactions
         </button>
     </div>
-    <div id="shop-wrap">
+    <div id="shop-wrap" class="menu-wrap">
         <div id="shop">
-            <div id="shop-bar">
-                <button id="buy-building">здания</button>
-                <button id="buy-plant">растеня</button>
-                <button id="buy-animal">животные</button>
-                <button id="buy-animalPen">загоны</button>
-                <button id="buy-bush">кусты</button>
-            </div>
+            <div id="shop-bar"></div>
             <div id="shop-list"></div>
         </div>
     </div>
-    <div id="spin-wrap">
+    <div id="spin-wrap" class="menu-wrap">
         <div id="spin">
             <div id="spin-bar">
                 <button id="closeSpin">X</button>
@@ -69,7 +66,7 @@
             </div>
         </div>
     </div>
-    <div id="booster-menu-wrap">
+    <div id="booster-menu-wrap" class="menu-wrap">
         <div id="booster-menu">
             <div id="booster-menu-bar">
                 <button id="close-booster-menu">X</button>
@@ -78,7 +75,7 @@
             <div id="booster-list"></div>
         </div>
     </div>
-    <div id="obstacle-menu-wrap">
+    <div id="obstacle-menu-wrap" class="menu-wrap">
         <div id="obstacle-menu">
             <div id="obstacle-menu-bar">
                 <button id="close-obstacle-menu">X</button>
@@ -88,7 +85,7 @@
             <h3 id="obstacle-price"></h3>
         </div>
     </div>
-    <div id="buisness-menu-wrap">
+    <div id="buisness-menu-wrap" class="menu-wrap">
         <div id="buisness-menu">
             <div id="buisness-menu-bar">
                 <button id="close-buisness-menu">X</button>
@@ -122,26 +119,40 @@
             </div>
         </div>
     </div>
-    <div id="stash-wrap">
+    <div id="stash-wrap" class="menu-wrap">
         <div id="stash">
             <div id="stash-bar">
-                <button id="closeStash">X</button>
+                <div id="stash-capacity"></div>
+                <h3 id="stash-capacity-text">10/50</h3>
+                <div id="closeStash"></div>
             </div>
             <div id="stash-list"></div>
-            <button id="upgrade-stash-button">Улучшить</button>
+            <div id="upgrade-stash-button-bar">
+                <div id="upgrade-stash-button">Улучшить</div>
+            </div>
+            <div id="stash-bottom"></div>
         </div>
     </div>
-    <div id="orders-wrap">
+    <div id="orders-wrap" class="menu-wrap">
         <div id="orders">
             <div id="orders-bar">
-                <button id="closeOrders">X</button>
+                <div id="closeOrders"></div>
+                <div id="order-money-content">
+                    <h3 id="order-money"></h3>
+                </div>
+                <div id="order-token-content">
+                    <h3 id="order-token"></h3>
+                </div>
             </div>
             <div id="order-details"></div>
+            <div id="order-buttons-bar"></div>
+            <div id="order-details-bottom"></div>
             <div id="orders-list"></div>
+            <div id="orders-bottom"></div>
         </div>
     </div>
 
-    <div id="building-menu-wrap">
+    <div id="building-menu-wrap" class="menu-wrap">
         <div id="building-menu">
             <div id="building-menu-bar">
                 <button id="close-building-menu">X</button>
@@ -154,7 +165,7 @@
             <div id="building-menu-list"></div>
         </div>
     </div>
-    <div id="animal-menu-wrap">
+    <div id="animal-menu-wrap" class="menu-wrap">
         <div id="animal-menu">
             <div id="animal-menu-bar">
                 <button id="close-animal-menu">X</button>
@@ -165,7 +176,7 @@
             <button id="animal-upgrade">Улучшить</button>
         </div>
     </div>
-    <div id="field-menu-wrap">
+    <div id="field-menu-wrap" class="menu-wrap">
         <div id="field-menu">
             <div id="field-menu-bar">
                 <button id="close-field-menu">X</button>
@@ -179,7 +190,7 @@
             <div id="field-menu-list"></div>
         </div>
     </div>
-    <div id="bush-menu-wrap">
+    <div id="bush-menu-wrap" class="menu-wrap">
         <div id="bush-menu">
             <button id="temp"></button>
             <div id="bush-menu-bar">
@@ -190,7 +201,7 @@
             <div id="bush-process-line"></div>
         </div>
     </div>
-    <div id="transaction-wrap">
+    <div id="transaction-wrap" class="menu-wrap">
         <div id="transaction-menu">
             <div id="transaction-bar">
                 <button id="closeTransaction">X</button>
@@ -207,7 +218,7 @@
             </div>
         </div>
     </div>    
-    <div id="deals-wrap">
+    <div id="deals-wrap" class="menu-wrap">
         <div id="deals">
             <div id="deals-bar">
                 <div id="balance-wrap">
@@ -225,7 +236,7 @@
             <div id="deals-list"></div>
         </div>
     </div>
-    <div id="payment-wrap">
+    <div id="payment-wrap" class="menu-wrap">
         <div id="payments">
             <div id="payment-bar">
                 <button id="close-payments">X</button>
@@ -248,6 +259,7 @@
         window.Telegram.WebApp.expand();
         window.Telegram.WebApp.disableVerticalSwipes()
     </script>
+    <script src="client/styles/styles.js"></script>
     <script src="client/tonweb.js"></script>
     <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <script src="client/init.js" type="module"></script>

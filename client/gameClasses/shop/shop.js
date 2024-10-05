@@ -20,26 +20,32 @@ class Shop{
                 }, 450);
             }
         });
-
-        document.getElementById("buy-building").onclick = () => {
-            this.drawBuildingShop();
-        }
-
-        document.getElementById("buy-plant").onclick = () => {
-            this.drawPlantShop();
-        }
-
-        document.getElementById("buy-animal").onclick = () => {
-            this.drawAnimalShop();
-        }
-
-        document.getElementById("buy-animalPen").onclick = () => {
-            this.drawAnimalPenShop();
-        }
-
-        document.getElementById("buy-bush").onclick = () => {
-            this.drawBushShop();
-        }
+        
+        const categories = [
+            { name: 'building', method: 'drawBuildingShop' },
+            { name: 'plant', method: 'drawPlantShop' },
+            { name: 'animal', method: 'drawAnimalShop' },
+            { name: 'animalPen', method: 'drawAnimalPenShop' },
+            { name: 'bush', method: 'drawBushShop' },
+        ];
+        
+        categories.forEach(category => {
+            const buyButton = document.createElement('div');
+            buyButton.id = `buy-${category.name}`;
+            buyButton.className = 'shop-categorie';
+        
+            const icon = document.createElement('div');
+            icon.className = 'shop-categorie-icon';
+            icon.style.backgroundImage = `url('client/assets/design/${category.name}_icon.png')`;
+            buyButton.appendChild(icon);
+        
+            document.getElementById('shop-bar').appendChild(buyButton);
+        
+            // Добавление обработчика события
+            buyButton.onclick = () => {
+                this[category.method](); // Вызов метода, соответствующего категории
+            };
+        });        
     
         document.getElementById("open-shop").onclick = () => {
             const slidableDiv = document.getElementById('shop');
@@ -61,43 +67,62 @@ class Shop{
         const shop = document.getElementById('shop-list');
         shop.innerHTML = '';
         RES.buildingNames.garden.concat(RES.buildingNames.bakery).forEach(building => {
+            const itemContent = document.createElement('div');
             const shopItem = document.createElement('div');
+            const content = document.createElement('div');
+            content.className = 'shop-item-content'
             const img = document.createElement('div');
             img.style.backgroundImage = `url('client/assets/buildings/${building}/${building}.png')`;
-            img.className = "item-image"
-            img.style.width = '100px';  // Укажите желаемую ширину
-            img.style.height = '100px'; // Укажите желаемую высоту
-            img.style.backgroundSize = 'cover';  // Убедитесь, что изображение занимает весь div
-
+            img.className = 'shop-item-img'
+            const priceWithArrow = document.createElement('div');
+            priceWithArrow.className = 'price-with-arrow';
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
+            price.className = 'shop-item-price'
+            const priceContainer = document.createElement('div');
+            priceContainer.className = 'shop-price-container'
+            priceContainer.appendChild(price)
     
-            // Создаем элемент для выпадающего описания
-            const description = document.createElement('div');
-            description.className = 'description';
-            description.innerText = 'описание'
-            description.style.display = 'none'; // изначально скрыто
+            const descriptionMenu = document.createElement('div');
+            descriptionMenu.className = 'description-menu';
+            descriptionMenu.style.display = 'none';
+            const description = document.createElement('h3')
+            description.className = 'description'
+            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            descriptionMenu.appendChild(description)
     
-            // Создаем стрелочку для открытия описания
             const arrow = document.createElement('span');
-            arrow.innerText = '↓'; // символ стрелочки
+            arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            // Добавляем обработчик для стрелочки
-            arrow.addEventListener('click', function() {
-                if (description.style.display === 'none') {
-                    description.style.display = 'block';
-                    arrow.innerText = '↑'; // меняем стрелочку на вверх
-                } else {
-                    description.style.display = 'none';
-                    arrow.innerText = '↓'; // меняем стрелочку на вниз
+            shopItem.addEventListener('click', function(event) {
+                const shopItemRect = shopItem.getBoundingClientRect();
+                const clickY = event.clientY;
+
+                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
+
+                if (clickY > bottomAreaThreshold) {
+                    if (descriptionMenu.style.display === 'none') {
+                        descriptionMenu.style.display = 'block';
+                        arrow.innerText = '↑';
+                    } else {
+                        descriptionMenu.style.display = 'none';
+                        arrow.innerText = '↓';
+                    }
                 }
-            });
-    
-            shopItem.appendChild(img);
-            shopItem.appendChild(price);
-            shopItem.appendChild(arrow);
-            shopItem.appendChild(description);
+            }) 
+            descriptionMenu.addEventListener('click', function() {
+                descriptionMenu.style.display = 'none';
+                arrow.innerText = '↓';
+            }) 
+
+            priceWithArrow.appendChild(priceContainer)
+            priceWithArrow.appendChild(arrow)
+            content.appendChild(img);
+            content.appendChild(priceWithArrow);
+            shopItem.appendChild(content)
+            itemContent.appendChild(shopItem)
+            itemContent.appendChild(descriptionMenu)
     
             if (GVAR.countBuilding(building) < RES.buildings[building].mapLimit && player._money >= RES.buildings[building].price) {
                 let touchStartX = 0;
@@ -153,48 +178,68 @@ class Shop{
             }
     
             shopItem.className = "shop-item";
-            shop.appendChild(shopItem);
+            shop.appendChild(itemContent);
         });
     }    
     drawPlantShop(){
         const shop = document.getElementById('shop-list');
         shop.innerHTML = '';
         RES.names.plants.forEach(plant => {
+            const itemContent = document.createElement('div');
             const shopItem = document.createElement('div');
-            const img = document.createElement('img');
-            img.src = `client/assets/items/${plant}.png`
-            img.className = "item-image"
+            const content = document.createElement('div');
+            content.className = 'shop-item-content'
+            const img = document.createElement('div');
+            img.style.backgroundImage = `url('client/assets/items/${plant}.png')`;
+            img.className = 'shop-item-img'
+            const priceWithArrow = document.createElement('div');
+            priceWithArrow.className = 'price-with-arrow';
             const price = document.createElement('h3');
             price.innerText = `${RES.plants[plant].seed.price}$`;
+            price.className = 'shop-item-price'
+            const priceContainer = document.createElement('div');
+            priceContainer.className = 'shop-price-container'
+            priceContainer.appendChild(price)
 
-            // Создаем элемент для выпадающего описания
             const description = document.createElement('div');
             description.className = 'description';
             description.innerText = 'описание'
-            description.style.display = 'none'; // изначально скрыто
-    
-            // Создаем стрелочку для открытия описания
+            description.style.display = 'none';
+
             const arrow = document.createElement('span');
-            arrow.innerText = '↓'; // символ стрелочки
+            arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            // Добавляем обработчик для стрелочки
-            arrow.addEventListener('click', function() {
-                if (description.style.display === 'none') {
-                    description.style.display = 'block';
-                    arrow.innerText = '↑'; // меняем стрелочку на вверх
-                } else {
-                    description.style.display = 'none';
-                    arrow.innerText = '↓'; // меняем стрелочку на вниз
-                }
-            });
+            shopItem.addEventListener('click', function(event) {
+                const shopItemRect = shopItem.getBoundingClientRect();
+                const clickY = event.clientY;
 
-            shopItem.appendChild(img)
-            shopItem.appendChild(price)
-            shopItem.appendChild(arrow);
-            shopItem.appendChild(description);
+                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
+
+                if (clickY > bottomAreaThreshold) {
+                    if (description.style.display === 'none') {
+                        description.style.display = 'block';
+                        arrow.innerText = '↑';
+                    } else {
+                        description.style.display = 'none';
+                        arrow.innerText = '↓';
+                    }
+                }
+            }) 
+            description.addEventListener('click', function() {
+                description.style.display = 'none';
+                arrow.innerText = '↓';
+            }) 
+
+            priceWithArrow.appendChild(priceContainer)
+            priceWithArrow.appendChild(arrow)
+            content.appendChild(img);
+            content.appendChild(priceWithArrow);
+            shopItem.appendChild(content)
+            itemContent.appendChild(shopItem)
+            itemContent.appendChild(description)
             
-            shopItem.addEventListener("click", function(e) {
+            img.addEventListener("click", function(e) {
                 if (player._money >= RES.plants[plant].seed.price && player.getInvFullness() >= 1)
                 {
                     player.buy(RES.plants[plant].seed.price)
@@ -205,46 +250,66 @@ class Shop{
                 }
             });
             shopItem.className = "shop-item";
-            shop.appendChild(shopItem);
+            shop.appendChild(itemContent);
         });
     }
     drawAnimalShop(){
         const shop = document.getElementById('shop-list');
         shop.innerHTML = '';
         RES.names.animals.forEach(animal => {
+            const itemContent = document.createElement('div');
             const shopItem = document.createElement('div');
-            const img = document.createElement('img');
-            img.src = `client/assets/animals/${animal}/${animal}.png`
-            img.className = "item-image"
+            const content = document.createElement('div');
+            content.className = 'shop-item-content'
+            const img = document.createElement('div');
+            img.style.backgroundImage = `url('client/assets/animals/${animal}/${animal}.png')`;
+            img.className = 'shop-item-img'
+            const priceWithArrow = document.createElement('div');
+            priceWithArrow.className = 'price-with-arrow';
             const price = document.createElement('h3');
             price.innerText = `${RES.animals[animal].price}$`;
+            price.className = 'shop-item-price'
+            const priceContainer = document.createElement('div');
+            priceContainer.className = 'shop-price-container'
+            priceContainer.appendChild(price)
 
-            // Создаем элемент для выпадающего описания
             const description = document.createElement('div');
             description.className = 'description';
             description.innerText = 'описание'
-            description.style.display = 'none'; // изначально скрыто
+            description.style.display = 'none';
     
-            // Создаем стрелочку для открытия описания
             const arrow = document.createElement('span');
-            arrow.innerText = '↓'; // символ стрелочки
+            arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            // Добавляем обработчик для стрелочки
-            arrow.addEventListener('click', function() {
-                if (description.style.display === 'none') {
-                    description.style.display = 'block';
-                    arrow.innerText = '↑'; // меняем стрелочку на вверх
-                } else {
-                    description.style.display = 'none';
-                    arrow.innerText = '↓'; // меняем стрелочку на вниз
-                }
-            });
+            shopItem.addEventListener('click', function(event) {
+                const shopItemRect = shopItem.getBoundingClientRect();
+                const clickY = event.clientY;
 
-            shopItem.appendChild(img)
-            shopItem.appendChild(price)
-            shopItem.appendChild(arrow);
-            shopItem.appendChild(description);
+                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
+
+                if (clickY > bottomAreaThreshold) {
+                    if (description.style.display === 'none') {
+                        description.style.display = 'block';
+                        arrow.innerText = '↑';
+                    } else {
+                        description.style.display = 'none';
+                        arrow.innerText = '↓';
+                    }
+                }
+            }) 
+            description.addEventListener('click', function() {
+                description.style.display = 'none';
+                arrow.innerText = '↓';
+            }) 
+
+            priceWithArrow.appendChild(priceContainer)
+            priceWithArrow.appendChild(arrow)
+            content.appendChild(img);
+            content.appendChild(priceWithArrow);
+            shopItem.appendChild(content)
+            itemContent.appendChild(shopItem)
+            itemContent.appendChild(description)
 
             if (player._money >= RES.animals[animal].price){
                 let touchStartX = 0;
@@ -296,46 +361,66 @@ class Shop{
                 img.style.filter = 'grayscale(100%)';
             }
             shopItem.className = "shop-item";
-            shop.appendChild(shopItem);
+            shop.appendChild(itemContent);
         });
     }
     drawAnimalPenShop(){
         const shop = document.getElementById('shop-list');
         shop.innerHTML = '';
         RES.buildingNames.animalPen.forEach(building => {
+            const itemContent = document.createElement('div');
             const shopItem = document.createElement('div');
-            const img = document.createElement('img');
-            img.src = `client/assets/buildings/${building}/${building}.png`
-            img.className = "item-image"
+            const content = document.createElement('div');
+            content.className = 'shop-item-content'
+            const img = document.createElement('div');
+            img.style.backgroundImage = `url('client/assets/buildings/${building}/${building}.png')`;
+            img.className = 'shop-item-img'
+            const priceWithArrow = document.createElement('div');
+            priceWithArrow.className = 'price-with-arrow';
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
+            price.className = 'shop-item-price'
+            const priceContainer = document.createElement('div');
+            priceContainer.className = 'shop-price-container'
+            priceContainer.appendChild(price)
 
-            // Создаем элемент для выпадающего описания
             const description = document.createElement('div');
             description.className = 'description';
             description.innerText = 'описание'
-            description.style.display = 'none'; // изначально скрыто
+            description.style.display = 'none';
     
-            // Создаем стрелочку для открытия описания
             const arrow = document.createElement('span');
-            arrow.innerText = '↓'; // символ стрелочки
+            arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            // Добавляем обработчик для стрелочки
-            arrow.addEventListener('click', function() {
-                if (description.style.display === 'none') {
-                    description.style.display = 'block';
-                    arrow.innerText = '↑'; // меняем стрелочку на вверх
-                } else {
-                    description.style.display = 'none';
-                    arrow.innerText = '↓'; // меняем стрелочку на вниз
-                }
-            });
+            shopItem.addEventListener('click', function(event) {
+                const shopItemRect = shopItem.getBoundingClientRect();
+                const clickY = event.clientY;
 
-            shopItem.appendChild(img)
-            shopItem.appendChild(price)
-            shopItem.appendChild(arrow);
-            shopItem.appendChild(description);
+                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
+
+                if (clickY > bottomAreaThreshold) {
+                    if (description.style.display === 'none') {
+                        description.style.display = 'block';
+                        arrow.innerText = '↑';
+                    } else {
+                        description.style.display = 'none';
+                        arrow.innerText = '↓';
+                    }
+                }
+            }) 
+            description.addEventListener('click', function() {
+                description.style.display = 'none';
+                arrow.innerText = '↓';
+            }) 
+
+            priceWithArrow.appendChild(priceContainer)
+            priceWithArrow.appendChild(arrow)
+            content.appendChild(img);
+            content.appendChild(priceWithArrow);
+            shopItem.appendChild(content)
+            itemContent.appendChild(shopItem)
+            itemContent.appendChild(description)
 
             if (player._money >= RES.buildings[building].price){
                 let touchStartX = 0;
@@ -386,46 +471,66 @@ class Shop{
                 img.style.filter = 'grayscale(100%)';
             }
             shopItem.className = "shop-item";
-            shop.appendChild(shopItem);
+            shop.appendChild(itemContent);
         });
     }
     drawBushShop(){
         const shop = document.getElementById('shop-list');
         shop.innerHTML = '';
         RES.buildingNames.bush.forEach(building => {
+            const itemContent = document.createElement('div');
             const shopItem = document.createElement('div');
-            const img = document.createElement('img');
-            img.src = `client/assets/buildings/${building}/${building}1.png`
-            img.className = "item-image"
+            const content = document.createElement('div');
+            content.className = 'shop-item-content'
+            const img = document.createElement('div');
+            img.style.backgroundImage = `url('client/assets/buildings/${building}/${building}1.png')`;
+            img.className = 'shop-item-img'
+            const priceWithArrow = document.createElement('div');
+            priceWithArrow.className = 'price-with-arrow';
             const price = document.createElement('h3');
             price.innerText = `${RES.buildings[building].price}$`;
+            price.className = 'shop-item-price'
+            const priceContainer = document.createElement('div');
+            priceContainer.className = 'shop-price-container'
+            priceContainer.appendChild(price)
 
-            // Создаем элемент для выпадающего описания
             const description = document.createElement('div');
             description.className = 'description';
             description.innerText = 'описание'
-            description.style.display = 'none'; // изначально скрыто
+            description.style.display = 'none';
     
-            // Создаем стрелочку для открытия описания
             const arrow = document.createElement('span');
-            arrow.innerText = '↓'; // символ стрелочки
+            arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            // Добавляем обработчик для стрелочки
-            arrow.addEventListener('click', function() {
-                if (description.style.display === 'none') {
-                    description.style.display = 'block';
-                    arrow.innerText = '↑'; // меняем стрелочку на вверх
-                } else {
-                    description.style.display = 'none';
-                    arrow.innerText = '↓'; // меняем стрелочку на вниз
-                }
-            });
+            shopItem.addEventListener('click', function(event) {
+                const shopItemRect = shopItem.getBoundingClientRect();
+                const clickY = event.clientY;
 
-            shopItem.appendChild(img)
-            shopItem.appendChild(price)
-            shopItem.appendChild(arrow);
-            shopItem.appendChild(description);
+                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
+
+                if (clickY > bottomAreaThreshold) {
+                    if (description.style.display === 'none') {
+                        description.style.display = 'block';
+                        arrow.innerText = '↑';
+                    } else {
+                        description.style.display = 'none';
+                        arrow.innerText = '↓';
+                    }
+                }
+            }) 
+            description.addEventListener('click', function() {
+                description.style.display = 'none';
+                arrow.innerText = '↓';
+            }) 
+
+            priceWithArrow.appendChild(priceContainer)
+            priceWithArrow.appendChild(arrow)
+            content.appendChild(img);
+            content.appendChild(priceWithArrow);
+            shopItem.appendChild(content)
+            itemContent.appendChild(shopItem)
+            itemContent.appendChild(description)
 
             if (player._money >= RES.buildings[building].price){
                 let touchStartX = 0;
@@ -476,7 +581,7 @@ class Shop{
                 img.style.filter = 'grayscale(100%)';
             }
             shopItem.className = "shop-item";
-            shop.appendChild(shopItem);
+            shop.appendChild(itemContent);
         });
     }
     drawStash()
@@ -484,26 +589,49 @@ class Shop{
         document.getElementById("stash-wrap").style.display = "flex";
         const stashList = document.getElementById('stash-list')
         stashList.innerHTML = "";
-    
-        for (let item in player._inventory)
+        const k = Math.trunc((player._inventorySize - player.getInvFullness()) * 10 / player._inventorySize)
+        let n = 0
+        if (k >= 8)
+            n = 3
+        else if (k >= 5)
+            n = 2
+        else if (k >= 1)
+            n = 1
+        const path = `url('client/assets/design/capacity_elem${n}.png`;
+        for (let i = 0; i < k; i++) {
+            const capElem = document.createElement('div')
+            capElem.className = 'stash-capacity-elem'
+            capElem.style.backgroundImage = path
+            document.getElementById('stash-capacity').appendChild(capElem)
+        }
+        for (let i = k; i < 10; i++) {
+            const capElem = document.createElement('div')
+            capElem.className = 'stash-capacity-elem'
+            capElem.style.backgroundImage = `url('client/assets/design/capacity_elem0.png`;
+            document.getElementById('stash-capacity').appendChild(capElem)
+        }
+
+        const inventoryArray = Object.entries(player._inventory);
+        inventoryArray.sort((a, b) => b[1] - a[1]);
+        for (let [item] of inventoryArray)
         {
             if (player._inventory[item] > 0)
             {
                 const div = document.createElement('div');
                 div.className = 'stash-item'
-                const img = document.createElement("img")
-                img.src = `client/assets/items/${item}.png`
-                img.className = "item-image"
+                const img = document.createElement("div")
+                img.style.backgroundImage = `url('client/assets/items/${item}.png')`;
+                img.className = "stash-image"
                 div.appendChild(img)
 
-                const name = document.createElement('h3');
-                name.innerHTML = player._inventory[item];    
-                div.appendChild(name);
+                const amount = document.createElement('h3');
+                amount.innerHTML = player._inventory[item];  
+                amount.className = 'stash-item-amount'  
+                div.appendChild(amount);
                 stashList.appendChild(div);
             }
         }
         const upgButton = document.getElementById('upgrade-stash-button')
-        upgButton.className = 'booster-button' // временно
         if (player._tokenBalance >= 1000){
             upgButton.disabled = false
         } else {

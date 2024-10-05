@@ -9,6 +9,8 @@ class GlobalVars{
         this.scale = 11;
         this.rescale = true
         this.redraw = true;
+        this.confirmFlag = false;
+        this.confirmTimer = null
     }
     countBuilding(type){
         let counter = 0
@@ -41,6 +43,32 @@ class GlobalVars{
         document.getElementById("stash-wrap").style.display = "none";
         document.getElementById("shop-wrap").style.display = "none";
         document.getElementById("building-menu-wrap").style.display = "none";
+    }
+    showFloatingText(message) {
+        const textElement = document.createElement('div');
+        textElement.textContent = message;
+      
+        textElement.classList.add('floating-text');
+        
+        document.body.appendChild(textElement);
+      
+        setTimeout(() => {
+          textElement.classList.add('float-away');
+        }, 50);
+      
+        setTimeout(() => {
+          textElement.remove();
+        }, 4000);
+    }
+    setConfirm(){
+        this.confirmFlag = true;
+        this.confirmTimer = setTimeout(() => {
+            this.confirmFlag = false;
+        }, 3000);
+    }
+    deleteConfirm(){
+        this.confirmFlag = false;
+        clearTimeout(this.confirmTimer)
     }
 }
 
