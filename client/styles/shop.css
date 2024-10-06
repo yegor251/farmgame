@@ -26,6 +26,7 @@
     aspect-ratio: 1;
     position: relative;
     scrollbar-width: none;
+    image-rendering: pixelated;
 }
 .shop-categorie-icon {
     width: 82%;
@@ -35,9 +36,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    background-size: contain; /* Увеличивает/уменьшает изображение пропорционально */
-    background-repeat: no-repeat; /* Не повторяем изображение */
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
+    image-rendering: pixelated;
 }
 #shop-list{
     width: 66.66%;
@@ -48,11 +50,10 @@
     width: 100%;
     padding-top: 100%;
     position: relative;
-    
+    image-rendering: pixelated;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,12 +81,14 @@
 }
 .shop-price-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
 }
 .price-with-arrow {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     margin-bottom: 8%;
     position: relative;
     overflow: hidden;
@@ -94,12 +97,13 @@
     position: absolute;
     right: 9%;
     color: white;
-    font-size: 20px;
+    font-size: 4.6vw;
 }
 .shop-item-price {
     color: yellow;
     text-align: center;
     flex: 1;
+    font-size: 4.6vw;
 }
 .description-menu {
     display: none;

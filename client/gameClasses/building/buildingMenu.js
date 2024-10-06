@@ -42,15 +42,15 @@ class BuildingMenu {
             const queueElem = document.createElement("div");
             queueElem.className = "queue-elem";
             if (queue[i] != undefined) {
-                const img = document.createElement("img");
-                img.className = "item-image";
+                const img = document.createElement("div");
+                img.className = "queue-elem-img";
                 const key = Object.keys(queue[i])[0];
-                img.src = `client/assets/items/${key}.png`;
+                img.style.backgroundImage = `url('client/assets/items/${key}.png')`;
                 queueElem.appendChild(img);
 
                 const time = document.createElement("h3");
-                time.className = "queue-text";
-                time.innerText = this._formatTime(Math.trunc(queue[i].timeToFinish / 1000));
+                time.className = "queue-elem-text";
+                time.innerText = this._formatTime(Math.trunc(queue[i].timeToFinish / 1000 + 7000));
                 queueElem.appendChild(time);
             }
             buildingQueue.appendChild(queueElem);
@@ -59,7 +59,10 @@ class BuildingMenu {
         if (this.building._slotsAmount < RES.buildings[this.building._type].maxSlots + CVAR.extraSlotsCount){
             const queueElem = document.createElement("div");
             queueElem.className = "queue-elem";
-            queueElem.innerText = '+'
+            const plus = document.createElement('h3')
+            plus.innerText = '+'
+            plus.className = 'queue-elem-plus'
+            queueElem.appendChild(plus)
             queueElem.onclick = () => {
                 const overlay = document.createElement('div');
                 overlay.id = 'menu-overlay';
@@ -108,8 +111,7 @@ class BuildingMenu {
         const queue = this.building._craftingItems;
         this.renderQueue();
         const buildingImg = document.getElementById('building-img');
-        buildingImg.src = `client/assets/buildings/${type}/${type}.png`;
-        buildingImg.className = 'menu-big-img';
+        buildingImg.style.backgroundImage = `url('client/assets/buildings/${type}/${type}.png')`;
         const button = document.getElementById('upgrade-building');
         button.onclick = () => {
             if (this.building.canUpgrade()){
@@ -120,13 +122,15 @@ class BuildingMenu {
         const buildingMenuList = document.getElementById('building-menu-list');
         buildingMenuList.innerHTML = "";
         for (let product in RES.buildings[type].workTypes) {
+            if (RES.buildings[type].workTypes[product].minLevel > this.building._level + 1) {
+                break
+            }
             const craft = document.createElement("div");
             craft.className = "craft";
 
             const craftImg = document.createElement("div");
             craftImg.style.backgroundImage = `url(client/assets/items/${product}.png)`;
             craftImg.className = "craft-item-image";
-            const buildingQueue = document.getElementById('building-queue');
 
             const isIntersecting = (rect1, rect2) => {
                 return (
@@ -146,6 +150,10 @@ class BuildingMenu {
 
                     clone.classList.add('clone-image');
                     document.body.appendChild(clone);
+
+                    const computedStyle = window.getComputedStyle(this);
+                    clone.style.width = computedStyle.width;
+                    clone.style.height = computedStyle.height;
 
                     const moveAt = (pageX, pageY) => {
                         clone.style.left = pageX - clone.offsetWidth / 2 + 'px';
@@ -181,7 +189,7 @@ class BuildingMenu {
 
             craft.addEventListener('touchstart', (event) => {
                 const dropList = document.createElement("div");
-                dropList.id = 'drop-list';
+                dropList.id = 'drop-list'
                 dropList.className = "craft-drop-list";
                 const dropName = document.createElement("h3");
                 dropName.innerText = product;
@@ -189,18 +197,9 @@ class BuildingMenu {
                 dropList.appendChild(dropName);
 
                 const dropTime = document.createElement("h3");
-                dropTime.innerText = this._formatTime(RES.buildings[type].workTypes[product].timeToFinish);
+                dropTime.innerText = 'time:' + this._formatTime(RES.buildings[type].workTypes[product].timeToFinish);
                 dropTime.className = 'drop-list-text';
                 dropList.appendChild(dropTime);
-                const dropLevel = document.createElement("h3");
-                dropLevel.className = 'drop-items-amount';
-                const nowLevel = this.building._level;
-                const needLevel = RES.buildings[type].workTypes[product].minLevel;
-                if (nowLevel < needLevel) {
-                    dropLevel.classList.add('insufficient');
-                }
-                dropLevel.innerText = `level: ${nowLevel}/${needLevel}`
-                dropList.appendChild(dropLevel);
 
                 for (let item in RES.buildings[type].workTypes[product].items) {
                     const dropItem = document.createElement("div");
@@ -211,9 +210,12 @@ class BuildingMenu {
 
                     const itemText = document.createElement("h3");
                     itemText.className = 'drop-items-amount';
-                    const playerItemAmount = player._inventory[item];
+                    let playerItemAmount = player._inventory[item];
                     const requiredItemAmount = RES.buildings[type].workTypes[product].items[item];
-                    itemText.innerText = `${playerItemAmount}/${requiredItemAmount}`;
+                    if (playerItemAmount == undefined){
+                        playerItemAmount = 0
+                    }
+                    itemText.innerText = ` ${playerItemAmount}/${requiredItemAmount}`;
 
                     if (playerItemAmount < requiredItemAmount) {
                         itemText.classList.add('insufficient');
@@ -221,6 +223,14 @@ class BuildingMenu {
                     dropItem.appendChild(img);
                     dropItem.appendChild(itemText);
                     dropList.appendChild(dropItem);
+                }
+                const nowLevel = this.building._level;
+                const needLevel = RES.buildings[type].workTypes[product].minLevel;
+                if (nowLevel < needLevel) {
+                    const newLevel = document.createElement("h3");
+                    newLevel.className = 'drop-list-text';
+                    newLevel.innerText = 'next level'
+                    dropList.appendChild(newLevel);
                 }
                 craft.appendChild(dropList);
                 dropList.style.display = 'block';

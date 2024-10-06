@@ -65,11 +65,26 @@ body{
     transform: translate(-50%, -300%);
     opacity: 0;
 }
+.menu-wrap {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    background-color: rgba(255, 255, 255, 0)
+}
+.clone-image {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000
+}
 /*     КОНЕЦ ОБЩИЕ СТИЛИ    */
 #bar {
     z-index: 100;
     position: absolute;
-    width: 40px; /* Изменяем ширину на 40px, так как компонент теперь вертикальный */
+    width: 9%; /* Изменяем ширину на 40px, так как компонент теперь вертикальный */
     height: 100%; /* Высота на 100%, чтобы занять всю высоту родителя */
     background-color: azure;
     display: flex;
@@ -92,21 +107,6 @@ body{
     margin: 0 auto 10px;
     image-rendering: pixelated;
 }
-.craft-item-image { /* используется в buildingMenu, fieldMenu для div */
-    height: 80px;
-    width: 80px; /* Укажите ширину, чтобы изображение не повторялось */
-    margin: 0 0 10px 0; /* Обнулите все отступы и добавьте нижний отступ */
-    image-rendering: pixelated;
-    background-repeat: no-repeat;
-    background-size: contain; /* Или используйте 'cover', если вам нужно, чтобы изображение покрывало весь элемент */
-    background-position: center;
-    left: 0;
-}
-.clone-image { /* используется везде где вытягивается картинка */
-    position: absolute;
-    pointer-events: none; /* Чтобы клон не перехватывал события мыши */
-    z-index: 1000; /* Размещаем клон поверх других элементов */
-}
 .menu-big-img{ /* большая картинка в менюшках */
     display: block;
     height: 150px;
@@ -123,23 +123,13 @@ body{
     height: 5vh;
     font-family: VCR;
 }
-.menu-wrap {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 50;
-    background-color: rgba(255, 255, 255, 0)
-}
-#spin, #building-menu, #animal-menu, #field-menu, #bush-menu, #booster-menu, #obstacle-menu, #buisness-menu, #deals, #payments{
+#spin, #animal-menu, #field-menu, #bush-menu, #booster-menu, #obstacle-menu, #buisness-menu, #deals, #payments{
     background-color: aliceblue;
     width: 80%;
     height: 80%;
     overflow-y: scroll;
 }
-#closeShop, #closeSpin, #close-building-menu, #close-animal-menu, #close-field-menu, #close-bush-menu, #close-booster-menu, #close-obstacle-menu, #close-buisness-menu{
+#closeShop, #closeSpin, #close-animal-menu, #close-field-menu, #close-bush-menu, #close-booster-menu, #close-obstacle-menu, #close-buisness-menu{
     float: right;
     border: none;
     background-color: rgb(225, 75, 75);
@@ -148,7 +138,7 @@ body{
     height: 5vh;
     font-family: VCR;
 }
-#building-menu-bar, #animal-menu-bar, #field-menu-bar, #bush-menu-bar, #booster-menu-bar, #obstacle-menu-bar, #buisness-menu-bar, #deals-bar, #payment-bar{
+#animal-menu-bar, #field-menu-bar, #bush-menu-bar, #booster-menu-bar, #obstacle-menu-bar, #buisness-menu-bar, #deals-bar, #payment-bar{
     width: 100%;
     height: 5vh;
 }
@@ -215,69 +205,9 @@ body{
 }
 
 /*        BUILDING       */
-#building-menu-list, #booster-list{
+#booster-list{
     display: flex;
     flex-wrap: wrap;
-}
-.craft {
-    width: 25%;
-    box-sizing: border-box;
-    margin-left: 5px;
-}
-.craft-drop-list {
-    margin-bottom: 10px;
-}
-.drop-item {
-    display: flex; /* выстраиваем элементы в строку */
-    align-items: center; /* выравнивание по центру */
-    margin-bottom: 10px; /* отступ между элементами */
-}
-.queue-elem {
-    width: 80px;
-    height: 100px;
-    border: 1px solid black;
-    display: inline-block; /* Выравнивание элементов в один ряд */
-    box-sizing: border-box; /* Учитывать рамку в общей ширине и высоте элемента */
-    margin: 0 0 10px 0; /* Обнулите все отступы и добавьте нижний отступ */
-    image-rendering: pixelated;
-    background-repeat: no-repeat;
-    background-size: contain; /* Или используйте 'cover', если вам нужно, чтобы изображение покрывало весь элемент */
-    background-position: center; /* Центрирование изображения */
-    position: relative;
-
-    vertical-align: top; /* Не допускает смещения блоков вниз */
-    text-align: center; /* Центрирование текста по горизонтали */
-    line-height: 100px; /* Вертикальное центрирование текста */
-}
-.craft-drop-list {
-    display: none;
-    position: absolute;
-    background-color: #f2f2f2; /* приятный задний фон */
-    border-radius: 10px; /* плавные углы */
-    padding: 10px; /* внутренний отступ */
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Убедитесь, что меню отображается поверх других элементов */
-}
-.drop-list-img{
-    display: block;
-    max-width: 100%;
-    height: 40px;
-    margin: 0 auto 10px;
-    image-rendering: pixelated;
-}
-.drop-items-amount{
-    color: rgb(55, 172, 55);
-}
-.drop-items-amount.insufficient {
-    color: red; /* красный цвет если недостаточно ресурсов */
-}
-.drop-list-text {
-    margin-bottom: 5px; /* отступ снизу для разделения */
-    font-size: 18px; /* размер шрифта */
-    font-weight: bold; /* жирный шрифт */
-    color: #333; /* темно-серый цвет */
-    text-align: center;
 }
 .queue-text {
     position: absolute;

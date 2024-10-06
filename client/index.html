@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="client/styles/shop.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/stash.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/orders.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/buildable.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -151,18 +152,24 @@
             <div id="orders-bottom"></div>
         </div>
     </div>
-
     <div id="building-menu-wrap" class="menu-wrap">
         <div id="building-menu">
-            <div id="building-menu-bar">
-                <button id="close-building-menu">X</button>
+            <div class="buildable-menu-bar">
+                <div id="close-building-menu" class="buildable-close-button"></div>
             </div>
             <div id="building-visual">
-                <img id="building-img">
+                <div class="buildable-image-bar">
+                    <div id="building-img" class="buildable-big-image"></div>
+                </div>
+                <div class="building-middle"></div>
                 <div id="building-queue"></div>
             </div>
-            <button id="upgrade-building">улучшить</button>
-            <div id="building-menu-list"></div>
+            <div class="building-middle"></div>
+            <div class="building-upgrade-bar">
+                <div id="upgrade-building" class="upgrade-buildable-button">улучшить</div>
+            </div>
+            <div id="building-menu-list" class="buildable-menu-list"></div>
+            <div class="buildable-bottom"></div>
         </div>
     </div>
     <div id="animal-menu-wrap" class="menu-wrap">

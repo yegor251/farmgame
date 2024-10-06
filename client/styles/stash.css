@@ -32,6 +32,7 @@
     position: absolute;
     top: 65%;
     left: 50%;
+    font-size: 5vw;
     transform: translateX(-50%);
     display: flex;
     flex-wrap: wrap;
@@ -107,6 +108,7 @@
     bottom: 7.5%;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 4.2vw;
 }
 #upgrade-stash-button-bar {
     display: flex;
@@ -139,6 +141,7 @@
     position: relative;
     justify-content: center;
     align-items: center;
+    font-size: 5.3vw;
 }
 #stash-bottom {
     width: 100%;

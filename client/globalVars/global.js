@@ -43,6 +43,15 @@ class GlobalVars{
         document.getElementById("stash-wrap").style.display = "none";
         document.getElementById("shop-wrap").style.display = "none";
         document.getElementById("building-menu-wrap").style.display = "none";
+        document.getElementById("booster-menu-wrap").style.display = "none";
+        document.getElementById("obstacle-menu-wrap").style.display = "none";
+        document.getElementById("buisness-menu-wrap").style.display = "none";
+        document.getElementById("animal-menu-wrap").style.display = "none";
+        document.getElementById("field-menu-wrap").style.display = "none";
+        document.getElementById("bush-menu-wrap").style.display = "none";
+        document.getElementById("transaction-wrap").style.display = "none";
+        document.getElementById("deals-wrap").style.display = "none";
+        document.getElementById("payment-wrap").style.display = "none";
     }
     showFloatingText(message) {
         const textElement = document.createElement('div');
