@@ -50,7 +50,7 @@ class BuildingMenu {
 
                 const time = document.createElement("h3");
                 time.className = "queue-elem-text";
-                time.innerText = this._formatTime(Math.trunc(queue[i].timeToFinish / 1000 + 7000));
+                time.innerText = this._formatTime(Math.trunc(queue[i].timeToFinish / 1000));
                 queueElem.appendChild(time);
             }
             buildingQueue.appendChild(queueElem);

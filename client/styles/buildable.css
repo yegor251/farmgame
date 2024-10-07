@@ -49,7 +49,7 @@
     scrollbar-width: none;
     overflow: hidden;
     justify-content: center;
-    align-items: centers;
+    align-items: center;
 }
 .buildable-big-image {
     width: 30%;
@@ -174,7 +174,7 @@
     position: relative;
 }
 .craft {
-    width: 22%;
+    width: 17%;
     box-sizing: border-box;
 }
 .craft-item-image {
@@ -219,12 +219,12 @@
     color: red;
 }
 .drop-list-text {
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     font-size: 4vw;
-    font-weight: bold;
     color: #333;
     text-align: center;
 }
+/*      КОНЕЦ ДРОП ЛИСТ     */
 .buildable-bottom {
     width: 100%;
     aspect-ratio: 270 / 11;
@@ -235,4 +235,48 @@
     background-position: center;
     background-repeat: no-repeat;
     image-rendering: pixelated;
+}
+/*     PROGRESS-BAR      */
+.timer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2%;
+    flex-direction: column;
+    background-image: url('../assets/design/menu.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+.progress-timer {
+    color: wheat;
+    font-size: 5vw;
+}
+.progress-line {
+    width: 80%;
+    aspect-ratio: 15 / 1;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.progress {
+    height: 100%;
+    background-color: #70c46d;
+    width: 0;
+    position: absolute;
+    border-radius: 2px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    transition: width 0.5s ease;
+}
+/*      КОНЕЦ PROGRESS-BAR      */
+.amount-text {
+    color: white;
+    font-size: 4.5vw;
+    text-align: center;
 }

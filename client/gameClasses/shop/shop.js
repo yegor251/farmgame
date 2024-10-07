@@ -95,20 +95,13 @@ class Shop{
             arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            shopItem.addEventListener('click', function(event) {
-                const shopItemRect = shopItem.getBoundingClientRect();
-                const clickY = event.clientY;
-
-                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
-
-                if (clickY > bottomAreaThreshold) {
-                    if (descriptionMenu.style.display === 'none') {
-                        descriptionMenu.style.display = 'block';
-                        arrow.innerText = '↑';
-                    } else {
-                        descriptionMenu.style.display = 'none';
-                        arrow.innerText = '↓';
-                    }
+            priceWithArrow.addEventListener('click', function(event) {
+                if (descriptionMenu.style.display === 'none') {
+                    descriptionMenu.style.display = 'block';
+                    arrow.innerText = '↑';
+                } else {
+                    descriptionMenu.style.display = 'none';
+                    arrow.innerText = '↓';
                 }
             }) 
             descriptionMenu.addEventListener('click', function() {
@@ -201,33 +194,29 @@ class Shop{
             priceContainer.className = 'shop-price-container'
             priceContainer.appendChild(price)
 
-            const description = document.createElement('div');
-            description.className = 'description';
-            description.innerText = 'описание'
-            description.style.display = 'none';
+            const descriptionMenu = document.createElement('div');
+            descriptionMenu.className = 'description-menu';
+            descriptionMenu.style.display = 'none';
+            const description = document.createElement('h3')
+            description.className = 'description'
+            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            descriptionMenu.appendChild(description)
 
             const arrow = document.createElement('span');
             arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            shopItem.addEventListener('click', function(event) {
-                const shopItemRect = shopItem.getBoundingClientRect();
-                const clickY = event.clientY;
-
-                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
-
-                if (clickY > bottomAreaThreshold) {
-                    if (description.style.display === 'none') {
-                        description.style.display = 'block';
-                        arrow.innerText = '↑';
-                    } else {
-                        description.style.display = 'none';
-                        arrow.innerText = '↓';
-                    }
+            priceWithArrow.addEventListener('click', function(event) {
+                if (descriptionMenu.style.display === 'none') {
+                    descriptionMenu.style.display = 'block';
+                    arrow.innerText = '↑';
+                } else {
+                    descriptionMenu.style.display = 'none';
+                    arrow.innerText = '↓';
                 }
             }) 
-            description.addEventListener('click', function() {
-                description.style.display = 'none';
+            descriptionMenu.addEventListener('click', function() {
+                descriptionMenu.style.display = 'none';
                 arrow.innerText = '↓';
             }) 
 
@@ -237,8 +226,8 @@ class Shop{
             content.appendChild(priceWithArrow);
             shopItem.appendChild(content)
             itemContent.appendChild(shopItem)
-            itemContent.appendChild(description)
-            
+            itemContent.appendChild(descriptionMenu)
+
             img.addEventListener("click", function(e) {
                 if (player._money >= RES.plants[plant].seed.price && player.getInvFullness() >= 1)
                 {
@@ -273,33 +262,29 @@ class Shop{
             priceContainer.className = 'shop-price-container'
             priceContainer.appendChild(price)
 
-            const description = document.createElement('div');
-            description.className = 'description';
-            description.innerText = 'описание'
-            description.style.display = 'none';
+            const descriptionMenu = document.createElement('div');
+            descriptionMenu.className = 'description-menu';
+            descriptionMenu.style.display = 'none';
+            const description = document.createElement('h3')
+            description.className = 'description'
+            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            descriptionMenu.appendChild(description)
     
             const arrow = document.createElement('span');
             arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            shopItem.addEventListener('click', function(event) {
-                const shopItemRect = shopItem.getBoundingClientRect();
-                const clickY = event.clientY;
-
-                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
-
-                if (clickY > bottomAreaThreshold) {
-                    if (description.style.display === 'none') {
-                        description.style.display = 'block';
-                        arrow.innerText = '↑';
-                    } else {
-                        description.style.display = 'none';
-                        arrow.innerText = '↓';
-                    }
+            priceWithArrow.addEventListener('click', function(event) {
+                if (descriptionMenu.style.display === 'none') {
+                    descriptionMenu.style.display = 'block';
+                    arrow.innerText = '↑';
+                } else {
+                    descriptionMenu.style.display = 'none';
+                    arrow.innerText = '↓';
                 }
             }) 
-            description.addEventListener('click', function() {
-                description.style.display = 'none';
+            descriptionMenu.addEventListener('click', function() {
+                descriptionMenu.style.display = 'none';
                 arrow.innerText = '↓';
             }) 
 
@@ -309,7 +294,7 @@ class Shop{
             content.appendChild(priceWithArrow);
             shopItem.appendChild(content)
             itemContent.appendChild(shopItem)
-            itemContent.appendChild(description)
+            itemContent.appendChild(descriptionMenu)
 
             if (player._money >= RES.animals[animal].price){
                 let touchStartX = 0;
@@ -384,33 +369,29 @@ class Shop{
             priceContainer.className = 'shop-price-container'
             priceContainer.appendChild(price)
 
-            const description = document.createElement('div');
-            description.className = 'description';
-            description.innerText = 'описание'
-            description.style.display = 'none';
+            const descriptionMenu = document.createElement('div');
+            descriptionMenu.className = 'description-menu';
+            descriptionMenu.style.display = 'none';
+            const description = document.createElement('h3')
+            description.className = 'description'
+            description.innerHTML = 'описание '
+            descriptionMenu.appendChild(description)
     
             const arrow = document.createElement('span');
             arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            shopItem.addEventListener('click', function(event) {
-                const shopItemRect = shopItem.getBoundingClientRect();
-                const clickY = event.clientY;
-
-                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
-
-                if (clickY > bottomAreaThreshold) {
-                    if (description.style.display === 'none') {
-                        description.style.display = 'block';
-                        arrow.innerText = '↑';
-                    } else {
-                        description.style.display = 'none';
-                        arrow.innerText = '↓';
-                    }
+            priceWithArrow.addEventListener('click', function(event) {
+                if (descriptionMenu.style.display === 'none') {
+                    descriptionMenu.style.display = 'block';
+                    arrow.innerText = '↑';
+                } else {
+                    descriptionMenu.style.display = 'none';
+                    arrow.innerText = '↓';
                 }
             }) 
-            description.addEventListener('click', function() {
-                description.style.display = 'none';
+            descriptionMenu.addEventListener('click', function() {
+                descriptionMenu.style.display = 'none';
                 arrow.innerText = '↓';
             }) 
 
@@ -420,7 +401,7 @@ class Shop{
             content.appendChild(priceWithArrow);
             shopItem.appendChild(content)
             itemContent.appendChild(shopItem)
-            itemContent.appendChild(description)
+            itemContent.appendChild(descriptionMenu)
 
             if (player._money >= RES.buildings[building].price){
                 let touchStartX = 0;
@@ -494,33 +475,29 @@ class Shop{
             priceContainer.className = 'shop-price-container'
             priceContainer.appendChild(price)
 
-            const description = document.createElement('div');
-            description.className = 'description';
-            description.innerText = 'описание'
-            description.style.display = 'none';
+            const descriptionMenu = document.createElement('div');
+            descriptionMenu.className = 'description-menu';
+            descriptionMenu.style.display = 'none';
+            const description = document.createElement('h3')
+            description.className = 'description'
+            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            descriptionMenu.appendChild(description)
     
             const arrow = document.createElement('span');
             arrow.innerText = '↓';
             arrow.className = 'description-arrow';
     
-            shopItem.addEventListener('click', function(event) {
-                const shopItemRect = shopItem.getBoundingClientRect();
-                const clickY = event.clientY;
-
-                const bottomAreaThreshold = shopItemRect.top + shopItemRect.height * 0.78;
-
-                if (clickY > bottomAreaThreshold) {
-                    if (description.style.display === 'none') {
-                        description.style.display = 'block';
-                        arrow.innerText = '↑';
-                    } else {
-                        description.style.display = 'none';
-                        arrow.innerText = '↓';
-                    }
+            priceWithArrow.addEventListener('click', function(event) {
+                if (descriptionMenu.style.display === 'none') {
+                    descriptionMenu.style.display = 'block';
+                    arrow.innerText = '↑';
+                } else {
+                    descriptionMenu.style.display = 'none';
+                    arrow.innerText = '↓';
                 }
             }) 
-            description.addEventListener('click', function() {
-                description.style.display = 'none';
+            descriptionMenu.addEventListener('click', function() {
+                descriptionMenu.style.display = 'none';
                 arrow.innerText = '↓';
             }) 
 
@@ -530,7 +507,7 @@ class Shop{
             content.appendChild(priceWithArrow);
             shopItem.appendChild(content)
             itemContent.appendChild(shopItem)
-            itemContent.appendChild(description)
+            itemContent.appendChild(descriptionMenu)
 
             if (player._money >= RES.buildings[building].price){
                 let touchStartX = 0;

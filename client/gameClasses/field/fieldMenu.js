@@ -1,6 +1,7 @@
 import player from "../player/player.js";
 import GVAR from "../../globalVars/global.js";
 import RES from "../../resources.js";
+import Calc from "../../calc.js";
 
 class FieldMenu{
     constructor() {
@@ -18,63 +19,54 @@ class FieldMenu{
     close(){
         document.getElementById("field-menu-wrap").style.display = "none";
     }
-    _formatTime(seconds) {
-        let hours = Math.floor(seconds / 3600);
-        let minutes = Math.floor((seconds % 3600) / 60);
-        let secs = seconds % 60;
+    renderTimer() {
+        const textTime = document.getElementById("field-timeToFinish");
+        if (this.field._plant === "none") {
+            textTime.innerText = '-';
+        } else {
+            textTime.innerText = Calc.formatTime(Math.floor(this.field._plant._timeToGrow / 1000));
+        }
     
-        let result = [];
-        if (hours > 0) {
-            result.push(hours + 'ч');
+        let remainingTime = 0;
+        let totalTime = 1; 
+    
+        if (this.field._plant !== "none") {
+            remainingTime = this.field._plant._timeToGrow;
+            totalTime = this.field._plant._plantTimeStamp;
+            if (remainingTime === 0) {
+                this.close();
+            }
+        } else {
+            remainingTime = 1
         }
-        if (minutes > 0) {
-            result.push(minutes + 'м');
-        }
-        if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
-            result.push(secs + 'с');
-        }
-        return result.join(' ');
-    }
-    renderTimer(){
-        const textTime = document.getElementById("field-timeToFinish")
-        if (this.field._plant == "none")
-            textTime.innerText = '-'
-        else{
-            textTime.innerText = this._formatTime(Math.floor(this.field._plant._timeToGrow / 1000))
-        }
-        let a = 0
-        let b = 1 
-        if (this.field._plant != "none"){
-            a = this.field._plant._timeToGrow
-            b = this.field._plant._plantTimeStamp
-            if (a == 0)
-                this.close()
-        }
+    
         var progressLine = document.getElementById('field-process-line');
         var progressBar = progressLine.querySelector('.progress');
-        
+    
         if (!progressBar) {
             progressBar = document.createElement('div');
             progressBar.className = 'progress';
             progressLine.appendChild(progressBar);
         }
-
-        var percentage = (a / b) * 100;
-        
+    
+        var percentage = ((totalTime - remainingTime) / totalTime) * 100;
         percentage = Math.max(0, Math.min(100, percentage));
+    
+        progressBar.style.transition = 'width 0.5s ease';
         progressBar.style.width = percentage + '%';
-        const plantImg = document.getElementById('overlay-plant-img')
-        if (this.field._plant != 'none'){
-            plantImg.src = this.field._plant._image.src
-            plantImg.style.display = 'flex'
+    
+
+        const plantImg = document.getElementById('overlay-plant-img');
+        if (this.field._plant !== 'none') {
+            plantImg.style.backgroundImage = `url(${this.field._plant._image.src})`;
+            plantImg.style.display = 'flex';
+        } else {
+            plantImg.style.display = 'none';
         }
-        else
-            plantImg.style.display = 'none'
-    }
+    }    
     renderPlants(){
         const fieldImg = document.getElementById('field-img')
-        fieldImg.src = `client/assets/buildings/${this.field._type}/${this.field._type}.png`
-        fieldImg.className = 'menu-big-img'
+        fieldImg.style.backgroundImage = `url(client/assets/buildings/${this.field._type}/${this.field._type}.png)`;
         const fieldMenuList = document.getElementById('field-menu-list');
         fieldMenuList.innerHTML = ""
         this.renderTimer()
@@ -86,11 +78,13 @@ class FieldMenu{
             const craftImg = document.createElement("div")
             craftImg.style.backgroundImage = `url(client/assets/items/${plant}.png)`
             craftImg.className = "craft-item-image"
-            if (player._inventory[plant] == 0)
+            if (!player._inventory[plant]) {
                 craftImg.style.filter = 'grayscale(100%)';
+                player._inventory[plant] = 0
+            }
             const amount = document.createElement("h3")
             amount.innerText = player._inventory[plant]
-            amount.className = 'drop-list-text' //потом замениться
+            amount.className = 'amount-text'
 
             const isIntersecting = (rect1, rect2) => {
                 return (
@@ -106,9 +100,12 @@ class FieldMenu{
                 craftImg.addEventListener('touchstart', function (e) {
                     e.preventDefault();
                     const clone = this.cloneNode(true);
-                    const chosenElem = craft.id.substring(0, craft.id.indexOf('-'));
                     clone.classList.add('clone-image');
                     document.body.appendChild(clone);
+
+                    const computedStyle = window.getComputedStyle(this);
+                    clone.style.width = computedStyle.width;
+                    clone.style.height = computedStyle.height;
         
                     const moveAt = (pageX, pageY) => {
                         clone.style.left = pageX - clone.offsetWidth / 2 + 'px';
@@ -151,7 +148,7 @@ class FieldMenu{
                 dropList.appendChild(dropName)
 
                 const dropTime =  document.createElement("h3")
-                dropTime.innerText = this._formatTime(RES.plants[plant].seed.timeToGrow)
+                dropTime.innerText = Calc.formatTime(RES.plants[plant].seed.timeToGrow)
                 dropTime.className = 'drop-list-text'
                 dropList.appendChild(dropTime)
 

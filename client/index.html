@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="client/styles/stash.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/orders.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/buildable.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/field.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
-    <script defer src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- <script defer src="https://telegram.org/js/telegram-web-app.js"></script> -->
 </head>
 <body>
     <div id="loading-screen">
@@ -185,16 +186,20 @@
     </div>
     <div id="field-menu-wrap" class="menu-wrap">
         <div id="field-menu">
-            <div id="field-menu-bar">
-                <button id="close-field-menu">X</button>
+            <div class="buildable-menu-bar">
+                <div id="close-field-menu" class="buildable-close-button"></div>
             </div>
-            <div id="field-img-container">
-                <img id="field-img">
-                <img id="overlay-plant-img">
+            <div id="field-img-container" class="buildable-image-bar">
+                <div id="field-img" class="buildable-big-image"></div>
+                <div id="overlay-plant-img"></div>
             </div>
-            <h3 id="field-timeToFinish"></h3>
-            <div id="field-process-line"></div>
-            <div id="field-menu-list"></div>
+            <div class="timer-bar">
+                <h3 id="field-timeToFinish" class="progress-timer"></h3>
+                <div id="field-process-line" class="progress-line"></div>
+            </div>
+            <div class="building-middle"></div>
+            <div id="field-menu-list" class="buildable-menu-list"></div>
+            <div class="buildable-bottom"></div>
         </div>
     </div>
     <div id="bush-menu-wrap" class="menu-wrap">
@@ -268,7 +273,7 @@
     </script>
     <script src="client/styles/styles.js"></script>
     <script src="client/tonweb.js"></script>
-    <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <!-- <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script> -->
     <script src="client/init.js" type="module"></script>
 </body>
 </html>

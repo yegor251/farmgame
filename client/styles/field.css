@@ -1,0 +1,21 @@
+#field-menu {
+    background-color: rgb(69, 41, 36);
+    width: 80%;
+    max-height: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+}
+#overlay-plant-img{
+    position: absolute;
+    width: 30%;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    scrollbar-width: none;
+    overflow: hidden;
+    z-index: 1000;
+}

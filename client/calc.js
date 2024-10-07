@@ -101,4 +101,21 @@ export default class Calc{
             (x < rect.x + rect.w) && (y < rect.y + rect.h)
         )
     }
+    static formatTime(seconds) {
+        let hours = Math.floor(seconds / 3600);
+        let minutes = Math.floor((seconds % 3600) / 60);
+        let secs = seconds % 60;
+    
+        let result = [];
+        if (hours > 0) {
+            result.push(hours + 'ч');
+        }
+        if (minutes > 0) {
+            result.push(minutes + 'м');
+        }
+        if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
+            result.push(secs + 'с');
+        }
+        return result.join(' ');
+    }
 }
