@@ -2,8 +2,8 @@
     "name": "grill",
     "price": 3500,
     "maxSlots": 1,
-    "sizex": -1,
-    "sizey": -1,
+    "sizex": 3,
+    "sizey": 2,
     "maxLevel": 4,
     "mapLimit": 2,
     "workTypes":
