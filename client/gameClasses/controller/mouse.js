@@ -22,7 +22,7 @@ class Mouse{
             x: 0,
             y: 0
         }
-        this._prevPos = {
+        this._offset = {
             i: 0,
             j: 0
         }
@@ -42,36 +42,18 @@ class Mouse{
         this._deltaMove.y = mousePos.y - this._screenPos.y;
         this._movedDist += Math.sqrt((this._deltaMove.x) * (this._deltaMove.x) + (this._deltaMove.y) * (this._deltaMove.y))
         this._screenPos = mousePos;
-        this._prevPos = this._mapPos
-        console.log(this._prevPos, this._mapPos)
         this._mapPos = index;
         if (this._LMBdown && !this._isDragging)
         {
             camera.move(this._deltaMove.x, this._deltaMove.y);
             camera.updateBoundingBox();
         }
-        let isBuildableMove = false
-        let i = 0
-        GVAR.buildableArr.forEach((el) => {
-            if (el._isMoving && !isBuildableMove)
-            {
-                const delta = Calc.indexToCanvas(this._mapPos.i - this._prevPos.i, this._mapPos.j - this._prevPos.j, CVAR.tileSide, CVAR.outlineWidth);
-                const pos = {
-                    x: el._x + delta.x,
-                    y: el._y + delta.y
-                }
-                el.move(pos)
-                console.log(delta, pos, this._mapPos, this._prevPos, i)
-                i += 1  
-                isBuildableMove = true
-            }
-        })
         if (GVAR.phantomStructureArr.length != 0){
-            let delta = Calc.indexToCanvas(this._mapPos.i - this._prevPos.i, this._mapPos.j - this._prevPos.i, CVAR.tileSide, CVAR.outlineWidth);
+            let pos = Calc.indexToCanvas(this._mapPos.i - this._offset.i, this._mapPos.j - this._offset.j, CVAR.tileSide, CVAR.outlineWidth);
             if (
-                mouse._screenPos.x >= window.innerWidth * 0.9 ||
+                mouse._screenPos.x >= window.innerWidth * 0.93 ||
                 mouse._screenPos.x <= window.innerWidth * 0.1 ||
-                mouse._screenPos.y >= window.innerHeight * 0.9 ||
+                mouse._screenPos.y >= window.innerHeight * 0.93 ||
                 mouse._screenPos.y <= window.innerHeight * 0.1
             ){
                 this._isOnBorder = true
@@ -95,13 +77,7 @@ class Mouse{
             } else{
                 this._isOnBorder = false;
             }
-            if (!isBuildableMove){
-                const pos = {
-                    x: GVAR.phantomStructureArr[0]._x + delta.x,
-                    y: GVAR.phantomStructureArr[0]._y + delta.y
-                }
-                GVAR.phantomStructureArr[0].move(pos)
-            }
+            GVAR.phantomStructureArr[0].move(pos)
         }
     }
     onMouseDown(e)
@@ -120,6 +96,10 @@ class Mouse{
                     return
                 }
                 let el = tiles[this._mapPos.i][this._mapPos.j]._structure
+                const a = Calc.CanvasToIndex(el._x, el._y, CVAR.tileSide, CVAR.outlineWidth)
+                console.log(this._mapPos.i - a.i, this._mapPos.j - a.j)
+                this._offset.i = this._mapPos.i - a.i
+                this._offset.j = this._mapPos.j - a.j
                 if (el!="none" && el._isMoving != undefined){
                     el._isMoving=true;
                     GVAR.redraw = true;
@@ -134,8 +114,8 @@ class Mouse{
     {
         if (player._phantomStructure!="none" && player._phantomStructure.structure._x>=0 && player._phantomStructure.structure._y>=0 && player._phantomStructure.structure._x<CVAR.tileSide*CVAR.tileCols && player._phantomStructure.structure._y<CVAR.tileSide*CVAR.tileRows){
             if (player._money >= player._phantomStructure.cost){
-                if (player._phantomStructure.structureType == 'building' && tiles[mouse._mapPos.i][mouse._mapPos.j].isCanPut(player._phantomStructure.structure)){
-                    tiles[mouse._mapPos.i][mouse._mapPos.j].createBuilding(player._phantomStructure.structure._type)
+                if (player._phantomStructure.structureType == 'building' && tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].isCanPut(player._phantomStructure.structure)){
+                    tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].createBuilding(player._phantomStructure.structure._type)
                     socketClient.send(`place/${player._phantomStructure.structure._type}/${mouse._mapPos.i}/${mouse._mapPos.j}`)
                     player.buy(player._phantomStructure.cost)
                     if (RES.buildingNames.bakery.concat(RES.buildingNames.animalPen).includes(player._phantomStructure.structure._type)){
@@ -164,7 +144,7 @@ class Mouse{
         GVAR.buildableArr.forEach((el) => {
             if (el._isMoving)
             {
-                if (el._x>=0 && el._y>=0 && el._x<CVAR.tileSide*CVAR.tileCols && el._y<CVAR.tileSide*CVAR.tileRows && tiles[this._mapPos.i][this._mapPos.j].isCanPut(el)){
+                if (el._x>=0 && el._y>=0 && el._x<CVAR.tileSide*CVAR.tileCols && el._y<CVAR.tileSide*CVAR.tileRows && tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].isCanPut(el)){
                     const pos = Calc.CanvasToIndex(el._x, el._y, CVAR.tileSide, CVAR.outlineWidth)
                     tiles[el._prevPosition.i][el._prevPosition.j].moveStructure(pos)
                 }
@@ -185,6 +165,8 @@ class Mouse{
         this._screenPos = mousePos;
         this._mapPos = index;
         this._isDragging = false;
+        this._offset.i = 0
+        this._offset.j = 0
         if (this._movedDist < 10)
         {
            this.onClick();

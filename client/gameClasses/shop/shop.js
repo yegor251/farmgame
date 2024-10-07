@@ -41,9 +41,8 @@ class Shop{
         
             document.getElementById('shop-bar').appendChild(buyButton);
         
-            // Добавление обработчика события
             buyButton.onclick = () => {
-                this[category.method](); // Вызов метода, соответствующего категории
+                this[category.method]();
             };
         });        
     
@@ -62,6 +61,14 @@ class Shop{
             GVAR.closeAllWindows();
             this.drawStash();
         }
+        const upgButton = document.getElementById('upgrade-stash-button')
+        upgButton.addEventListener('click', () => {
+            if (player._tokenBalance >= 1000 && player._inventorySize < CVAR.maxInvSize){
+                player.upgradeInventory()
+                socketClient.send('invupgrade')
+                this.drawStash()
+            }
+        });
     }
     drawBuildingShop(){
         const shop = document.getElementById('shop-list');
@@ -565,6 +572,7 @@ class Shop{
     {
         document.getElementById("stash-wrap").style.display = "flex";
         const stashList = document.getElementById('stash-list')
+        document.getElementById('stash-capacity-text').innerText = `${player._inventorySize - player.getInvFullness()}/${player._inventorySize}`
         stashList.innerHTML = "";
         const k = Math.trunc((player._inventorySize - player.getInvFullness()) * 10 / player._inventorySize)
         let n = 0
@@ -575,6 +583,7 @@ class Shop{
         else if (k >= 1)
             n = 1
         const path = `url('client/assets/design/capacity_elem${n}.png`;
+        document.getElementById('stash-capacity').innerHTML = ''
         for (let i = 0; i < k; i++) {
             const capElem = document.createElement('div')
             capElem.className = 'stash-capacity-elem'
@@ -608,16 +617,6 @@ class Shop{
                 stashList.appendChild(div);
             }
         }
-        const upgButton = document.getElementById('upgrade-stash-button')
-        if (player._tokenBalance >= 1000){
-            upgButton.disabled = false
-        } else {
-            upgButton.disabled = true
-        }
-        upgButton.addEventListener('click', () => {
-            player.upgradeInventory()
-            socketClient.send('invupgrade')
-        });
     }
 }
 const shop = new Shop();

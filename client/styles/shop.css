@@ -44,6 +44,7 @@
 #shop-list{
     width: 66.66%;
     position: absolute;
+    background-color: rgb(69, 41, 36);
 }
 .shop-item {
     background-image: url('../assets/design/cell.png');
