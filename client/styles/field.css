@@ -10,7 +10,6 @@
 #overlay-plant-img{
     position: absolute;
     width: 30%;
-    aspect-ratio: 1 / 1;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

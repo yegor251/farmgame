@@ -118,6 +118,8 @@ class Player{
     }
     canCraft(item){
         for (const el in item.items) {
+            if (!this._inventory[el])
+                this._inventory[el] = 0
             if (item.items[el]>this._inventory[el]){
                 return false
             }

@@ -12,6 +12,9 @@ class FieldMenu{
     }
     show(field){
         this.field = field
+        const fieldImg = document.getElementById('field-img')
+        fieldImg.style.backgroundImage = `url(client/assets/buildings/${field._type}/${field._type}.png)`;
+        fieldImg.style.aspectRatio = `1 / 1`;
         GVAR.closeAllWindows()
         document.getElementById("field-menu-wrap").style.display = "flex";
         this.renderPlants()
@@ -59,14 +62,13 @@ class FieldMenu{
         const plantImg = document.getElementById('overlay-plant-img');
         if (this.field._plant !== 'none') {
             plantImg.style.backgroundImage = `url(${this.field._plant._image.src})`;
+            plantImg.style.aspectRatio = `${this.field._plant._image.width} / ${this.field._plant._image.height}`
             plantImg.style.display = 'flex';
         } else {
             plantImg.style.display = 'none';
         }
     }    
     renderPlants(){
-        const fieldImg = document.getElementById('field-img')
-        fieldImg.style.backgroundImage = `url(client/assets/buildings/${this.field._type}/${this.field._type}.png)`;
         const fieldMenuList = document.getElementById('field-menu-list');
         fieldMenuList.innerHTML = ""
         this.renderTimer()

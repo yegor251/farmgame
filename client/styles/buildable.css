@@ -53,7 +53,6 @@
 }
 .buildable-big-image {
     width: 30%;
-    aspect-ratio: 1 / 1;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -96,7 +95,7 @@
     margin-bottom: 4%;
 }
 .queue-elem-img {
-    width: 80%;
+    width: 70%;
     aspect-ratio: 1 / 1;
     display: inline-block;
     box-sizing: border-box;

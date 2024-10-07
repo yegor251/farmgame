@@ -12,6 +12,13 @@ class BuildingMenu {
     }
     show(building) {
         this.building = building;
+        const img = new Image();
+        img.src = `client/assets/buildings/${building._type}/${building._type}.png`
+        img.onload = function() {
+            const buildingImg = document.getElementById('building-img');
+            buildingImg.style.backgroundImage = `url('client/assets/buildings/${building._type}/${building._type}.png')`;
+            buildingImg.style.aspectRatio = `${img.width} / ${img.height}`;
+        };
         GVAR.closeAllWindows();
         document.getElementById("building-menu-wrap").style.display = "flex";
         this.renderCrafts();
@@ -108,10 +115,7 @@ class BuildingMenu {
     }
     renderCrafts() {
         const type = this.building._type;
-        const queue = this.building._craftingItems;
         this.renderQueue();
-        const buildingImg = document.getElementById('building-img');
-        buildingImg.style.backgroundImage = `url('client/assets/buildings/${type}/${type}.png')`;
         const button = document.getElementById('upgrade-building');
         button.onclick = () => {
             if (this.building.canUpgrade()){
@@ -143,49 +147,52 @@ class BuildingMenu {
             const thisMenu = this;
             const building = this.building;
 
-            if (building.canStartWork(RES.buildings[type].workTypes[product])) {
-                craftImg.addEventListener('touchstart', function (e) {
-                    e.preventDefault();
-                    const clone = this.cloneNode(true);
-
-                    clone.classList.add('clone-image');
-                    document.body.appendChild(clone);
-
-                    const computedStyle = window.getComputedStyle(this);
-                    clone.style.width = computedStyle.width;
-                    clone.style.height = computedStyle.height;
-
-                    const moveAt = (pageX, pageY) => {
-                        clone.style.left = pageX - clone.offsetWidth / 2 + 'px';
-                        clone.style.top = pageY - clone.offsetHeight / 2 + 'px';
-                    };
-
-                    const touch = e.touches[0];
-                    moveAt(touch.pageX, touch.pageY);
-
-                    const onTouchMove = (event) => {
-                        if (!isIntersecting(clone.getBoundingClientRect(), craft.getBoundingClientRect()))
-                            document.getElementById('drop-list').style.display = 'none';
-                        const touch = event.touches[0];
-                        moveAt(touch.pageX, touch.pageY);
-                    };
-                    const onTouchEnd = () => {
-                        document.removeEventListener('touchmove', onTouchMove);
-                        const cloneRect = clone.getBoundingClientRect();
-                        const visualRect = document.getElementById('building-visual').getBoundingClientRect();
-                        if (isIntersecting(cloneRect, visualRect) && building.canStartWork(RES.buildings[type].workTypes[product])) {
-                            building.startWork(RES.buildings[type].workTypes[product]);
-                            thisMenu.renderCrafts();
-                        }
-                        clone.remove();
-                    };
-
-                    document.addEventListener('touchmove', onTouchMove);
-                    document.addEventListener('touchend', onTouchEnd, { once: true });
-                });
-            } else {
-                craftImg.style.filter = 'grayscale(100%)';
+            if (!building.canStartWork(RES.buildings[type].workTypes[product])) {
+                craftImg.style.filter = 'grayscale(100%)'
             }
+            craftImg.addEventListener('touchstart', function (e) {
+                e.preventDefault();
+                if (!building.canStartWork(RES.buildings[type].workTypes[product])){
+                    GVAR.showFloatingText('не выполнены условия крафта')
+                    return
+                }
+                const clone = this.cloneNode(true);
+
+                clone.classList.add('clone-image');
+                document.body.appendChild(clone);
+
+                const computedStyle = window.getComputedStyle(this);
+                clone.style.width = computedStyle.width;
+                clone.style.height = computedStyle.height;
+
+                const moveAt = (pageX, pageY) => {
+                    clone.style.left = pageX - clone.offsetWidth / 2 + 'px';
+                    clone.style.top = pageY - clone.offsetHeight / 2 + 'px';
+                };
+
+                const touch = e.touches[0];
+                moveAt(touch.pageX, touch.pageY);
+
+                const onTouchMove = (event) => {
+                    if (!isIntersecting(clone.getBoundingClientRect(), craft.getBoundingClientRect()))
+                        document.getElementById('drop-list').style.display = 'none';
+                    const touch = event.touches[0];
+                    moveAt(touch.pageX, touch.pageY);
+                };
+                const onTouchEnd = () => {
+                    document.removeEventListener('touchmove', onTouchMove);
+                    const cloneRect = clone.getBoundingClientRect();
+                    const visualRect = document.getElementById('building-visual').getBoundingClientRect();
+                    if (isIntersecting(cloneRect, visualRect) && building.canStartWork(RES.buildings[type].workTypes[product])) {
+                        building.startWork(RES.buildings[type].workTypes[product]);
+                        thisMenu.renderCrafts();
+                    }
+                    clone.remove();
+                };
+
+                document.addEventListener('touchmove', onTouchMove);
+                document.addEventListener('touchend', onTouchEnd, { once: true });
+            });
 
             craft.addEventListener('touchstart', (event) => {
                 const dropList = document.createElement("div");

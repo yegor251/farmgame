@@ -1,7 +1,6 @@
 #shop{
     width: 45%;
     height: 95%;
-    overflow-y: scroll;
     position: absolute;
     left: 0;
     background-color: transparent;
@@ -43,8 +42,12 @@
 }
 #shop-list{
     width: 66.66%;
+    top: 0;
+    bottom: 0;
     position: absolute;
     background-color: rgb(69, 41, 36);
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 .shop-item {
     background-image: url('../assets/design/cell.png');

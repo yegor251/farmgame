@@ -152,9 +152,6 @@ class Shop{
                             setTimeout(() => {
                                 mouse._isBlockAfterShop = false
                             }, 1000);
-                            console.log('AAAAA')
-                            // mouse.onMouseMove(e);
-                            // mouse.onMouseMove(e);
                         }
                     }, 300);
                 });
@@ -235,15 +232,20 @@ class Shop{
             itemContent.appendChild(shopItem)
             itemContent.appendChild(descriptionMenu)
 
+            if (player._money < RES.plants[plant].seed.price)
+                img.style.filter = 'grayscale(100%)';
             img.addEventListener("click", function(e) {
-                if (player._money >= RES.plants[plant].seed.price && player.getInvFullness() >= 1)
-                {
-                    player.buy(RES.plants[plant].seed.price)
-                    player.pushInventory(plant, 1)
-                    socketClient.send(`buy/${plant}/${1}`)
-                }else{
-                    console.log("нет денег или места в инвентаре")
+                if (player._money < RES.plants[plant].seed.price){
+                    GVAR.showFloatingText('not enough money')
+                    return
                 }
+                if (player.getInvFullness() == 0){
+                    GVAR.showFloatingText('недостаточно места в инвентаре')
+                    return
+                }
+                player.buy(RES.plants[plant].seed.price)
+                player.pushInventory(plant, 1)
+                socketClient.send(`buy/${plant}/${1}`)
             });
             shopItem.className = "shop-item";
             shop.appendChild(itemContent);
