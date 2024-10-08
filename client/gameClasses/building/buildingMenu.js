@@ -117,12 +117,18 @@ class BuildingMenu {
         const type = this.building._type;
         this.renderQueue();
         const button = document.getElementById('upgrade-building');
-        button.onclick = () => {
-            if (this.building.canUpgrade()){
-                this.building.upgrade()
-                this.renderCrafts()
-            }
-        };
+        if (this.building._level >= RES.buildings[type].maxLevel)
+            button.remove()
+        else {
+            button.onclick = () => {
+                if (player._money < RES.buildings[type].upgradesPrice[this.building._level-1])
+                    GVAR.showFloatingText('недостаточно денег')
+                else {
+                    this.building.upgrade()
+                    this.renderCrafts()
+                }
+            };
+        }
         const buildingMenuList = document.getElementById('building-menu-list');
         buildingMenuList.innerHTML = "";
         for (let product in RES.buildings[type].workTypes) {

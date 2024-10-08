@@ -1,3 +1,4 @@
+import Calc from "../../calc.js";
 import GVAR from "../../globalVars/global.js";
 import RES from "../../resources.js";
 
@@ -23,23 +24,6 @@ class BushMenu{
         document.getElementById("bush-menu-wrap").style.display = "flex";
         this.renderMenu()
     }
-    _formatTime(seconds) {
-        let hours = Math.floor(seconds / 3600);
-        let minutes = Math.floor((seconds % 3600) / 60);
-        let secs = seconds % 60;
-    
-        let result = [];
-        if (hours > 0) {
-            result.push(hours + 'ч');
-        }
-        if (minutes > 0) {
-            result.push(minutes + 'м');
-        }
-        if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
-            result.push(secs + 'с');
-        }
-        return result.join(' ');
-    }
     renderTimer(){
         if (this.bush._timeToFinish == 0){
             this.close()
@@ -49,7 +33,7 @@ class BushMenu{
         if (this.bush._timeToFinish == undefined)
             textTime.innerText = '-'
         else
-            textTime.innerText = this._formatTime(Math.floor(this.bush._timeToFinish / 1000))
+            textTime.innerText = Calc.formatTime(Math.floor(this.bush._timeToFinish / 1000))
         
         let remainingTime = 0;
         let totalTime = this.bush._timeStamp;

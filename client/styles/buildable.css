@@ -39,7 +39,8 @@
     display: flex;
     flex-wrap: wrap;
     padding-left: 4%;
-    padding-right: 4%;  
+    padding-right: 4%; 
+    padding-top: 0.5%; 
     background-image: url('../assets/design/menu.png');
     background-size: 100% 100%;
     background-position: center;

@@ -178,13 +178,22 @@
     </div>
     <div id="animal-menu-wrap" class="menu-wrap">
         <div id="animal-menu">
-            <div id="animal-menu-bar">
-                <button id="close-animal-menu">X</button>
+            <div class="buildable-menu-bar">
+                <div id="close-animal-menu" class="buildable-close-button"></div>
             </div>
-            <img id="animal-img">
-            <h3 id="animal-timeToFinish"></h3>
-            <div id="animal-process-line"></div>
-            <button id="animal-upgrade">Улучшить</button>
+            <div class="buildable-image-bar">
+                <div id="animal-img" class="buildable-big-image"></div>
+            </div>
+            <div class="timer-bar">
+                <h3 id="animal-timeToFinish" class="progress-timer"></h3>
+                <div id="animal-process-line" class="progress-line"></div>
+            </div>
+            <div class="building-middle"></div>
+            <div class="timer-bar">
+                <div id="animal-upgrade" class="upgrade-buildable-button">улучшить</div>
+                <div id="animal-start-button" class="interaction-button"></div>
+            </div>          
+            <div class="buildable-bottom"></div>
         </div>
     </div>
     <div id="field-menu-wrap" class="menu-wrap">
