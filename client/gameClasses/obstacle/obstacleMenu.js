@@ -14,6 +14,9 @@ class ObstacleMenu {
     show(obstacle) {
         this.obstacle = obstacle;
         GVAR.closeAllWindows();
+        const img = document.getElementById('obstacle-img')
+        img.style.backgroundImage = `url(client/assets/obstacles/${obstacle._type}/${obstacle._type}0.png)`;
+        img.style.aspectRatio = `${obstacle._image.width} / ${obstacle._image.height}`
         document.getElementById("obstacle-menu-wrap").style.display = "flex";
         this.renderMenu();
     }
@@ -22,23 +25,38 @@ class ObstacleMenu {
         document.getElementById("obstacle-menu-wrap").style.display = "none";
     }
     renderMenu() {
-        const type = this.obstacle._type;
-        const img = document.getElementById('obstacle-img')
-        img.className = 'menu-big-img'; //заменить
-        img.src = `client/assets/obstacles/${type}/${type}0.png`;
-
         const obstacleDelete = document.getElementById('obstacle-button');
-        obstacleDelete.className = 'booster-button'; //заменить
-        if ((this.obstacle._deletePrice && this.obstacle._deleteTokenPrice && 
-         player._money >= this.obstacle._deletePrice && player._tokenBalance >= this.obstacle._deleteTokenPrice) || 
-         (this.obstacle._deleteTokenPrice && player._tokenBalance >= this.obstacle._deleteTokenPrice) || 
-         (this.obstacle._deletePrice && player._money >= this.obstacle._deletePrice)
-        ) {
-            obstacleDelete.disabled = false;
+        const money = document.getElementById('obstacle-money')
+        if (this.obstacle._deletePrice){
+            money.innerText = this.obstacle._deletePrice
+            if (this.obstacle._deletePrice > player._money)
+                document.getElementById('obstacle-money-checkmark').style.filter = 'grayscale(100%)';
+            else
+                document.getElementById('obstacle-money-checkmark').style.filter = 'grayscale(0%)';
         } else {
-            obstacleDelete.disabled = true;
+            money.innerText = '0'
+            document.getElementById('obstacle-money-checkmark').style.filter = 'grayscale(0%)';
+        }
+        const token = document.getElementById('obstacle-token')
+        if (this.obstacle._deleteTokenPrice){
+            token.innerText = this.obstacle._deleteTokenPrice
+            if (this.obstacle._deleteTokenPrice > player._tokenBalance)
+                document.getElementById('obstacle-token-checkmark').style.filter = 'grayscale(100%)';
+            else
+                document.getElementById('obstacle-token-checkmark').style.filter = 'grayscale(0%)';
+        } else {
+            token.innerText = '0'
+            document.getElementById('obstacle-token-checkmark').style.filter = 'grayscale(0%)';
         }
         obstacleDelete.addEventListener('click', () => {
+            if (this.obstacle._deletePrice && this.obstacle._deletePrice > player._money){
+                GVAR.showFloatingText('недостаточно money')
+                return
+            }
+            if (this.obstacle._deleteTokenPrice && this.obstacle._deleteTokenPrice > player._tokenBalance){
+                GVAR.showFloatingText('недостаточно token')
+                return
+            }
             const tileIndex = Calc.CanvasToIndex(this.obstacle._x, this.obstacle._y, CVAR.tileSide, CVAR.outlineWidth);
             for (let i = tileIndex.i; i < this.obstacle._w / CVAR.tileSide; i++) {
                 for (let j = tileIndex.j; j < this.obstacle._h / CVAR.tileSide; j++) {
@@ -55,6 +73,7 @@ class ObstacleMenu {
             }
             this.obstacle.delete()
             this.close()
+            GVAR.showFloatingText('успешно')
         });
     }
 }

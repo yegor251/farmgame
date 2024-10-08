@@ -54,9 +54,6 @@
     transform: translateX(-50%);
     display: flex;
     flex-wrap: wrap;
-    display: flex;
-    flex-wrap: wrap;
-    display: flex;
     align-items: center;
     justify-content: center;
 }

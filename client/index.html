@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="client/styles/buildable.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/field.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/bushAndAnimal.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/obstacle.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -80,12 +81,22 @@
     </div>
     <div id="obstacle-menu-wrap" class="menu-wrap">
         <div id="obstacle-menu">
-            <div id="obstacle-menu-bar">
-                <button id="close-obstacle-menu">X</button>
+            <div class="buildable-menu-bar">
+                <div id="close-obstacle-menu" class="buildable-close-button"></div>
             </div>
-            <img id="obstacle-img">
-            <button id="obstacle-button">Удалить</button>
-            <h3 id="obstacle-price"></h3>
+            <div class="timer-bar">
+                <div id="obstacle-img" class="buildable-big-image"></div>
+                <div id="obstacle-button" class="interaction-button"></div>
+                <div id="obstacle-money-content">
+                    <h3 id="obstacle-money"></h3>
+                    <div id="obstacle-money-checkmark" class="little-checkmark"></div>
+                </div>
+                <div id="obstacle-token-content">
+                    <h3 id="obstacle-token"></h3>
+                    <div id="obstacle-token-checkmark" class="little-checkmark"></div>
+                </div>
+            </div>
+            <div class="buildable-bottom"></div>
         </div>
     </div>
     <div id="buisness-menu-wrap" class="menu-wrap">
