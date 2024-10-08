@@ -124,13 +124,13 @@ body{
     height: 5vh;
     font-family: VCR;
 }
-#spin, #animal-menu, #bush-menu, #booster-menu, #obstacle-menu, #buisness-menu, #deals, #payments{
+#spin, #animal-menu, #booster-menu, #obstacle-menu, #buisness-menu, #deals, #payments{
     background-color: aliceblue;
     width: 80%;
     height: 80%;
     overflow-y: scroll;
 }
-#closeSpin, #close-animal-menu, #close-bush-menu, #close-booster-menu, #close-obstacle-menu, #close-buisness-menu{
+#closeSpin, #close-animal-menu, #close-booster-menu, #close-obstacle-menu, #close-buisness-menu{
     float: right;
     border: none;
     background-color: rgb(225, 75, 75);
@@ -139,7 +139,7 @@ body{
     height: 5vh;
     font-family: VCR;
 }
-#animal-menu-bar, #bush-menu-bar, #booster-menu-bar, #obstacle-menu-bar, #buisness-menu-bar, #deals-bar, #payment-bar{
+#animal-menu-bar, #booster-menu-bar, #obstacle-menu-bar, #buisness-menu-bar, #deals-bar, #payment-bar{
     width: 100%;
     height: 5vh;
 }
@@ -220,14 +220,14 @@ body{
 }
 
 /*        PROCESS-LINE AND TIME для всех будут общие, ещё добавить сюда здание и куст*/
-#animal-process-line, #bush-process-line {
+#animal-process-line{
     width: 100%;
     height: 20px;
     background-color: lightgray;
     position: relative;
     overflow: hidden;
 }
-#animal-timeToFinish, #waterer-price, #bush-timeToFinish{
+#animal-timeToFinish{
     width: 100%;
     bottom: 0;
     text-align: center;

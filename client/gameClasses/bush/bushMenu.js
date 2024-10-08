@@ -11,21 +11,16 @@ class BushMenu{
     close(){
         document.getElementById("bush-menu-wrap").style.display = "none";
         this.bush = 'none'
-        if (document.getElementById("bush-waterer")){
-            document.getElementById("bush-waterer").remove()
-            document.getElementById("waterer-price").remove()
-        }
+        let startButton = document.getElementById('bush-reset');
+        let newButton = startButton.cloneNode(true);
+        startButton.parentNode.replaceChild(newButton, startButton);
+        startButton = newButton;
+        startButton.dataset.handlerAdded = undefined
     }
     show(bush){
         this.bush = bush
         GVAR.closeAllWindows()
         document.getElementById("bush-menu-wrap").style.display = "flex";
-        const waterer = document.createElement('img')
-        waterer.id = 'bush-waterer'
-        document.getElementById('bush-menu').appendChild(waterer)
-        const watererPrice = document.createElement('h3')
-        watererPrice.id = 'waterer-price'
-        document.getElementById('bush-menu').appendChild(watererPrice)
         this.renderMenu()
     }
     _formatTime(seconds) {
@@ -46,39 +41,44 @@ class BushMenu{
         return result.join(' ');
     }
     renderTimer(){
+        if (this.bush._timeToFinish == 0){
+            this.close()
+            return
+        }
         const textTime = document.getElementById("bush-timeToFinish")
         if (this.bush._timeToFinish == undefined)
             textTime.innerText = '-'
         else
             textTime.innerText = this._formatTime(Math.floor(this.bush._timeToFinish / 1000))
-        let a = this.bush._timeToFinish
-        let b = this.bush._timeStamp
+        
+        let remainingTime = 0;
+        let totalTime = this.bush._timeStamp;
         if (this.bush._timeToFinish == undefined)
-            a = 0;
+            remainingTime = totalTime;
+        else
+            remainingTime = this.bush._timeToFinish
+
+        const bushImage = document.getElementById('bush-img');
+        console.log(this.bush)
+        bushImage.style.backgroundImage = `url(${this.bush._image.src})`
+        bushImage.style.aspectRatio = `${this.bush._image.width} / ${this.bush._image.height}`
+
         var progressLine = document.getElementById('bush-process-line');
         var progressBar = progressLine.querySelector('.progress');
         
         if (!progressBar) {
-            // Create the progress bar if it does not exist
             progressBar = document.createElement('div');
             progressBar.className = 'progress';
             progressLine.appendChild(progressBar);
         }
         
-        var percentage = (a / b) * 100;
+        var percentage = ((totalTime - remainingTime) / totalTime) * 100;
         
-        // Ensure the percentage is within the bounds of 0 to 100
         percentage = Math.max(0, Math.min(100, percentage));
+        progressBar.style.transition = 'width 0.5s ease';
         progressBar.style.width = percentage + '%';
     }
     renderMenu() {
-        const temp = document.createElement('button')
-        temp.innerText = this.bush._collectedAmount
-        document.getElementById('temp').innerText = this.bush._collectedAmount
-
-        const bushImage = document.getElementById('bush-img');
-        bushImage.className = 'menu-big-img';
-        bushImage.src = this.bush._image.src
         this.renderTimer();
     
         const isIntersecting = (rect1, rect2) => {
@@ -91,14 +91,17 @@ class BushMenu{
         };
     
         const bush = this.bush;
-        const startButton = document.getElementById("bush-waterer");
-        startButton.className = 'item-image';
-        startButton.src = `client/assets/waterer/waterer.png`;
+        const startButton = document.getElementById("bush-reset");
+        startButton.style.backgroundImage = `url(client/assets/design/waterer1.png)`;
 
-        const watererPrice = document.getElementById("waterer-price");
-        // watererPrice.className = 'item-image';
-        watererPrice.innerText = bush._resetPrice//цена пересоздания
+        const resetPrice = document.getElementById("bush-reset-price");
+        if (bush._collectedAmount < bush._collectedAmountLimit){
+            resetPrice.innerText = ''
+        } else{
+            resetPrice.innerText = bush._resetPrice
+        }
         console.log(this.bush.canReset())
+        console.log(startButton.dataset.handlerAdded)
         if (this.bush.canReset()) {
             if (startButton.dataset.handlerAdded !== 'true') {
                 startButton.style.filter = 'grayscale(0%)';
@@ -112,6 +115,7 @@ class BushMenu{
         }
     
         function startButtonTouchStartHandler(e) {
+            console.log('startbutton')
             e.preventDefault();
             const clone = this.cloneNode(true);
             clone.classList.add('clone-image');
@@ -125,9 +129,19 @@ class BushMenu{
             const touch = e.touches[0];
             moveAt(touch.pageX, touch.pageY);
     
+            let currentImage = '';
             const onTouchMove = (event) => {
                 const touch = event.touches[0];
                 moveAt(touch.pageX, touch.pageY);
+                const cloneRect = clone.getBoundingClientRect();
+                const imgRect = document.getElementById('bush-img').getBoundingClientRect();
+                const newImage = isIntersecting(cloneRect, imgRect) 
+                                ? 'url(client/assets/design/waterer2.png)' 
+                                : 'url(client/assets/design/waterer1.png)';
+                if (currentImage !== newImage) {
+                    currentImage = newImage;
+                    clone.style.backgroundImage = newImage;
+                }
             };
     
             const onTouchEnd = () => {
@@ -136,9 +150,7 @@ class BushMenu{
                 const imgRect = document.getElementById('bush-img').getBoundingClientRect();
                 if (isIntersecting(cloneRect, imgRect)) {
                     bush.reset();
-                    // Применяем CSS фильтр для черно-белого изображения
                     startButton.style.filter = 'grayscale(100%)';
-                    // Удаляем обработчик события, чтобы запретить перемещение
                     startButton.removeEventListener('touchstart', startButtonTouchStartHandler);
                     startButton.dataset.handlerAdded = 'false';
                 }

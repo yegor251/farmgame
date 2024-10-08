@@ -29,7 +29,7 @@ export default class Bush extends Buildable{
     }
     setProperties(endTime, intData){
         this._collectedAmount = intData
-        if (intData != this._collectedAmountLimit){
+        if (intData < this._collectedAmountLimit){
             this._finishTime = endTime * 1000
             if (Date.now() < this._finishTime){
                 const time = this._finishTime - Date.now() < player._growBooster.timeToEnd 
@@ -44,6 +44,7 @@ export default class Bush extends Buildable{
         } else{
             this._timeToFinish = undefined
             this._isWork = false;
+            this._image = RES.buildings[this._type].image[2]
         }
         console.log('setTime', this._timeToFinish)
     }
@@ -52,16 +53,12 @@ export default class Bush extends Buildable{
             ctx.shadowBlur = 30;
             ctx.shadowColor = "rgb(0,230,0)";
         }
-        if (this._timeToFinish == 0 && this._finishTime - Date.now() <= 0){
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = "rgb(0,0,230)";
-        }
         const out = (this._image.height - 16 * this._size.h)*CVAR.tileSide/16
         ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
         ctx.shadowBlur = 0;
     }
     canReset(){
-        return this._collectedAmount == this._collectedAmountLimit
+        return this._collectedAmount >= this._collectedAmountLimit//сюда недостаточно денег
     }
     reset(){
         socketClient.send(`use/null/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
@@ -102,7 +99,6 @@ export default class Bush extends Buildable{
                 this._timeToFinish = 0
                 this._image = RES.buildings[this._type].image[1]
                 this._isWork = false;
-                bushMenu.close()
             }
         }
     }
