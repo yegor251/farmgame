@@ -21,6 +21,7 @@ class BushMenu{
     show(bush){
         this.bush = bush
         GVAR.closeAllWindows()
+        document.getElementById("bush-name").innerText = bush._type
         document.getElementById("bush-menu-wrap").style.display = "flex";
         this.renderMenu()
     }
@@ -43,7 +44,6 @@ class BushMenu{
             remainingTime = this.bush._timeToFinish
 
         const bushImage = document.getElementById('bush-img');
-        console.log(this.bush)
         bushImage.style.backgroundImage = `url(${this.bush._image.src})`
         bushImage.style.aspectRatio = `${this.bush._image.width} / ${this.bush._image.height}`
 
@@ -84,8 +84,7 @@ class BushMenu{
         } else{
             resetPrice.innerText = bush._resetPrice
         }
-        console.log(this.bush.canReset())
-        console.log(startButton.dataset.handlerAdded)
+
         if (this.bush.canReset()) {
             if (startButton.dataset.handlerAdded !== 'true') {
                 startButton.style.filter = 'grayscale(0%)';
@@ -99,7 +98,6 @@ class BushMenu{
         }
     
         function startButtonTouchStartHandler(e) {
-            console.log('startbutton')
             e.preventDefault();
             const clone = this.cloneNode(true);
             clone.classList.add('clone-image');

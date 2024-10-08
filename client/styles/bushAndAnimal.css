@@ -14,3 +14,8 @@
     background-size: cover;
     background-position: center;
 }
+.name-text {
+    text-align: center;
+    font-size: 5vw;
+    color: aliceblue;
+}
