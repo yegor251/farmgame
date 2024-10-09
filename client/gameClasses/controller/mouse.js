@@ -78,6 +78,19 @@ class Mouse{
                 this._isOnBorder = false;
             }
             GVAR.phantomStructureArr[0].move(pos)
+            if (tiles[mouse._mapPos.i - mouse._offset.i] == undefined || tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j] == undefined){
+                GVAR.phantomStructureArr[0]._canPut = false
+                return
+            }
+            if (player._phantomStructure.structureType == 'animal'){
+                if (RES.buildingNames.animalPen.includes(tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j]._structure._type)){
+                    GVAR.phantomStructureArr[0]._canPut = tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j]._structure.canAddAnimal(GVAR.phantomStructureArr[0]._type)
+                } else {
+                    GVAR.phantomStructureArr[0]._canPut = false
+                }
+            } else {
+                GVAR.phantomStructureArr[0]._canPut = tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].isCanPut(GVAR.phantomStructureArr[0])
+            }
         }
     }
     onMouseDown(e)
@@ -97,7 +110,6 @@ class Mouse{
                 }
                 let el = tiles[this._mapPos.i][this._mapPos.j]._structure
                 const a = Calc.CanvasToIndex(el._x, el._y, CVAR.tileSide, CVAR.outlineWidth)
-                console.log(this._mapPos.i - a.i, this._mapPos.j - a.j)
                 this._offset.i = this._mapPos.i - a.i
                 this._offset.j = this._mapPos.j - a.j
                 if (el!="none" && el._isMoving != undefined){

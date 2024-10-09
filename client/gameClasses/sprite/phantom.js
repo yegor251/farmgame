@@ -12,7 +12,8 @@ export default class Phantom extends Sprite{
         this._type = type
         this._image = image
         this._size = size
-        this._isMoving = false;
+        this._isMoving = false
+        this._canPut = true;
         this._w = this._size.w * CVAR.tileSide;
         this._h = this._size.h * CVAR.tileSide;
     }
@@ -24,6 +25,8 @@ export default class Phantom extends Sprite{
     }
     draw () {
         let out = (this._image.height - 16 * this._size.h)*CVAR.tileSide/16
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = this._canPut ? `rgb(0,${CVAR.greenColor},0)` : `rgb(${CVAR.redColor},0,0)`
         if (RES.names.animals.includes(this._type)){
             if (this._size.w < 1){
                 out *= -1
@@ -34,5 +37,6 @@ export default class Phantom extends Sprite{
             }
         } else
             ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
+        ctx.shadowBlur = 0;
     }
 }

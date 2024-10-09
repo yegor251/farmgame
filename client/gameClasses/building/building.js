@@ -135,8 +135,8 @@ export default class Building extends Buildable{
     draw(){
         const out = (this._image.height - 16 * this._size.h)*CVAR.tileSide/16
         if (this._isMoving){
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = "rgb(0,230,0)"
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = this._canPut ? `rgb(0,${CVAR.greenColor},0)` : `rgb(${CVAR.redColor},0,0)`
         }
         ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
         ctx.shadowBlur = 0;
@@ -147,7 +147,7 @@ export default class Building extends Buildable{
             let key = Object.keys(this._craftingItems[0])[0]
             ctx.drawImage(RES.items[key].image, this._x + RES.buildings[this._type].productx, this._y + RES.buildings[this._type].producty, CVAR.itemMapSize, CVAR.itemMapSize)
         }
-    }
+    }   
     update()
     {
         if (!this._freeze && this._nowWorkIndex < this._craftingItems.length){

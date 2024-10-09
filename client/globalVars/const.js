@@ -9,6 +9,7 @@ class ConstVar{
         this.extraSlotPrice = 1000; this.extraSlotCoef = 10;
         this.orderCompleteTime = 600; this.orderRerollTime = 1800;
         this.maxInvSize = 2000;
+        this.redColor = 230; this.greenColor = 230;
     }
 }
 

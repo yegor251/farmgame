@@ -42,7 +42,7 @@ export default class Tile extends Sprite{
         let size = RES.buildings[elem._type].size;
         let tileIndex = Calc.CanvasToIndex(this._x, this._y, CVAR.tileSide, CVAR.outlineWidth);
 
-        if (tileIndex.i+size.h>CVAR.tileRows || tileIndex.j+size.w>CVAR.tileCols)
+        if (tileIndex.i+size.w>CVAR.tileRows || tileIndex.j+size.h>CVAR.tileCols)
             return false;
         for (let i = tileIndex.i; i < tileIndex.i + size.w; i++) {
             for (let j = tileIndex.j; j < tileIndex.j + size.h; j++) {
