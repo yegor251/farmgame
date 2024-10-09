@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="client/styles/field.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/bushAndAnimal.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/obstacle.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/spin.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -58,16 +59,18 @@
     </div>
     <div id="spin-wrap" class="menu-wrap">
         <div id="spin">
-            <div id="spin-bar">
-                <button id="closeSpin">X</button>
+            <div class="buildable-menu-bar">
+                <div id="closeSpin" class="buildable-close-button"></div>
             </div>
-            <div class="spinwheel-wrap">
-                <div id="spin-centered-content">
-                    <button id="spin-button">Spin</button>
-                    <span class="arrow"></span>
-                    <div id="spin-container"></div>
+            <div id="spin-list">
+                <div id="spin-content">
+                    <div id="spin-wheel"></div>
+                    <div id="spin-arrow"></div>
                 </div>
+                <div id="spin-button" class="upgrade-buildable-button">Spin</div>
+                <h3 id="spin-timer"></h3>
             </div>
+            <div class="buildable-bottom"></div>
         </div>
     </div>
     <div id="booster-menu-wrap" class="menu-wrap">

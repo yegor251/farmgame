@@ -1,6 +1,7 @@
 import GVAR from "../../globalVars/global.js";
 import player from "../player/player.js";
 import socketClient from "../../init.js";
+import Calc from "../../calc.js";
 
 class Spin {
     constructor() {
@@ -10,68 +11,78 @@ class Spin {
                     this.doSpin()
                     socketClient.send('spin')
                     socketClient.send('regen')
+                    this.startTimer()
+                    this.renderSpin()
                 } else{
-                    console.log('Недостаточно места в инвентаре')
+                    GVAR.showFloatingText('Недостаточно места в инв')
                 }
-            } else{
-                console.log('Спин не активен')
             }
         }
         
         document.getElementById("closeSpin").onclick = () => {
-            document.getElementById("spin-wrap").style.display = "none";
+            this.close()
         }
         document.getElementById("open-spin").onclick = () => {
             GVAR.closeAllWindows()
             this.open()
         }
     }
+    startTimer(){
+        document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp - Math.floor(Date.now() / 1000))
+        this.interval = setInterval(() => {
+            if (Math.floor(Date.now() / 1000) < player._spinTimeStamp){
+                document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp - Math.floor(Date.now() / 1000))
+            } else {
+                clearInterval(this.interval)
+                this.interval = null
+                document.getElementById('spin-timer').style.display = 'none'
+                document.getElementById('spin-button').style.display = 'flex'
+            }
+        }, 1000);
+    }
     open(){
+        if (Math.floor(Date.now() / 1000) < player._spinTimeStamp){
+            this.startTimer()
+        }
         this.renderSpin();
         document.getElementById("spin-wrap").style.display = "flex";
     }
+    close(){
+        if (this.interval != null){
+            clearInterval(this.interval)
+        }
+        this.interval = null
+        document.getElementById("spin-wrap").style.display = "none";
+    }
     doSpin(){
-        const container = document.getElementById('spin-container');
-        let number = Math.ceil(360 - (Math.random()*180/player._spinItems.length + player._spinDropIndex*360/player._spinItems.length) + 360);
+        const container = document.getElementById('spin-wheel');
+        let number = Math.ceil(360 - (Math.random()*180/player._spinItems.length + player._spinDropIndex*360/player._spinItems.length) + 720);
         container.style.transform = `rotate(${number}deg)`;
         container.style.transform = `rotate(${number}deg)`;
         console.log(player._spinItems[player._spinDropIndex])
     }
-    getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
     renderSpin(){
-        const spin = document.getElementById('spin-container');
+        const spin = document.getElementById('spin-wheel');
         spin.innerHTML = ""
+        if (this.interval != null){
+            document.getElementById('spin-button').style.display = 'none'
+            return
+        }
+        document.getElementById('spin-button').style.display = 'flex'
         const size = player._spinItems.length
-        let h = 150; // половина ширины рулетки (радиус)
         for (let index = 0; index < size; index++) {
             const elem = document.createElement("div")
-            elem.style.backgroundColor = this.getRandomColor();
-            elem.style.height = "50%";
-            elem.style.width = `${h*Math.sqrt(2-2*Math.cos(2*Math.PI/size))/Math.cos(Math.PI/size)}px`;
-            elem.style.position = "absolute";
-            elem.style.clipPath = "polygon(100% 0, 50% 100%, 0 0)";
-            elem.style.transformOrigin = "bottom";
-            elem.style.textAlign = "center";
-            elem.style.display = "flex";
-            elem.style.alignItems = "center";
-            elem.style.left = "63px"; // подбор
+            elem.className = 'spin-elem'
             elem.style.transform = `rotate(${(index) * 360 / size}deg)`;
 
-            const img = document.createElement("img")
-            img.src = `client/assets/items/${player._spinItems[index].item}.png`
+            const img = document.createElement("div")
+            img.style.backgroundImage = `url(client/assets/items/${player._spinItems[index].item}.png)`
             img.className = "spin-image"
             const amount = document.createElement("h3")
             amount.className = "spin-text"
             amount.innerText = player._spinItems[index].amount
-            elem.appendChild(amount)
             elem.appendChild(img)
+            elem.appendChild(amount)
             spin.appendChild(elem)
         }
     }
