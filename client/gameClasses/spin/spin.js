@@ -11,8 +11,12 @@ class Spin {
                     this.doSpin()
                     socketClient.send('spin')
                     socketClient.send('regen')
-                    this.startTimer()
-                    this.renderSpin()
+                    setTimeout(() => {
+                        this.startTimer()
+                        setTimeout(() => { //временно
+                            this.renderSpin()
+                        }, 1000);
+                    }, 4000);
                 } else{
                     GVAR.showFloatingText('Недостаточно места в инв')
                 }
@@ -28,6 +32,7 @@ class Spin {
         }
     }
     startTimer(){
+        console.log('timer')
         document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp - Math.floor(Date.now() / 1000))
         this.interval = setInterval(() => {
             if (Math.floor(Date.now() / 1000) < player._spinTimeStamp){
@@ -62,6 +67,7 @@ class Spin {
         console.log(player._spinItems[player._spinDropIndex])
     }
     renderSpin(){
+        console.log(this.interval, player._spinItems)
         const spin = document.getElementById('spin-wheel');
         spin.innerHTML = ""
         if (this.interval != null){
