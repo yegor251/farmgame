@@ -9,19 +9,6 @@ class Orders {
         document.getElementById("closeOrders").onclick = () => {
             this.close()
         }
-        document.getElementById("open-orders").onclick = () => {
-            GVAR.closeAllWindows()
-            document.getElementById("orders-wrap").style.display = "flex";
-            this.chosenOrderInd = 'none'
-            this.clear()
-            this._intervalId = setInterval(() => {
-                if (this.chosenOrderInd != 'none'){
-                    this.showOrderDetails()
-                    this.renderOrders();
-                }
-            }, 1000);
-            this.renderOrders();
-        }
         this.chosenOrderInd = 'none'
     }
     clear(){
@@ -34,6 +21,18 @@ class Orders {
         this.chosenOrderInd = 'none'
         clearInterval(this._intervalId)
         document.getElementById("orders-wrap").style.display = "none";
+    }
+    open(){
+        document.getElementById("orders-wrap").style.display = "flex";
+        this.chosenOrderInd = 'none'
+        this.clear()
+        this._intervalId = setInterval(() => {
+            if (this.chosenOrderInd != 'none'){
+                this.showOrderDetails()
+                this.renderOrders();
+            }
+        }, 1000);
+        this.renderOrders();
     }
     verifyOrder(order) {
         for (let item in order.orderItems) {

@@ -24,8 +24,7 @@ import RES from './resources.js';
 // socketClient.send('buydeal/Deal_test_1')
 // console.log(player._boostersArr)
 
-tiles[1][5].createBuilding('small_swamp')
-tiles[10][5].createBuilding('barn')
+tiles[1][7].createBuilding('small_swamp')
 
 // Ensure the document is scrollable
 function ensureDocumentIsScrollable() {

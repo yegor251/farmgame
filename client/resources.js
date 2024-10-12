@@ -13,7 +13,7 @@ class Resources {
     this.buildingNames.garden = ["garden"]
     this.buildingNames.animalPen = ['coop', 'cowshed', 'pigsty', 'sheepfold']
     this.buildingNames.bush = ['cranberry', 'apple_tree', 'raspberry', 'cherry', 'blackberry', 'strawberry']
-    this.buildingNames.serviceBuildings = ['barn'];
+    this.buildingNames.serviceBuildings = ['barn', 'spin_wheel', 'orders_board'];
     for (const type in this.buildingNames) {
       this.buildingNames[type].forEach(name => {
         this.names.buildings.push(name)

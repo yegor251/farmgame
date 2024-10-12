@@ -57,10 +57,6 @@ class Shop{
         document.getElementById("closeStash").onclick = () => {
             document.getElementById("stash-wrap").style.display = "none";
         }
-        document.getElementById("open-stash").onclick = () => {
-            GVAR.closeAllWindows();
-            this.drawStash();
-        }
         const upgButton = document.getElementById('upgrade-stash-button')
         upgButton.addEventListener('click', () => {
             if (player._tokenBalance >= 1000 && player._inventorySize < CVAR.maxInvSize){

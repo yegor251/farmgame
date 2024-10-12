@@ -5,6 +5,7 @@ import RES from "../../resources.js";
 import shop from "../shop/shop.js";
 import { spin } from "../spin/spin.js";
 import { orderManager } from "../orders/orders.js";
+import GVAR from "../../globalVars/global.js";
 
 export default class ServiceBuilding extends Sprite{
     constructor(x, y, type)
@@ -20,11 +21,12 @@ export default class ServiceBuilding extends Sprite{
         ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
     }
     onClick() {
+        GVAR.closeAllWindows();
         if (this._type == 'barn')
             shop.drawStash()
-        else if (this._type == 'spin')
+        else if (this._type == 'spin_wheel')
             spin.open()
-        else if (this._type == 'orders')
+        else if (this._type == 'orders_board')
             orderManager.open()
     }
     update(){

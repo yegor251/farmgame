@@ -279,6 +279,9 @@ class Init {
                 tiles[i][j] = new Tile(tileCoords.x, tileCoords.y, CVAR.tileSide, CVAR.tileSide, RES.map.grass[map[i][j]]);
             }
         }
+        RES.buildingNames.serviceBuildings.forEach(name => {
+            tiles[RES.buildings[name].i][RES.buildings[name].j].createBuilding(name)
+        });
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
         socketClient.send(`connect/2357367`)

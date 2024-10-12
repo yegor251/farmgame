@@ -26,13 +26,8 @@ class Spin {
         document.getElementById("closeSpin").onclick = () => {
             this.close()
         }
-        document.getElementById("open-spin").onclick = () => {
-            GVAR.closeAllWindows()
-            this.open()
-        }
     }
     startTimer(){
-        console.log('timer')
         document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp - Math.floor(Date.now() / 1000))
         this.interval = setInterval(() => {
             if (Math.floor(Date.now() / 1000) < player._spinTimeStamp){
