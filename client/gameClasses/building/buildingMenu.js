@@ -245,8 +245,16 @@ class BuildingMenu {
                     newLevel.innerText = 'next level'
                     dropList.appendChild(newLevel);
                 }
-                craft.appendChild(dropList);
+                const rect = craft.getBoundingClientRect();
+
+                let topPosition = rect.bottom - rect.top;
                 dropList.style.display = 'block';
+                if (window.innerHeight - rect.bottom < 3 * rect.height) {
+                    topPosition = -3 * rect.height;
+                }
+
+                dropList.style.top = `${topPosition}px`;
+                craft.appendChild(dropList);
             });
 
             craft.addEventListener('touchend', (event) => {

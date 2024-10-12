@@ -4,6 +4,7 @@ import Calc from "./calc.js";
 import CVAR from "./globalVars/const.js";
 import player from "./gameClasses/player/player.js";
 import GVAR from "./globalVars/global.js";
+import loader from "./loadingScreen.js";
 
 class SocketClient{
     constructor()
@@ -11,7 +12,7 @@ class SocketClient{
         window.Telegram.WebApp.expand();
         window.Telegram.WebApp.disableVerticalSwipes();
         this.requestQueue = new Array()
-        this.socket = new WebSocket('ws:10.37.129.2:8000');
+        this.socket = new WebSocket('ws:localhost:8000');
         this.gameSessionPromiseResolve = null;
         this.gameSessionPromise = new Promise((resolve) => {
             this.gameSessionPromiseResolve = resolve;
@@ -212,7 +213,8 @@ class SocketClient{
               	el.slots.forEach(slot => {
                   	tiles[el.x][el.y]._structure.addSlot(slot)
               	});
-              	// tiles[el.x][el.y]._structure._slotsAmount = el.integerData //количество слотов
+                tiles[el.x][el.y]._structure._level = el.level
+              	tiles[el.x][el.y]._structure._slotsAmount += el.integerData
           	} else if (RES.buildingNames.garden.includes(el.name)){
 				if (el.slots[0].workName != 'none')
 					tiles[el.x][el.y]._structure.addSlot(el.slots[0])
@@ -249,6 +251,7 @@ class Init {
     constructor() {
     }
     async initMap(){
+        loader.updateLoading(loader.progress, 'Initializing map')
         const Tile = (await import("./gameClasses/tile/tile.js")).default;
 
         const loadText = async (url) => {
@@ -278,13 +281,11 @@ class Init {
         }
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357347`)
+        socketClient.send(`connect/2357367`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
-        console.log("map loaded")
-
+        loader.updateLoading(loader.progress + 25, 'Init game session')
         await socketClient.gameSessionPromise;
-        console.log("Game session initialized");
     }
     async splitImageToBlocks(imageSrc, flag) {
 
@@ -336,7 +337,7 @@ class Init {
                 const img = new Image();
                 img.src = src;
                 img.onload = () => {
-                    console.log(`Image loaded: ${src}`);
+                    loader.updateLoading(loader.progress + 0.15, 'Loading images')
                     resolve(img);
                 };
                 img.onerror = (error) => {
@@ -355,6 +356,7 @@ class Init {
         const loadMapImages = async () => {
             RES.map.grass = await this.splitImageToBlocks(`client/assets/map/Grass.png`)
             RES.map.water = await this.splitImageToBlocks(`client/assets/map/Water.png`)
+            loader.updateLoading(loader.progress + 0.2, 'Loading images')
         }
   
         const loadAssets = async (type, name) => {
@@ -423,9 +425,6 @@ class Init {
             console.log(RES)
   
             await Promise.all(allAssetPromises);
-            console.log('All resources loaded');
-            // Возвращаем экземпляр класса Resources, чтобы его можно было использовать
-            // после загрузки в других модулях
             await this.initMap();
             return RES;
         } catch (error) {
@@ -438,12 +437,18 @@ class Init {
 const init = new Init();
   
 init.loadRes().then(async () => {
-    const script = document.createElement('script'); // Динамически загружаем основной скрипт после загрузки ресурсов
+    const script = document.createElement('script');
     script.src = 'client/index.js';
     script.type = 'module'
     document.body.appendChild(script);
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
+    loader.updateLoading(loader.progress + 25, 'Preparation')
+    const interv = setInterval(() => {
+        loader.updateLoading(loader.progress + 2.5, 'Preparation')
+    }, 100);
     await sleep(1000);
+    clearInterval(interv)
+    loader.hideLoadingScreen()
     document.getElementById('loading-screen').style.display = 'none';
 }).catch((error) => {
     console.error('Failed to load resources:', error);

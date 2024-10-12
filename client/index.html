@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="client/styles/bushAndAnimal.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/obstacle.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/spin.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/boosters.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/loading_screen.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -17,7 +19,34 @@
 </head>
 <body>
     <div id="loading-screen">
-        Loading5...
+        <div id="loading-container">
+            <p id="loading-text">Loading...</p>
+            <div id="loading-bar-wrapper">
+              <div id="loading-bar"></div>
+            </div>
+          </div>
+        
+          <div id="main-content">
+            <div id="background" class="layer">
+              <img src="client/assets/loading/BACKGROUND.png" alt="Background">
+            </div>
+            
+            <div id="stars" class="layer">
+              <img src="client/assets/loading/STARS.png" alt="Stars">
+            </div>
+            
+            <div id="clouds" class="layer">
+              <img src="client/assets/loading/CLOUDS.png" alt="Clouds">
+            </div>
+            
+            <div id="birds" class="layer">
+              <img src="client/assets/loading/BIRDS.png" alt="Birds">
+            </div>
+            
+            <div id="topLayer" class="layer">
+              <img src="client/assets/loading/TOP_LAYER.png" alt="Top Layer">
+            </div>
+        </div>
     </div>
 
     <canvas id="canvas"></canvas>
@@ -75,11 +104,14 @@
     </div>
     <div id="booster-menu-wrap" class="menu-wrap">
         <div id="booster-menu">
-            <div id="booster-menu-bar">
-                <button id="close-booster-menu">X</button>
+            <div class="buildable-menu-bar">
+                <div id="close-booster-menu" class="buildable-close-button"></div>
             </div>
-            <div id="activ-boosters"></div>
-            <div id="booster-list"></div>
+            <div class="buildable-menu-list">
+                <div id="activ-boosters"></div>
+            </div>
+            <div id="boosters-list"></div>
+            <div class="buildable-bottom"></div>
         </div>
     </div>
     <div id="obstacle-menu-wrap" class="menu-wrap">

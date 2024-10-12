@@ -6,7 +6,7 @@ class GlobalVars{
         this.phantomStructureArr = new Array(0);
         this.obstacleArr = new Array();
 
-        this.scale = 11;
+        this.scale = 5;
         this.rescale = true
         this.redraw = true;
         this.confirmFlag = false;
@@ -54,21 +54,28 @@ class GlobalVars{
         document.getElementById("payment-wrap").style.display = "none";
     }
     showFloatingText(message) {
+        const existingTexts = document.querySelectorAll('.floating-text');
+        
+        for (const textElement of existingTexts) {
+            if (textElement.textContent === message) {
+                return;
+            }
+        }
+    
         const textElement = document.createElement('div');
         textElement.textContent = message;
-      
         textElement.classList.add('floating-text');
         
         document.body.appendChild(textElement);
       
         setTimeout(() => {
-          textElement.classList.add('float-away');
+            textElement.classList.add('float-away');
         }, 50);
       
         setTimeout(() => {
-          textElement.remove();
+            textElement.remove();
         }, 4000);
-    }
+    }    
     setConfirm(){
         this.confirmFlag = true;
         this.confirmTimer = setTimeout(() => {

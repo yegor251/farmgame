@@ -108,13 +108,13 @@ export default class Calc{
     
         let result = [];
         if (hours > 0) {
-            result.push(hours + 'ч');
+            result.push(hours + 'h');
         }
         if (minutes > 0) {
-            result.push(minutes + 'м');
+            result.push(minutes + 'm');
         }
         if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
-            result.push(secs + 'с');
+            result.push(secs + 's');
         }
         return result.join(' ');
     }
