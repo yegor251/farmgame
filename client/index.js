@@ -24,8 +24,6 @@ import RES from './resources.js';
 // socketClient.send('buydeal/Deal_test_1')
 // console.log(player._boostersArr)
 
-tiles[1][7].createBuilding('small_swamp')
-
 // Ensure the document is scrollable
 function ensureDocumentIsScrollable() {
     const isScrollable =
@@ -215,9 +213,7 @@ async function animate(delta){
             const k = (i+2+waterInd)%4
             ctx.drawImage(RES.map.water[k], i * CVAR.tileSide, -20, CVAR.tileSide, CVAR.tileSide);
             ctx.drawImage(RES.map.water[k], i * CVAR.tileSide, -10, CVAR.tileSide, CVAR.tileSide);
-            ctx.drawImage(RES.map.water[k], i * CVAR.tileSide, 0, CVAR.tileSide, CVAR.tileSide);
 
-            ctx.drawImage(RES.map.water[k], i * CVAR.tileSide, CVAR.tileRows * CVAR.tileSide - 10, CVAR.tileSide, CVAR.tileSide);
             ctx.drawImage(RES.map.water[k], i * CVAR.tileSide, CVAR.tileRows * CVAR.tileSide + 0, CVAR.tileSide, CVAR.tileSide);
             ctx.drawImage(RES.map.water[k], i * CVAR.tileSide, CVAR.tileRows * CVAR.tileSide + 10, CVAR.tileSide, CVAR.tileSide);
         }
@@ -230,6 +226,18 @@ async function animate(delta){
             ctx.drawImage(RES.map.water[waterInd], CVAR.tileRows * CVAR.tileSide + 0, j * CVAR.tileSide, CVAR.tileSide, CVAR.tileSide);
             ctx.drawImage(RES.map.water[waterInd], CVAR.tileRows * CVAR.tileSide + 10, j * CVAR.tileSide, CVAR.tileSide, CVAR.tileSide);
         }
+        for (let i = 0; i < CVAR.tileCols; i++) {
+            ctx.drawImage(RES.map.grass[1], i * CVAR.tileSide, -10, CVAR.tileSide, CVAR.tileSide);
+            ctx.drawImage(RES.map.grass[7], i * CVAR.tileSide, CVAR.tileRows * CVAR.tileSide, CVAR.tileSide, CVAR.tileSide);
+        }
+        for (let j = 0; j < CVAR.tileRows; j++) {
+            ctx.drawImage(RES.map.grass[3], -10, j * CVAR.tileSide, CVAR.tileSide, CVAR.tileSide);
+            ctx.drawImage(RES.map.grass[5], CVAR.tileCols * CVAR.tileSide, j * CVAR.tileSide, CVAR.tileSide, CVAR.tileSide);
+        }
+        ctx.drawImage(RES.map.grass[0], -10, -10, CVAR.tileSide, CVAR.tileSide);
+        ctx.drawImage(RES.map.grass[6], -10, CVAR.tileRows * CVAR.tileSide, CVAR.tileSide, CVAR.tileSide);
+        ctx.drawImage(RES.map.grass[2], CVAR.tileCols * CVAR.tileSide, -10, CVAR.tileSide, CVAR.tileSide);
+        ctx.drawImage(RES.map.grass[8], CVAR.tileCols * CVAR.tileSide, CVAR.tileCols * CVAR.tileSide, CVAR.tileSide, CVAR.tileSide);
 
         const drawBoundingBox = camera.getBoundingBox();
         for (let i = drawBoundingBox.left; i < drawBoundingBox.right; i++)

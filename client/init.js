@@ -253,21 +253,7 @@ class Init {
     async initMap(){
         loader.updateLoading(loader.progress, 'Initializing map')
         const Tile = (await import("./gameClasses/tile/tile.js")).default;
-
-        const loadText = async (url) => {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
-            const text = await response.text();
-            const lines = text.split('\n');
-            const mapArray = lines.map(line => 
-                line.trim().split(' ').map(Number)
-            );
-            const transposedArray = mapArray[0].map((_, colIndex) => mapArray.map(row => row[colIndex]));
-
-            return transposedArray;
-        };
         
-        const map = await loadText(`client/assets/map/map.txt`);
         for (let i = 0; i < CVAR.tileRows; i++) {
             tiles[i] = new Array(CVAR.tileCols);
         }
@@ -276,7 +262,7 @@ class Init {
             for (let j = 0; j < CVAR.tileCols; j++)
             {
                 let tileCoords = Calc.indexToCanvas(i, j, CVAR.tileSide, CVAR.outlineWidth);
-                tiles[i][j] = new Tile(tileCoords.x, tileCoords.y, CVAR.tileSide, CVAR.tileSide, RES.map.grass[map[i][j]]);
+                tiles[i][j] = new Tile(tileCoords.x, tileCoords.y, CVAR.tileSide, CVAR.tileSide, RES.map.grass[Math.random() < 0.25 ? Math.floor(Math.random() * 12) + 9 : 4]);
             }
         }
         RES.buildingNames.serviceBuildings.forEach(name => {

@@ -6,7 +6,7 @@ class GlobalVars{
         this.phantomStructureArr = new Array(0);
         this.obstacleArr = new Array();
 
-        this.scale = 5;
+        this.scale = 7 * window.innerHeight / 1000;
         this.rescale = true
         this.redraw = true;
         this.confirmFlag = false;

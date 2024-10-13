@@ -4,7 +4,7 @@
     "productLimit": 3,
     "speed": 46800,
     "sizex": 2,
-    "sizey": 2,
+    "sizey": 1,
     "mapLimit": 1600,
     "products": {
       "cherry": 3
