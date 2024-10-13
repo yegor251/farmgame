@@ -1,7 +1,6 @@
 {
     "name": "huge_swamp",
-    "removePrice": 3000,
-    "removeTokenPrice": 10000,
+    "removeTokenPrice": 12000,
     "sizex": 8,
     "sizey": 8
 }

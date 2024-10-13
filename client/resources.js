@@ -30,7 +30,7 @@ class Resources {
       'sweater', 'cottonFabric', 'sheepFeed', 'cowFeed', 'bakedPotato', 'shirt', 'shorts',
       'baconPie', 'butter']; //только крафты
     this.names.animals = ['chicken', 'cow', 'pig', 'sheep'];
-    this.names.obstacles = ["small_swamp", 'medium_swamp', 'huge_swamp'];
+    this.names.obstacles = ["small_swamp", 'medium_swamp', 'huge_swamp', 'stone_big', 'autumn_big_tree', 'autumn_tight_tree', 'autumn_tree', 'autumn_tree_fall', 'tree', 'big_stump', 'log', 'small_stump', 'stone_small', 'tree_big', 'tree_fall'];
     this.mapImgNames = ["grass_1", "grass_2"];
   }
 }

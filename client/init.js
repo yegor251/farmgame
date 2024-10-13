@@ -382,7 +382,7 @@ class Init {
                 } else if (type === "obstacles") {
                     data.image = {};
             
-                    const stagesPromises = Array.from({ length: 4 }).map(async (_, i) => {
+                    const stagesPromises = Array.from({ length: data.stages }).map(async (_, i) => {
                         data.image[i] = await loadImage(`client/assets/${type}/${name}/${name}${i}.png`);
                     });
                     await Promise.all(stagesPromises);
