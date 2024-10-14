@@ -1,4 +1,14 @@
 {
     "productx": 5,
-    "producty": 7
+    "producty": 7,
+    "localization": {
+        "name": {
+            "ru": "попкорница",
+            "en": "popcorn maker"
+        },
+        "description": {
+            "ru": "производственное здание",
+            "en": "industrial building"
+        }
+    }
 }

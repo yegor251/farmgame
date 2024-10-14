@@ -1,0 +1,395 @@
+{
+    "1": {
+        "ru": "недостаточно денег",
+        "en": "not enough money"
+    },
+    "2": {
+        "ru": "недостаточно токенов",
+        "en": "not enough tokens"
+    },
+    "3": {
+        "ru": "нет места в амбаре",
+        "en": "no space in the barn"
+    },
+    "4": {
+        "ru": "нажмите ещё раз для подтверждения",
+        "en": "press again to confirm"
+    },
+    "5": {
+        "ru": "этот бустер уже активен",
+        "en": "this booster is already activated"
+    },
+    "6": {
+        "ru": "не выполнены условия крафта",
+        "en": "crafting conditions not met"
+    },
+    "7": {
+        "ru": "успешно",
+        "en": "successfully"
+    },
+    "8": {
+        "ru": "улучшить",
+        "en": "upgrade"
+    },
+    "9": {
+        "ru": "купить за { токенов?",
+        "en": "buy for { tokens?"
+    },
+    "10": {
+        "ru": "невозможно установить здание",
+        "en": "unable to install building"
+    },
+    "11": {
+        "ru": "животное не подходит или нет места",
+        "en": "the animal is not suitable or there is no room"
+    },
+    "tomatoJuice": {
+      "name": {
+        "ru": "томатный сок",
+        "en": "tomato juice"
+      }
+    },
+    "brownSugar": {
+      "name": {
+        "ru": "коричневый сахар",
+        "en": "brown sugar"
+      }
+    },
+    "pancakes": {
+      "name": {
+        "ru": "блины",
+        "en": "pancakes"
+      }
+    },
+    "butterPopcorn": {
+      "name": {
+        "ru": "попкорн с маслом",
+        "en": "butter popcorn"
+      }
+    },
+    "apple": {
+      "name": {
+        "ru": "яблоко",
+        "en": "apple"
+      }
+    },
+    "carrotJuice": {
+      "name": {
+        "ru": "морковный сок",
+        "en": "carrot juice"
+      }
+    },
+    "blackberryCupcake": {
+      "name": {
+        "ru": "ежевичный кекс",
+        "en": "blackberry cupcake"
+      }
+    },
+    "redScarf": {
+      "name": {
+        "ru": "красный шарф",
+        "en": "red scarf"
+      }
+    },
+    "cherry": {
+      "name": {
+        "ru": "вишня",
+        "en": "cherry"
+      }
+    },
+    "omelet": {
+      "name": {
+        "ru": "яичница",
+        "en": "fried eggs"
+      }
+    },
+    "applePie": {
+      "name": {
+        "ru": "яблочный пирог",
+        "en": "apple pie"
+      }
+    },
+    "cookie": {
+      "name": {
+        "ru": "печенье",
+        "en": "cookie"
+      }
+    },
+    "pigFeed": {
+      "name": {
+        "ru": "корм для свиней",
+        "en": "pig feed"
+      }
+    },
+    "sweetPopcorn": {
+      "name": {
+        "ru": "сладкий попкорн",
+        "en": "sweet popcorn"
+      }
+    },
+    "cherryJuice": {
+      "name": {
+        "ru": "вишневый сок",
+        "en": "cherry juice"
+      }
+    },
+    "wool": {
+      "name": {
+        "ru": "шерсть",
+        "en": "wool"
+      }
+    },
+    "creamCake": {
+      "name": {
+        "ru": "сливочный торт",
+        "en": "cream cake"
+      }
+    },
+    "raspberryCupcake": {
+      "name": {
+        "ru": "малиновый кекс",
+        "en": "raspberry cupcake"
+      }
+    },
+    "blueCap": {
+      "name": {
+        "ru": "синяя кепка",
+        "en": "blue cap"
+      }
+    },
+    "raspberry": {
+      "name": {
+        "ru": "малина",
+        "en": "raspberry"
+      }
+    },
+    "chickenFeed": {
+      "name": {
+        "ru": "куриный корм",
+        "en": "chicken feed"
+      }
+    },
+    "berryJuice": {
+      "name": {
+        "ru": "ягодный сок",
+        "en": "berry juice"
+      }
+    },
+    "hamburger": {
+      "name": {
+        "ru": "гамбургер",
+        "en": "hamburger"
+      }
+    },
+    "cherryPie": {
+      "name": {
+        "ru": "вишневый пирог",
+        "en": "cherry pie"
+      }
+    },
+    "spicyPizza": {
+      "name": {
+        "ru": "острая пицца",
+        "en": "spicy pizza"
+      }
+    },
+    "carrotCake": {
+      "name": {
+        "ru": "морковный торт",
+        "en": "carrot cake"
+      }
+    },
+    "egg": {
+      "name": {
+        "ru": "яйцо",
+        "en": "egg"
+      }
+    },
+    "appleJuice": {
+      "name": {
+        "ru": "яблочный сок",
+        "en": "apple juice"
+      }
+    },
+    "cornbread": {
+      "name": {
+        "ru": "кукурузный хлеб",
+        "en": "corn bread"
+      }
+    },
+    "syrup": {
+      "name": {
+        "ru": "сироп",
+        "en": "syrup"
+      }
+    },
+    "pizza": {
+      "name": {
+        "ru": "пицца",
+        "en": "pizza"
+      }
+    },
+    "cheese": {
+      "name": {
+        "ru": "сыр",
+        "en": "cheese"
+      }
+    },
+    "cream": {
+      "name": {
+        "ru": "сливки",
+        "en": "cream"
+      }
+    },
+    "whiteSugar": {
+      "name": {
+        "ru": "белый сахар",
+        "en": "white sugar"
+      }
+    },
+    "blackberry": {
+      "name": {
+        "ru": "ежевика",
+        "en": "blackberry"
+      }
+    },
+    "potatoBread": {
+      "name": {
+        "ru": "картофельный хлеб",
+        "en": "potato bread"
+      }
+    },
+    "carrotPie": {
+      "name": {
+        "ru": "морковный пирог",
+        "en": "carrot pie"
+      }
+    },
+    "popcorn": {
+      "name": {
+        "ru": "попкорн",
+        "en": "popcorn"
+      }
+    },
+    "chilePopcorn": {
+      "name": {
+        "ru": "острый попкорн",
+        "en": "chile popcorn"
+      }
+    },
+    "bacon": {
+      "name": {
+        "ru": "бекон",
+        "en": "bacon"
+      }
+    },
+    "purpleDress": {
+      "name": {
+        "ru": "фиолетовое платье",
+        "en": "purple dress"
+      }
+    },
+    "blueSweater": {
+      "name": {
+        "ru": "синий свитер",
+        "en": "blue sweater"
+      }
+    },
+    "strawberry": {
+      "name": {
+        "ru": "клубника",
+        "en": "strawberry"
+      }
+    },
+    "bakedTomato": {
+      "name": {
+        "ru": "печеный томат",
+        "en": "baked tomato"
+      }
+    },
+    "strawberryCake": {
+      "name": {
+        "ru": "клубничный торт",
+        "en": "strawberry cake"
+      }
+    },
+    "pumpkinPie": {
+      "name": {
+        "ru": "тыквенный пирог",
+        "en": "pumpkin pie"
+      }
+    },
+    "cheesecake": {
+      "name": {
+        "ru": "чизкейк",
+        "en": "cheesecake"
+      }
+    },
+    "bread": {
+      "name": {
+        "ru": "хлеб",
+        "en": "bread"
+      }
+    },
+    "sweater": {
+      "name": {
+        "ru": "свитер",
+        "en": "sweater"
+      }
+    },
+    "cottonFabric": {
+      "name": {
+        "ru": "хлопковая ткань",
+        "en": "cotton fabric"
+      }
+    },
+    "sheepFeed": {
+      "name": {
+        "ru": "корм для овец",
+        "en": "sheep feed"
+      }
+    },
+    "cowFeed": {
+      "name": {
+        "ru": "корм для коров",
+        "en": "cow feed"
+      }
+    },
+    "bakedPotato": {
+      "name": {
+        "ru": "печеный картофель",
+        "en": "baked potato"
+      }
+    },
+    "shirt": {
+      "name": {
+        "ru": "рубашка",
+        "en": "shirt"
+      }
+    },
+    "shorts": {
+      "name": {
+        "ru": "шорты",
+        "en": "shorts"
+      }
+    },
+    "baconPie": {
+      "name": {
+        "ru": "пирог с беконом",
+        "en": "bacon pie"
+      }
+    },
+    "milk": {
+      "name": {
+        "ru": "молоко",
+        "en": "milk"
+      }
+    },
+    "butter": {
+      "name": {
+        "ru": "масло",
+        "en": "butter"
+      }
+    }
+  }
+  

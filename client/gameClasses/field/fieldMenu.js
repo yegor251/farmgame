@@ -145,7 +145,7 @@ class FieldMenu{
                 dropList.id = 'drop-list'
                 dropList.className = "craft-drop-list"
                 const dropName =  document.createElement("h3")
-                dropName.innerText = plant
+                dropName.innerText = RES.plants[plant].localization.name[GVAR.language]
                 dropName.className = 'drop-list-text'
                 dropList.appendChild(dropName)
 

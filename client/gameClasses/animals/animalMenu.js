@@ -26,6 +26,12 @@ class AnimalMenu{
         animalImg.style.aspectRatio = `${animalPen._image.width} / ${animalPen._image.height}`
         GVAR.closeAllWindows()
         document.getElementById("animal-menu-wrap").style.display = "flex";
+        document.getElementById('animal-pen-name').innerText = RES.buildings[animalPen._type].localization.name[GVAR.language]
+        const startButton = document.getElementById("animal-start-button");
+        const feedType = Object.keys(RES.buildings[animalPen._type].intake)[0]
+        startButton.style.backgroundImage = `url(client/assets/items/${feedType}.png)`
+        const upgradeButton = document.getElementById('animal-upgrade');
+        upgradeButton.innerText = GVAR.localization[8][GVAR.language];
         this.renderMenu()
     }
     renderTimer(){
@@ -65,12 +71,13 @@ class AnimalMenu{
         const type = this.animalPen._type;
         this.renderTimer();
         const upgradeButton = document.getElementById('animal-upgrade');
+        upgradeButton.innerText = GVAR.localization[8][GVAR.language]
         if (this.animalPen._level >= RES.buildings[type].maxLevel)
             upgradeButton.remove()
         else {
             upgradeButton.onclick = () => {
                 if (player._money < RES.buildings[type].upgradesPrice[this.animalPen._level-1])
-                    GVAR.showFloatingText('недостаточно денег')
+                    GVAR.showFloatingText(1)
                 else
                     this.animalPen.upgrade()
             };

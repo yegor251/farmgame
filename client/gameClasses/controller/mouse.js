@@ -124,31 +124,39 @@ class Mouse{
     }
     onMouseUp(e)
     {
-        if (player._phantomStructure!="none" && player._phantomStructure.structure._x>=0 && player._phantomStructure.structure._y>=0 && player._phantomStructure.structure._x<CVAR.tileSide*CVAR.tileCols && player._phantomStructure.structure._y<CVAR.tileSide*CVAR.tileRows){
-            if (player._money >= player._phantomStructure.cost){
-                if (player._phantomStructure.structureType == 'building' && tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].isCanPut(player._phantomStructure.structure)){
-                    tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].createBuilding(player._phantomStructure.structure._type)
-                    socketClient.send(`place/${player._phantomStructure.structure._type}/${mouse._mapPos.i}/${mouse._mapPos.j}`)
-                    player.buy(player._phantomStructure.cost)
-                    if (RES.buildingNames.bakery.concat(RES.buildingNames.animalPen).includes(player._phantomStructure.structure._type)){
-                        RES.buildings[player._phantomStructure.structure._type].price *= CVAR.nextBuildingPriceCoef
-                    } else if (player._phantomStructure.structure._type == 'garden'){
-                        RES.buildings['garden'].floatPrice *= CVAR.nextGardenPriceCoef
-                        RES.buildings['garden'].price = Math.floor(RES.buildings['garden'].floatPrice)
+        if (player._phantomStructure!="none"){
+            if (player._phantomStructure.structure._x>=0 && player._phantomStructure.structure._y>=0 && player._phantomStructure.structure._x<CVAR.tileSide*CVAR.tileCols && player._phantomStructure.structure._y<CVAR.tileSide*CVAR.tileRows){
+                if (player._money >= player._phantomStructure.cost){
+                    if (player._phantomStructure.structureType == 'building'){
+                        if (tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].isCanPut(player._phantomStructure.structure)){
+                            tiles[mouse._mapPos.i - mouse._offset.i][mouse._mapPos.j - mouse._offset.j].createBuilding(player._phantomStructure.structure._type)
+                            socketClient.send(`place/${player._phantomStructure.structure._type}/${mouse._mapPos.i}/${mouse._mapPos.j}`)
+                            player.buy(player._phantomStructure.cost)
+                            if (RES.buildingNames.bakery.concat(RES.buildingNames.animalPen).includes(player._phantomStructure.structure._type)){
+                                RES.buildings[player._phantomStructure.structure._type].price *= CVAR.nextBuildingPriceCoef
+                            } else if (player._phantomStructure.structure._type == 'garden'){
+                                RES.buildings['garden'].floatPrice *= CVAR.nextGardenPriceCoef
+                                RES.buildings['garden'].price = Math.floor(RES.buildings['garden'].floatPrice)
+                            }
+                            player._phantomStructure = "none"
+                        } else {
+                            GVAR.showFloatingText(10)
+                        }
+                    } else if (player._phantomStructure.structureType == 'animal' && RES.buildingNames.animalPen.includes(tiles[mouse._mapPos.i][mouse._mapPos.j]._structure._type) && tiles[mouse._mapPos.i][mouse._mapPos.j]._structure.canAddAnimal(player._phantomStructure.structure._type)){
+                        tiles[mouse._mapPos.i][mouse._mapPos.j]._structure.addAnimal()
+                        const x = tiles[mouse._mapPos.i][mouse._mapPos.j]._structure._x
+                        const y = tiles[mouse._mapPos.i][mouse._mapPos.j]._structure._y
+                        socketClient.send(`use/buy/${x/CVAR.tileSide}/${y/CVAR.tileSide}`)
+                        player.buy(player._phantomStructure.cost)
+                        player._phantomStructure = "none"
+                    } else {
+                        GVAR.showFloatingText(11)
                     }
-                    player._phantomStructure = "none"
-                }else if (player._phantomStructure.structureType == 'animal' && RES.buildingNames.animalPen.includes(tiles[mouse._mapPos.i][mouse._mapPos.j]._structure._type) && tiles[mouse._mapPos.i][mouse._mapPos.j]._structure.canAddAnimal(player._phantomStructure.structure._type)){
-                    tiles[mouse._mapPos.i][mouse._mapPos.j]._structure.addAnimal()
-                    const x = tiles[mouse._mapPos.i][mouse._mapPos.j]._structure._x
-                    const y = tiles[mouse._mapPos.i][mouse._mapPos.j]._structure._y
-                    socketClient.send(`use/buy/${x/CVAR.tileSide}/${y/CVAR.tileSide}`)
-                    player.buy(player._phantomStructure.cost)
-                    player._phantomStructure = "none"
                 }
+                this._isBlockAfterShop = false;
             } else {
-                console.log("недостаточно денег")
+                GVAR.showFloatingText(10)
             }
-            this._isBlockAfterShop = false;
         }
         GVAR.phantomStructureArr.pop()
         player._phantomStructure = "none"
@@ -161,6 +169,7 @@ class Mouse{
                     tiles[el._prevPosition.i][el._prevPosition.j].moveStructure(pos)
                 }
                 else {
+                    GVAR.showFloatingText(10)
                     let prevPos = Calc.indexToCanvas(el._prevPosition.i, el._prevPosition.j, CVAR.tileSide, CVAR.outlineWidth);
                     el.move(prevPos)
                 }

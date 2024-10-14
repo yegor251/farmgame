@@ -1,4 +1,14 @@
 {
     "productx": 6,
-    "producty": 3
+    "producty": 3,
+    "localization": {
+        "name": {
+            "ru": "дробилка",
+            "en": "crusher"
+        },
+        "description": {
+            "ru": "производственное здание",
+            "en": "industrial building"
+        }
+    }
 }

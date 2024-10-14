@@ -270,7 +270,7 @@ class Init {
         });
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357367`)
+        socketClient.send(`connect/2357368`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
         loader.updateLoading(loader.progress + 25, 'Init game session')
@@ -347,7 +347,9 @@ class Init {
             RES.map.water = await this.splitImageToBlocks(`client/assets/map/Water.png`)
             loader.updateLoading(loader.progress + 0.2, 'Loading images')
         }
-  
+
+        GVAR.localization = await loadJson('client/assets/localization/localization.json')
+
         const loadAssets = async (type, name) => {
             let data = {}
             if (type != 'items'){

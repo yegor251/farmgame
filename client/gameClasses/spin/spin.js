@@ -18,7 +18,7 @@ class Spin {
                         }, 1000);
                     }, 4000);
                 } else{
-                    GVAR.showFloatingText('Недостаточно места в инв')
+                    GVAR.showFloatingText(3)
                 }
             }
         }

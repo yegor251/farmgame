@@ -11,6 +11,8 @@ class GlobalVars{
         this.redraw = true;
         this.confirmFlag = false;
         this.confirmTimer = null
+        this.localization = null
+        this.language = 'en'
     }
     countBuilding(type){
         let counter = 0
@@ -53,8 +55,12 @@ class GlobalVars{
         document.getElementById("deals-wrap").style.display = "none";
         document.getElementById("payment-wrap").style.display = "none";
     }
-    showFloatingText(message) {
+    showFloatingText(code, text) {
         const existingTexts = document.querySelectorAll('.floating-text');
+        let message = this.localization[code][this.language];
+        if (message.includes('{')) {
+            message = message.replace(/\{/g, text);
+        }
         
         for (const textElement of existingTexts) {
             if (textElement.textContent === message) {

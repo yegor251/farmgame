@@ -19,7 +19,7 @@ class Resources {
         this.names.buildings.push(name)
       });
     }
-    this.names.plants = ["wheat", "corn", 'carrot', 'soy', 'sugarCane', 'carrot', 'pumpkin', 'indigo', 'pepper', 'tomato', 'cotton', 'potato'];
+    this.names.plants = ["wheat", "corn", 'soy', 'sugarCane', 'carrot', 'pumpkin', 'indigo', 'pepper', 'tomato', 'cotton', 'potato'];
     this.names.items = ['tomatoJuice', 'brownSugar', 'pancakes', 'butterPopcorn',
       'carrotJuice', 'blackberryCupcake', 'redScarf', 'omelet', 'applePie', 'cookie',
       'pigFeed', 'sweetPopcorn', 'cherryJuice', 'creamCake', 'raspberryCupcake',

@@ -45,7 +45,6 @@
     top: 0;
     bottom: 0;
     position: absolute;
-    background-color: rgb(69, 41, 36);
     overflow-y: auto;
     scrollbar-width: none;
 }
@@ -121,13 +120,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100px;
     background-origin: content-box;
 }
 .description {
     margin-left: 8%;
     margin-right: 8%;
     margin-bottom: 8%;
+    text-align: center;
+    color: white;
+    font-size: 4vw;
 }
 .slide-out {
     transform: translateX(-100%);

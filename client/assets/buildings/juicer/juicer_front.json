@@ -1,4 +1,14 @@
 {
     "productx": -1.5,
-    "producty": 22
+    "producty": 22,
+    "localization": {
+        "name": {
+            "ru": "соковыжималка",
+            "en": "juicer"
+        },
+        "description": {
+            "ru": "производственное здание",
+            "en": "industrial building"
+        }
+    }
 }

@@ -1,0 +1,12 @@
+{
+    "localization": {
+        "name": {
+            "ru": "сахарный тростник",
+            "en": "sugar cane"
+        },
+        "description": {
+            "ru": "растение",
+            "en": "plant"
+        }
+    }
+}

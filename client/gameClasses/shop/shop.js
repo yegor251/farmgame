@@ -65,6 +65,7 @@ class Shop{
                 this.drawStash()
             }
         });
+        upgButton.innerText = GVAR.localization[8][GVAR.language]
     }
     drawBuildingShop(){
         const shop = document.getElementById('shop-list');
@@ -91,7 +92,7 @@ class Shop{
             descriptionMenu.style.display = 'none';
             const description = document.createElement('h3')
             description.className = 'description'
-            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            description.innerHTML = RES.buildings[building].localization.description[GVAR.language]
             descriptionMenu.appendChild(description)
     
             const arrow = document.createElement('span');
@@ -199,7 +200,7 @@ class Shop{
             descriptionMenu.style.display = 'none';
             const description = document.createElement('h3')
             description.className = 'description'
-            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            description.innerHTML = RES.plants[plant].localization.description[GVAR.language]
             descriptionMenu.appendChild(description)
 
             const arrow = document.createElement('span');
@@ -232,11 +233,11 @@ class Shop{
                 img.style.filter = 'grayscale(100%)';
             img.addEventListener("click", function(e) {
                 if (player._money < RES.plants[plant].seed.price){
-                    GVAR.showFloatingText('not enough money')
+                    GVAR.showFloatingText(1)
                     return
                 }
                 if (player.getInvFullness() == 0){
-                    GVAR.showFloatingText('недостаточно места в инвентаре')
+                    GVAR.showFloatingText(3)
                     return
                 }
                 player.buy(RES.plants[plant].seed.price)
@@ -272,7 +273,7 @@ class Shop{
             descriptionMenu.style.display = 'none';
             const description = document.createElement('h3')
             description.className = 'description'
-            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            description.innerHTML = RES.animals[animal].localization.description[GVAR.language]
             descriptionMenu.appendChild(description)
     
             const arrow = document.createElement('span');
@@ -379,7 +380,7 @@ class Shop{
             descriptionMenu.style.display = 'none';
             const description = document.createElement('h3')
             description.className = 'description'
-            description.innerHTML = 'описание '
+            description.innerHTML = RES.buildings[building].localization.description[GVAR.language]
             descriptionMenu.appendChild(description)
     
             const arrow = document.createElement('span');
@@ -485,7 +486,7 @@ class Shop{
             descriptionMenu.style.display = 'none';
             const description = document.createElement('h3')
             description.className = 'description'
-            description.innerHTML = 'описание описание описание описание описание описание описание описание '
+            description.innerHTML = RES.buildings[building].localization.description[GVAR.language]
             descriptionMenu.appendChild(description)
     
             const arrow = document.createElement('span');

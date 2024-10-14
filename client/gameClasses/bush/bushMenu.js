@@ -21,7 +21,7 @@ class BushMenu{
     show(bush){
         this.bush = bush
         GVAR.closeAllWindows()
-        document.getElementById("bush-name").innerText = bush._type
+        document.getElementById("bush-name").innerText = RES.buildings[bush._type].localization.name[GVAR.language]
         document.getElementById("bush-menu-wrap").style.display = "flex";
         this.renderMenu()
     }

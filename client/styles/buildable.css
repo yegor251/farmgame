@@ -228,6 +228,8 @@
     font-size: 4vw;
     color: #333;
     text-align: center;
+    word-wrap: break-word;
+    white-space: normal;
 }
 /*      КОНЕЦ ДРОП ЛИСТ     */
 .buildable-bottom {

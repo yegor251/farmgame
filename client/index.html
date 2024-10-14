@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preload" href="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js" as="script">
     <link rel="stylesheet" href="client/style.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/shop.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/stash.css" type="text/css"/>
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="client/styles/spin.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/boosters.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/loading_screen.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/buisness.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -54,15 +56,6 @@
         <h1 id="money">Money: 10</h1>
         <button id="open-shop">
             Shop
-        </button>
-        <button id="open-stash">
-            Stash
-        </button>
-        <button id="open-orders">
-            Orders
-        </button>
-        <button id="open-spin">
-            Spin
         </button>
         <button id="booster">
             boost
@@ -178,7 +171,7 @@
             <div class="back-color">
                 <div id="stash-list"></div>
                 <div id="upgrade-stash-button-bar">
-                    <div id="upgrade-stash-button">Улучшить</div>
+                    <div id="upgrade-stash-button"></div>
                 </div>
                 <div id="stash-bottom"></div>
             </div>
@@ -216,7 +209,7 @@
             </div>
             <div class="building-middle"></div>
             <div class="building-upgrade-bar">
-                <div id="upgrade-building" class="upgrade-buildable-button">улучшить</div>
+                <div id="upgrade-building" class="upgrade-buildable-button"></div>
             </div>
             <div id="building-menu-list" class="buildable-menu-list"></div>
             <div class="buildable-bottom"></div>
@@ -228,6 +221,7 @@
                 <div id="close-animal-menu" class="buildable-close-button"></div>
             </div>
             <div class="buildable-image-bar">
+                <h3 id="animal-pen-name" class="name-text"></h3>
                 <div id="animal-img" class="buildable-big-image"></div>
             </div>
             <div class="timer-bar">
@@ -236,7 +230,7 @@
             </div>
             <div class="building-middle"></div>
             <div class="timer-bar">
-                <div id="animal-upgrade" class="upgrade-buildable-button">улучшить</div>
+                <div id="animal-upgrade" class="upgrade-buildable-button"></div>
                 <div id="animal-start-button" class="interaction-button"></div>
             </div>          
             <div class="buildable-bottom"></div>

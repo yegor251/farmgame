@@ -50,11 +50,11 @@ class ObstacleMenu {
         }
         obstacleDelete.addEventListener('click', () => {
             if (this.obstacle._deletePrice && this.obstacle._deletePrice > player._money){
-                GVAR.showFloatingText('недостаточно money')
+                GVAR.showFloatingText(1)
                 return
             }
             if (this.obstacle._deleteTokenPrice && this.obstacle._deleteTokenPrice > player._tokenBalance){
-                GVAR.showFloatingText('недостаточно token')
+                GVAR.showFloatingText(2)
                 return
             }
             const tileIndex = Calc.CanvasToIndex(this.obstacle._x, this.obstacle._y, CVAR.tileSide, CVAR.outlineWidth);
@@ -73,7 +73,7 @@ class ObstacleMenu {
             }
             this.obstacle.delete()
             this.close()
-            GVAR.showFloatingText('успешно')
+            GVAR.showFloatingText(7)
         });
     }
 }

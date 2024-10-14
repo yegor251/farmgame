@@ -91,10 +91,6 @@ export default class AnimalPen extends Buildable{
         }
     }
     canAddAnimal(animal){
-        if (animal !== RES.buildings[this._type].animal)
-            console.log('животное не подходит')
-        if (this._animals.length == RES.buildings[this._type].maxAnimalAmount)
-            console.log('слоты для животных заняты')
         return (this._animals.length < RES.buildings[this._type].maxAnimalAmount && animal === RES.buildings[this._type].animal)
     }
     addAnimal(){

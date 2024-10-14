@@ -39,28 +39,6 @@ class Camera{
         }
         this.updateBoundingBox();
     }
-    newMove(x,y){
-        if (this._x + x < this.mapBoundingBox.left)
-            this._x = this.mapBoundingBox.left
-        else
-            this._x += x
-        
-        if (this._y + y < this.mapBoundingBox.top)
-            this._y = this.mapBoundingBox.top
-        else
-            this._y += y
-
-        if (this._x + x > this.mapBoundingBox.right)
-            this._x = this.mapBoundingBox.right
-        else
-            this._x += x
-        
-        if (this._y + y > this.mapBoundingBox.bottom)
-            this._y = this.mapBoundingBox.bottom
-        else
-            this._y += y
-        this.updateBoundingBox();
-    }
     getPos()
     {
         return{

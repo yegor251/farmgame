@@ -130,7 +130,7 @@ class BoosterMenu{
                     const visualRect = document.getElementById('activ-boosters').getBoundingClientRect();
                     if (isIntersecting(cloneRect, visualRect)) {
                         if (!player.canActivateBooster(i)){
-                            GVAR.showFloatingText('Данный бустер уже активен, попробуйте позже')
+                            GVAR.showFloatingText(5)
                         } else {
                             player.activateBooster(i)
                             socketClient.send(`activateb/${i}`)

@@ -1,4 +1,14 @@
 {
     "productx": 13,
-    "producty": 12
+    "producty": 12,
+    "localization": {
+        "name": {
+            "ru": "сахарный завод",
+            "en": "sugar factory"
+        },
+        "description": {
+            "ru": "производственное здание",
+            "en": "industrial building"
+        }
+    }
 }

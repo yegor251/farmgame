@@ -1,3 +1,13 @@
 {
-    "animal": "sheep"
+    "animal": "sheep",
+    "localization": {
+        "name": {
+            "ru": "овчарня",
+            "en": "sheepfold"
+        },
+        "description": {
+            "ru": "дом для овец",
+            "en": "sheep house"
+        }
+    }
 }

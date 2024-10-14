@@ -1,3 +1,4 @@
+import Calc from "../../calc.js";
 import player from "../player/player.js";
 import businesses from "./buisnesses.js";
 
@@ -36,23 +37,6 @@ class BuisnessMenu{
         this.currBusiness = undefined
         setInterval(() => this.updateTimers(), 1000);
     }
-    _formatTime(seconds) {
-        let hours = Math.floor(seconds / 3600);
-        let minutes = Math.floor((seconds % 3600) / 60);
-        let secs = seconds % 60;
-    
-        let result = [];
-        if (hours > 0) {
-            result.push(hours + 'ч');
-        }
-        if (minutes > 0) {
-            result.push(minutes + 'м');
-        }
-        if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
-            result.push(secs + 'с');
-        }
-        return result.join(' ');
-    }
     openBusiness(index) {
         const business = businesses[index-1];
         
@@ -81,7 +65,7 @@ class BuisnessMenu{
     
         if (!this.currBusiness.canInvest) {
             const timeLeft = Math.ceil((this.currBusiness.investmentEndTime - Date.now()) / 1000);
-            document.getElementById("timer").innerText = this._formatTime(timeLeft);
+            document.getElementById("timer").innerText = Calc.formatTime(timeLeft);
         } else {
             document.getElementById("timer").innerText = "";
         }

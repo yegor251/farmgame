@@ -2,6 +2,7 @@ import player from "../player/player.js";
 import GVAR from "../../globalVars/global.js";
 import RES from "../../resources.js";
 import CVAR from "../../globalVars/const.js";
+import Calc from "../../calc.js";
 
 class BuildingMenu {
     constructor() {
@@ -23,23 +24,6 @@ class BuildingMenu {
         document.getElementById("building-menu-wrap").style.display = "flex";
         this.renderCrafts();
     }
-    _formatTime(seconds) {
-        let hours = Math.floor(seconds / 3600);
-        let minutes = Math.floor((seconds % 3600) / 60);
-        let secs = seconds % 60;
-    
-        let result = [];
-        if (hours > 0) {
-            result.push(hours + 'ч');
-        }
-        if (minutes > 0) {
-            result.push(minutes + 'м');
-        }
-        if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
-            result.push(secs + 'с');
-        }
-        return result.join(' ');
-    }
     renderQueue() {
         const queue = this.building._craftingItems;
         const size = this.building._slotsAmount;
@@ -57,7 +41,7 @@ class BuildingMenu {
 
                 const time = document.createElement("h3");
                 time.className = "queue-elem-text";
-                time.innerText = this._formatTime(Math.trunc(queue[i].timeToFinish / 1000));
+                time.innerText = Calc.formatTime(Math.trunc(queue[i].timeToFinish / 1000));
                 queueElem.appendChild(time);
             }
             buildingQueue.appendChild(queueElem);
@@ -71,44 +55,20 @@ class BuildingMenu {
             plus.className = 'queue-elem-plus'
             queueElem.appendChild(plus)
             queueElem.onclick = () => {
-                const overlay = document.createElement('div');
-                overlay.id = 'menu-overlay';
-                
-                const menu = document.createElement('div');
-                menu.id = 'menu';
-
                 const extraSlotCount = this.building._slotsAmount - RES.buildings[this.building._type].maxSlots
                 const price = CVAR.extraSlotPrice * Math.pow(CVAR.extraSlotCoef, extraSlotCount)
-                const question = document.createElement('p');
-                question.innerText = `Хотите ли купить улучшение за ${price} токенов?`;
-                
-                const yesButton = document.createElement('button');
-                yesButton.innerText = 'Да';
-                yesButton.className = 'menu-button yes-button';
-                yesButton.onclick = () => {
+                if (GVAR.confirmFlag){
                     if (player._tokenBalance >= price){
                         this.building.incSlotsAmount()
                         player.spendToken(price)
                         this.renderQueue()
+                    } else {
+                        GVAR.showFloatingText(2)
                     }
-                    document.body.removeChild(menu);
-                    document.body.removeChild(overlay);
-                };
-
-                const noButton = document.createElement('button');
-                noButton.innerText = 'Нет';
-                noButton.className = 'menu-button no-button';
-                noButton.onclick = () => {
-                    document.body.removeChild(menu);
-                    document.body.removeChild(overlay);
-                };
-
-                menu.appendChild(question);
-                menu.appendChild(yesButton);
-                menu.appendChild(noButton);
-
-                document.body.appendChild(overlay);
-                document.body.appendChild(menu);
+                } else {
+                    GVAR.setConfirm()
+                    GVAR.showFloatingText(9, price)
+                }            
             };
             buildingQueue.appendChild(queueElem);
         }
@@ -117,12 +77,13 @@ class BuildingMenu {
         const type = this.building._type;
         this.renderQueue();
         const button = document.getElementById('upgrade-building');
+        button.innerText = GVAR.localization[8][GVAR.language]
         if (this.building._level >= RES.buildings[type].maxLevel)
             button.remove()
         else {
             button.onclick = () => {
                 if (player._money < RES.buildings[type].upgradesPrice[this.building._level-1])
-                    GVAR.showFloatingText('недостаточно денег')
+                    GVAR.showFloatingText(1)
                 else {
                     this.building.upgrade()
                     this.renderCrafts()
@@ -159,7 +120,7 @@ class BuildingMenu {
             craftImg.addEventListener('touchstart', function (e) {
                 e.preventDefault();
                 if (!building.canStartWork(RES.buildings[type].workTypes[product])){
-                    GVAR.showFloatingText('не выполнены условия крафта')
+                    GVAR.showFloatingText(6)
                     return
                 }
                 const clone = this.cloneNode(true);
@@ -204,13 +165,13 @@ class BuildingMenu {
                 const dropList = document.createElement("div");
                 dropList.id = 'drop-list'
                 dropList.className = "craft-drop-list";
-                const dropName = document.createElement("h3");
-                dropName.innerText = product;
+                const dropName = document.createElement("h3");  
+                dropName.innerText = GVAR.localization[product].name[GVAR.language];
                 dropName.className = 'drop-list-text';
                 dropList.appendChild(dropName);
 
                 const dropTime = document.createElement("h3");
-                dropTime.innerText = 'time:' + this._formatTime(RES.buildings[type].workTypes[product].timeToFinish);
+                dropTime.innerText = 'time:' + Calc.formatTime(RES.buildings[type].workTypes[product].timeToFinish);
                 dropTime.className = 'drop-list-text';
                 dropList.appendChild(dropTime);
 

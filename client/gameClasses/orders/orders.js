@@ -2,6 +2,7 @@ import player from "../player/player.js";
 import GVAR from "../../globalVars/global.js";
 import socketClient from "../../init.js";
 import CVAR from "../../globalVars/const.js";
+import Calc from "../../calc.js";
 
 class Orders {
     constructor() {
@@ -60,23 +61,6 @@ class Orders {
         console.log('now', Math.floor(Date.now()/1000), this._intervalId)
         this.clear()
     }
-    _formatTime(seconds) {
-        let hours = Math.floor(seconds / 3600);
-        let minutes = Math.floor((seconds % 3600) / 60);
-        let secs = seconds % 60;
-    
-        let result = [];
-        if (hours > 0) {
-            result.push(hours + 'h');
-        }
-        if (minutes > 0) {
-            result.push(minutes + 'm');
-        }
-        if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
-            result.push(secs + 's');
-        }
-        return result.join(' ');
-    }
     showTimer(order){
         const orderDetails = document.getElementById('order-details');
         orderDetails.innerHTML = "";
@@ -84,7 +68,7 @@ class Orders {
         timer.className = 'order-timer'
         orderDetails.appendChild(timer)
         if (order.timeStamp > Math.floor(Date.now()/1000))
-            timer.innerText = this._formatTime(order.timeStamp - Math.floor(Date.now()/1000))
+            timer.innerText = Calc.formatTime(order.timeStamp - Math.floor(Date.now()/1000))
         else
             this.showOrderDetails(order)
     }
@@ -128,13 +112,7 @@ class Orders {
         completeButton.className = `complete-order`;
         if (this.verifyOrder(order))
             completeButton.onclick = () => {
-                console.log(GVAR.confirmFlag)
-                if (GVAR.confirmFlag)
-                    this.completeOrder(order);
-                else {
-                    GVAR.setConfirm()
-                    GVAR.showFloatingText('Нажмите ещё раз для подтверждения')
-                }
+                this.completeOrder(order);
             };
         else
             completeButton.style.filter = 'grayscale(100%)';
@@ -142,13 +120,11 @@ class Orders {
         const rerollButton = document.createElement("div");
         rerollButton.className = `reroll-order`;
         rerollButton.onclick = () => {
-            console.log(GVAR.confirmFlag)
             if (GVAR.confirmFlag)
                 this.rerollOrder(order);
             else {
                 GVAR.setConfirm()
-                console.log(GVAR.confirmFlag)
-                GVAR.showFloatingText('Нажмите ещё раз для подтверждения')
+                GVAR.showFloatingText(4)
             }
         };
         document.getElementById('order-buttons-bar').innerHTML = ''
