@@ -98,124 +98,16 @@ body{
     height: 5vh;
     font-family: VCR;
 }
-#buisness-menu, #deals, #payments{
+#deals, #payments{
     background-color: aliceblue;
     width: 80%;
     height: 80%;
     overflow-y: scroll;
 }
-#close-buisness-menu{
-    float: right;
-    border: none;
-    background-color: rgb(225, 75, 75);
-    color:aliceblue;
-    width: 5vh;
-    height: 5vh;
-    font-family: VCR;
-}
-#buisness-menu-bar, #deals-bar, #payment-bar{
+#deals-bar, #payment-bar{
     width: 100%;
     height: 5vh;
 }
-
-/*       ORDER      */
-.res-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-.res-img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    image-rendering: pixelated;
-}
-.booster-button {
-    background-color: #4CAF50; /* Зеленый фон */
-    color: white; /* Белый текст */
-    padding: 10px 20px; /* Отступы внутри кнопки */
-    border: none; /* Без рамки */
-    border-radius: 5px; /* Закругленные углы */
-    cursor: pointer; /* Курсор указывает, что это кнопка */
-    font-size: 16px; /* Размер текста */
-}
-
-.booster-button:disabled {
-    background-color: #ccc; /* Серый фон, когда кнопка отключена */
-    color: #666; /* Темно-серый текст */
-    cursor: not-allowed; /* Курсор указывает, что кнопка неактивна */
-}
-
-/*   БИЗНЕСЫ    */
-.businesses {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-}
-
-.business {
-    width: 150px;
-    height: 100px;
-    background-color: lightgray;
-    border: 2px solid gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.business.locked {
-    background-color: darkgray;
-    cursor: not-allowed;
-}
-
-#money-display {
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    background-color: white;
-    border: 1px solid gray;
-    padding: 20px;
-    z-index: 1000;
-}
-
-.modal-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-button {
-    margin: 10px;
-}
-
-button:disabled {
-    background-color: lightgray;
-    cursor: not-allowed;
-}
-
-.close {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-}
-
-#timer {
-    font-weight: bold;
-    color: red;
-    margin-top: 10px;
-}
-
 
 .line-with-text {
     display: flex;                 /* Enables flexbox for alignment */

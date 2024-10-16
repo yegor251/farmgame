@@ -1,0 +1,123 @@
+#buisness-menu {
+    background-color: aliceblue;
+    width: 80%;
+    max-height: 90%;
+    overflow-y: scroll;
+    flex-direction: column;
+}
+#buisness-menu-bar {
+    width: 100%;
+    aspect-ratio: 27 / 1;
+    position: relative;
+    overflow: visible;
+    background-image: url('../assets/design/buisness_menu_top.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+#close-buisness-menu {
+    position: absolute;
+    height: 190%;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    background-image: url('../assets/design/button_exit.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    right: -4.2%;
+    top: 18%;
+    transform: translateY(-50%);
+}
+.buisness-menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10%;
+    padding-right: 10%;  
+    padding-bottom: 2%;  
+    background-image: url('../assets/design/buisness_menu.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    position: relative;
+}
+.buisness_slot {
+    width: 80%;
+    background-color: #72838D;
+    justify-content: center;
+    align-items: center;
+}
+.buisness_slot_top {
+    width: 100%;
+    aspect-ratio: 172 / 3;
+    position: relative;
+    overflow: visible;
+    background-image: url('../assets/design/buisness_slot_top.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+.buisness_slot_img_bar {
+    padding-left: 4%;
+    padding-right: 4%;  
+    padding-bottom: 2%;  
+    background-image: url('../assets/design/buisness_slot_menu.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    position: relative;
+    box-sizing: border-box;
+}
+#buisness_slot_img {
+    width: 80%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+.buisness_slot_bottom {
+    width: 100%;
+    aspect-ratio: 172 / 3;
+    position: relative;
+    overflow: visible;
+    background-image: url('../assets/design/buisness_slot_top.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+.buisness-arrow-bar {
+    width: 100%;
+    justify-content: space-between;
+}
+.buisness-arrow {
+    width: 25%;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+#buisness-arrow1 {
+    background-image: url('../assets/design/b_arrow_1.png');
+}
+#buisness-arrow2 {
+    background-image: url('../assets/design/b_arrow_2.png');
+}
+.buisness-menu-bottom {
+    width: 100%;
+    aspect-ratio: 27 / 1;
+    position: relative;
+    background-image: url('../assets/design/buisness_menu_bottom.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}

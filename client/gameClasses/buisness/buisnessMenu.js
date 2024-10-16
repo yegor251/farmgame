@@ -1,9 +1,9 @@
 import Calc from "../../calc.js";
 import player from "../player/player.js";
 import businesses from "./buisnesses.js";
+import GVAR from "../../globalVars/global.js";
 
 const levelMultiplier = 1.2;  // Коэффициент уровня
-const businessMultiplier = 1.33;  // Коэффициент бизнеса
 const maxLevel = 3;  // Максимальное количество уровней
 const investmentLockTime = 10000; // Время блокировки инвестирования
 
@@ -13,29 +13,37 @@ class BuisnessMenu{
             document.getElementById("buisness-menu-wrap").style.display = "none";
         }
         document.getElementById("open-buisness").onclick = () => {
-            this.updateMoneyDisplay()
-            console.log(player._tokenBalance)
-            document.getElementById("buisness-menu-wrap").style.display = "flex";
+            this.show();
         }
-        for (let i = 1; i < 6; i++) {
-            document.getElementById(`business${i}`).onclick = () => {
-                this.openBusiness(i)
-            }
+        document.getElementById('buisness-arrow1').onclick = () => {
+            if (this.currBusiness == 2)
+                document.getElementById('buisness-arrow1').style.display = 'none';
+            document.getElementById('buisness-arrow2').style.display = 'flex';
+            this.currBusiness -= 1
+            this.renderMenu()
         }
-        document.getElementById(`close-business-modal`).onclick = () => {
-            document.getElementById("business-modal").style.display = "none";
+        document.getElementById('buisness-arrow2').onclick = () => {
+            if (this.currBusiness == 4)
+                document.getElementById('buisness-arrow2').style.display = 'none';
+            document.getElementById('buisness-arrow1').style.display = 'flex';
+            this.currBusiness += 1
+            this.renderMenu()
         }
-        document.getElementById('invest-button').onclick = () => {
-            this.investMoney()
-        }
-        document.getElementById('collect-button').onclick = () => {
-            this.claim()
-        }
-        document.getElementById('level-up-button').onclick = () => {
-            this.levelUp()
-        }
-        this.currBusiness = undefined
-        setInterval(() => this.updateTimers(), 1000);
+        this.currBusiness = 1
+    }
+    show(){
+        this.interval = setInterval(() => this.updateTimers(), 1000);
+        GVAR.closeAllWindows();
+        this.renderMenu();
+        document.getElementById("buisness-menu-wrap").style.display = "flex";
+    }
+    close(){
+        clearInterval(this.interval);
+        document.getElementById("buisness-menu-wrap").style.display = "none";
+    }
+    renderMenu(){
+        const img = document.getElementById("buisness_slot_img");
+        img.style.backgroundImage = `client/buisnesses/buisness${this.currBusiness}.png`
     }
     openBusiness(index) {
         const business = businesses[index-1];

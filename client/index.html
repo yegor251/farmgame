@@ -130,35 +130,22 @@
     <div id="buisness-menu-wrap" class="menu-wrap">
         <div id="buisness-menu">
             <div id="buisness-menu-bar">
-                <button id="close-buisness-menu">X</button>
+                <div id="close-buisness-menu"></div>
             </div>
-            <div id="money-display">Ваши деньги: <span id="crupto-money">100</span></div>
-    
-            <div class="businesses">
-                <div class="business locked" id="business1">Бизнес 1 (Цена: 525)</div>
-                <div class="business locked" id="business2">Бизнес 2 (Цена: 1005)</div>
-                <div class="business locked" id="business3">Бизнес 3 (Цена: 1925)</div>
-                <div class="business locked" id="business4">Бизнес 4 (Цена: 3687)</div>
-                <div class="business locked" id="business5">Бизнес 5 (Цена: 7061)</div>
-            </div>
-
-            <div id="business-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close" id="close-business-modal">&times;</span>
-                    <h2 id="business-title">Бизнес</h2>
-                    <p>Уровень: <span id="level">1</span></p>
-                    <p>Инвестировано: <span id="invested">0</span></p>
-                    <p>Заработано: <span id="earnings">0</span></p>
-                    <p>Максимальный вклад: <span id="max-capacity">0</span></p>
-                    <p>Стоимость повышения уровня: <span id="level-up-cost">0</span></p>
-                    <label for="investment-amount">Введите сумму для инвестирования:</label>
-                    <input type="number" id="investment-amount" min="10" step="10" value="10">
-                    <button id="invest-button">Пополнить баланс</button>
-                    <button id="collect-button">Собрать деньги</button>
-                    <button id="level-up-button">Повысить уровень</button>
-                    <p id="timer"></p>
+            <div class="buisness-menu-list">
+                <div class="buisness_slot">
+                    <div class="buisness_slot_top"></div>
+                    <div class="buisness_slot_img_bar">
+                        <div id="buisness_slot_img"></div>
+                    </div>
+                    <div class="buisness_slot_bottom"></div>
+                </div>
+                <div class="buisness-arrow-bar">
+                    <div id="buisness-arrow1" class="buisness-arrow"></div>
+                    <div id="buisness-arrow2" class="buisness-arrow"></div>
                 </div>
             </div>
+            <div class="buisness-menu-bottom"></div>
         </div>
     </div>
     <div id="stash-wrap" class="menu-wrap">
