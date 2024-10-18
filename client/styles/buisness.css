@@ -1,11 +1,12 @@
 #buisness-menu {
-    background-color: aliceblue;
+    background-color: #72838D;
     width: 80%;
     max-height: 90%;
     overflow-y: scroll;
     flex-direction: column;
+    overflow: visible;
 }
-#buisness-menu-bar {
+.buisness-menu-bar {
     width: 100%;
     aspect-ratio: 27 / 1;
     position: relative;
@@ -16,12 +17,12 @@
     background-repeat: no-repeat;
     image-rendering: pixelated;
 }
-#close-buisness-menu {
+.exit_button_metal {
     position: absolute;
-    height: 190%;
+    height: 270%;
     width: auto;
     aspect-ratio: 1 / 1;
-    background-image: url('../assets/design/button_exit.png');
+    background-image: url('../assets/design/exit_button_metal_1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -29,8 +30,9 @@
     margin: 0;
     box-sizing: border-box;
     image-rendering: pixelated;
-    right: -4.2%;
+    right: -3.9%;
     top: 18%;
+    z-index: 1000;
     transform: translateY(-50%);
 }
 .buisness-menu-list {

@@ -1,81 +1,120 @@
 import player from "../player/player.js";
 import socketClient from "../../init.js";
+import GVAR from "../../globalVars/global.js";
 
 class TransactionsMenu {
     constructor() {
-        this.depositButton = document.getElementById("deposits-button");
-        this.withdrawButton = document.getElementById("withdraws-button");
-        this.depositContainer = document.getElementById("transaction-deposits-list");
-        this.withdrawContainer = document.getElementById("transaction-withdraws-list");
-        this.closeButton = document.getElementById("closeTransaction");
-
-        this.depositButton.onclick = () => this.showDeposits();
-        this.withdrawButton.onclick = () => this.showWithdraws();
-        this.closeButton.onclick = () => this.closeMenu();
+        document.getElementById("closeTransaction").onclick = () => this.closeMenu();
         document.getElementById('open-transactions').onclick = () => {
+            GVAR.closeAllWindows();
             document.getElementById('transaction-wrap').style.display = 'flex'
+            this.renderMenu();
         }
-        this.showDeposits();
     }
+    renderMenu(){
+        function formatTime(timeStamp) {
+            const date = new Date(timeStamp * 1000);
+            const options = { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleString('en-GB', options).replace(', ', ',');
+        }
 
-    showDeposits() {
-        this.clearContainers();
-        player._deposits.forEach((deposit, index) => {
-            const item = document.createElement("div");
-            item.classList.add("transaction-item");
+        const transactionsContent = document.getElementById('transactions-content');
+        transactionsContent.innerHTML = ''
+        const transText = document.createElement('h3');
+        transText.innerText = GVAR.localization[13][GVAR.language]
+        transText.className = 'trans-text'
+        transactionsContent.appendChild(transText)
+        if (player._transactions.length == 0){
+            const text = document.createElement('h3');
+            text.innerText = GVAR.localization[14][GVAR.language]
+            text.className = 'trans-text'
+            transactionsContent.appendChild(text)
+            return
+        }
 
-            const acceptButton = document.createElement("button");
-            acceptButton.innerText = "Принять";
-            acceptButton.disabled = !deposit.active;
-            acceptButton.onclick = () => {
-                deposit.active = false
-                socketClient.send(`claim/${index}`)
-                socketClient.send('regen')
-                this.showDeposits()
+        const table = document.createElement('div');
+        table.className = 'transactions-table'
+        
+        player._transactions.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'transactions-table-row'
+        
+            const timeCell = document.createElement('div');
+            const timeCelltext = document.createElement('h3');
+            timeCelltext.className = 'table-text'
+            timeCelltext.innerText = formatTime(item.time_stamp);
+
+            timeCell.className = 'table-col1';
+            timeCell.appendChild(timeCelltext)
+            row.appendChild(timeCell);
+        
+            const typeCell = document.createElement('div');
+            const arrow = document.createElement('div');
+            arrow.className = item.type === 'dep' ? 'deposit-arrow' : 'withdraw-arrow';
+
+            typeCell.className = 'table-col2';
+            typeCell.appendChild(arrow)
+            row.appendChild(typeCell);
+        
+            const walletCell = document.createElement('div');
+            const walletCelltext = document.createElement('h3');
+            walletCelltext.className = 'table-text'
+            walletCelltext.innerText = item.type === 'dep' ? '-' : `${item.wallet.slice(0, 3)}..${item.wallet.slice(-3)}`;
+
+            walletCell.className = 'table-col3';
+            walletCell.appendChild(walletCelltext)
+            row.appendChild(walletCell);
+        
+            const jettonSignatureCell = document.createElement('div');
+            const jettonSignatureCelltext = document.createElement('h3');
+            jettonSignatureCelltext.className = 'table-text'
+            jettonSignatureCelltext.innerText = item.jetton_signature;
+
+            jettonSignatureCell.className = 'table-col4';
+            jettonSignatureCell.appendChild(jettonSignatureCelltext)
+            row.appendChild(jettonSignatureCell);
+        
+            const amountCell = document.createElement('div');
+            const amountCelltext = document.createElement('h3');
+            amountCelltext.className = 'table-text'
+            if (item.type === 'dep'){
+                amountCelltext.innerText = '+' + item.amount;
+                amountCelltext.classList.add('unlocked')
+            } else {
+                amountCelltext.innerText = '-' + item.amount;
+                amountCelltext.classList.add('locked')
             }
-            item.appendChild(acceptButton);
-
-            const info = document.createElement("div");
-            info.classList.add("transaction-info");
-            info.innerHTML = `
-                <p>Сумма: ${deposit.amount}</p>
-                <p>Время: ${new Date(deposit.time_stamp * 1000).toLocaleString()}</p>
-                <p>Валюта: ${deposit.jetton_signature}</p>
-            `;
-            item.appendChild(info);
-
-            this.depositContainer.appendChild(item);
+            amountCell.className = 'table-col5';
+            amountCell.appendChild(amountCelltext)
+            row.appendChild(amountCell);
+        
+            const claimCell = document.createElement('div');
+            claimCell.className = 'table-col6';
+            const claimButton = document.createElement('div');
+            if (item.type === 'dep' && item.active){
+                claimButton.className = 'claim-deposit-button'
+                const claimText = document.createElement('h3');
+                claimText.className = 'claim-deposit-text'
+                claimText.classList.add('unlocked')
+                claimText.innerText = GVAR.localization[12][GVAR.language]
+                claimButton.appendChild(claimText);
+                claimButton.onclick = () => {
+                    socketClient.send(`claim/${item.index}`);
+                    socketClient.send('regen')
+                    item.active = false;
+                    this.renderMenu();
+                }
+            } else {
+                claimButton.className = 'img-claimed';
+            }
+            claimCell.appendChild(claimButton);
+            row.appendChild(claimCell);
+        
+            table.appendChild(row);
         });
-        this.depositContainer.style.display = "block";
+          
+        transactionsContent.appendChild(table);                 
     }
-
-    showWithdraws() {
-        this.clearContainers();
-        player._withdraws.forEach(withdraw => {
-            const item = document.createElement("div");
-            item.classList.add("transaction-item");
-
-            const info = document.createElement("div");
-            info.classList.add("transaction-info");
-            info.innerHTML = `
-                <p>Сумма: ${withdraw.amount}</p>
-                <p>Кошелек: ${withdraw.wallet}</p>
-                <p>Время: ${new Date(withdraw.time_stamp).toLocaleString()}</p>
-            `;
-            item.appendChild(info);
-
-            this.withdrawContainer.appendChild(item);
-        });
-        this.withdrawContainer.style.display = "block";
-    }
-
-    clearContainers() {
-        this.depositContainer.style.display = "none";
-        this.withdrawContainer.style.display = "none";
-        this.depositContainer.innerHTML = "";
-        this.withdrawContainer.innerHTML = "";
-    }
-
     closeMenu() {
         document.getElementById('transaction-wrap').style.display = 'none';
     }

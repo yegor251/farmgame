@@ -222,7 +222,6 @@ class SocketClient{
 				for (let i = 0; i < el.integerData; i++) {
 					tiles[el.x][el.y]._structure.addAnimal()
 				}
-                console.log(el.level)
                 tiles[el.x][el.y]._structure.setLevel(el.level)
 				if (el.slots[0])
 					tiles[el.x][el.y]._structure.setTime(el.slots[0].workEndTimeStamp)
@@ -237,8 +236,38 @@ class SocketClient{
         RES.buildings['garden'].price = Math.floor(RES.buildings['garden'].floatPrice)
 
         player._availableDeals = data.availableDeals
-        player._deposits = data.deposits
-        player._withdraws = data.withdraws
+
+        // data.deposits = [{
+        //     time_stamp: 1696807080000,
+        //     jetton_signature: "ton",
+        //     amount: 10.3,
+        //     active: true
+        // },{
+        //     time_stamp: 1696608080000,
+        //     jetton_signature: "usdt",
+        //     amount: 10.3,
+        // }]
+        // data.withdraws = [{
+        //     time_stamp: 1696507080000,
+        //     jetton_signature: "txt",
+        //     wallet: 'qduefnrf',
+        //     amount: 10.3,
+        // },{
+        //     time_stamp: 1696609080000,
+        //     jetton_signature: "ton",
+        //     wallet: 'frfrnfjrnfr',
+        //     amount: 10.3,
+        // }]
+
+        let transactions = [
+            ...data.deposits.map((dep, index) => ({...dep, time_stamp: Math.round(dep.time_stamp / 1000), type: 'dep', index})),
+            ...data.withdraws.map(wit => ({...wit, time_stamp: Math.round(wit.time_stamp / 1000), type: 'wit'}))
+        ];
+
+        transactions.sort((a, b) => b.time_stamp - a.time_stamp);
+
+        player._transactions = transactions;
+
 		this.gameSessionPromiseResolve()
   	}
 }

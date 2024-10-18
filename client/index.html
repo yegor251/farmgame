@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="client/styles/boosters.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/loading_screen.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/buisness.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/transactions.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -129,8 +130,8 @@
     </div>
     <div id="buisness-menu-wrap" class="menu-wrap">
         <div id="buisness-menu">
-            <div id="buisness-menu-bar">
-                <div id="close-buisness-menu"></div>
+            <div class="buisness-menu-bar">
+                <div id="close-buisness-menu" class="exit_button_metal"></div>
             </div>
             <div class="buisness-menu-list">
                 <div class="buisness_slot">
@@ -264,19 +265,11 @@
     </div>
     <div id="transaction-wrap" class="menu-wrap">
         <div id="transaction-menu">
-            <div id="transaction-bar">
-                <button id="closeTransaction">X</button>
+            <div class="buisness-menu-bar">
+                <div id="closeTransaction" class="exit_button_metal"></div>
             </div>
-            <div class="transaction-content-wrap">
-                <div id="transaction-centered-content">
-                    <div class="transaction-buttons">
-                        <button id="deposits-button">Депозиты</button>
-                        <button id="withdraws-button">Выводы</button>
-                    </div>
-                    <div id="transaction-deposits-list" class="transaction-list"></div>
-                    <div id="transaction-withdraws-list" class="transaction-list"></div>
-                </div>
-            </div>
+            <div id="transactions-content" class="transaction-menu-list"></div>
+            <div class="buisness-menu-bottom"></div>
         </div>
     </div>    
     <div id="deals-wrap" class="menu-wrap">

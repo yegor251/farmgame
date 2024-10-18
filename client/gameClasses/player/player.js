@@ -36,8 +36,7 @@ class Player{
             timeToEnd: 0
         }
         this._boostersArr = []
-        this._deposits = []
-        this._withdraws = []
+        this._transactions = []
     }
     upgradeInventory(){
         this._inventorySize += 10

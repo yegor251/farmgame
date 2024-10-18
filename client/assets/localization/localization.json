@@ -43,6 +43,18 @@
         "ru": "животное не подходит или нет места",
         "en": "the animal is not suitable or there is no room"
     },
+    "12": {
+        "ru": "СОБРАТЬ",
+        "en": "CLAIM"
+    },
+    "13": {
+        "ru": "ваши транзакции:",
+        "en": "your transactions:"
+    },
+    "14": {
+        "ru": "пусто",
+        "en": "empty"
+    },
     "tomatoJuice": {
       "name": {
         "ru": "томатный сок",
