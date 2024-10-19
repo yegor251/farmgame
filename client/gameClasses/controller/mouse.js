@@ -51,9 +51,9 @@ class Mouse{
         if (GVAR.phantomStructureArr.length != 0){
             let pos = Calc.indexToCanvas(this._mapPos.i - this._offset.i, this._mapPos.j - this._offset.j, CVAR.tileSide, CVAR.outlineWidth);
             if (
-                mouse._screenPos.x >= window.innerWidth * 0.93 ||
+                mouse._screenPos.x >= window.innerWidth * 0.95 ||
                 mouse._screenPos.x <= window.innerWidth * 0.1 ||
-                mouse._screenPos.y >= window.innerHeight * 0.93 ||
+                mouse._screenPos.y >= window.innerHeight * 0.95 ||
                 mouse._screenPos.y <= window.innerHeight * 0.1
             ){
                 this._isOnBorder = true

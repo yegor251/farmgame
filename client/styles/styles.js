@@ -6,7 +6,6 @@ document.getElementById('upgrade-stash-button').addEventListener('touchend', () 
     document.getElementById('upgrade-stash-button').style.backgroundImage = "url('client/assets/design/stash_button_upgrade.png')";
 });
 
-
 document.getElementById('closeStash').addEventListener('touchstart', () => {
     document.getElementById('closeStash').style.backgroundImage = `url('client/assets/design/button_exit_pressed.png')`
 });
@@ -50,5 +49,61 @@ document.querySelectorAll('.exit_button_metal').forEach(button => {
 
     button.addEventListener('touchend', () => {
         button.style.backgroundImage = "url('client/assets/design/exit_button_metal_1.png')";
+    });
+});
+
+document.querySelectorAll('.main-menu-button').forEach(button => {
+    button.addEventListener('touchstart', () => {
+        let backgroundImage = getComputedStyle(button).backgroundImage;
+        if (backgroundImage.includes('url(')) {
+            let imagePath = backgroundImage.slice(5, -2);
+            let newImagePath = imagePath.slice(0, -5) + '2.png';
+            button.style.backgroundImage = `url('${newImagePath}')`;
+        }
+    });
+
+    button.addEventListener('touchend', () => {
+        let backgroundImage = getComputedStyle(button).backgroundImage;
+        if (backgroundImage.includes('url(')) {
+            let imagePath = backgroundImage.slice(5, -2);
+            let newImagePath = imagePath.slice(0, -5) + '1.png';
+            button.style.backgroundImage = `url('${newImagePath}')`;
+        }
+    });
+});
+
+document.getElementById('close-main-menu').addEventListener('touchstart', () => {
+    document.getElementById('close-main-menu').style.backgroundImage = `url('client/assets/design/exit_main_button_2.png')`
+});
+
+document.getElementById('close-main-menu').addEventListener('touchend', () => {
+    document.getElementById('close-main-menu').style.backgroundImage = "url('client/assets/design/exit_main_button_1.png')";
+});
+
+document.getElementById('networth-question-button').addEventListener('touchstart', () => {
+    document.getElementById('networth-question-button').style.backgroundImage = `url('client/assets/design/question_button_2.png')`
+});
+
+document.getElementById('networth-question-button').addEventListener('touchend', () => {
+    document.getElementById('networth-question-button').style.backgroundImage = "url('client/assets/design/question_button_1.png')";
+});
+
+document.querySelectorAll('.donate-plus-button').forEach(button => {
+    button.addEventListener('touchstart', () => {
+        let backgroundImage = getComputedStyle(button).backgroundImage;
+        if (backgroundImage.includes('url(')) {
+            let imagePath = backgroundImage.slice(5, -2);
+            let newImagePath = imagePath.slice(0, -5) + '2.png';
+            button.style.backgroundImage = `url('${newImagePath}')`;
+        }
+    });
+
+    button.addEventListener('touchend', () => {
+        let backgroundImage = getComputedStyle(button).backgroundImage;
+        if (backgroundImage.includes('url(')) {
+            let imagePath = backgroundImage.slice(5, -2);
+            let newImagePath = imagePath.slice(0, -5) + '1.png';
+            button.style.backgroundImage = `url('${newImagePath}')`;
+        }
     });
 });

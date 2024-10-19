@@ -14,6 +14,7 @@ class BoosterMenu{
         }
     }
     show(){
+        GVAR.closeAllWindows();
         document.getElementById("booster-menu-wrap").style.display = "flex";
         this.drawMenu();
         this.interval = setInterval(() => {
@@ -23,6 +24,7 @@ class BoosterMenu{
     }
     close() {
         document.getElementById("booster-menu-wrap").style.display = "none";
+        document.getElementById("main-menu-wrap").style.display = "flex";
         clearInterval(this.interval)
     }
     renderActivBoosters(){

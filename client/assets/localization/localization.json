@@ -55,6 +55,10 @@
         "ru": "пусто",
         "en": "empty"
     },
+    "15": {
+        "ru": "это общий нетворс, от него зависит количество ордеров",
+        "en": "this is the total networth, the number of orders depends on it"
+    },
     "tomatoJuice": {
       "name": {
         "ru": "томатный сок",

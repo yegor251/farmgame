@@ -11,6 +11,7 @@ import { orderManager } from './gameClasses/orders/orders.js';
 import boosterMenu from './gameClasses/boosterMenu/boosterMenu.js';
 import { transactionsMenu } from './gameClasses/transactionsMenu/transactionsMenu.js';
 import { dealmenu } from './gameClasses/ton-connect/tonMenu.js';
+import { mainMenu } from './gameClasses/mainMenu/mainMenu.js';
 import { buildingMenu } from './gameClasses/building/buildingMenu.js';
 import { animalMenu } from './gameClasses/animals/animalMenu.js';
 import { fieldMenu } from './gameClasses/field/fieldMenu.js';
@@ -68,7 +69,10 @@ let singleTouchEndTimeout = null;
 const SINGLE_TOUCH_DELAY = 50;
 
 document.addEventListener('touchmove', (e) => {
-    if (canvas === document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)) {
+    const targetElement = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+    const isChildOfBar = !targetElement || targetElement.closest('#buttons-bar') !== null;
+
+    if (canvas === targetElement || isChildOfBar) {
         if (e.touches.length == 1 && !isScaling) {
             mouse.onMouseMove(e);
         } else if (e.touches.length > 1) {
@@ -186,10 +190,10 @@ setInterval(() => {
 
 async function animate(delta){    
     if (mouse._isOnBorder && !mouse._isBlockAfterShop){
-        camera.move(-mouse._dirX * GVAR.scale * 0.5, -mouse._dirY * GVAR.scale * 0.5)
+        camera.move(-mouse._dirX * GVAR.scale * 0.4, -mouse._dirY * GVAR.scale * 0.4)
         let pos = {
-            x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX * 0.5,
-            y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY * 0.5
+            x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX * 0.4,
+            y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY * 0.4
         }
         if (camera._cameraIndexBoundingBox.top == 0)
             pos.y = GVAR.phantomStructureArr[0]._floatY

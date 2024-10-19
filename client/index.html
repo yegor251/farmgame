@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="client/styles/loading_screen.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/buisness.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/transactions.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/mainMenu.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>svoGAME</title>
@@ -53,26 +54,74 @@
     </div>
 
     <canvas id="canvas"></canvas>
-    <div id="bar">
-        <h1 id="money">Money: 10</h1>
-        <button id="open-shop">
-            Shop
-        </button>
-        <button id="booster">
-            boost
-        </button>
-        <button id="open-buisness">
-            Buisness
-        </button>
-        <button id="open-deals">
-            Deals
-        </button>
-        <button id="open-connect">
-            ton-connect
-        </button>
-        <button id="open-transactions">
-            transactions
-        </button>
+    <div id="buttons-bar">
+        <div id="open-shop"></div>
+        <div id="open-main-menu"></div>
+    </div>
+    <div id="money-bar">
+        <div id="money-container">
+            <h3 id="money">1000</h3>
+            <div id="money-img" class="small-bar-img"></div>
+        </div>
+        <div id="token-container">
+            <h3 id="token">100000</h3>
+            <div id="token-img" class="small-bar-img"></div>
+        </div>
+    </div>
+    <div id="main-menu-wrap" class="menu-wrap">
+        <div id="main-menu">
+            <div class="main-menu-bar">
+                <div id="farm-name-cont">
+                    <h3 id="farm-name">Farm egor2511</h3>
+                </div>
+                <div id="close-main-menu"></div>
+            </div>
+            <div id="main-menu-body">
+                <div id="main-menu-balances">
+                    <div class="balance-content">
+                        <div class="money-balance-icon"></div>
+                        <div id="money-balance-place" class="balance-place">
+                            <h3 id="money-balance" class="balance"></h3>
+                        </div>
+                    </div>
+                    <div class="balance-content">
+                        <div class="money-balance-icon"></div>
+                        <div id="networth-balance-place" class="balance-place">
+                            <h3 id="networth-balance" class="balance"></h3>
+                        </div>
+                        <div id="networth-question-button"></div>
+                    </div>
+                    <div class="balance-content">
+                        <div class="token-balance-icon"></div>
+                        <div id="token-balance-place" class="balance-place">
+                            <h3 id="token-balance" class="balance"></h3>
+                        </div>
+                        <div class="donate-plus-button"></div>
+                    </div>
+                    <div class="balance-content">
+                        <div class="ton-balance-icon"></div>
+                        <div id="ton-balance-place" class="balance-place">
+                            <h3 id="ton-balance" class="balance"></h3>
+                        </div>
+                        <div class="donate-plus-button"></div>
+                    </div>
+                    <div class="balance-content">
+                        <div class="usdt-balance-icon"></div>
+                        <div id="usdt-balance-place" class="balance-place">
+                            <h3 id="usdt-balance" class="balance"></h3>
+                        </div>
+                        <div class="donate-plus-button"></div>
+                    </div>
+                </div>
+                <div id="main-menu-buttons">
+                    <div id="open-transactions" class="main-menu-button"></div>
+                    <div id="open-buisness" class="main-menu-button"></div>
+                    <div id="booster" class="main-menu-button"></div>
+                    <div id="open-deals" class="main-menu-button"></div>
+                </div>
+            </div>
+            <div class="main-menu-bottom"></div>
+        </div>
     </div>
     <div id="shop-wrap" class="menu-wrap">
         <div id="shop">

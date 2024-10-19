@@ -12,6 +12,7 @@ class AnimalMenu{
     }
     close(){
         document.getElementById("animal-menu-wrap").style.display = "none";
+        document.getElementById("buttons-bar").style.display = "flex";
         this.animalPen = 'none'
         let startButton = document.getElementById('animal-start-button');
         let newButton = startButton.cloneNode(true);

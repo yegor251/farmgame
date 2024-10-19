@@ -132,7 +132,7 @@ class Player{
     }
     updateMoney()
     {
-        document.getElementById('money').innerText = `Money: ${this._money}`;
+        document.getElementById('money').innerText = this._money;
         //апдейт tokenBalance
     }
     pushInventory(item, n)

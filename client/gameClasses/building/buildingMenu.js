@@ -7,7 +7,9 @@ import Calc from "../../calc.js";
 class BuildingMenu {
     constructor() {
         document.getElementById("close-building-menu").onclick = () => {
+            this.building = 'none';
             document.getElementById("building-menu-wrap").style.display = "none";
+            document.getElementById("buttons-bar").style.display = "flex";
         };
         this.building = 'none';
     }

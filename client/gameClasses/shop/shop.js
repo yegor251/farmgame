@@ -17,6 +17,7 @@ class Shop{
                 slidableDiv.classList.add('slide-out');
                 setTimeout(() => {
                     document.getElementById("shop-wrap").style.display = "none";
+                    document.getElementById("buttons-bar").style.display = "flex";
                 }, 450);
             }
         });
@@ -56,6 +57,7 @@ class Shop{
 
         document.getElementById("closeStash").onclick = () => {
             document.getElementById("stash-wrap").style.display = "none";
+            document.getElementById("buttons-bar").style.display = "flex";
         }
         const upgButton = document.getElementById('upgrade-stash-button')
         upgButton.addEventListener('click', () => {

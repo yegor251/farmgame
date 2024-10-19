@@ -21,6 +21,7 @@ class FieldMenu{
     }
     close(){
         document.getElementById("field-menu-wrap").style.display = "none";
+        document.getElementById("buttons-bar").style.display = "flex";
     }
     renderTimer() {
         const textTime = document.getElementById("field-timeToFinish");

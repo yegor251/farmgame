@@ -117,6 +117,7 @@ class TransactionsMenu {
     }
     closeMenu() {
         document.getElementById('transaction-wrap').style.display = 'none';
+        document.getElementById("main-menu-wrap").style.display = "flex";
     }
 }
 

@@ -53,6 +53,7 @@ class Spin {
         }
         this.interval = null
         document.getElementById("spin-wrap").style.display = "none";
+        document.getElementById("buttons-bar").style.display = "flex";
     }
     doSpin(){
         const container = document.getElementById('spin-wheel');

@@ -41,7 +41,7 @@ body{
     font-size: 8vw;
     font-weight: bold;
     color: white;
-    text-shadow: 2px 2px 0px black;
+    text-shadow: 0.3vw 0.3vw 0vw black;
     pointer-events: none;
     opacity: 1;
     transition: transform 4s linear, opacity 4s linear;
@@ -69,35 +69,83 @@ body{
     pointer-events: none;
     z-index: 1000
 }
-/*     КОНЕЦ ОБЩИЕ СТИЛИ    */
-#bar {
-    z-index: 100;
+#buttons-bar {
+    z-index: 5;
     position: absolute;
-    width: 5%;
-    height: 100%;
-    background-color: azure;
+    width: 100%;
+    height: 16vw;
+    background-color: rgba(0, 0, 0, 0);
     display: flex;
-    flex-direction: column; /* Добавляем, чтобы элементы внутри компонента располагались вертикально */
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    top: 0; /* Чтобы компонент начинался с верхней части родителя */
-    right: 0; /* Чтобы компонент был прижат к правому краю родителя */
+    bottom: 0;
+    left: 0;
 }
-#money{
-    padding-left: 15px;
-    width: fit-content;
+#money-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 100;
+    pointer-events: none;
+    flex-direction: column;
 }
+#money-container, #token-container {
+    padding-top: 1vw;
+    display: flex;
+    margin-left: auto;
+    padding-right: 1vw;
+}
+#money {
+    color: yellow;
+    font-size: 4.7vw;
+    padding-right: 1vw;
+    text-shadow: 0.3vw 0.3vw 0 black, -0.3vw -0.3vw 0 black, 0.3vw -0.3vw 0 black, -0.3vw 0.3vw 0 black;
+}
+#token {
+    color: rgb(213, 0, 251);
+    font-size: 4.7vw;
+    padding-right: 1vw;
+    text-shadow: 0.3vw 0.3vw 0 black, -0.3vw -0.3vw 0 black, 0.3vw -0.3vw 0 black, -0.3vw 0.3vw 0 black;
+}
+.small-bar-img {
+    height: 4.7vw;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+#money-img {
+    background-image: url('assets/design/money_img.png');
+}
+#token-img {
+    background-image: url('assets/design/token_img.png');
+}
+#open-shop, #open-main-menu {
+    width: 15vw;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    margin-bottom: 1vw;
+    box-sizing: border-box;
+}
+#open-shop {
+    margin-left: 1vw;
+    background-image: url('assets/design/shop_button.png');
+}
+#open-main-menu {
+    margin-right: 1vw;
+    background-image: url('assets/design/profile_button.png');
+}
+/*     КОНЕЦ ОБЩИЕ СТИЛИ    */
 
 /*      ОБЩИЕ СТИЛИ ДЛЯ КНОПОК, WRAP, MENU(ВСЁ ЧТО ОДИНАКОВОЕ)      */
-#open-shop, #open-stash, #open-orders, #open-spin{
-    margin-right: 15px;
-    border: none;
-    background-color: rgb(75, 112, 225);
-    color:aliceblue;
-    width: 8vh;
-    height: 5vh;
-    font-family: VCR;
-}
 #deals, #payments{
     background-color: aliceblue;
     width: 80%;

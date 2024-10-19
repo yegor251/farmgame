@@ -25,12 +25,9 @@ class PayMenu {
             }
         })
 
-        document.getElementById('open-connect').onclick = () => {
-            document.getElementById("payment-wrap").style.display = 'flex';
-        }
         document.getElementById('close-payments').onclick = () => {
             document.getElementById("payment-wrap").style.display = 'none';
-            document.getElementById("deals-wrap").style.display = "flex";
+            document.getElementById("main-menu-wrap").style.display = "flex";
         }
     }
 

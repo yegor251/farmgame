@@ -11,6 +11,7 @@ class BuisnessMenu{
     constructor() {
         document.getElementById("close-buisness-menu").onclick = () => {
             document.getElementById("buisness-menu-wrap").style.display = "none";
+            document.getElementById("main-menu-wrap").style.display = "flex";
         }
         document.getElementById("open-buisness").onclick = () => {
             this.show();
@@ -40,6 +41,7 @@ class BuisnessMenu{
     close(){
         clearInterval(this.interval);
         document.getElementById("buisness-menu-wrap").style.display = "none";
+        document.getElementById("main-menu-wrap").style.display = "flex";
     }
     renderMenu(){
         const img = document.getElementById("buisness_slot_img");
