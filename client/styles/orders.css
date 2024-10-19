@@ -46,7 +46,7 @@
     justify-content: center;
 }
 #order-token-content {
-    width: 42.6%; 
+    width: 50%; 
     height: 47.22%;
     position: absolute;
     top: 40%;
@@ -59,11 +59,11 @@
 }
 #order-money {
     color: yellow;
-    font-size: 5vw;
+    font-size: 4.7vw;
 }
 #order-token {
     color: rgb(213, 0, 251);
-    font-size: 5vw;
+    font-size: 4.7vw;
 }
 #order-details {
     width: 100%;

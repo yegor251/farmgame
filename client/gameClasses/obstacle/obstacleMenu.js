@@ -40,7 +40,7 @@ class ObstacleMenu {
         }
         const token = document.getElementById('obstacle-token')
         if (this.obstacle._deleteTokenPrice){
-            token.innerText = this.obstacle._deleteTokenPrice
+            token.innerText = (this.obstacle._deleteTokenPrice / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
             if (this.obstacle._deleteTokenPrice > player._tokenBalance)
                 document.getElementById('obstacle-token-checkmark').style.filter = 'grayscale(100%)';
             else

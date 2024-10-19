@@ -83,10 +83,10 @@ class Orders {
         orderDetails.innerHTML = "";
 
         const orderPrice = document.getElementById('order-money');
-        orderPrice.innerText = `Cost: ${order.orderPrice}`;
+        orderPrice.innerText = `Money: ${order.orderPrice}`;
 
         const orderTokenPrice = document.getElementById('order-token');
-        orderTokenPrice.innerText = `Cost: ${order.orderTokenPrice}`;
+        orderTokenPrice.innerText = `Token: ${(order.orderTokenPrice / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]}`;
 
         for (let item in order.orderItems) {
             const res = document.createElement("div");

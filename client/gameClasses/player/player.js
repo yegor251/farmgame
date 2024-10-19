@@ -104,9 +104,6 @@ class Player{
         this._tokenBalance += n
         this.updateMoney()
     }
-    checkNetworthLevel(){
-
-    }
     getInvFullness(){
         let sum = 0;
         console.log(this._inventory)
@@ -133,7 +130,7 @@ class Player{
     updateMoney()
     {
         document.getElementById('money').innerText = this._money;
-        //апдейт tokenBalance
+        document.getElementById('token').innerText = (this._tokenBalance / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
     }
     pushInventory(item, n)
     {

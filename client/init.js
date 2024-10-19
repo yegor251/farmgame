@@ -141,8 +141,8 @@ class SocketClient{
         player._inventorySize = 50 + 10 * data.player.Inventory.level
 		player._money = data.player.money
         player._networth = data.player.networth
-		player.updateMoney()
         player._tokenBalance = data.wallet.tokenBalance
+        player.updateMoney()
         player._tonBalance = data.wallet.tonBalance
         player._usdtBalance = data.wallet.usdtBalance
 

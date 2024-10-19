@@ -25,6 +25,8 @@ import RES from './resources.js';
 // socketClient.send('buydeal/Deal_test_1')
 // console.log(player._boostersArr)
 
+tiles[10][10].createBuilding('huge_swamp')
+
 // Ensure the document is scrollable
 function ensureDocumentIsScrollable() {
     const isScrollable =
