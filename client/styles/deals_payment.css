@@ -1,0 +1,117 @@
+#payments {
+    background-color: grey;
+    width: 80%;
+    max-height: 90%;
+    overflow: visible;
+}
+.payment-menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 1.5%;  
+    background-image: url('../assets/design/buisness_menu.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    box-sizing: border-box;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding: 4%;
+    box-sizing: border-box;
+}
+.manual-pay {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 4vw;
+}
+#manual-pay-text {
+    text-align: center;
+    font-size: 4.5vw;
+}
+#adress-text {
+    text-align: left;
+    font-size: 4vw;
+    word-wrap: break-word;
+}
+#memo-warning-text {
+    text-align: center;
+    font-size: 4vw;
+    color: rgb(159, 4, 4);
+}
+#memo-text {
+    text-align: center;
+    font-size: 4.5vw;
+}
+.tap-to-copy {
+    font-size: 4vw;
+    text-align: center;
+    margin-top: 1vw;
+}
+.line-with-text {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 4vw;
+}
+.line-with-text::before, .line-with-text::after {
+    content: "";
+    flex: 1;
+    border-bottom: 0.4vw solid #000;
+}
+.line-with-text::before {
+    margin-right: 1vw;
+}
+.line-with-text::after {
+    margin-left: 1vw;
+}
+#or-text {
+    font-size: 4vw;
+}
+#payment-ton-text {
+    text-align: center;
+    font-size: 4.5vw;
+    margin-bottom: 4vw;
+}
+#ton-connect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#ton-connect-button * {
+    overflow: hidden;
+}
+#ton-amount {
+    width: 30vw;
+    height: 7vw;
+    border: 0.75vw solid #ccc;
+    border-radius: 3vw;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: black;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    box-sizing: border-box;
+    padding-left: 1vw;
+    font-size: 5vw;
+}
+#ton-amount:focus {
+    border-color: #7E8F99;
+    background-color: #f9f9f9;
+    outline: none;
+}
+#proceed-to-buy {
+    width: 30vw;
+    aspect-ratio: 96 / 34;
+    background-image: url('../assets/design/grey_button.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    justify-content: center;
+    align-items: center;
+}
+#deposit-text {
+    font-size: 5vw;
+}

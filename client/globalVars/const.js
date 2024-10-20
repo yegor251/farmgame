@@ -10,6 +10,7 @@ class ConstVar{
         this.orderCompleteTime = 600; this.orderRerollTime = 1800;
         this.maxInvSize = 2000;
         this.redColor = 230; this.greenColor = 230;
+        this.wallet = 'QWERTYUIOPASDFGHJKLZXCVBNMQWERTYUIOPASDFGHJKLZXCVBNM';
     }
 }
 

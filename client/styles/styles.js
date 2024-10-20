@@ -107,3 +107,46 @@ document.querySelectorAll('.donate-plus-button').forEach(button => {
         }
     });
 });
+
+document.getElementById('ton-amount').addEventListener('keydown', function (e) {
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', 'Backspace'];
+    if (!allowedKeys.includes(e.key)) {
+        e.preventDefault();
+    }
+
+    const value = e.target.value;
+
+    if (e.key === '.' && (value.includes('.') || value.length === 0)) {
+        e.preventDefault();
+        return;
+    }
+    if (e.key === 'Backspace' && value.includes('.')) {
+        const parts = value.split('.');
+        const dotIndex = value.indexOf('.') + 1;
+        console.log(dotIndex, e.target.selectionStart)
+        if (e.target.selectionStart === dotIndex) {
+            e.target.value = parts[0];
+            e.preventDefault();
+        }
+    }
+});
+
+document.getElementById('ton-amount').addEventListener('input', function (e) {
+    let value = e.target.value;
+
+    const parts = value.split('.');
+    if (parts[0].length > 4) {
+        e.target.value = value.slice(0, value.length - 1);
+        return;
+    }
+
+    if (parts.length > 1 && parts[1].length > 6) {
+        e.target.value = value.slice(0, value.length - 1);
+    } else {
+        e.target.value = value;
+    }  
+});
+
+document.getElementById('ton-amount').addEventListener('paste', function (e) {
+    e.preventDefault();
+});

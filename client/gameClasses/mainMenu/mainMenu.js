@@ -1,5 +1,6 @@
 import GVAR from "../../globalVars/global.js";
 import player from "../player/player.js";
+import { pm } from "../ton-connect/tonMenu.js";
 
 class MainManu {
     constructor() {
@@ -15,7 +16,7 @@ class MainManu {
         }
         document.querySelectorAll('.donate-plus-button').forEach(button => {
             button.onclick = () => {
-                document.getElementById('payment-wrap').style.display = 'flex';
+                pm.drawPayMenu();
                 document.getElementById('main-menu-wrap').style.display = 'none';
             }
         });

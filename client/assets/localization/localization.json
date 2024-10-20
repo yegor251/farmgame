@@ -59,6 +59,38 @@
         "ru": "это общий нетворс, от него зависит количество ордеров",
         "en": "this is the total networth, the number of orders depends on it"
     },
+    "16": {
+        "ru": "Отправляйте TON, USDT, FTC на адрес:",
+        "en": "Send TON, USDT, TFC to adress:"
+    },
+    "17": {
+        "ru": "копировать",
+        "en": "tap to copy"
+    },
+    "18": {
+        "ru": "Обязательно укажите комментарий(мемо):",
+        "en": "Be sure to include a comment(memo):"
+    },
+    "19": {
+        "ru": "ИЛИ",
+        "en": "OR"
+    },
+    "20": {
+        "ru": "Вы можете подключить кошелек для пополнения TON",
+        "en": "You can connect wallet to deposit TON"
+    },
+    "21": {
+        "ru": "ДЕПОЗИТ",
+        "en": "DEPOSIT"
+    },
+    "22": {
+        "ru": "скопировано",
+        "en": "copied"
+    },
+    "23": {
+        "ru": "неправильный ввод!",
+        "en": "wrong input!"
+    },
     "tomatoJuice": {
       "name": {
         "ru": "томатный сок",

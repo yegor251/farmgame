@@ -12,7 +12,9 @@ class GlobalVars{
         this.confirmFlag = false;
         this.confirmTimer = null
         this.localization = null
-        this.language = 'en'
+        this.language = 'ru'
+        this.tg_id = '1770661619'
+        this.tg_name = 'qwerty123'
     }
     countBuilding(type){
         let counter = 0
@@ -65,7 +67,7 @@ class GlobalVars{
         }
         
         for (const textElement of existingTexts) {
-            if (textElement.textContent === message) {
+            if (textElement.textContent === message && code != 22) {
                 return;
             }
         }

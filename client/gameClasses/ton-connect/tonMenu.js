@@ -1,10 +1,9 @@
+import CVAR from "../../globalVars/const.js";
+import GVAR from "../../globalVars/global.js";
 import socketClient from "../../init.js";
 import player from "../player/player.js";
 
 const tonweb = new window.TonWeb();
-
-const WALLET_ADRESS = "UQAr2S7H-w148h9N97NI17bqSW8v9TLV8V7Scp60KiM4fewU";
-const TELEGRAM_ID = "1770661619"
 
 class PayMenu {
     constructor() {
@@ -29,27 +28,51 @@ class PayMenu {
             document.getElementById("payment-wrap").style.display = 'none';
             document.getElementById("main-menu-wrap").style.display = "flex";
         }
+        document.getElementById("adress-copy-div").addEventListener("click", function() {
+            GVAR.showFloatingText(22);
+            navigator.clipboard.writeText(CVAR.wallet).then(() => {
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        });
+        document.getElementById("memo-copy-div").addEventListener("click", function() {
+            GVAR.showFloatingText(22);
+            navigator.clipboard.writeText(GVAR.tg_id).then(() => {
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        });
     }
-
     drawPayMenu() {
-        document.getElementById("deals-wrap").style.display = "none";
         document.getElementById("payment-wrap").style.display = "flex";
+        document.getElementById("manual-pay-text").innerText = GVAR.localization[16][GVAR.language];
+        document.getElementById("adress-text").innerText = CVAR.wallet;
+        document.querySelectorAll('.tap-to-copy').forEach(text => {
+            text.innerText = GVAR.localization[17][GVAR.language];
+        });
+        document.getElementById("memo-warning-text").innerText = GVAR.localization[18][GVAR.language];
+        document.getElementById("memo-text").innerText = GVAR.tg_id;
+        document.getElementById("or-text").innerText = GVAR.localization[19][GVAR.language];
+        document.getElementById("payment-ton-text").innerText = GVAR.localization[20][GVAR.language];
+        document.getElementById("deposit-text").innerText = GVAR.localization[21][GVAR.language];
     }
-
     walletConnected() {
         document.getElementById("ton-amount").style.display = "flex";
         document.getElementById("proceed-to-buy").style.display = "flex";
         document.getElementById("proceed-to-buy").onclick = async () => {
-            const amount = parseInt(document.getElementById("ton-amount").value);
-            await this.purchaseTon(amount);
+            const s = document.getElementById("ton-amount").value;
+            if (!isNaN(parseFloat(s)) && isFinite(s) && parseFloat(s) > 0) {
+                const amount = Math.trunc(parseFloat(s) * 1000000000);
+                await this.purchaseTon(amount);
+            } else {
+                GVAR.showFloatingText(23);
+            }
         }
     }
-
     walletDisconnected() {
         document.getElementById("ton-amount").style.display = "none";
         document.getElementById("proceed-to-buy").style.display = "none";
     }
-
     async generatePayload(amount) {
         let a = new tonweb.boc.Cell();
         a.bits.writeUint(0, 32);
@@ -57,18 +80,14 @@ class PayMenu {
         let payload = tonweb.utils.bytesToBase64(await a.toBoc());
         return payload
     }
-
     async purchaseTon(amount) {
-
-        // VERIFY AMOUNT PLS
-
-        var payload = await this.generatePayload(TELEGRAM_ID);
+        var payload = await this.generatePayload(GVAR.tg_id);
 
         const transaction = {
-            validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
+            validUntil: Math.floor(Date.now() / 1000) + 120, // 120 sec
             messages: [
                 {
-                    address: WALLET_ADRESS,
+                    address: CVAR.wallet,
                     amount: `${amount}`,
                     payload: `${payload}`
                 }
@@ -85,7 +104,7 @@ class PayMenu {
     }
 }
 
-const pm = new PayMenu();
+export const pm = new PayMenu();
 
 class DealsMenu
 {
