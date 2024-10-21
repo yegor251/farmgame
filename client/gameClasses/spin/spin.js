@@ -60,10 +60,8 @@ class Spin {
         let number = Math.ceil(360 - (Math.random()*180/player._spinItems.length + player._spinDropIndex*360/player._spinItems.length) + 720);
         container.style.transform = `rotate(${number}deg)`;
         container.style.transform = `rotate(${number}deg)`;
-        console.log(player._spinItems[player._spinDropIndex])
     }
     renderSpin(){
-        console.log(this.interval, player._spinItems)
         const spin = document.getElementById('spin-wheel');
         spin.innerHTML = ""
         if (this.interval != null){

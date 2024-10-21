@@ -50,7 +50,6 @@ class Orders {
             this.showTimer(order);
             this.renderOrders();
             this.clear()
-            console.log('now', Math.floor(Date.now()/1000))
         }
     }
     rerollOrder(order){
@@ -59,7 +58,6 @@ class Orders {
         socketClient.send(`regen`)
         this.showTimer(order);
         this.renderOrders()
-        console.log('now', Math.floor(Date.now()/1000), this._intervalId)
         this.clear()
     }
     showTimer(order){

@@ -8,7 +8,6 @@ export default class Animal extends Sprite{
     {
         super(x, y);
         this.range = range
-        console.log(type)
         this.standImages = RES.animals[type].standImages
         this.currStandInd = 0
         this.goImages = RES.animals[type].goImages

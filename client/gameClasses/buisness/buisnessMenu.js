@@ -81,7 +81,6 @@ class BuisnessMenu{
         }
     }
     claim() {
-        console.log('claim')
         if (this.currBusiness && this.currBusiness.canClaim) {
             player._tokenBalance += this.currBusiness.invested * this.currBusiness.income;
             player._tokenBalance += this.currBusiness.invested;

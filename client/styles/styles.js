@@ -157,7 +157,6 @@ document.getElementById('ton-amount').addEventListener('keydown', function (e) {
     if (e.key === 'Backspace' && value.includes('.')) {
         const parts = value.split('.');
         const dotIndex = value.indexOf('.') + 1;
-        console.log(dotIndex, e.target.selectionStart)
         if (e.target.selectionStart === dotIndex) {
             e.target.value = parts[0];
             e.preventDefault();
@@ -200,7 +199,6 @@ document.getElementById('withdraw-amount').addEventListener('keydown', function 
     if (e.key === 'Backspace' && value.includes('.')) {
         const parts = value.split('.');
         const dotIndex = value.indexOf('.') + 1;
-        console.log(dotIndex, e.target.selectionStart)
         if (e.target.selectionStart === dotIndex) {
             e.target.value = parts[0];
             e.preventDefault();

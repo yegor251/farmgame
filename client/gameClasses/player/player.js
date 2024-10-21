@@ -53,7 +53,6 @@ class Player{
     }
     activateBooster(id){
         let boost = this._boostersArr[id]
-        console.log(boost)
         this._boostersArr.splice(id, 1)
         if (boost.type == 'WorkSpeed'){
             this._workBooster.boosterAmount = boost.amount
@@ -63,10 +62,9 @@ class Player{
             this._growBooster.boosterAmount = boost.amount
             this._growBooster.timeToEnd = boost.time * 1000
             this._activBoostersArr.push(this._growBooster)
-        } else{ //кажется этот else не нужен из-за reroll
+        } else {
             boost.boosterAmount = boost.amount
             boost.timeToEnd = boost.time * 1000
-            console.log(boost.timeToEnd)
             boost.timeStamp = 0
             this._activBoostersArr.push(boost)
         }
@@ -76,7 +74,6 @@ class Player{
             const booster = this._activBoostersArr[i];
             if (booster.timeStamp == 0){
                 booster.timeStamp = Date.now() + booster.timeToEnd
-                console.log(booster.timeToEnd, Date.now() / 1000)
                 break
             }
         }
@@ -106,7 +103,6 @@ class Player{
     }
     getInvFullness(){
         let sum = 0;
-        console.log(this._inventory)
         for (const el in this._inventory) {
             sum += this._inventory[el];
         }
@@ -138,7 +134,6 @@ class Player{
         this._inventory[item]+= n
         :
         this._inventory[item] = n;
-        console.log(this._inventory)
     }
 }
 const player = new Player();

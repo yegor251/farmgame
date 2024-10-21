@@ -27,21 +27,20 @@ export default class Building extends Buildable{
         }
         let timeCounter = 0;
         if (this._craftingItems[0].timeToFinish > (player._workBooster.boosterAmount-1)*player._workBooster.timeToEnd){
-            this._craftingItems[0].workingTimeStamp = Date.now() + this._craftingItems[0].timeToFinish - (player._workBooster.boosterAmount - 1) * player._workBooster.timeToEnd + 1000 //перестраховка для бека
+            this._craftingItems[0].workingTimeStamp = Date.now() + this._craftingItems[0].timeToFinish - (player._workBooster.boosterAmount - 1) * player._workBooster.timeToEnd + 1000
             return
         } else {
-            this._craftingItems[0].workingTimeStamp = Date.now() + this._craftingItems[0].timeToFinish/player._workBooster.boosterAmount + 1000 //перестраховка для бека
-            timeCounter += this._craftingItems[0].timeToFinish/player._workBooster.boosterAmount + 1000 //перестраховка для бека
+            this._craftingItems[0].workingTimeStamp = Date.now() + this._craftingItems[0].timeToFinish/player._workBooster.boosterAmount + 1000
+            timeCounter += this._craftingItems[0].timeToFinish/player._workBooster.boosterAmount + 1000
         }
 
         let i;
         for (i = 1; i < this._craftingItems.length; i++) {
             if (this._craftingItems[i].timeToFinish > (player._workBooster.boosterAmount-1)*(player._workBooster.timeToEnd - timeCounter)){
-                this._craftingItems[i].workingTimeStamp = this._craftingItems[i-1].workingTimeStamp + this._craftingItems[i].timeToFinish - (player._workBooster.boosterAmount - 1) * (player._workBooster.timeToEnd - timeCounter) + 1000 //перестраховка для бека
-                console.log(Date.now() - this._craftingItems[1].workingTimeStamp, timeCounter)
+                this._craftingItems[i].workingTimeStamp = this._craftingItems[i-1].workingTimeStamp + this._craftingItems[i].timeToFinish - (player._workBooster.boosterAmount - 1) * (player._workBooster.timeToEnd - timeCounter) + 1000
                 break
             } else {
-                this._craftingItems[i].workingTimeStamp = this._craftingItems[i-1].workingTimeStamp + this._craftingItems[i].timeToFinish/player._workBooster.boosterAmount + 1000 //перестраховка для бека
+                this._craftingItems[i].workingTimeStamp = this._craftingItems[i-1].workingTimeStamp + this._craftingItems[i].timeToFinish/player._workBooster.boosterAmount + 1000
                 timeCounter += this._craftingItems[i].timeToFinish/player._workBooster.boosterAmount + 1000 //перестраховка для бека
             }
         }
@@ -171,18 +170,16 @@ export default class Building extends Buildable{
             const key = Object.keys(this._craftingItems[0])[0];
             if (player.getInvFullness()>=this._craftingItems[0][key]){
                 player.pushInventory(key,this._craftingItems[0][key])
-                console.log(this._craftingItems, this._nowWorkIndex)
                 this._craftingItems.shift()
                 this._nowWorkIndex -= 1
             } else {
-                console.log("инвентарь заполнен")
+                GVAR.showFloatingText(3)
                 return false
             }
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
             return true
         }
         else {
-            console.log(`сейчас изготавливается:`, this._craftingItems)
             return false
         }
     }

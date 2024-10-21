@@ -10,7 +10,6 @@ export default class Plant extends Sprite{
     constructor(x, y, w, h, plantType)
     {
         super(x, y, w, h);
-        console.log(plantType)
         this._image = RES.plants[plantType].image.stages[0]
         this._type = plantType;
         this._plantTimeStamp = RES.plants[plantType].seed.timeToGrow * 1000;
@@ -31,7 +30,6 @@ export default class Plant extends Sprite{
     {
         this._image = RES.plants[this._type].image.stages[Math.trunc(3-this._timeToGrow*3/this._plantTimeStamp)]
         this._timeToGrow = (this._timeToGrow != 0 ? (this._timeToGrow - 1000) : 0);
-        console.log(this._growTimeStamp - Date.now(), this._timeToGrow)
         if (this._growTimeStamp - Date.now() <= 0)
         {
             this._timeToGrow = 0

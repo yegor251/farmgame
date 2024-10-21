@@ -63,7 +63,6 @@ class PayMenu {
             const s = document.getElementById("ton-amount").value;
             if (!isNaN(parseFloat(s)) && isFinite(s) && parseFloat(s) > 0) {
                 const amount = Math.trunc(parseFloat(s) * 1000000000);
-                console.log(amount)
                 await this.purchaseTon(amount);
             } else {
                 GVAR.showFloatingText(23);
@@ -144,7 +143,6 @@ class DealsMenu
                 if (GVAR.confirmFlag){
                     const canBuy = (deal.tonPrice && player._tonBalance >= deal.tonPrice) ||
                      (deal.usdtPrice && player._usdtBalance >= deal.usdtPrice);
-                    console.log(player._usdtBalance, deal.usdtPrice)
                     if (canBuy){
                         socketClient.send(`buydeal/${dealKey}`)
                         socketClient.send(`regen`)
@@ -153,9 +151,7 @@ class DealsMenu
                         else {
                             player._usdtBalance -= deal.usdtPrice
                         }
-                        console.log(dealKey)
                         delete player._availableDeals[dealKey];
-                        console.log(player._availableDeals)
                         GVAR.showFloatingText(7)
                         menu.drawDealsMenu()
                     } else {

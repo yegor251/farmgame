@@ -181,7 +181,6 @@ class BoosterMenu{
                 const rect = img.getBoundingClientRect();
 
                 let topPosition = rect.bottom - rect.top;
-                console.log(topPosition)
 
                 dropList.style.top = `${topPosition}px`;
             });

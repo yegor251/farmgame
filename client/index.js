@@ -20,11 +20,6 @@ import { bushMenu } from './gameClasses/bush/bushMenu.js';
 import RES from './resources.js';
 
 
-// import socketClient from './init.js';
-
-// socketClient.send('buydeal/Deal_test_1')
-// console.log(player._boostersArr)
-
 tiles[10][10].createBuilding('huge_swamp')
 
 // Ensure the document is scrollable
@@ -164,7 +159,6 @@ setInterval(() => {
     player._activBoostersArr.forEach(booster => {
         booster.timeToEnd = (booster.timeStamp - Date.now() > 0 ? (booster.timeStamp - Date.now()) : 0);
         if (booster.timeToEnd == 0){
-            console.log('test')
             booster.boosterAmount = 1
             booster.timeStamp = 0;
             player._activBoostersArr = player._activBoostersArr.filter(item => item !== booster);

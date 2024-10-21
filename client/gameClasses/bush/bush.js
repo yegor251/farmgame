@@ -5,6 +5,7 @@ import player from "../player/player.js";
 import { bushMenu } from "./bushMenu.js";
 import socketClient from "../../init.js";
 import CVAR from "../../globalVars/const.js";
+import GVAR from "../../globalVars/global.js";
 
 export default class Bush extends Buildable{
     constructor(x, y, type)
@@ -46,7 +47,6 @@ export default class Bush extends Buildable{
             this._isWork = false;
             this._image = RES.buildings[this._type].image[2]
         }
-        console.log('setTime', this._timeToFinish)
     }
     draw(){
         if (this._isMoving){
@@ -58,7 +58,7 @@ export default class Bush extends Buildable{
         ctx.shadowBlur = 0;
     }
     canReset(){
-        return this._collectedAmount >= this._collectedAmountLimit//сюда недостаточно денег
+        return this._collectedAmount >= this._collectedAmountLimit
     }
     reset(){
         socketClient.send(`use/null/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
@@ -66,7 +66,6 @@ export default class Bush extends Buildable{
         player.buy(this._resetPrice)
         this.startWork()
         this._image = RES.buildings[this._type].image[0]
-        console.log('reset')
     }
     canStartWork(){
         return (!this._isWork && this._collectedAmount < this._collectedAmountLimit)
@@ -75,12 +74,10 @@ export default class Bush extends Buildable{
         this._freeze = true
         this._timeToFinish = this._timeStamp;
         this._isWork = true;
-        console.log('start')
     }
     realStart(){
         if (player._growBooster.boosterAmount==1){
             this._finishTime = Date.now() + this._timeStamp;
-            console.log('realstart', this._finishTime, Date.now())
             return
         }
         if (this._timeToFinish > (player._growBooster.boosterAmount-1)*player._growBooster.timeToEnd){
@@ -115,7 +112,7 @@ export default class Bush extends Buildable{
                 this.realStart()
             }
         } else
-            console.log('недостаточно места в инвенторе')
+            GVAR.showFloatingText(3)
         if (this._collectedAmount == this._collectedAmountLimit)
             this._image = RES.buildings[this._type].image[2]
         else

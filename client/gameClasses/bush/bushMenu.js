@@ -1,6 +1,7 @@
 import Calc from "../../calc.js";
 import GVAR from "../../globalVars/global.js";
 import RES from "../../resources.js";
+import player from "../player/player.js";
 
 class BushMenu{
     constructor() {
@@ -132,10 +133,14 @@ class BushMenu{
                 const cloneRect = clone.getBoundingClientRect();
                 const imgRect = document.getElementById('bush-img').getBoundingClientRect();
                 if (isIntersecting(cloneRect, imgRect)) {
-                    bush.reset();
-                    startButton.style.filter = 'grayscale(100%)';
-                    startButton.removeEventListener('touchstart', startButtonTouchStartHandler);
-                    startButton.dataset.handlerAdded = 'false';
+                    if (player._money >= bush._resetPrice) {
+                        bush.reset();
+                        startButton.style.filter = 'grayscale(100%)';
+                        startButton.removeEventListener('touchstart', startButtonTouchStartHandler);
+                        startButton.dataset.handlerAdded = 'false';
+                    } else {
+                        GVAR.showFloatingText(1)
+                    }
                 }
                 clone.remove();
             };

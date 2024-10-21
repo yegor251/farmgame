@@ -19,7 +19,6 @@ export default class Tile extends Sprite{
         this._structure = "none";
     }
     use(type){
-        console.log(this._structure._type)
         if (RES.buildingNames.bakery.includes(this._structure._type)){
             this._structure._freeze = false
             this._structure.realStart()
@@ -27,11 +26,9 @@ export default class Tile extends Sprite{
             this._structure._freeze = false
             this._structure.realStart()
         } else if (RES.buildingNames.animalPen.includes(this._structure._type)){
-            console.log(type)
             if (type=='start'){
                 this._structure._freeze = false
                 this._structure.realStart()
-                console.log(this._structure)
             }
         } else if (RES.buildingNames.bush.includes(this._structure._type)){
             this._structure._freeze = false

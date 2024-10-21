@@ -41,7 +41,7 @@ export default class Field extends Buildable{
             if (player.getInvFullness() >= RES.plants[this._plant._type].seed.amount){
                 this.collect();
             } else{
-                console.log('Недостаточно места в инвентаре')
+                GVAR.showFloatingText(3)
             }
         } else {
             fieldMenu.show(this)

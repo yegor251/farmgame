@@ -42,7 +42,6 @@ export default class AnimalPen extends Buildable{
             this._timeToFinish = 0
         }
         this._isWork = true;
-        console.log(this._timeToFinish, Date.now() - this._finishTime)
     }
     setLevel(level){
         this._level = level
@@ -79,7 +78,6 @@ export default class AnimalPen extends Buildable{
         this._isWork = true;
     }
     realStart(){
-        console.log('realStart')
         if (player._workBooster.boosterAmount==1){
             this._finishTime = Date.now() + this._timeStamp;
             return
@@ -106,7 +104,6 @@ export default class AnimalPen extends Buildable{
             (this._timeToFinish - 1000)
             : 0);
             if (this._finishTime - Date.now() <= 0){
-                console.log(this._finishTime , Date.now())
                 this._timeToFinish = 0
                 this._isWork = false;
                 animalMenu.close()
