@@ -92,8 +92,8 @@
         "en": "wrong input!"
     },
     "24": {
-        "ru": "Для вывода необходимо 0.05 TON для комиссии. Вывод происходит в течение часа",
-        "en": "For withdrawal you need 0.05 TON for gas. Withdrawal occurs within an hour"
+        "ru": "Для вывода необходимо 0.1 TON для комиссии. Вывод происходит в течение часа",
+        "en": "For withdrawal you need 0.1 TON for gas. Withdrawal occurs within an hour"
     },
     "25": {
         "ru": "адрес вывода:",
@@ -112,8 +112,36 @@
         "en": "wrong wallet format"
     },
     "29": {
-      "ru": "недостаточно TON(0.05) для оплаты комиссии",
-      "en": "not enough TON(0.05) to pay gas"
+      "ru": "недостаточно TON(0.1) для оплаты комиссии",
+      "en": "not enough TON(0.1) to pay gas"
+    },
+    "30": {
+      "ru": "Текущий буст +{% скорости",
+      "en": "Current speed boost +{%"
+    },
+    "31": {
+      "ru": "Хотите купить +10% за { золота?",
+      "en": "Do you want to buy +10% for { gold?"
+    },
+    "32": {
+      "ru": "Хотите купить дополнительный слот за { токенов?",
+      "en": "Do you want to buy an additional slot for { tokens?"
+    },
+    "33": {
+      "ru": "Текущий уровень: {",
+      "en": "Current level: {"
+    },
+    "34": {
+      "ru": "Хотите улучшить за { золота?",
+      "en": "Do you want to upgrade for { gold?"
+    },
+    "35": {
+      "ru": "Хотите купить +10 вместимости за 10 токенов?",
+      "en": "Want to buy +10 capacity for 10 tokens?"
+    },
+    "36": {
+      "ru": "Хотите удалить это препятствие?",
+      "en": "Do you want to remove this obstacle?"
     },
     "tomatoJuice": {
       "name": {

@@ -132,7 +132,7 @@ export default class AnimalPen extends Buildable{
             this._timeToFinish = undefined;
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
         } else{
-            console.log('Недостаточно места в инвентаре')
+            GVAR.showFloatingText(3)
         }
     }
     onClick()

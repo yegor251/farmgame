@@ -299,7 +299,7 @@ class Init {
         });
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357368`)
+        socketClient.send(`connect/2357378`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
         loader.updateLoading(loader.progress + 25, 'Init game session')

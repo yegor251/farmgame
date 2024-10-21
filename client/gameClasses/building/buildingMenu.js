@@ -59,7 +59,10 @@ class BuildingMenu {
             queueElem.onclick = () => {
                 const extraSlotCount = this.building._slotsAmount - RES.buildings[this.building._type].maxSlots
                 const price = CVAR.extraSlotPrice * Math.pow(CVAR.extraSlotCoef, extraSlotCount)
-                if (GVAR.confirmFlag){
+                document.getElementById('selection-menu-wrap').style.display = 'flex'
+                document.getElementById('selection-text').innerText =
+                `${GVAR.localization[32][GVAR.language].replace(/\{/g, Math.trunc(price / 100))}`
+                document.getElementById('selection-yes').onclick = () => {
                     if (player._tokenBalance >= price){
                         this.building.incSlotsAmount()
                         player.spendToken(price)
@@ -67,10 +70,8 @@ class BuildingMenu {
                     } else {
                         GVAR.showFloatingText(2)
                     }
-                } else {
-                    GVAR.setConfirm()
-                    GVAR.showFloatingText(9, price)
-                }            
+                    document.getElementById('selection-menu-wrap').style.display = 'none'
+                }      
             };
             buildingQueue.appendChild(queueElem);
         }
@@ -84,11 +85,19 @@ class BuildingMenu {
             button.remove()
         else {
             button.onclick = () => {
-                if (player._money < RES.buildings[type].upgradesPrice[this.building._level-1])
-                    GVAR.showFloatingText(1)
-                else {
-                    this.building.upgrade()
-                    this.renderCrafts()
+                document.getElementById('selection-menu-wrap').style.display = 'flex'
+                document.getElementById('selection-text').innerText =
+                `${GVAR.localization[33][GVAR.language].replace(/\{/g, this.building._level)}\n
+                ${GVAR.localization[34][GVAR.language].replace(/\{/g, RES.buildings[type].upgradesPrice[this.building._level-1])}`
+                document.getElementById('selection-yes').onclick = () => {
+                    if (player._money < RES.buildings[type].upgradesPrice[this.building._level-1])
+                        GVAR.showFloatingText(1)
+                    else {
+                        this.building.upgrade()
+                        this.renderCrafts()
+                        GVAR.showFloatingText(7)
+                    }
+                    document.getElementById('selection-menu-wrap').style.display = 'none'
                 }
             };
         }

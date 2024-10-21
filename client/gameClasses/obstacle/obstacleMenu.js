@@ -49,33 +49,38 @@ class ObstacleMenu {
             token.innerText = '0'
             document.getElementById('obstacle-token-checkmark').style.filter = 'grayscale(0%)';
         }
-        obstacleDelete.addEventListener('click', () => {
-            if (this.obstacle._deletePrice && this.obstacle._deletePrice > player._money){
-                GVAR.showFloatingText(1)
-                return
-            }
-            if (this.obstacle._deleteTokenPrice && this.obstacle._deleteTokenPrice > player._tokenBalance){
-                GVAR.showFloatingText(2)
-                return
-            }
-            const tileIndex = Calc.CanvasToIndex(this.obstacle._x, this.obstacle._y, CVAR.tileSide, CVAR.outlineWidth);
-            for (let i = tileIndex.i; i < this.obstacle._w / CVAR.tileSide; i++) {
-                for (let j = tileIndex.j; j < this.obstacle._h / CVAR.tileSide; j++) {
-                    tiles[i][j]._structure = "none"
+        obstacleDelete.onclick = () => {
+            document.getElementById('selection-menu-wrap').style.display = 'flex'
+            document.getElementById('selection-text').innerText = GVAR.localization[36][GVAR.language]
+            document.getElementById('selection-yes').onclick = () => {
+                if (this.obstacle._deletePrice && this.obstacle._deletePrice > player._money){
+                    GVAR.showFloatingText(1)
+                } else {
+                    if (this.obstacle._deleteTokenPrice && this.obstacle._deleteTokenPrice > player._tokenBalance){
+                        GVAR.showFloatingText(2)
+                    } else {
+                        const tileIndex = Calc.CanvasToIndex(this.obstacle._x, this.obstacle._y, CVAR.tileSide, CVAR.outlineWidth);
+                        for (let i = tileIndex.i; i < this.obstacle._w / CVAR.tileSide; i++) {
+                            for (let j = tileIndex.j; j < this.obstacle._h / CVAR.tileSide; j++) {
+                                tiles[i][j]._structure = "none"
+                            }
+                        }
+                        if (this.obstacle._deletePrice && this.obstacle._deleteTokenPrice){
+                            player.buy(this.obstacle._deletePrice)
+                            player.spendToken(this.obstacle._deleteTokenPrice)
+                        } else if (this.obstacle._deleteTokenPrice){
+                            player.spendToken(this.obstacle._deleteTokenPrice)
+                        } else {
+                            player.buy(this.obstacle._deletePrice)
+                        }
+                        this.obstacle.delete()
+                        this.close()
+                        GVAR.showFloatingText(7)
+                    }
                 }
+                document.getElementById('selection-menu-wrap').style.display = 'none'
             }
-            if (this.obstacle._deletePrice && this.obstacle._deleteTokenPrice){
-                player.buy(this.obstacle._deletePrice)
-                player.spendToken(this.obstacle._deleteTokenPrice)
-            } else if (this.obstacle._deleteTokenPrice){
-                player.spendToken(this.obstacle._deleteTokenPrice)
-            } else {
-                player.buy(this.obstacle._deletePrice)
-            }
-            this.obstacle.delete()
-            this.close()
-            GVAR.showFloatingText(7)
-        });
+        }
     }
 }
 export const obstacleMenu = new ObstacleMenu();

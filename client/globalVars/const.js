@@ -11,7 +11,7 @@ class ConstVar{
         this.maxInvSize = 2000;
         this.redColor = 230; this.greenColor = 230;
         this.wallet = 'UQBY9QGb8nnU80ZgMOPU6LVGqod8t0R3WFcCIyMYTUyZwYg6';
-        this.transactionFee = 50000000
+        this.transactionFee = 100000000
     }
 }
 

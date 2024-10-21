@@ -71,16 +71,26 @@ class AnimalMenu{
     renderMenu() {
         const type = this.animalPen._type;
         this.renderTimer();
+        const animalPen = this.animalPen;
         const upgradeButton = document.getElementById('animal-upgrade');
         upgradeButton.innerText = GVAR.localization[8][GVAR.language]
         if (this.animalPen._level >= RES.buildings[type].maxLevel)
             upgradeButton.remove()
         else {
             upgradeButton.onclick = () => {
-                if (player._money < RES.buildings[type].upgradesPrice[this.animalPen._level-1])
-                    GVAR.showFloatingText(1)
-                else
-                    this.animalPen.upgrade()
+                document.getElementById('selection-menu-wrap').style.display = 'flex'
+                document.getElementById('selection-text').innerText =
+                `${GVAR.localization[30][GVAR.language].replace(/\{/g, (animalPen._level-1)*10)}\n
+                ${GVAR.localization[31][GVAR.language].replace(/\{/g, RES.buildings[type].upgradesPrice[this.animalPen._level-1])}`
+                document.getElementById('selection-yes').onclick = () => {
+                    if (player._money < RES.buildings[type].upgradesPrice[this.animalPen._level-1])
+                        GVAR.showFloatingText(1)
+                    else {
+                        this.animalPen.upgrade()
+                        GVAR.showFloatingText(7)
+                    }
+                    document.getElementById('selection-menu-wrap').style.display = 'none'
+                }
             };
         }
     
@@ -93,7 +103,6 @@ class AnimalMenu{
             );
         };
     
-        const animalPen = this.animalPen;
         const startButton = document.getElementById("animal-start-button");
         const feedType = Object.keys(RES.buildings[type].intake)[0]
         startButton.style.backgroundImage = `url(client/assets/items/${feedType}.png)`;

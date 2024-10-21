@@ -60,13 +60,19 @@ class Shop{
             document.getElementById("buttons-bar").style.display = "flex";
         }
         const upgButton = document.getElementById('upgrade-stash-button')
-        upgButton.addEventListener('click', () => {
-            if (player._tokenBalance >= 1000 && player._inventorySize < CVAR.maxInvSize){
-                player.upgradeInventory()
-                socketClient.send('invupgrade')
-                this.drawStash()
+        upgButton.onclick = () => {
+            document.getElementById('selection-menu-wrap').style.display = 'flex'
+            document.getElementById('selection-text').innerText = GVAR.localization[35][GVAR.language]
+            document.getElementById('selection-yes').onclick = () => {
+                if (player._tokenBalance >= 1000 && player._inventorySize < CVAR.maxInvSize){
+                    player.upgradeInventory()
+                    socketClient.send('invupgrade')
+                    this.drawStash()
+                    GVAR.showFloatingText(7)
+                }
+                document.getElementById('selection-menu-wrap').style.display = 'none'
             }
-        });
+        }
         upgButton.innerText = GVAR.localization[8][GVAR.language]
     }
     drawBuildingShop(){
