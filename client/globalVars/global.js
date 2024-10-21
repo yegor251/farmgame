@@ -12,7 +12,7 @@ class GlobalVars{
         this.confirmFlag = false;
         this.confirmTimer = null
         this.localization = null
-        this.language = 'ru'
+        this.language = 'en'
         this.tg_id = '1770661619'
         this.tg_name = 'qwerty123'
     }

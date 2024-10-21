@@ -73,7 +73,7 @@
         <div id="main-menu">
             <div class="main-menu-bar">
                 <div id="farm-name-cont">
-                    <h3 id="farm-name">Farm egor2511</h3>
+                    <h3 id="farm-name"></h3>
                 </div>
                 <div id="close-main-menu"></div>
             </div>
@@ -98,6 +98,7 @@
                             <h3 id="token-balance" class="balance"></h3>
                         </div>
                         <div class="donate-plus-button"></div>
+                        <div id="token-withdraw-button"></div>
                     </div>
                     <div class="balance-content">
                         <div class="ton-balance-icon"></div>
@@ -122,6 +123,44 @@
                 </div>
             </div>
             <div class="main-menu-bottom"></div>
+        </div>
+    </div>
+    <div id="withdraw-menu-wrap" class="menu-wrap">
+        <div id="withdraw-menu">
+            <div class="buisness-menu-bar">
+                <div id="close-withdraw-menu" class="exit_button_metal"></div>
+            </div>
+            <div class="payment-menu-list">
+                <div id="withdraw-ton-wrap">
+                    <div id="withdraw-ton-img"></div>
+                    <h4 id="withdraw-ton-balance"></h4>
+                </div>
+                <div id="withdraw-token-wrap">
+                    <div id="withdraw-token-img"></div>
+                    <h4 id="withdraw-token-balance"></h4>
+                </div>
+                <div class="manual-pay">
+                    <div class="manual-pay">
+                        <h3 id="withdraw-rule"></h3>
+                    </div>
+                    <div class="manual-pay">
+                        <h3 id="withdraw-adress-text"></h3>
+                    </div>
+                    <div class="withdraw-center-content">
+                        <input id="withdraw-adress" type="text">
+                    </div>
+                    <div class="manual-pay">
+                        <h3 id="withdraw-amount-text"></h3>
+                    </div>
+                    <div class="withdraw-center-content">
+                        <input id="withdraw-amount" type="text">
+                        <div id="confirm-withdraw">
+                            <h4 id="confirm-withdraw-text"></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buisness-menu-bottom"></div>
         </div>
     </div>
     <div id="shop-wrap" class="menu-wrap">
@@ -324,20 +363,21 @@
     </div>    
     <div id="deals-wrap" class="menu-wrap">
         <div id="deals">
-            <div id="deals-bar">
-                <div id="balance-wrap">
-                    <div id="ton-wrap">
-                        <h4>TON: 1.000</h4>
-                        <button id="buy-ton">+</button>
-                    </div>
-                    <div id="usdt-wrap">
-                        <h4>USDT: 100.000</h4>
-                        <button id="buy-usdt">+</button>
-                    </div>
-                </div>
-                <button id="close-deals">X</button>
+            <div id="deals-bar" class="buildable-menu-bar">
+                <div id="close-deals" class="buildable-close-button"></div>
             </div>
-            <div id="deals-list"></div>
+            <div class="buildable-menu-list">
+                <div id="ton-wrap">
+                    <div id="deal-ton-img"></div>
+                    <h4 id="deal-ton-balance"></h4>
+                </div>
+                <div id="usdt-wrap">
+                    <div id="deal-usdt-img"></div>
+                    <h4 id="deal-usdt-balance"></h4>
+                </div>
+            </div>
+            <div id="deals-list" class="buildable-menu-list"></div>
+            <div class="buildable-bottom"></div>
         </div>
     </div>
     <div id="payment-wrap" class="menu-wrap">

@@ -20,15 +20,21 @@ class TransactionsMenu {
 
         const transactionsContent = document.getElementById('transactions-content');
         transactionsContent.innerHTML = ''
+        const blockDiv = document.createElement('div');
+        blockDiv.className = 'manual-pay'
         const transText = document.createElement('h3');
+        blockDiv.appendChild(transText)
         transText.innerText = GVAR.localization[13][GVAR.language]
         transText.className = 'trans-text'
-        transactionsContent.appendChild(transText)
+        transactionsContent.appendChild(blockDiv)
         if (player._transactions.length == 0){
+            const blockDiv = document.createElement('div');
+            blockDiv.className = 'manual-pay'
             const text = document.createElement('h3');
             text.innerText = GVAR.localization[14][GVAR.language]
-            text.className = 'trans-text'
-            transactionsContent.appendChild(text)
+            text.className = 'trans-empty-text'
+            blockDiv.appendChild(text)
+            transactionsContent.appendChild(blockDiv)
             return
         }
 

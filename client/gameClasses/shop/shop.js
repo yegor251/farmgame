@@ -137,6 +137,7 @@ class Shop{
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
                             document.getElementById("shop-wrap").style.display = "none";
+                            document.getElementById("buttons-bar").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,
                                 structureType: 'building'
@@ -317,8 +318,8 @@ class Shop{
 
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
-                            document.getElementById("shop-wrap").style.display = "none"; //везде заменить на плавное закрывание
-
+                            document.getElementById("shop-wrap").style.display = "none";
+                            document.getElementById("buttons-bar").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.animals[animal].price,
                                 structureType: 'animal'
@@ -425,6 +426,7 @@ class Shop{
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
                             document.getElementById("shop-wrap").style.display = "none";
+                            document.getElementById("buttons-bar").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,
                                 structureType: 'building'
@@ -531,6 +533,7 @@ class Shop{
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
                             document.getElementById("shop-wrap").style.display = "none";
+                            document.getElementById("buttons-bar").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,
                                 structureType: 'building'

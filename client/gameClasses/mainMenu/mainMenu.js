@@ -1,6 +1,7 @@
 import GVAR from "../../globalVars/global.js";
 import player from "../player/player.js";
 import { pm } from "../ton-connect/tonMenu.js";
+import { withdraw } from "../ton-connect/tonMenu.js";
 
 class MainManu {
     constructor() {
@@ -20,6 +21,9 @@ class MainManu {
                 document.getElementById('main-menu-wrap').style.display = 'none';
             }
         });
+        document.getElementById("token-withdraw-button").onclick = () => {
+            withdraw.show();
+        }
     }
     show(){
         GVAR.closeAllWindows()
@@ -31,6 +35,7 @@ class MainManu {
         document.getElementById("buttons-bar").style.display = "flex";
     }
     renderMenu(){
+        document.getElementById('farm-name').innerText = `${GVAR.tg_name}'s farm`;
         document.getElementById('money-balance').innerText = player._money;
         document.getElementById('networth-balance').innerText = player._networth;
         document.getElementById('token-balance').innerText = (player._tokenBalance / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];

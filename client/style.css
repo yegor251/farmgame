@@ -1,4 +1,3 @@
-/*     ОБЩИЕ СТИЛИ    */
 *{
     padding: 0;
     margin: 0;
@@ -73,7 +72,7 @@ body{
     z-index: 5;
     position: absolute;
     width: 100%;
-    height: 16vw;
+    height: 22vw;
     background-color: rgba(0, 0, 0, 0);
     display: flex;
     flex-direction: row;
@@ -98,21 +97,22 @@ body{
     display: flex;
     margin-left: auto;
     padding-right: 1vw;
+    align-items: center;
 }
 #money {
     color: yellow;
-    font-size: 4.7vw;
+    font-size: 6vw;
     padding-right: 1vw;
     text-shadow: 0.3vw 0.3vw 0 black, -0.3vw -0.3vw 0 black, 0.3vw -0.3vw 0 black, -0.3vw 0.3vw 0 black;
 }
 #token {
-    color: rgb(213, 0, 251);
-    font-size: 4.7vw;
+    color: #45BB76;
+    font-size: 6vw;
     padding-right: 1vw;
     text-shadow: 0.3vw 0.3vw 0 black, -0.3vw -0.3vw 0 black, 0.3vw -0.3vw 0 black, -0.3vw 0.3vw 0 black;
 }
 .small-bar-img {
-    height: 4.7vw;
+    height: 8vw;
     aspect-ratio: 1 / 1;
     background-size: cover;
     background-position: center;
@@ -120,93 +120,26 @@ body{
     image-rendering: pixelated;
 }
 #money-img {
-    background-image: url('assets/design/money_img.png');
+    background-image: url('assets/design/money_icon.png');
 }
 #token-img {
-    background-image: url('assets/design/token_img.png');
+    background-image: url('assets/design/token_icon.png');
 }
 #open-shop, #open-main-menu {
-    width: 15vw;
+    width: 20vw;
     aspect-ratio: 1 / 1;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     image-rendering: pixelated;
-    margin-bottom: 1vw;
+    margin-bottom: 2vw;
     box-sizing: border-box;
 }
 #open-shop {
-    margin-left: 1vw;
+    margin-left: 2vw;
     background-image: url('assets/design/shop_button.png');
 }
 #open-main-menu {
-    margin-right: 1vw;
+    margin-right: 2vw;
     background-image: url('assets/design/profile_button.png');
-}
-/*     КОНЕЦ ОБЩИЕ СТИЛИ    */
-
-/*      ОБЩИЕ СТИЛИ ДЛЯ КНОПОК, WRAP, MENU(ВСЁ ЧТО ОДИНАКОВОЕ)      */
-#deals{
-    background-color: aliceblue;
-    width: 80%;
-    height: 80%;
-    overflow-y: scroll;
-}
-#deals-bar{
-    width: 100%;
-    height: 5vh;
-}
-  
-/*      DEAL      */
-.deal {
-    background-color: #000;
-    color: #fff;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.deal h3 {
-    margin-bottom: 10px;
-    font-size: 1.5em;
-    color: #ffd700; /* Золотой цвет для заголовка */
-}
-
-.deal-price, .deal-token {
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.deal h4 {
-    margin-top: 15px;
-    font-size: 1.2em;
-    color: #ffa500; /* Оранжевый для заголовков */
-}
-.deal-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    margin-top: 15px;
-}
-
-.deal-button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-
-.deal-button:not(:disabled):hover {
-    background-color: #218838;
-}
-
-#balance-wrap {
-    display: inline-flex;
-}
-#ton-wrap, #usdt-wrap {
-    display: flex;
-    flex-direction: row;
 }

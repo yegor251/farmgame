@@ -55,8 +55,8 @@
     background-repeat: no-repeat;
     image-rendering: pixelated;
     padding-top: 3%;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 7%;
+    padding-right: 7%;
     box-sizing: border-box;
     background-color: #E6DECF;
 }
@@ -65,41 +65,33 @@
     flex-direction: row;
     padding-bottom: 2.5vw;
 }
-.money-balance-icon {
-    width: 13%;
+.money-balance-icon, .token-balance-icon, .ton-balance-icon,  #token-withdraw-button,
+.usdt-balance-icon, .donate-plus-button, #networth-question-button {
+    width: 11%;
     aspect-ratio: 1/1;
-    background-image: url('../assets/design/money_img.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     image-rendering: pixelated;
 }
+#token-withdraw-button {
+    margin-left: 3%;
+    background-image: url('../assets/design/withdraw_butt_1.png');
+}
+.money-balance-icon {
+    background-image: url('../assets/design/money_img.png');
+}
 .token-balance-icon {
-    width: 13%;
-    aspect-ratio: 1/1;
     background-image: url('../assets/design/token.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 .ton-balance-icon {
-    width: 13%;
-    aspect-ratio: 1/1;
     background-image: url('../assets/design/ton.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 .usdt-balance-icon {
-    width: 13%;
-    aspect-ratio: 1/1;
     background-image: url('../assets/design/usdt.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 .balance-place {
-    width: 65%;
+    width: 58%;
     height: auto;
     margin-left: 3%;
     margin-right: 3%;
@@ -139,22 +131,10 @@
     border-radius: 0;
 }
 #networth-question-button {
-    width: 13%;
-    aspect-ratio: 1/1;
     background-image: url('../assets/design/question_button_1.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    image-rendering: pixelated;
 }
 .donate-plus-button {
-    width: 13%;
-    aspect-ratio: 1/1;
     background-image: url('../assets/design/add_button_1.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    image-rendering: pixelated;
 }
 #main-menu-buttons {
     padding: 5%;

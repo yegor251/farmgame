@@ -4,8 +4,8 @@
         "en": "not enough money"
     },
     "2": {
-        "ru": "недостаточно токенов",
-        "en": "not enough tokens"
+        "ru": "недостаточно средств",
+        "en": "not enough funds"
     },
     "3": {
         "ru": "нет места в амбаре",
@@ -61,7 +61,7 @@
     },
     "16": {
         "ru": "Отправляйте TON, USDT, FTC на адрес:",
-        "en": "Send TON, USDT, TFC to adress:"
+        "en": "Send TON, USDT, TFC to address:"
     },
     "17": {
         "ru": "копировать",
@@ -90,6 +90,30 @@
     "23": {
         "ru": "неправильный ввод!",
         "en": "wrong input!"
+    },
+    "24": {
+        "ru": "Для вывода необходимо 0.05 TON для комиссии. Вывод происходит в течение часа",
+        "en": "For withdrawal you need 0.05 TON for gas. Withdrawal occurs within an hour"
+    },
+    "25": {
+        "ru": "адрес вывода:",
+        "en": "withdrawal address:"
+    },
+    "26": {
+        "ru": "количество токенов:",
+        "en": "number of tokens:"
+    },
+    "27": {
+        "ru": "ОТПРАВИТЬ",
+        "en": "SEND"
+    },
+    "28": {
+        "ru": "неправильный формат кошелька",
+        "en": "wrong wallet format"
+    },
+    "29": {
+      "ru": "недостаточно TON(0.05) для оплаты комиссии",
+      "en": "not enough TON(0.05) to pay gas"
     },
     "tomatoJuice": {
       "name": {

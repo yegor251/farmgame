@@ -63,6 +63,7 @@ class PayMenu {
             const s = document.getElementById("ton-amount").value;
             if (!isNaN(parseFloat(s)) && isFinite(s) && parseFloat(s) > 0) {
                 const amount = Math.trunc(parseFloat(s) * 1000000000);
+                console.log(amount)
                 await this.purchaseTon(amount);
             } else {
                 GVAR.showFloatingText(23);
@@ -110,76 +111,133 @@ class DealsMenu
 {
     constructor() {
         document.getElementById("open-deals").onclick = () => {
+            GVAR.closeAllWindows();
             document.getElementById("deals-wrap").style.display = 'flex';
+            this.drawDealsMenu();
         }
 
         document.getElementById("close-deals").onclick = () => {
             document.getElementById("deals-wrap").style.display = "none";
+            document.getElementById("main-menu-wrap").style.display = "flex";
         }
-
-        document.getElementById("buy-usdt").onclick = () => {
-            document.getElementById("deals-wrap").style.display = "none";
-            pm.drawPayMenu();
-        }
-
-        document.getElementById("buy-ton").onclick = () => {
-            document.getElementById("deals-wrap").style.display = "none";
-            pm.drawPayMenu();
-        }
-
-        this.drawDealsMenu();
     }
-
     drawDealsMenu() {
+        document.getElementById('deal-ton-balance').innerText = (player._tonBalance / 1000000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
+        document.getElementById('deal-usdt-balance').innerText = (player._usdtBalance / 1000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
         const dealsWrap = document.getElementById("deals-list");
-
+        dealsWrap.innerHTML = ''
+        if (Object.keys(player._availableDeals).length === 0){
+            const text = document.createElement('h3');
+            text.className = 'deal-empty-text'
+            text.innerText = GVAR.localization[14][GVAR.language];
+            dealsWrap.appendChild(text)
+        }
+        const menu = this
         for (const dealKey in player._availableDeals) {
             const deal = player._availableDeals[dealKey];
-    
-            const dealDiv = document.createElement("div");
-            dealDiv.className = "deal";
-                
-            let dealContent = `
-                <h3>${deal.name}</h3>
-                ${deal.tonPrice ? `<div class="deal-price">Price: ${deal.tonPrice} TON</div>` : ''}
-                ${deal.usdtPrice ? `<div class="deal-price">Price: ${deal.usdtPrice} USDT</div>` : ''}
-                <div class="deal-token">Token: ${deal.reward.token}</div>
-                <h4>Boosters:</h4>
-                <ul class="booster-list">`;
-    
-            for (const booster of deal.reward.boosters) {
-                dealContent += `
-                    <li>
-                        <span>Type: ${booster.boosterType}</span>, 
-                        <span>Percentage: ${booster.percentage}%</span>, 
-                        <span>Time: ${booster.time}s</span>
-                    </li>`;
+            
+            const dealImg = document.createElement('div')
+            dealImg.className = 'deal'
+            dealImg.style.backgroundImage = `url(client/assets/deals/${dealKey}.png)`
+            
+            dealImg.onclick = () => {
+                if (GVAR.confirmFlag){
+                    const canBuy = (deal.tonPrice && player._tonBalance >= deal.tonPrice) ||
+                     (deal.usdtPrice && player._usdtBalance >= deal.usdtPrice);
+                    console.log(player._usdtBalance, deal.usdtPrice)
+                    if (canBuy){
+                        socketClient.send(`buydeal/${dealKey}`)
+                        socketClient.send(`regen`)
+                        if (deal.tonPrice)
+                            player._tonBalance -= deal.tonPrice
+                        else {
+                            player._usdtBalance -= deal.usdtPrice
+                        }
+                        console.log(dealKey)
+                        delete player._availableDeals[dealKey];
+                        console.log(player._availableDeals)
+                        GVAR.showFloatingText(7)
+                        menu.drawDealsMenu()
+                    } else {
+                        GVAR.showFloatingText(2)
+                    }
+                } else {
+                    GVAR.setConfirm()
+                    GVAR.showFloatingText(4)
+                }
             }
-    
-            dealContent += `</ul>`;
-    
-            // Вставляем содержимое в dealDiv
-            dealDiv.innerHTML = dealContent;
-    
-            const canAfford = (deal.tonPrice && player._tonBalance >= deal.tonPrice) ||
-                              (deal.usdtPrice && player._usdtBalance >= deal.usdtPrice);
-            // Создание кнопки через createElement
-            const buyButton = document.createElement("button");
-            buyButton.className = "deal-button";
-            buyButton.textContent = "Купить";
-            buyButton.disabled = !canAfford;  // Активность кнопки зависит от canAfford
-            buyButton.onclick = () => {
-                socketClient.send(`buydeal/${dealKey}`)
-                socketClient.send(`regen`)
-            }
-            // Добавление кнопки в dealDiv
-            dealDiv.appendChild(buyButton);
-    
-            // Добавление блока сделки в dealsWrap
-            dealsWrap.appendChild(dealDiv);
+            dealsWrap.appendChild(dealImg);
         }
-    }    
-    
+    }
 }
 
 export const dealmenu = new DealsMenu();
+
+class WithdrawMenu
+{
+    constructor() {
+        document.getElementById("close-withdraw-menu").onclick = () => {
+            document.getElementById("withdraw-menu-wrap").style.display = "none";
+            document.getElementById("main-menu-wrap").style.display = "flex";
+        }
+
+        function isValidTonAddress(address) {
+            try {
+                const decodedAddress = new tonweb.utils.Address(address);
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        document.getElementById('confirm-withdraw').onclick = () => {
+            const wallet = document.getElementById('withdraw-adress').value
+            if (isValidTonAddress(wallet)){
+                let flag = true
+                let amount = 0;
+                try {
+                    amount = Math.trunc(parseFloat(document.getElementById('withdraw-amount').value)*100)
+                    if (amount <=0){
+                        flag = false
+                    }
+                } catch (error) {
+                    flag = false
+                }
+                if (flag && amount) {
+                    if (amount > 0 && amount <= player._tokenBalance){
+                        if (player._tonBalance >= CVAR.transactionFee){
+                            socketClient.send(`widthdraw/${amount}/${wallet}`)
+                            GVAR.showFloatingText(7)
+                            player._tonBalance -= CVAR.transactionFee
+                            player._tokenBalance -= amount
+                        } else {
+                            GVAR.showFloatingText(29);
+                        }
+                    } else {
+                        GVAR.showFloatingText(2);
+                    }
+                } else {
+                    GVAR.showFloatingText(23);
+                }
+            } else {
+                GVAR.showFloatingText(28);
+            }
+        }
+
+    }
+    show() {
+        GVAR.closeAllWindows();
+        document.getElementById("withdraw-menu-wrap").style.display = "flex";
+        this.drawMenu();
+    }
+    drawMenu() {
+        document.getElementById('withdraw-ton-balance').innerText = (player._tonBalance / 1000000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
+        document.getElementById('withdraw-token-balance').innerText = (player._tokenBalance / 100).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
+        document.getElementById('withdraw-rule').innerText = GVAR.localization[24][GVAR.language]
+        document.getElementById('withdraw-adress-text').innerText = GVAR.localization[25][GVAR.language]
+        document.getElementById('withdraw-amount-text').innerText = GVAR.localization[26][GVAR.language]
+        document.getElementById('confirm-withdraw-text').innerText = GVAR.localization[27][GVAR.language]
+    }    
+}
+
+export const withdraw = new WithdrawMenu();
