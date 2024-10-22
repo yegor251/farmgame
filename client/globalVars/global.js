@@ -1,3 +1,4 @@
+import l from "../assets/localization/localization.js";
 class GlobalVars{
     constructor()
     {
@@ -11,7 +12,7 @@ class GlobalVars{
         this.redraw = true;
         this.confirmFlag = false;
         this.confirmTimer = null
-        this.localization = null
+        this.localization = l.localization
         this.language = 'en'
         this.tg_id = '1770661619'
         this.tg_name = 'qwerty123'

@@ -299,7 +299,7 @@ class Init {
         });
 
         // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357378`)
+        socketClient.send(`connect/2357379`)
         // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
 
         loader.updateLoading(loader.progress + 25, 'Init game session')
@@ -377,7 +377,6 @@ class Init {
             loader.updateLoading(loader.progress + 0.2, 'Loading images')
         }
 
-        GVAR.localization = await loadJson('client/assets/localization/localization.json')
 
         const loadAssets = async (type, name) => {
             let data = {}
@@ -457,10 +456,8 @@ class Init {
 const init = new Init();
   
 init.loadRes().then(async () => {
-    const script = document.createElement('script');
-    script.src = 'client/index.js';
-    script.type = 'module'
-    document.body.appendChild(script);
+    const { main } = await import('./index.js');
+    main();
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
     loader.updateLoading(loader.progress + 25, 'Preparation')
     const interv = setInterval(() => {
