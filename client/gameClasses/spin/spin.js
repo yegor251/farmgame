@@ -44,6 +44,7 @@ class Spin {
         if (Math.floor(Date.now() / 1000) < player._spinTimeStamp){
             this.startTimer()
         }
+        GVAR.closeAllWindows()
         this.renderSpin();
         document.getElementById("spin-wrap").style.display = "flex";
     }

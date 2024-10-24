@@ -138,9 +138,23 @@ class Mouse{
                                 RES.buildings['garden'].floatPrice *= CVAR.nextGardenPriceCoef
                                 RES.buildings['garden'].price = Math.floor(RES.buildings['garden'].floatPrice)
                             }
+                            if (player._phantomStructure.structure._type == 'garden' && GVAR.countBuilding('garden') == 1){
+                                const customEvent = new Event('firstGardenPlace');
+                                document.body.dispatchEvent(customEvent);
+                            } else if (player._phantomStructure.structure._type == 'bakery' && GVAR.countBuilding('bakery') == 1){
+                                const customEvent = new Event('firstBuildingPlace');
+                                document.body.dispatchEvent(customEvent);
+                            }
                             player._phantomStructure = "none"
                         } else {
                             GVAR.showFloatingText(10)
+                            if (player._phantomStructure.structure._type == 'garden' && GVAR.countBuilding('garden') == 0){
+                                const customEvent = new Event('firstGardenPlaceBad');
+                                document.body.dispatchEvent(customEvent);
+                            } else if (player._phantomStructure.structure._type == 'bakery' && GVAR.countBuilding('bakery') == 0) {
+                                const customEvent = new Event('firstBuildingPlaceBad');
+                                document.body.dispatchEvent(customEvent);
+                            }
                         }
                     } else if (player._phantomStructure.structureType == 'animal' && RES.buildingNames.animalPen.includes(tiles[mouse._mapPos.i][mouse._mapPos.j]._structure._type) && tiles[mouse._mapPos.i][mouse._mapPos.j]._structure.canAddAnimal(player._phantomStructure.structure._type)){
                         tiles[mouse._mapPos.i][mouse._mapPos.j]._structure.addAnimal()

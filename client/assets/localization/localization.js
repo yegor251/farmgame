@@ -146,6 +146,54 @@ class local{
               "ru": "Хотите удалить это препятствие?",
               "en": "Do you want to remove this obstacle?"
             },
+            "37": {
+              "ru": "Добро пожаловать на ферму! Для начала пройдите обучение! Откройте магазин",
+              "en": "Welcome to the farm! First, take the training! Open shop"
+            },
+            "38": {
+              "ru": "Зажмите, чтобы выбрать грядку",
+              "en": "Hold to select a garden"
+            },
+            "39": {
+              "ru": "Разместите грядку на свободном месте",
+              "en": "Place the garden in a free space"
+            },
+            "40": {
+              "ru": "Зажмите, чтобы выбрать растение для посадки",
+              "en": "Hold to select a plant for planting"
+            },
+            "41": {
+              "ru": "Перетащите растение в область грядки",
+              "en": "Drag the plant into the garden area"
+            },
+            "42": {
+              "ru": "Зажмите, чтобы выбрать печку",
+              "en": "Hold to select the bakery"
+            },
+            "43": {
+              "ru": "Разместите печку на свободном месте",
+              "en": "Place the bakery in a free space"
+            },
+            "44": {
+              "ru": "Для крафта хлеба зажмите его",
+              "en": "To craft bread, hold it"
+            },
+            "45": {
+              "ru": "И перетащите в зону печи",
+              "en": "And drag it to the bakery area"
+            },
+            "46": {
+              "ru": "Это беслатный спин, нажмите, чтобы получить предметы",
+              "en": "This is a free spin, click to get items"
+            },
+            "47": {
+              "ru": "Это доска заказов, их нужно выполнять для заработка денег и токенов. Выберите заказ нажав по нему",
+              "en": "This is an order board, you need to execute them to earn money and tokens. Select an order by clicking on it"
+            },
+            "48": {
+              "ru": "Выполните заказ, нажав по галочке, вы также можете удалить заказ, нажав по мусорке",
+              "en": "Complete the order by clicking on the check mark, you can also delete the order by clicking on the trash can"
+            },
             "tomatoJuice": {
               "name": {
                 "ru": "томатный сок",

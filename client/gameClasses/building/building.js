@@ -172,6 +172,10 @@ export default class Building extends Buildable{
                 player.pushInventory(key,this._craftingItems[0][key])
                 this._craftingItems.shift()
                 this._nowWorkIndex -= 1
+                if (GVAR.countBuilding('bakery') == 1 && player._networth == 40 && player._inventory['bread'] == 1){
+                    const customEvent = new Event('firstBreadDone');
+                    document.body.dispatchEvent(customEvent);
+                }
             } else {
                 GVAR.showFloatingText(3)
                 return false

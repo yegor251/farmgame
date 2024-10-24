@@ -48,11 +48,7 @@ class Shop{
         });        
     
         document.getElementById("open-shop").onclick = () => {
-            const slidableDiv = document.getElementById('shop');
-            slidableDiv.classList.remove('slide-out');
-            GVAR.closeAllWindows();
-            document.getElementById("shop-wrap").style.display = "flex";
-            this.drawBuildingShop();
+            this.show()
         }        
 
         document.getElementById("closeStash").onclick = () => {
@@ -74,6 +70,13 @@ class Shop{
             }
         }
         upgButton.innerText = GVAR.localization[8][GVAR.language]
+    }
+    show(){
+        const slidableDiv = document.getElementById('shop');
+        slidableDiv.classList.remove('slide-out');
+        GVAR.closeAllWindows();
+        document.getElementById("shop-wrap").style.display = "flex";
+        this.drawBuildingShop();
     }
     drawBuildingShop(){
         const shop = document.getElementById('shop-list');
@@ -157,6 +160,15 @@ class Shop{
                             setTimeout(() => {
                                 mouse._isBlockAfterShop = false
                             }, 1000);
+
+                            if (building == 'garden' && GVAR.countBuilding('garden') == 0){
+                                const customEvent = new Event('firstGarden');
+                                document.body.dispatchEvent(customEvent);
+                            }
+                            if (building == 'bakery' && GVAR.countBuilding('bakery') == 0){
+                                const customEvent = new Event('firstBuilding');
+                                document.body.dispatchEvent(customEvent);
+                            }
                             mouse.onMouseMove(e);
                         }
                     }, 300);

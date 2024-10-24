@@ -184,3 +184,25 @@ body{
     word-wrap: break-word;
     text-align: center;
 }
+.education-activ-zone {
+    background-color: rgba(255, 255, 255, 0);
+    position: absolute;
+}
+.education-unactiv-zone {
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    position: absolute;
+}
+#education-menu-wrap {
+    z-index: 1000;
+    pointer-events: none;
+}
+.education-text {
+    z-index: 1001;
+    position: absolute;
+    font-size: 6vw;
+    color: white;
+    word-wrap: break-word;
+    text-align: center;
+    text-shadow: 0.4vw 0.4vw 0vw black;
+}

@@ -76,7 +76,7 @@ class FieldMenu{
         RES.names.plants.forEach(plant =>
         {
             const craft = document.createElement("div")
-            craft.className = "craft"
+            craft.className = "plant-craft"
 
             const craftImg = document.createElement("div")
             craftImg.style.backgroundImage = `url(client/assets/items/${plant}.png)`
@@ -101,6 +101,10 @@ class FieldMenu{
             const field = this.field;
             if (player._inventory[plant] > 0) {
                 craftImg.addEventListener('touchstart', function (e) {
+                    if (GVAR.countBuilding('garden') == 1 && player._inventory['wheat'] == 4 && GVAR.countBuilding('bakery') == 0){
+                        const customEvent = new Event('firstPlant');
+                        document.body.dispatchEvent(customEvent);
+                    }
                     e.preventDefault();
                     const clone = this.cloneNode(true);
                     clone.classList.add('clone-image');
@@ -129,9 +133,18 @@ class FieldMenu{
                         const cloneRect = clone.getBoundingClientRect();
                         const visualRect = document.getElementById('field-img').getBoundingClientRect();
                         if (isIntersecting(cloneRect, visualRect) && field.canCreatePlant(plant)) {
+                            if (GVAR.countBuilding('garden') == 1 && player._inventory['wheat'] == 4 && GVAR.countBuilding('bakery') == 0){
+                                const customEvent = new Event('firstPlantDone');
+                                document.body.dispatchEvent(customEvent);
+                            }
                             player._inventory[plant] -= 1;
                             field.createPlant(plant)
                             thisMenu.renderPlants()
+                        } else {
+                            if (GVAR.countBuilding('garden') == 1 && player._inventory['wheat'] == 4 && GVAR.countBuilding('bakery') == 0){
+                                const customEvent = new Event('firstPlantBad');
+                                document.body.dispatchEvent(customEvent);
+                            }
                         }
                         clone.remove();
                     };

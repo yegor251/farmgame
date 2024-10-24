@@ -7,11 +7,14 @@ import Calc from "../../calc.js";
 class BuildingMenu {
     constructor() {
         document.getElementById("close-building-menu").onclick = () => {
-            this.building = 'none';
-            document.getElementById("building-menu-wrap").style.display = "none";
-            document.getElementById("buttons-bar").style.display = "flex";
+            this.close()
         };
         this.building = 'none';
+    }
+    close(){
+        this.building = 'none';
+        document.getElementById("building-menu-wrap").style.display = "none";
+        document.getElementById("buttons-bar").style.display = "flex";
     }
     show(building) {
         this.building = building;
@@ -129,6 +132,10 @@ class BuildingMenu {
                 craftImg.style.filter = 'grayscale(100%)'
             }
             craftImg.addEventListener('touchstart', function (e) {
+                if (!player._inventory['bread']){
+                    const customEvent = new Event('firstBread');
+                    document.body.dispatchEvent(customEvent);
+                }
                 e.preventDefault();
                 if (!building.canStartWork(RES.buildings[type].workTypes[product])){
                     GVAR.showFloatingText(6)
@@ -162,8 +169,21 @@ class BuildingMenu {
                     const cloneRect = clone.getBoundingClientRect();
                     const visualRect = document.getElementById('building-visual').getBoundingClientRect();
                     if (isIntersecting(cloneRect, visualRect) && building.canStartWork(RES.buildings[type].workTypes[product])) {
+                        if (!player._inventory['bread']){
+                            const customEvent = new Event('firstBreadStart');
+                            document.body.dispatchEvent(customEvent);
+                        }
                         building.startWork(RES.buildings[type].workTypes[product]);
                         thisMenu.renderCrafts();
+                    } else {
+                        GVAR.buildableArr.forEach(el => {
+                            if (el._type == 'bakery'){
+                                if (player._inventory['bread'] == undefined || (player._networth == 40 && el._craftingItems.length == 0)) {
+                                    const customEvent = new Event('firstBreadBad');
+                                    document.body.dispatchEvent(customEvent);
+                                }
+                            }
+                        });
                     }
                     clone.remove();
                 };

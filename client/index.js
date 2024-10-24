@@ -1,23 +1,3 @@
-import GVAR from './globalVars/global.js';
-import { canvas, ctx } from './globalVars/canvas.js';
-import tiles from './globalVars/tiles.js';
-import mouse from './gameClasses/controller/mouse.js';
-import camera from './gameClasses/controller/camera.js';
-import shop from './gameClasses/shop/shop.js';
-import player from './gameClasses/player/player.js';
-import { spin } from './gameClasses/spin/spin.js';
-import { buisnessMenu } from './gameClasses/buisness/buisnessMenu.js';
-import { orderManager } from './gameClasses/orders/orders.js';
-import boosterMenu from './gameClasses/boosterMenu/boosterMenu.js';
-import { transactionsMenu } from './gameClasses/transactionsMenu/transactionsMenu.js';
-import { dealmenu } from './gameClasses/ton-connect/tonMenu.js';
-import { mainMenu } from './gameClasses/mainMenu/mainMenu.js';
-import { buildingMenu } from './gameClasses/building/buildingMenu.js';
-import { animalMenu } from './gameClasses/animals/animalMenu.js';
-import { fieldMenu } from './gameClasses/field/fieldMenu.js';
-import CVAR from './globalVars/const.js';
-import { bushMenu } from './gameClasses/bush/bushMenu.js';
-import RES from './resources.js';
 
 export async function main() {
     const [
@@ -40,7 +20,8 @@ export async function main() {
         { fieldMenu },
         { default: CVAR },
         { bushMenu },
-        { default: RES }
+        { default: RES },
+        { educationMenu }
     ] = await Promise.all([
         import('./globalVars/global.js'),
         import('./globalVars/canvas.js'),
@@ -61,12 +42,15 @@ export async function main() {
         import('./gameClasses/field/fieldMenu.js'),
         import('./globalVars/const.js'),
         import('./gameClasses/bush/bushMenu.js'),
-        import('./resources.js')
+        import('./resources.js'),
+        import('./gameClasses/education/educationMenu.js')
     ]);
-
-    // Здесь выполните действия после загрузки всех модулей
-    console.log("Все модули загружены");
+    educationMenu.start()
     tiles[10][10].createBuilding('huge_swamp')
+    // if (player._inventory['wheat'] == 0){
+    //     socketClient.send('buy/wheat/4')
+    //     socketClient.send('regen')
+    // }
 
     // Ensure the document is scrollable
     function ensureDocumentIsScrollable() {

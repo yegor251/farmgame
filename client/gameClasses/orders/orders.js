@@ -111,6 +111,7 @@ class Orders {
         completeButton.className = `complete-order`;
         if (this.verifyOrder(order))
             completeButton.onclick = () => {
+                GVAR.canRerollOrders = true
                 this.completeOrder(order);
             };
         else
@@ -119,11 +120,13 @@ class Orders {
         const rerollButton = document.createElement("div");
         rerollButton.className = `reroll-order`;
         rerollButton.onclick = () => {
-            if (GVAR.confirmFlag)
-                this.rerollOrder(order);
-            else {
-                GVAR.setConfirm()
-                GVAR.showFloatingText(4)
+            if (GVAR.canRerollOrders) {
+                if (GVAR.confirmFlag)
+                    this.rerollOrder(order);
+                else {
+                    GVAR.setConfirm()
+                    GVAR.showFloatingText(4)
+                }
             }
         };
         document.getElementById('order-buttons-bar').innerHTML = ''

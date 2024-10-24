@@ -18,3 +18,9 @@
     overflow: hidden;
     z-index: 1000;
 }
+.plant-craft {
+    width: 17%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible;
+}

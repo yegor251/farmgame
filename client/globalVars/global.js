@@ -16,6 +16,7 @@ class GlobalVars{
         this.language = 'en'
         this.tg_id = '1770661619'
         this.tg_name = 'qwerty123'
+        this.canRerollOrders = false
     }
     countBuilding(type){
         let counter = 0
