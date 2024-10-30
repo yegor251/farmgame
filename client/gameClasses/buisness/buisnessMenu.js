@@ -132,7 +132,13 @@ class BuisnessMenu{
         document.getElementById('business_invest').oninput = () =>  {
             document.getElementById('business_invest_sum').innerText = document.getElementById('business_invest').value
             document.getElementById('buisness-inactive-income').innerText = GVAR.localization[60][GVAR.language] + (document.getElementById('business_invest').value * businessesProperties[this.currBusiness].income).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
-        }       
+        }     
+        document.getElementById('buisness-properties-wrap').onclick = (event) => {
+            if (event.target === event.currentTarget) {
+                this.closeBuisnessProp()
+            }
+        };
+          
     }
     closeBuisnessProp(){
         document.getElementById("buisness-properties-wrap").style.display = "none"
