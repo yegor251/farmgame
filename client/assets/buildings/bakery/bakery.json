@@ -11,7 +11,7 @@
       "bread":
       {
           "minLevel": 1,
-          "timeToFinish": 180,
+          "timeToFinish": 120,
           "items":
           {
               "wheat": 3
