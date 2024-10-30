@@ -31,8 +31,8 @@ class local{
                 "en": "successfully"
             },
             "8": {
-                "ru": "улучшить",
-                "en": "upgrade"
+                "ru": "Улучшить",
+                "en": "Upgrade"
             },
             "9": {
                 "ru": "купить за { токенов?",
@@ -193,6 +193,74 @@ class local{
             "48": {
               "ru": "Выполните заказ, нажав по галочке, вы также можете удалить заказ, нажав по мусорке",
               "en": "Complete the order by clicking on the check mark, you can also delete the order by clicking on the trash can"
+            },
+            "49": {
+              "ru": "Чтобы получить 0.5 токена приглашайте друзей!",
+              "en": "To get 0.5 token, invite your friends!"
+            },
+            "50": {
+              "ru": "Пригласить друзей",
+              "en": "Invite your friends"
+            },
+            "51": {
+              "ru": "Хотите купить { за } токенов?",
+              "en": "Do you want to buy { for } tokens?"
+            },
+            "52": {
+              "ru": "Покупайте майнинг оборудование за токены, вкладывайте в него токены и преумножайте их! Блокировка токенов происходит на 15 дней",
+              "en": "Buy mining equipment for tokens, invest tokens in it and multiply them! Tokens are blocked for 15 days"
+            },
+            "53": {
+              "ru": "Максимальная вместимость: ",
+              "en": "Max capacity: "
+            },
+            "54": {
+              "ru": "Депозит: ",
+              "en": "Deposit: "
+            },
+            "55": {
+              "ru": "Уровень: ",
+              "en": "Level: "
+            },
+            "56": {
+              "ru": "Цена улучшения: ",
+              "en": "Upgrade price: "
+            },
+            "57": {
+              "ru": "Вложить",
+              "en": "Invest"
+            },
+            "58": {
+              "ru": "Вложено: ",
+              "en": "Invested: "
+            },
+            "59": {
+              "ru": "Доход: { токенов",
+              "en": "Income: { tokens"
+            },
+            "60": {
+              "ru": "Доход: ",
+              "en": "Income: "
+            },
+            "b0": {
+              "ru": "НОУТБУК",
+              "en": "LAPTOP"
+            },
+            "b1": {
+              "ru": "ВИДЕОКАРТА",
+              "en": "VIDEO CARD"
+            },
+            "b2": {
+              "ru": "МАЙНИНГ БОКС",
+              "en": "MINING BOX"
+            },
+            "b3": {
+              "ru": "ЦЕНТРАЛЬНЫЙ МАЙНИНГ-ХАБ",
+              "en": "CENTRAL MINE HUB"
+            },
+            "b4": {
+              "ru": "СУПЕРКОМПЬЮТЕР",
+              "en": "SUPERCOMPUTER"
             },
             "tomatoJuice": {
               "name": {

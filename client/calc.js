@@ -102,20 +102,24 @@ export default class Calc{
         )
     }
     static formatTime(seconds) {
-        let hours = Math.floor(seconds / 3600);
+        let days = Math.floor(seconds / 86400);
+        let hours = Math.floor((seconds % 86400) / 3600);
         let minutes = Math.floor((seconds % 3600) / 60);
         let secs = seconds % 60;
     
         let result = [];
+        if (days > 0) {
+            result.push(days + 'd');
+        }
         if (hours > 0) {
             result.push(hours + 'h');
         }
         if (minutes > 0) {
             result.push(minutes + 'm');
         }
-        if (secs > 0 || (hours === 0 && minutes === 0 && secs === 0)) {
+        if (secs > 0 || (days === 0 && hours === 0 && minutes === 0 && secs === 0)) {
             result.push(secs + 's');
         }
         return result.join(' ');
-    }
+    }    
 }

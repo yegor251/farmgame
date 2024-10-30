@@ -1,3 +1,5 @@
+import socketClient from './init.js';
+
 
 export async function main() {
     const [
@@ -46,11 +48,15 @@ export async function main() {
         import('./gameClasses/education/educationMenu.js')
     ]);
     educationMenu.start()
+    buisnessMenu.init()
     tiles[10][10].createBuilding('huge_swamp')
-    // if (player._inventory['wheat'] == 0){
-    //     socketClient.send('buy/wheat/4')
-    //     socketClient.send('regen')
-    // }
+    if (player._inventory['wheat'] == 0){
+        socketClient.send('buy/wheat/4')
+        socketClient.send('regen')
+    }
+    // socketClient.send(`business/buy/${0}/0`)
+    // socketClient.send(`business/upgrade/${0}/0`)
+    // socketClient.send(`business/collect/${0}/0`)
 
     // Ensure the document is scrollable
     function ensureDocumentIsScrollable() {

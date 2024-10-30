@@ -24,6 +24,29 @@ class MainManu {
         document.getElementById("token-withdraw-button").onclick = () => {
             withdraw.show();
         }
+        this.link = `t.me/tonfarmgame_bot?start=${GVAR.tg_id}`
+        document.getElementById("referral-link").innerText = `t.me/tonfarmgame_bot?start=${GVAR.tg_id}`
+        document.getElementById('referral-text').innerText = GVAR.localization[49][GVAR.language]
+        document.getElementById('referral-button-text').innerText = GVAR.localization[50][GVAR.language]
+        document.querySelectorAll('.tap-to-copy').forEach(text => {
+            text.innerText = GVAR.localization[17][GVAR.language];
+        });
+        document.getElementById("referral-yes").onclick = () => {
+            GVAR.showFloatingText(22);
+            document.getElementById("referral-menu-wrap").style.display = 'none'
+            navigator.clipboard.writeText(this.link).then(() => {
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        }
+
+        document.getElementById("referral-no").onclick = () => {
+            document.getElementById("referral-menu-wrap").style.display = 'none'
+        }
+
+        document.getElementById("referral-container").onclick = () => {
+            document.getElementById("referral-menu-wrap").style.display = 'flex'
+        }
     }
     show(){
         GVAR.closeAllWindows()

@@ -9,8 +9,6 @@ import loader from "./loadingScreen.js";
 class SocketClient{
     constructor()
     {
-        window.Telegram.WebApp.expand();
-        window.Telegram.WebApp.disableVerticalSwipes();
         this.requestQueue = new Array()
         this.socket = new WebSocket('ws:localhost:8000');
         this.gameSessionPromiseResolve = null;
@@ -137,7 +135,6 @@ class SocketClient{
     }
   	regenPlayer(data){
 		player._inventory = data.player.Inventory.map
-        player._inventory['chickenFeed'] = 10
         player._inventorySize = 50 + 10 * data.player.Inventory.level
 		player._money = data.player.money
         player._networth = data.player.networth
@@ -145,6 +142,7 @@ class SocketClient{
         player.updateMoney()
         player._tonBalance = data.wallet.tonBalance
         player._usdtBalance = data.wallet.usdtBalance
+        player._buisnesses = data.businesses
 
         player._spinItems = data.player.spin.items
         player._isSpinActivated = data.player.spin.activated
@@ -278,6 +276,17 @@ export default socketClient;
 
 class Init {
     constructor() {
+        if (Object.keys(window.Telegram.WebApp.initDataUnsafe).length != 0){
+            window.Telegram.WebApp.expand();
+            window.Telegram.WebApp.disableVerticalSwipes();
+            GVAR.tg_id = window.Telegram.WebApp.initDataUnsafe.user.id
+            GVAR.tg_name = window.Telegram.WebApp.initDataUnsafe.user.username
+            if (window.Telegram.WebApp.initDataUnsafe.user.language_code === 'ru') {
+                GVAR.language = 'ru'
+            } else {
+                GVAR.language = 'en'
+            }
+        }
     }
     async initMap(){
         loader.updateLoading(loader.progress, 'Initializing map')
@@ -298,9 +307,11 @@ class Init {
             tiles[RES.buildings[name].i][RES.buildings[name].j].createBuilding(name)
         });
 
-        // socketClient.send(`connect/` + Math.ceil(Date.now() / 10000))
-        socketClient.send(`connect/2357379`)
-        // socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.user.id}`)
+        if (Object.keys(window.Telegram.WebApp.initDataUnsafe).length != 0) {
+            socketClient.send(`connect/${GVAR.tg_id}`)
+        } else {
+            socketClient.send(`connect/2357473`)
+        }
 
         loader.updateLoading(loader.progress + 25, 'Init game session')
         await socketClient.gameSessionPromise;

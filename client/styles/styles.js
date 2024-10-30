@@ -112,6 +112,58 @@ document.getElementById('proceed-to-buy').addEventListener('touchend', () => {
     document.getElementById('proceed-to-buy').style.backgroundImage = "url('client/assets/design/grey_button_1.png')";
 });
 
+document.getElementById('open-buisness-button').addEventListener('touchstart', () => {
+    document.getElementById('open-buisness-button').style.backgroundImage = `url('client/assets/design/open_business_2.png')`
+});
+
+document.getElementById('open-buisness-button').addEventListener('touchend', () => {
+    document.getElementById('open-buisness-button').style.backgroundImage = "url('client/assets/design/open_business_1.png')";
+});
+
+document.getElementById('buisness-question').addEventListener('touchstart', () => {
+    document.getElementById('buisness-question').style.backgroundImage = `url('client/assets/design/buisness_question_button_2.png')`
+});
+
+document.getElementById('buisness-question').addEventListener('touchend', () => {
+    document.getElementById('buisness-question').style.backgroundImage = "url('client/assets/design/buisness_question_button_1.png')";
+});
+
+document.getElementById('buisness-question-close').addEventListener('touchstart', () => {
+    document.getElementById('buisness-question-close').style.backgroundImage = `url('client/assets/design/exit_button_metal_2.png')`
+});
+
+document.getElementById('buisness-question-close').addEventListener('touchend', () => {
+    document.getElementById('buisness-question-close').style.backgroundImage = "url('client/assets/design/exit_button_metal_1.png')";
+});
+
+document.querySelectorAll('.buisness-button').forEach(button => {
+    button.addEventListener('touchstart', () => {
+        button.style.backgroundImage = `url('client/assets/design/grey_button_2.png')`;
+    });
+
+    button.addEventListener('touchend', () => {
+        button.style.backgroundImage = "url('client/assets/design/grey_button_1.png')";
+    });
+});
+
+document.getElementById('referral-button').addEventListener('touchstart', () => {
+    document.getElementById('referral-button').style.backgroundImage = `url('client/assets/design/referral_button_2.png')`
+});
+
+document.getElementById('referral-button').addEventListener('touchend', () => {
+    document.getElementById('referral-button').style.backgroundImage = "url('client/assets/design/referral_button_1.png')";
+});
+
+document.querySelectorAll('.upgrade-buildable-button').forEach(button => {
+    button.addEventListener('touchstart', () => {
+        button.style.backgroundImage = "url('client/assets/design/stash_button_upgrade_pressed.png')";
+    });
+
+    button.addEventListener('touchend', () => {
+        button.style.backgroundImage = "url('client/assets/design/stash_button_upgrade.png')";
+    });
+});
+
 document.querySelectorAll('.claim-deposit-button').forEach(button => {
     button.addEventListener('touchstart', () => {
         button.style.backgroundImage = "url('client/assets/design/grey_button_2.png')";

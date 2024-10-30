@@ -206,3 +206,77 @@ body{
     text-align: center;
     text-shadow: 0.4vw 0.4vw 0vw black;
 }
+#referral-menu {
+    width: 60vw;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #c9c2b3;
+    border-radius: 2vw;
+    border: 0.6vw solid #EAE6DE;
+    z-index: 1000;
+}
+#referral-text-bar, #referral-buttons-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+#referral-buttons-bar {
+    margin-bottom: 3vw;
+}
+#referral-yes, #referral-no {
+  width: 14vw;
+  height: 6vw;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 4.5vw;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#referral-yes {
+  background-color: green;
+}
+#referral-no {
+  background-color: red;
+}
+#referral-text {
+    font-size: 4vw;
+    word-wrap: break-word;
+    text-align: center;
+}
+#referral-button-text {
+    text-align: center;
+    font-size: 3.9vw;
+    word-wrap: break-word;
+}
+#referral-text, #referral-link {
+    font-size: 4.7vw;
+    text-align: center;
+    margin-bottom: 0.5vh;
+    margin-top: 2vw;
+}
+#referral-link {
+    margin-bottom: 4vw;
+}
+#referral-button {
+    width: 50%;
+    aspect-ratio: 96 / 33;
+    background-image: url('assets/design/referral_button_1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+}
+#referral-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

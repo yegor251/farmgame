@@ -37,6 +37,7 @@ class Player{
         }
         this._boostersArr = []
         this._transactions = []
+        this._buisnesses = []
     }
     upgradeInventory(){
         this._inventorySize += 10

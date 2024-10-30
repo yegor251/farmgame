@@ -121,6 +121,11 @@
                     <div id="booster" class="main-menu-button"></div>
                     <div id="open-deals" class="main-menu-button"></div>
                 </div>
+                <div id="referral-container">
+                    <div id="referral-button">
+                        <h3 id="referral-button-text"></h3>
+                    </div>
+                </div>
             </div>
             <div class="main-menu-bottom"></div>
         </div>
@@ -223,16 +228,82 @@
                 <div id="close-buisness-menu" class="exit_button_metal"></div>
             </div>
             <div class="buisness-menu-list">
+                <div id="buisness-menu-list-bar">
+                    <div id="buisness-question"></div>
+                    <h3 id="buisness-name"></h3>
+                </div>
                 <div class="buisness_slot">
                     <div class="buisness_slot_top"></div>
                     <div class="buisness_slot_img_bar">
                         <div id="buisness_slot_img"></div>
+                        <div id="buisness_slot_lock"></div>
                     </div>
                     <div class="buisness_slot_bottom"></div>
                 </div>
                 <div class="buisness-arrow-bar">
                     <div id="buisness-arrow1" class="buisness-arrow"></div>
+                    <div id="buisness-price-cont">
+                        <h3 id="buisness-price"></h3>
+                        <div id="open-buisness-button">Open</div>
+                    </div>
                     <div id="buisness-arrow2" class="buisness-arrow"></div>
+                </div>
+            </div>
+            <div class="buisness-menu-bottom"></div>
+        </div>
+    </div>
+    <div id="buisness-buy-wrap" class="menu-wrap">
+        <div id="buisness-buy">
+            <div id="buisness-buy-bar">
+                <h3 id="buisness-buy-text"></h3>
+            </div>
+            <div id="buisness-buy-buttons-bar">
+                <div id="buisness-yes">yes</div>
+                <div id="buisness-no">no</div>
+            </div>
+        </div>
+    </div>
+    <div id="buisness-question-wrap" class="menu-wrap">
+        <div id="buisness-question-menu">
+            <h3 id="buisness-question-text"></h3>
+            <div id="buisness-question-close"></div>
+        </div>
+    </div>
+    <div id="buisness-properties-wrap" class="menu-wrap">
+        <div id="buisness-properties">
+            <div class="buisness-menu-bar">
+                <div id="close-buisness-properties"></div>
+            </div>
+            <div id="buisness-properties-list" class="buisness-menu-list">
+                <div id="buisness-active">
+                    <h3 id="buisness-active-name"></h3>
+                    <h3 id="buisness-active-deposited" class="buisness-pro-text"></h3>
+                    <h3 id="buisness-active-earning" class="buisness-pro-text"></h3>
+                    <h3 id="buisness-active-level" class="buisness-pro-text"></h3>
+                    <h3 id="buisness-active-time" class="buisness-pro-text"></h3>
+                    <div id="buisness-claim-button" class="buisness-button">
+                        <h3 id="buisness-claim-button-text" class="buisness-button-text"></h3>
+                    </div>
+                </div>
+                <div id="buisness-inactive">
+                    <h3 id="buisness-inactive-name"></h3>
+                    <h3 id="buisness-inactive-capacity" class="buisness-pro-text"></h3>
+                    <h3 id="buisness-inactive-level" class="buisness-pro-text"></h3>
+                    <h3 id="buisness-inactive-upgrade-price" class="buisness-pro-text"></h3>
+                    <div id="buisness-upgarde-button" class="buisness-button">
+                        <h3 id="buisness-upgarde-button-text" class="buisness-button-text"></h3>
+                    </div>
+                    <div id="business-invest-div">
+                        <h3 id="buisness-inactive-income" class="buisness-pro-text"></h3>
+                        <div id="b-inv-sum-div">
+                            <h3 id="b-deposit-text" class="buisness-pro-text"></h3>
+                            <output id="business_invest_sum" class="buisness-pro-text">10</output>
+                        </div>
+                        <input type="range" id="business_invest" min="10" step="10">
+                    </div>
+                    <div id="buisness-start-button" class="buisness-button">
+                        <h3 id="buisness-start-button-text" class="buisness-button-text"></h3>
+                    </div>
                 </div>
             </div>
             <div class="buisness-menu-bottom"></div>
@@ -422,7 +493,7 @@
     <div id="selection-menu-wrap" class="menu-wrap">
         <div id="selection-menu">
             <div id="selection-text-bar">
-                <h3 id="selection-text">Текущий буст +10%.<br>Хотите купить +10% за 1000 золота?</h3>
+                <h3 id="selection-text"></h3>
             </div>
             <div id="selection-buttons-bar">
                 <div id="selection-yes">yes</div>
@@ -430,13 +501,25 @@
             </div>
         </div>
     </div>
+    <div id="referral-menu-wrap" class="menu-wrap">
+        <div id="referral-menu">
+            <div id="referral-text-bar">
+                <h3 id="referral-text"></h3>
+                <h3 id="referral-link"></h3>
+            </div>
+            <div id="referral-buttons-bar">
+                <div id="referral-yes">copy</div>
+                <div id="referral-no">close</div>
+            </div>
+        </div>
+    </div>
     <div id ="education-menu-wrap" class="menu-wrap"></div>
-    <!-- <script src="client/styles/styles.js"></script>
+    <script src="client/styles/styles.js"></script>
     <script src="client/tonweb.js"></script>
     <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-    <script src="client/init.js" type="module"></script> -->
-    <script src="client/tonweb.js"></script>
+    <script src="client/init.js" type="module"></script>
+    <!-- <script src="client/tonweb.js"></script>
     <script defer src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-    <script src="client/bundle.js" type="module"></script>
+    <script src="client/bundle.js" type="module"></script> -->
 </body>
 </html>
