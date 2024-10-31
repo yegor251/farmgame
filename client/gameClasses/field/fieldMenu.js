@@ -20,12 +20,13 @@ class FieldMenu{
         this.renderPlants()
     }
     close(){
+        this.field = 'none'
         document.getElementById("field-menu-wrap").style.display = "none";
         document.getElementById("buttons-bar").style.display = "flex";
     }
     renderTimer() {
         const textTime = document.getElementById("field-timeToFinish");
-        if (this.field._plant === "none") {
+        if (this.field._plant === "none" || !this.field._plant) {
             textTime.innerText = '-';
         } else {
             textTime.innerText = Calc.formatTime(Math.floor(this.field._plant._timeToGrow / 1000));
@@ -34,7 +35,7 @@ class FieldMenu{
         let remainingTime = 0;
         let totalTime = 1; 
     
-        if (this.field._plant !== "none") {
+        if (this.field._plant !== "none" && this.field._plant) {
             remainingTime = this.field._plant._timeToGrow;
             totalTime = this.field._plant._plantTimeStamp;
             if (remainingTime === 0) {
@@ -61,7 +62,7 @@ class FieldMenu{
     
 
         const plantImg = document.getElementById('overlay-plant-img');
-        if (this.field._plant !== 'none') {
+        if (this.field._plant !== 'none' && this.field._plant) {
             plantImg.style.backgroundImage = `url(${this.field._plant._image.src})`;
             plantImg.style.aspectRatio = `${this.field._plant._image.width} / ${this.field._plant._image.height}`
             plantImg.style.display = 'flex';

@@ -84,8 +84,14 @@ export async function main() {
     window.onresize = () => {
         canvas.setAttribute('width', window.innerWidth);
         canvas.setAttribute('height', window.innerHeight);
-        GVAR.rescale = true;
-    }
+        ctx.imageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.msImageSmoothingEnabled = false;
+        camera.updateMapBoundingBox()
+        camera.move(0,0)
+        GVAR.redraw = true;
+    }  
 
     document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
