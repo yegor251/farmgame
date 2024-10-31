@@ -308,9 +308,9 @@ class Init {
         });
 
         if (Object.keys(window.Telegram.WebApp.initDataUnsafe).length != 0) {
-            socketClient.send(`connect/${GVAR.tg_id}`)
+            socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.query_id}`)
         } else {
-            socketClient.send(`connect/2357473`)
+            socketClient.send(`connect/2357474`)
         }
 
         loader.updateLoading(loader.progress + 25, 'Init game session')
