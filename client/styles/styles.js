@@ -281,3 +281,8 @@ document.getElementById('withdraw-amount').addEventListener('paste', function (e
 document.getElementById('selection-no').onclick = () => {
     document.getElementById('selection-menu-wrap').style.display = 'none'
 }
+
+document.getElementById("selection-menu-wrap").onclick = (e) => {
+    if (e.target == document.getElementById("selection-menu-wrap"))
+        document.getElementById('selection-menu-wrap').style.display = 'none'
+};

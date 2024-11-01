@@ -1,5 +1,3 @@
-import socketClient from './init.js';
-
 
 export async function main() {
     const [
@@ -23,7 +21,7 @@ export async function main() {
         { default: CVAR },
         { bushMenu },
         { default: RES },
-        { educationMenu }
+        { educationMenu },
     ] = await Promise.all([
         import('./globalVars/global.js'),
         import('./globalVars/canvas.js'),
@@ -45,18 +43,20 @@ export async function main() {
         import('./globalVars/const.js'),
         import('./gameClasses/bush/bushMenu.js'),
         import('./resources.js'),
-        import('./gameClasses/education/educationMenu.js')
+        import('./gameClasses/education/educationMenu.js'),
     ]);
     educationMenu.start()
     buisnessMenu.init()
-    tiles[10][10].createBuilding('huge_swamp')
-    if (player._inventory['wheat'] == 0){
-        socketClient.send('buy/wheat/4')
-        socketClient.send('regen')
+
+    function renderMenues() {
+        shop.drawAnimalPenShop()
+        shop.drawAnimalShop()
+        shop.drawBuildingShop()
+        shop.drawBushShop()
+        shop.drawPlantShop()
     }
-    // socketClient.send(`business/buy/${0}/0`)
-    // socketClient.send(`business/upgrade/${0}/0`)
-    // socketClient.send(`business/collect/${0}/0`)
+
+    renderMenues()
 
     // Ensure the document is scrollable
     function ensureDocumentIsScrollable() {

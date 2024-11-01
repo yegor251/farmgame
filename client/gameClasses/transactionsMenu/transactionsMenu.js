@@ -4,14 +4,18 @@ import GVAR from "../../globalVars/global.js";
 
 class TransactionsMenu {
     constructor() {
-        document.getElementById("closeTransaction").onclick = () => this.closeMenu();
+        document.getElementById("closeTransaction").onclick = () => this.close();
         document.getElementById('open-transactions').onclick = () => {
             GVAR.closeAllWindows();
             document.getElementById('transaction-wrap').style.display = 'flex'
-            this.renderMenu();
+            this.show();
         }
+        document.getElementById("transaction-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("transaction-wrap"))
+                this.close()
+        };
     }
-    renderMenu(){
+    show(){
         function formatTime(timeStamp) {
             const date = new Date(timeStamp * 1000);
             const options = { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' };
@@ -108,7 +112,7 @@ class TransactionsMenu {
                     socketClient.send(`claim/${item.index}`);
                     socketClient.send('regen')
                     item.active = false;
-                    this.renderMenu();
+                    this.show();
                 }
             } else {
                 claimButton.className = 'img-claimed';
@@ -121,7 +125,7 @@ class TransactionsMenu {
           
         transactionsContent.appendChild(table);                 
     }
-    closeMenu() {
+    close() {
         document.getElementById('transaction-wrap').style.display = 'none';
         document.getElementById("main-menu-wrap").style.display = "flex";
     }

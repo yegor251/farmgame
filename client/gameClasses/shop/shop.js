@@ -10,7 +10,6 @@ import socketClient from "../../init.js";
 class Shop{
     constructor() {
         const shopWrap = document.getElementById('shop-wrap');
-        const shopBar = document.getElementById('shop-bar');
         shopWrap.addEventListener('click', function(event) {
             if (!(event.target.closest('#shop-bar') || event.target.closest('#shop-list'))) {
                 const slidableDiv = document.getElementById('shop');
@@ -52,9 +51,12 @@ class Shop{
         }        
 
         document.getElementById("closeStash").onclick = () => {
-            document.getElementById("stash-wrap").style.display = "none";
-            document.getElementById("buttons-bar").style.display = "flex";
+            this.closeStash()
         }
+        document.getElementById("stash-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("stash-wrap"))
+                this.closeStash()
+        };
         const upgButton = document.getElementById('upgrade-stash-button')
         upgButton.onclick = () => {
             document.getElementById('selection-menu-wrap').style.display = 'flex'
@@ -252,7 +254,7 @@ class Shop{
 
             if (player._money < RES.plants[plant].seed.price)
                 img.style.filter = 'grayscale(100%)';
-            img.addEventListener("click", function(e) {
+            img.onclick = () => {
                 if (player._money < RES.plants[plant].seed.price){
                     GVAR.showFloatingText(1)
                     return
@@ -264,7 +266,9 @@ class Shop{
                 player.buy(RES.plants[plant].seed.price)
                 player.pushInventory(plant, 1)
                 socketClient.send(`buy/${plant}/${1}`)
-            });
+                if (player._money < RES.plants[plant].seed.price)
+                    img.style.filter = 'grayscale(100%)';
+            }
             shopItem.className = "shop-item";
             shop.appendChild(itemContent);
         });
@@ -639,6 +643,10 @@ class Shop{
                 stashList.appendChild(div);
             }
         }
+    }
+    closeStash(){
+        document.getElementById("stash-wrap").style.display = "none";
+        document.getElementById("buttons-bar").style.display = "flex";
     }
 }
 const shop = new Shop();

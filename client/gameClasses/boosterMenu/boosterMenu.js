@@ -12,6 +12,10 @@ class BoosterMenu{
         document.getElementById("booster").onclick = () => {
             this.show()
         }
+        document.getElementById("booster-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("booster-menu-wrap"))
+                this.close()
+        };
     }
     show(){
         GVAR.closeAllWindows();

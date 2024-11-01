@@ -8,6 +8,10 @@ class BushMenu{
         document.getElementById("close-bush-menu").onclick = () => {
             this.close()
         }
+        document.getElementById("bush-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("bush-menu-wrap"))
+                this.close()
+        };
         this.bush = 'none'
     }
     close(){

@@ -8,6 +8,10 @@ class FieldMenu{
         document.getElementById("close-field-menu").onclick = () => {
             this.close()
         }
+        document.getElementById("field-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("field-menu-wrap"))
+                this.close()
+        };
         this.field = 'none'
     }
     show(field){

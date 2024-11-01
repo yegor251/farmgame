@@ -8,6 +8,10 @@ class AnimalMenu{
         document.getElementById("close-animal-menu").onclick = () => {
             this.close()
         }
+        document.getElementById("animal-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("animal-menu-wrap"))
+                this.close()
+        };
         this.animalPen = 'none'
     }
     close(){

@@ -9,6 +9,10 @@ class ObstacleMenu {
         document.getElementById("close-obstacle-menu").onclick = () => {
             this.close()
         };
+        document.getElementById("obstacle-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("obstacle-menu-wrap"))
+                this.close()
+        };
         this.obstacle = 'none';
     }
     show(obstacle) {

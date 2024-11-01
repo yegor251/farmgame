@@ -22,8 +22,7 @@ for (let i = 0; i < 4; i++) {
 class BuisnessMenu{
     constructor() {
         document.getElementById("close-buisness-menu").onclick = () => {
-            document.getElementById("buisness-menu-wrap").style.display = "none";
-            document.getElementById("main-menu-wrap").style.display = "flex";
+            this.close()
         }
         document.getElementById("open-buisness").onclick = () => {
             this.show();
@@ -138,7 +137,14 @@ class BuisnessMenu{
                 this.closeBuisnessProp()
             }
         };
-          
+        document.getElementById("buisness-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("buisness-menu-wrap"))
+                this.close()
+        };
+        document.getElementById("buisness-question-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("buisness-question-wrap"))
+                document.getElementById("buisness-question-wrap").style.display = "none"
+        };
     }
     closeBuisnessProp(){
         document.getElementById("buisness-properties-wrap").style.display = "none"

@@ -17,7 +17,7 @@ class MainManu {
         }
         document.querySelectorAll('.donate-plus-button').forEach(button => {
             button.onclick = () => {
-                pm.drawPayMenu();
+                pm.show();
                 document.getElementById('main-menu-wrap').style.display = 'none';
             }
         });
@@ -47,6 +47,14 @@ class MainManu {
         document.getElementById("referral-container").onclick = () => {
             document.getElementById("referral-menu-wrap").style.display = 'flex'
         }
+        document.getElementById("main-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("main-menu-wrap"))
+                this.close()
+        };
+        document.getElementById("referral-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("referral-menu-wrap"))
+                document.getElementById("referral-menu-wrap").style.display = 'none'
+        };
     }
     show(){
         GVAR.closeAllWindows()

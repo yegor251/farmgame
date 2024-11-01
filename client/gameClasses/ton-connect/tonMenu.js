@@ -25,9 +25,12 @@ class PayMenu {
         })
 
         document.getElementById('close-payments').onclick = () => {
-            document.getElementById("payment-wrap").style.display = 'none';
-            document.getElementById("main-menu-wrap").style.display = "flex";
+            this.close()
         }
+        document.getElementById("payment-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("payment-wrap"))
+                this.close()
+        };
         document.getElementById("adress-copy-div").addEventListener("click", function() {
             GVAR.showFloatingText(22);
             navigator.clipboard.writeText(CVAR.wallet).then(() => {
@@ -43,7 +46,11 @@ class PayMenu {
             });
         });
     }
-    drawPayMenu() {
+    close(){
+        document.getElementById("payment-wrap").style.display = 'none';
+        document.getElementById("main-menu-wrap").style.display = "flex";
+    }
+    show() {
         document.getElementById("payment-wrap").style.display = "flex";
         document.getElementById("manual-pay-text").innerText = GVAR.localization[16][GVAR.language];
         document.getElementById("adress-text").innerText = CVAR.wallet;
@@ -112,15 +119,22 @@ class DealsMenu
         document.getElementById("open-deals").onclick = () => {
             GVAR.closeAllWindows();
             document.getElementById("deals-wrap").style.display = 'flex';
-            this.drawDealsMenu();
+            this.show();
         }
 
         document.getElementById("close-deals").onclick = () => {
-            document.getElementById("deals-wrap").style.display = "none";
-            document.getElementById("main-menu-wrap").style.display = "flex";
+            this.close()
         }
+        document.getElementById("deals-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("deals-wrap"))
+                this.close()
+        };
     }
-    drawDealsMenu() {
+    close(){
+        document.getElementById("deals-wrap").style.display = "none";
+        document.getElementById("main-menu-wrap").style.display = "flex";
+    }
+    show() {
         document.getElementById('deal-ton-balance').innerText = (player._tonBalance / 1000000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
         document.getElementById('deal-usdt-balance').innerText = (player._usdtBalance / 1000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
         const dealsWrap = document.getElementById("deals-list");
@@ -153,7 +167,7 @@ class DealsMenu
                         }
                         delete player._availableDeals[dealKey];
                         GVAR.showFloatingText(7)
-                        menu.drawDealsMenu()
+                        menu.show()
                     } else {
                         GVAR.showFloatingText(2)
                     }
@@ -173,9 +187,12 @@ class WithdrawMenu
 {
     constructor() {
         document.getElementById("close-withdraw-menu").onclick = () => {
-            document.getElementById("withdraw-menu-wrap").style.display = "none";
-            document.getElementById("main-menu-wrap").style.display = "flex";
+            this.close()
         }
+        document.getElementById("withdraw-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("withdraw-menu-wrap"))
+                this.close()
+        };
 
         function isValidTonAddress(address) {
             try {
@@ -220,6 +237,10 @@ class WithdrawMenu
             }
         }
 
+    }
+    close(){
+        document.getElementById("withdraw-menu-wrap").style.display = "none";
+        document.getElementById("main-menu-wrap").style.display = "flex";
     }
     show() {
         GVAR.closeAllWindows();

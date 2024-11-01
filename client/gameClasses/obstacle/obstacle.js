@@ -4,6 +4,7 @@ import Sprite from "../sprite/sprite.js";
 import RES from "../../resources.js";
 import { obstacleMenu } from "./obstacleMenu.js";
 import GVAR from "../../globalVars/global.js";
+import socketClient from "../../init.js";
 
 export default class Obstacle extends Sprite{
     constructor(x, y, type)
@@ -30,6 +31,7 @@ export default class Obstacle extends Sprite{
         obstacleMenu.show(this)
     }
     delete(){
+        socketClient.send(`rmobstacle/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
         GVAR.obstacleArr = GVAR.obstacleArr.filter(item => item !== this);
         GVAR.buildableArr = GVAR.buildableArr.filter(item => item !== this);
     }

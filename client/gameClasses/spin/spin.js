@@ -8,7 +8,7 @@ class Spin {
     constructor() {
         document.getElementById('spin-button').onclick = () => {
             if (!player._isSpinActivated || (player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) < 0){
-                if (player.getInvFullness() >= player._spinItems[player._spinDropIndex].amount){
+                if (player.getInvFullness() >= player._spinItems[player._spinDropIndex].amount || player._spinItems[player._spinDropIndex].item == 'money'){
                     player._isSpinActivated = true
                     this.doSpin()
                     socketClient.send('spin')
@@ -26,25 +26,31 @@ class Spin {
         document.getElementById("closeSpin").onclick = () => {
             this.close()
         }
+        document.getElementById("spin-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("spin-wrap"))
+                this.close()
+        };
     }
     startTimer(){
-        document.getElementById('spin-timer').style.display = 'flex'
-        document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
-        this.interval = setInterval(() => {
-            document.getElementById('spin-button').style.display = 'none'
-            if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && player._isSpinActivated) {
-                document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
-            } else {
-                socketClient.send('regen')
-                clearInterval(this.interval)
-                this.interval = null
-                document.getElementById('spin-timer').style.display = 'none'
-                document.getElementById('spin-button').style.display = 'flex'
-                this.renderSpin()
-            }
-        }, 1000);
+        if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && player._isSpinActivated) {
+            document.getElementById('spin-timer').style.display = 'flex'
+            document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
+            this.interval = setInterval(() => {
+                document.getElementById('spin-button').style.display = 'none'
+                if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && player._isSpinActivated) {
+                    document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
+                } else {
+                    socketClient.send('regen')
+                    clearInterval(this.interval)
+                    this.interval = null
+                    document.getElementById('spin-timer').style.display = 'none'
+                    document.getElementById('spin-button').style.display = 'flex'
+                    this.renderSpin()
+                }
+            }, 1000);
+        }
     }
-    open(){
+    show(){
         if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && !this.interval && player._isSpinActivated){
             document.getElementById('spin-button').style.display = 'none'
             this.startTimer()

@@ -25,9 +25,9 @@ export default class ServiceBuilding extends Sprite{
         if (this._type == 'barn')
             shop.drawStash()
         else if (this._type == 'spin_wheel')
-            spin.open()
+            spin.show()
         else if (this._type == 'orders_board')
-            orderManager.open()
+            orderManager.show()
     }
     update(){
     }

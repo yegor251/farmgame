@@ -10,6 +10,10 @@ class Orders {
         document.getElementById("closeOrders").onclick = () => {
             this.close()
         }
+        document.getElementById("orders-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("orders-wrap"))
+                this.close()
+        };
         this.chosenOrderInd = 'none'
     }
     clear(){
@@ -24,7 +28,7 @@ class Orders {
         document.getElementById("orders-wrap").style.display = "none";
         document.getElementById("buttons-bar").style.display = "flex";
     }
-    open(){
+    show(){
         document.getElementById("orders-wrap").style.display = "flex";
         this.chosenOrderInd = 'none'
         this.clear()

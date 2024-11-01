@@ -9,6 +9,10 @@ class BuildingMenu {
         document.getElementById("close-building-menu").onclick = () => {
             this.close()
         };
+        document.getElementById("building-menu-wrap").onclick = (e) => {
+            if (e.target == document.getElementById("building-menu-wrap"))
+                this.close()
+        };
         this.building = 'none';
     }
     close(){
@@ -178,7 +182,7 @@ class BuildingMenu {
                     } else {
                         GVAR.buildableArr.forEach(el => {
                             if (el._type == 'bakery'){
-                                if (player._inventory['bread'] == undefined || (player._networth == 40 && el._craftingItems.length == 0)) {
+                                if (player._inventory['bread'] == undefined || (player._networth == 0 && el._craftingItems.length == 0)) {
                                     const customEvent = new Event('firstBreadBad');
                                     document.body.dispatchEvent(customEvent);
                                 }

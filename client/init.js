@@ -5,16 +5,21 @@ import CVAR from "./globalVars/const.js";
 import player from "./gameClasses/player/player.js";
 import GVAR from "./globalVars/global.js";
 import loader from "./loadingScreen.js";
+import { spin } from "./gameClasses/spin/spin.js";
 
 class SocketClient{
     constructor()
     {
         this.requestQueue = new Array()
         this.socket = new WebSocket('ws:localhost:8000');
+        // this.socket = new WebSocket('wss://tonfarmgame.ru/api/');
         this.gameSessionPromiseResolve = null;
         this.gameSessionPromise = new Promise((resolve) => {
             this.gameSessionPromiseResolve = resolve;
         });
+        this.interval = setInterval(() => {
+            this.send('ping')
+        }, 58000);
         this.socket.onmessage = (m) => {
             const data = JSON.parse(m.data)
             console.log(data)
@@ -125,12 +130,15 @@ class SocketClient{
         this.requestQueue.shift()
     }
     send(request) {
+        console.log('send')
         if (this.socket.readyState === WebSocket.OPEN) {
             this.socket.send(request);
             if (request.split('/')[0] != 'connect' && request.split('/')[0] != 'regen'){
                 this.requestQueue.push(request);
             }
             console.log(this.requestQueue)
+        } else {
+            console.log('отключился сокет')
         }
     }
   	regenPlayer(data){
@@ -154,6 +162,7 @@ class SocketClient{
                 break
             }
         }
+        spin.renderSpin()
       	player._orderArr = data.player.orders
         player._boostersArr = []
         data.availableBoosters.forEach(el => {
@@ -308,9 +317,10 @@ class Init {
         });
 
         if (Object.keys(window.Telegram.WebApp.initDataUnsafe).length != 0) {
-            socketClient.send(`connect/${window.Telegram.WebApp.initDataUnsafe.query_id}`)
+            console.log(window.Telegram.WebApp)
+            socketClient.send(`connect/${window.Telegram.WebApp.initData}`)
         } else {
-            socketClient.send(`connect/2357474`)
+            socketClient.send(`connect/2357478`)
         }
 
         loader.updateLoading(loader.progress + 25, 'Init game session')

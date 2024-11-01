@@ -85,7 +85,7 @@ const stages = [
         }),
         event: 'firstBread',
         getCondition: () => {
-            if (GVAR.countBuilding('bakery') == 1 && player._networth == 40) {
+            if (GVAR.countBuilding('bakery') == 1 && player._networth == 0) {
                 for (let i = 0; i < GVAR.buildableArr.length; i++) {
                     const el = GVAR.buildableArr[i];
                     if (el._type == "bakery"){
@@ -105,7 +105,7 @@ const stages = [
         getZone: () => ({}),
         event: 'firstBreadStart',
         getCondition: () => {
-            if (GVAR.countBuilding('bakery') == 1 && player._networth == 40) {
+            if (GVAR.countBuilding('bakery') == 1 && player._networth == 0) {
                 for (let i = 0; i < GVAR.buildableArr.length; i++) {
                     const el = GVAR.buildableArr[i];
                     if (el._type == "bakery"){
@@ -136,7 +136,7 @@ const stages = [
     {
         getZone: () => ({}),
         event: 'firstBreadDone',
-        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 40 && !player._inventory['bread']),
+        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && !player._inventory['bread']),
         text: '',
         text_pos: {x: 0, y: 0}
     },
@@ -148,7 +148,7 @@ const stages = [
             h: (document.getElementsByClassName('order')[0].getBoundingClientRect().height / window.innerHeight) * 100
         }),
         event: 'click',
-        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 40 && player._inventory['bread'] == 1),
+        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && player._inventory['bread'] == 1),
         text: GVAR.localization[47][GVAR.language],
         text_pos: {x: 0, y: 12}
     },
@@ -160,7 +160,7 @@ const stages = [
             h: (document.getElementsByClassName('complete-order')[0].getBoundingClientRect().height / window.innerHeight) * 100
         }),
         event: 'click',
-        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 40 && player._inventory['bread'] == 1),
+        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && player._inventory['bread'] == 1),
         text: GVAR.localization[48][GVAR.language],
         text_pos: {x: 0, y: 12}
     }

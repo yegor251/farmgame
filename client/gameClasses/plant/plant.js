@@ -17,14 +17,8 @@ export default class Plant extends Sprite{
         this._grown = false;
     }
     draw(){
-        if (this._grown)
-        {
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = "yellow";
-        }
         const out = (this._image.height - 16 * this._h/CVAR.tileSide)*CVAR.tileSide/16 //смещение вверх из-за размера картинки
         ctx.drawImage(this._image, this._x, this._y - out, this._w, this._h + out);
-        ctx.shadowBlur = 0;
     }
     updateGrowTime()
     {
