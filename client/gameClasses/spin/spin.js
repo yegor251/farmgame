@@ -22,7 +22,6 @@ class Spin {
                 }
             }
         }
-        this.curr_rotate = 0;
         document.getElementById("closeSpin").onclick = () => {
             this.close()
         }
@@ -45,6 +44,7 @@ class Spin {
                     this.interval = null
                     document.getElementById('spin-timer').style.display = 'none'
                     document.getElementById('spin-button').style.display = 'flex'
+                    document.getElementById('spin-wheel').style.transform = `rotate(0deg)`;
                     this.renderSpin()
                 }
             }, 1000);
@@ -55,6 +55,7 @@ class Spin {
             document.getElementById('spin-button').style.display = 'none'
             this.startTimer()
         } else {
+            document.getElementById('spin-timer').style.display = 'none'
             this.renderSpin();
         }
         GVAR.closeAllWindows()
@@ -71,8 +72,7 @@ class Spin {
     doSpin(){
         const container = document.getElementById('spin-wheel');
         let number = Math.ceil(360 - (Math.random()*180/player._spinItems.length + player._spinDropIndex*360/player._spinItems.length) + 720);
-        this.curr_rotate += number
-        container.style.transform = `rotate(${this.curr_rotate}deg)`;
+        container.style.transform = `rotate(${number}deg)`;
     }
     renderSpin(){
         const spin = document.getElementById('spin-wheel');

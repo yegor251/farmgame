@@ -193,7 +193,7 @@ class EducationMenu {
                     buildingMenu.show(el)
             });
         else if (this.currentStage == 9)
-            spin.open()
+            spin.show()
         else if (this.currentStage == 5)
             shop.show()
         else if (this.currentStage == 11)
@@ -300,7 +300,7 @@ class EducationMenu {
                 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
                 await sleep(1500);
                 buildingMenu.close()
-                spin.open()
+                spin.show()
                 this.nextStage();
             }
             document.body.removeEventListener('firstBreadStart', handleEventFirstBreadStart);

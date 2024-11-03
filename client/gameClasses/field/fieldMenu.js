@@ -21,6 +21,7 @@ class FieldMenu{
         fieldImg.style.aspectRatio = `1 / 1`;
         GVAR.closeAllWindows()
         document.getElementById("field-menu-wrap").style.display = "flex";
+        document.getElementById('field-img-bar').style.aspectRatio = 28 / 10
         this.renderPlants()
     }
     close(){
@@ -70,6 +71,8 @@ class FieldMenu{
             plantImg.style.backgroundImage = `url(${this.field._plant._image.src})`;
             plantImg.style.aspectRatio = `${this.field._plant._image.width} / ${this.field._plant._image.height}`
             plantImg.style.display = 'flex';
+            document.getElementById('field-img-bar').style.aspectRatio = `${this.field._plant._image.width * 2.8} / ${this.field._plant._image.height}`
+            console.log(document.getElementById('field-img-bar').style.aspectRatio)
         } else {
             plantImg.style.display = 'none';
         }

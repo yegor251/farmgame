@@ -24,3 +24,21 @@
     position: relative;
     overflow: visible;
 }
+#field-img-bar {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 4%;
+    padding-right: 4%; 
+    padding-top: 0.5%; 
+    background-image: url('../assets/design/menu.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    position: relative;
+    scrollbar-width: none;
+    overflow: hidden;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+}

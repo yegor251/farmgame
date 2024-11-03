@@ -22,6 +22,8 @@ export async function main() {
         { bushMenu },
         { default: RES },
         { educationMenu },
+        { pm },
+        { withdraw },
     ] = await Promise.all([
         import('./globalVars/global.js'),
         import('./globalVars/canvas.js'),
@@ -44,6 +46,8 @@ export async function main() {
         import('./gameClasses/bush/bushMenu.js'),
         import('./resources.js'),
         import('./gameClasses/education/educationMenu.js'),
+        import('./gameClasses/ton-connect/tonMenu.js'),
+        import('./gameClasses/ton-connect/tonMenu.js'),
     ]);
     educationMenu.start()
     buisnessMenu.init()
@@ -54,6 +58,13 @@ export async function main() {
         shop.drawBuildingShop()
         shop.drawBushShop()
         shop.drawPlantShop()
+        shop.show()
+        document.getElementById("shop-wrap").style.display = 'none'
+        const menues = [boosterMenu, buisnessMenu, orderManager, spin, transactionsMenu, dealmenu, withdraw, pm, mainMenu]
+        menues.forEach(menu => {
+            menu.show()
+            menu.close()
+        });
     }
 
     renderMenues()
@@ -228,10 +239,10 @@ export async function main() {
 
     async function animate(delta){    
         if (mouse._isOnBorder && !mouse._isBlockAfterShop){
-            camera.move(-mouse._dirX * GVAR.scale * 0.4, -mouse._dirY * GVAR.scale * 0.4)
+            camera.move(-mouse._dirX * GVAR.scale * 0.8, -mouse._dirY * GVAR.scale * 0.8)
             let pos = {
-                x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX * 0.4,
-                y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY * 0.4
+                x: GVAR.phantomStructureArr[0]._floatX + mouse._dirX * 0.8,
+                y: GVAR.phantomStructureArr[0]._floatY + mouse._dirY * 0.8
             }
             if (camera._cameraIndexBoundingBox.top == 0)
                 pos.y = GVAR.phantomStructureArr[0]._floatY

@@ -19,7 +19,7 @@ class SocketClient{
         });
         this.interval = setInterval(() => {
             this.send('ping')
-        }, 58000);
+        }, 50000);
         this.socket.onmessage = (m) => {
             const data = JSON.parse(m.data)
             console.log(data)
@@ -244,32 +244,20 @@ class SocketClient{
 
         player._availableDeals = data.availableDeals
 
-        // data.deposits = [{
-        //     time_stamp: 1696807080000,
-        //     jetton_signature: "ton",
-        //     amount: 10.3,
-        //     active: true
-        // },{
-        //     time_stamp: 1696608080000,
-        //     jetton_signature: "usdt",
-        //     amount: 10.3,
-        // }]
-        // data.withdraws = [{
-        //     time_stamp: 1696507080000,
-        //     jetton_signature: "txt",
-        //     wallet: 'qduefnrf',
-        //     amount: 10.3,
-        // },{
-        //     time_stamp: 1696609080000,
-        //     jetton_signature: "ton",
-        //     wallet: 'frfrnfjrnfr',
-        //     amount: 10.3,
-        // }]
-
         let transactions = [
-            ...data.deposits.map((dep, index) => ({...dep, time_stamp: Math.round(dep.time_stamp / 1000), type: 'dep', index})),
-            ...data.withdraws.map(wit => ({...wit, time_stamp: Math.round(wit.time_stamp / 1000), type: 'wit'}))
-        ];
+            ...data.deposits.map((dep, index) => ({
+                ...dep,
+                time_stamp: Math.round(dep.time_stamp / 1000),
+                type: 'dep',
+                index
+            })),
+            ...data.withdraws.map(wit => ({
+                ...wit,
+                time_stamp: Math.round(wit.time_stamp / 1000),
+                type: 'wit',
+                jetton_signature: 'TFC'
+            }))
+        ];        
 
         transactions.sort((a, b) => b.time_stamp - a.time_stamp);
 
@@ -320,7 +308,7 @@ class Init {
             console.log(window.Telegram.WebApp)
             socketClient.send(`connect/${window.Telegram.WebApp.initData}`)
         } else {
-            socketClient.send(`connect/2357478`)
+            socketClient.send(`connect/2357479`)
         }
 
         loader.updateLoading(loader.progress + 25, 'Init game session')

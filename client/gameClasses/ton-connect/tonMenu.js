@@ -209,7 +209,7 @@ class WithdrawMenu
                 let flag = true
                 let amount = 0;
                 try {
-                    amount = Math.trunc(parseFloat(document.getElementById('withdraw-amount').value)*100)
+                    amount = Math.round(parseFloat(document.getElementById('withdraw-amount').value)*100)
                     if (amount <=0){
                         flag = false
                     }
@@ -219,10 +219,10 @@ class WithdrawMenu
                 if (flag && amount) {
                     if (amount > 0 && amount <= player._tokenBalance){
                         if (player._tonBalance >= CVAR.transactionFee){
-                            socketClient.send(`widthdraw/${amount}/${wallet}`)
+                            socketClient.send(`withdraw/${amount}/${wallet}`)
                             GVAR.showFloatingText(7)
                             player._tonBalance -= CVAR.transactionFee
-                            player._tokenBalance -= amount
+                            player.spendToken(amount)
                         } else {
                             GVAR.showFloatingText(29);
                         }

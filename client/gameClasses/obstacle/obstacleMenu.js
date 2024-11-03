@@ -64,8 +64,8 @@ class ObstacleMenu {
                         GVAR.showFloatingText(2)
                     } else {
                         const tileIndex = Calc.CanvasToIndex(this.obstacle._x, this.obstacle._y, CVAR.tileSide, CVAR.outlineWidth);
-                        for (let i = tileIndex.i; i < this.obstacle._w / CVAR.tileSide; i++) {
-                            for (let j = tileIndex.j; j < this.obstacle._h / CVAR.tileSide; j++) {
+                        for (let i = tileIndex.i; i < this.obstacle._w / CVAR.tileSide + tileIndex.i; i++) {
+                            for (let j = tileIndex.j; j < this.obstacle._h / CVAR.tileSide + tileIndex.j; j++) {
                                 tiles[i][j]._structure = "none"
                             }
                         }
