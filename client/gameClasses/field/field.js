@@ -31,8 +31,8 @@ export default class Field extends Buildable{
             ctx.shadowColor = this._canPut ? `rgb(0,${CVAR.greenColor},0)` : `rgb(${CVAR.redColor},0,0)`
         }
         ctx.drawImage(this._image, this._x, this._y, this._w, this._h);
-        if (this._plant!="none") this._plant.draw()
         ctx.shadowBlur = 0;
+        if (this._plant!="none") this._plant.draw()
     }
     onClick()
     {

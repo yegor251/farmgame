@@ -198,17 +198,23 @@
     border-radius: 10px;
     border: 2px solid rgb(52, 32, 28);
     z-index: 1000;
-    padding: 5%;
+    padding-top: 1vw;
     box-sizing: border-box;
-    max-width: 250%;
-    left: -50%;
+    max-width: 44vw;
+    left: -100%;
     white-space: nowrap;
+}
+.drop-items-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 41vw;
 }
 .drop-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 20vw;
 }
 .drop-list-img {
     width: 10vw;

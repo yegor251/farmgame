@@ -56,14 +56,17 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
 }
 #order-money {
     color: yellow;
     font-size: 4.7vw;
+    text-shadow: 0.25vw 0.25vw 0 black, -0.25vw -0.25vw 0 black, 0.25vw -0.25vw 0 black, -0.25vw 0.25vw 0 black;
 }
 #order-token {
-    color: rgb(213, 0, 251);
+    color: #45BB76;
     font-size: 4.7vw;
+    text-shadow: 0.25vw 0.25vw 0 black, -0.25vw -0.25vw 0 black, 0.25vw -0.25vw 0 black, -0.25vw 0.25vw 0 black;
 }
 #order-details {
     width: 100%;
@@ -205,4 +208,19 @@
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+}
+#order-token-img, #order-money-img {
+    height: 90%;
+    aspect-ratio: 1 / 1;
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+    image-rendering: pixelated;
+    margin-right: 1vw;
+}
+#order-money-img {
+    background-image: url('../assets/design/money_icon.png');
+}
+#order-token-img {
+    background-image: url('../assets/design/token_icon.png');
 }

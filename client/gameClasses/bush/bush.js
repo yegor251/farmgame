@@ -100,7 +100,8 @@ export default class Bush extends Buildable{
         }
     }
     collect(){
-        const amount = RES.buildings[this._type].products[this._type]
+        const key = Object.keys(RES.buildings[this._type].products)[0]
+        const amount = RES.buildings[this._type].products[key]
         if (player.getInvFullness() >= amount){
             player.pushInventory(this._type, amount);
             this._timeToFinish = undefined;

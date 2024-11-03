@@ -19,8 +19,8 @@ class Orders {
     clear(){
         document.getElementById('order-details').innerHTML = "";
         document.getElementById('order-buttons-bar').innerHTML = "";
-        document.getElementById('order-money').innerHTML = "";
-        document.getElementById('order-token').innerHTML = "";
+        document.getElementById('order-money-content').style.display = "none";
+        document.getElementById('order-token-content').style.display = "none";
     }
     close(){
         this.chosenOrderInd = 'none'
@@ -65,15 +65,15 @@ class Orders {
         this.clear()
     }
     showTimer(order){
+        this.clear()
         const orderDetails = document.getElementById('order-details');
-        orderDetails.innerHTML = "";
         const timer = document.createElement('h3')
         timer.className = 'order-timer'
         orderDetails.appendChild(timer)
         if (order.timeStamp > Math.floor(Date.now()/1000))
             timer.innerText = Calc.formatTime(order.timeStamp - Math.floor(Date.now()/1000))
         else
-            this.showOrderDetails(order)
+            this.showOrderDetails()
     }
     showOrderDetails() {
         const order = player._orderArr[this.chosenOrderInd]
@@ -81,14 +81,16 @@ class Orders {
             this.showTimer(order)
             return
         }
+        document.getElementById('order-money-content').style.display = "flex";
+        document.getElementById('order-token-content').style.display = "flex";
         const orderDetails = document.getElementById('order-details');
         orderDetails.innerHTML = "";
 
         const orderPrice = document.getElementById('order-money');
-        orderPrice.innerText = `Money: ${order.orderPrice}`;
+        orderPrice.innerText = order.orderPrice
 
         const orderTokenPrice = document.getElementById('order-token');
-        orderTokenPrice.innerText = `Token: ${(order.orderTokenPrice / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]}`;
+        orderTokenPrice.innerText = (order.orderTokenPrice / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
 
         for (let item in order.orderItems) {
             const res = document.createElement("div");

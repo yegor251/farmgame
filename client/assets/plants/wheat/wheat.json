@@ -1,9 +1,9 @@
 {
   "name": "wheat",
-  "orderPrice": 3,
+  "orderPrice": 4,
   "orderTokenPrice": 0,
   "orderAmountMin": 3,
-  "orderAmountMax": 20,
+  "orderAmountMax": 15,
   "seed":{
       "price": 10,
       "amount": 3,

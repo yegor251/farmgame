@@ -139,8 +139,8 @@ class local{
               "en": "Do you want to upgrade for { gold?"
             },
             "35": {
-              "ru": "Хотите купить +10 вместимости за 10 токенов?",
-              "en": "Want to buy +10 capacity for 10 tokens?"
+              "ru": "Хотите купить +10 вместимости за { токенов?",
+              "en": "Want to buy +10 capacity for { tokens?"
             },
             "36": {
               "ru": "Хотите удалить это препятствие?",

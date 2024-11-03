@@ -143,7 +143,7 @@ class SocketClient{
     }
   	regenPlayer(data){
 		player._inventory = data.player.Inventory.map
-        player._inventorySize = 50 + 10 * data.player.Inventory.level
+        player._inventorySize = 70 + 10 * data.player.Inventory.level
 		player._money = data.player.money
         player._networth = data.player.networth
         player._tokenBalance = data.wallet.tokenBalance

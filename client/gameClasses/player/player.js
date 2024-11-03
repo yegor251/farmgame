@@ -11,7 +11,7 @@ class Player{
         this._phantomStructure = "none";
 
         this._inventory = []
-        this._inventorySize = 50;
+        this._inventorySize = 70;
         
         this._orderArr = []
         
@@ -40,8 +40,11 @@ class Player{
         this._buisnesses = []
     }
     upgradeInventory(){
+        if (this._inventorySize < 120)
+            this.spendToken(100)
+        else
+            this.spendToken(1000)
         this._inventorySize += 10
-        this.spendToken(1000)
     }
     canActivateBooster(id){
         let boost = this._boostersArr[id]

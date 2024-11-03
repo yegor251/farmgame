@@ -10,16 +10,29 @@ import socketClient from "../../init.js";
 class Shop{
     constructor() {
         const shopWrap = document.getElementById('shop-wrap');
-        shopWrap.addEventListener('click', function(event) {
-            if (!(event.target.closest('#shop-bar') || event.target.closest('#shop-list'))) {
+        shopWrap.onclick = (e) => {
+            if (e.target == shopWrap || e.target == document.getElementById("shop-list") 
+             || e.target == document.getElementById("shop") || 
+             e.target == document.getElementById("shop-wrap")){
                 const slidableDiv = document.getElementById('shop');
                 slidableDiv.classList.add('slide-out');
                 setTimeout(() => {
                     document.getElementById("shop-wrap").style.display = "none";
                     document.getElementById("buttons-bar").style.display = "flex";
                 }, 450);
-            }
-        });
+             }
+        }
+        // shopWrap.addEventListener('click', function(event) {
+        //     console.log(event.target)
+        //     if (!(event.target.closest('#shop-bar') || event.target.closest('#shop-list'))) {
+        //         const slidableDiv = document.getElementById('shop');
+        //         slidableDiv.classList.add('slide-out');
+        //         setTimeout(() => {
+        //             document.getElementById("shop-wrap").style.display = "none";
+        //             document.getElementById("buttons-bar").style.display = "flex";
+        //         }, 450);
+        //     }
+        // });
         
         const categories = [
             { name: 'building', method: 'drawBuildingShop' },
@@ -60,7 +73,7 @@ class Shop{
         const upgButton = document.getElementById('upgrade-stash-button')
         upgButton.onclick = () => {
             document.getElementById('selection-menu-wrap').style.display = 'flex'
-            document.getElementById('selection-text').innerText = GVAR.localization[35][GVAR.language]
+            document.getElementById('selection-text').innerText = GVAR.localization[35][GVAR.language].replace(/\{/g, player._inventorySize < 120 ? 1 : 10)
             document.getElementById('selection-yes').onclick = () => {
                 if (player._tokenBalance >= 1000 && player._inventorySize < CVAR.maxInvSize){
                     player.upgradeInventory()
@@ -266,8 +279,7 @@ class Shop{
                 player.buy(RES.plants[plant].seed.price)
                 player.pushInventory(plant, 1)
                 socketClient.send(`buy/${plant}/${1}`)
-                if (player._money < RES.plants[plant].seed.price)
-                    img.style.filter = 'grayscale(100%)';
+                this.drawPlantShop()
             }
             shopItem.className = "shop-item";
             shop.appendChild(itemContent);

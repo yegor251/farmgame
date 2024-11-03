@@ -166,6 +166,8 @@ class FieldMenu{
                 const dropList = document.createElement("div")
                 dropList.id = 'drop-list'
                 dropList.className = "craft-drop-list"
+                dropList.style.padding = '2vw'
+                dropList.style.left = '-50%'
                 const dropName =  document.createElement("h3")
                 dropName.innerText = RES.plants[plant].localization.name[GVAR.language]
                 dropName.className = 'drop-list-text'

@@ -4,7 +4,7 @@
   "maxSlots": 2,
   "sizex": 3,
   "sizey": 2,
-  "maxLevel": 5,
+  "maxLevel": 6,
   "mapLimit": 3,
   "workTypes":
   {
@@ -37,7 +37,7 @@
       },
       "cookie":
       {
-          "minLevel": 2,
+          "minLevel": 3,
           "timeToFinish": 1500,
           "items":
           {
@@ -52,7 +52,7 @@
       },
       "raspberryCupcake":
       {
-          "minLevel": 3,
+          "minLevel": 4,
           "timeToFinish": 1200,
           "items":
           {
@@ -67,7 +67,7 @@
       },
       "blackberryCupcake":
       {
-          "minLevel": 3,
+          "minLevel": 4,
           "timeToFinish": 180,
           "items":
           {
@@ -82,7 +82,7 @@
       },
       "pizza":
       {
-          "minLevel": 4,
+          "minLevel": 5,
           "timeToFinish": 600,
           "items":
           {
@@ -97,7 +97,7 @@
       },
       "spicyPizza":
       {
-          "minLevel": 4,
+          "minLevel": 5,
           "timeToFinish": 600,
           "items":
           {
@@ -113,7 +113,7 @@
       },
       "potatoBread":
       {
-          "minLevel": 5,
+          "minLevel": 6,
           "timeToFinish": 900,
           "items":
           {
@@ -130,6 +130,6 @@
   },
   "upgradesPrice":
   [
-      150, 500, 10000, 50000
+      150, 500, 1000, 10000, 50000
   ]
 }

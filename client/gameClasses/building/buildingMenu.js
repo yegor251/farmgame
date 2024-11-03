@@ -210,8 +210,21 @@ class BuildingMenu {
                 dropTime.className = 'drop-list-text';
                 dropList.appendChild(dropTime);
 
+                let dropItems = document.createElement("div")
+                dropItems.className = "drop-items-list"
+                let flag = true
                 for (let item in RES.buildings[type].workTypes[product].items) {
                     const dropItem = document.createElement("div");
+                    if (flag) {
+                        dropItems.appendChild(dropItem)
+                        flag = false
+                    } else {
+                        dropItems.appendChild(dropItem)
+                        dropList.appendChild(dropItems)
+                        dropItems = document.createElement("div")
+                        dropItems.className = "drop-items-list"
+                        flag = true
+                    }
                     dropItem.className = "drop-item";
                     const img = document.createElement("img");
                     img.src = `client/assets/items/${item}.png`;
@@ -231,8 +244,10 @@ class BuildingMenu {
                     }
                     dropItem.appendChild(img);
                     dropItem.appendChild(itemText);
-                    dropList.appendChild(dropItem);
                 }
+                if (!flag)
+                    dropList.appendChild(dropItems);
+                console.log(dropList)
                 const nowLevel = this.building._level;
                 const needLevel = RES.buildings[type].workTypes[product].minLevel;
                 if (nowLevel < needLevel) {

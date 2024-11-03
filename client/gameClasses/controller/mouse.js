@@ -45,8 +45,7 @@ class Mouse{
         this._mapPos = index;
         if (this._LMBdown && !this._isDragging)
         {
-            camera.move(this._deltaMove.x, this._deltaMove.y);
-            camera.updateBoundingBox();
+            camera.move(this._deltaMove.x / 1.2, this._deltaMove.y / 1.2);
         }
         if (GVAR.phantomStructureArr.length != 0){
             let pos = Calc.indexToCanvas(this._mapPos.i - this._offset.i, this._mapPos.j - this._offset.j, CVAR.tileSide, CVAR.outlineWidth);
