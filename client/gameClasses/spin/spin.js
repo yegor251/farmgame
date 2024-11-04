@@ -10,11 +10,11 @@ class Spin {
             if (!player._isSpinActivated || (player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) < 0){
                 if (player.getInvFullness() >= player._spinItems[player._spinDropIndex].amount || player._spinItems[player._spinDropIndex].item == 'money'){
                     player._isSpinActivated = true
+                    player._spinTimeStamp = Math.trunc(Date.now() / 1000)
                     this.doSpin()
                     socketClient.send('spin')
                     socketClient.send('regen')
-                    setTimeout(() => {
-                        this.startTimer()
+                    setTimeout(() => {  
                         this.renderSpin();
                     }, 4500);
                 } else{
@@ -29,31 +29,29 @@ class Spin {
             if (e.target == document.getElementById("spin-wrap"))
                 this.close()
         };
-    }
-    startTimer(){
-        if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && player._isSpinActivated) {
-            document.getElementById('spin-timer').style.display = 'flex'
-            document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
-            this.interval = setInterval(() => {
+        setInterval(() => {
+            if ((player._spinTimeStamp + CVAR.spinTime < Math.trunc(Date.now() / 1000))){
+                socketClient.send('regen')
+                player._spinTimeStamp = Math.trunc(Date.now() / 1000)
+                this.close()
+                this.show()
+            } else {
                 document.getElementById('spin-button').style.display = 'none'
-                if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && player._isSpinActivated) {
+                if (player._isSpinActivated) {
+                    document.getElementById('spin-timer').style.display = 'flex'
                     document.getElementById('spin-timer').innerText = Calc.formatTime(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
                 } else {
-                    socketClient.send('regen')
-                    clearInterval(this.interval)
-                    this.interval = null
-                    document.getElementById('spin-timer').style.display = 'none'
-                    document.getElementById('spin-button').style.display = 'flex'
                     document.getElementById('spin-wheel').style.transform = `rotate(0deg)`;
                     this.renderSpin()
+                    document.getElementById('spin-timer').style.display = 'none'
+                    document.getElementById('spin-button').style.display = 'flex'
                 }
-            }, 1000);
-        }
+            }
+        }, 1000);
     }
     show(){
-        if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && !this.interval && player._isSpinActivated){
+        if ((player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000)) >= 0 && player._isSpinActivated){
             document.getElementById('spin-button').style.display = 'none'
-            this.startTimer()
         } else {
             document.getElementById('spin-timer').style.display = 'none'
             this.renderSpin();
@@ -62,10 +60,6 @@ class Spin {
         document.getElementById("spin-wrap").style.display = "flex";
     }
     close(){
-        if (this.interval != null){
-            clearInterval(this.interval)
-        }
-        this.interval = null
         document.getElementById("spin-wrap").style.display = "none";
         document.getElementById("buttons-bar").style.display = "flex";
     }
@@ -73,15 +67,11 @@ class Spin {
         const container = document.getElementById('spin-wheel');
         let number = Math.ceil(360 - (Math.random()*180/player._spinItems.length + player._spinDropIndex*360/player._spinItems.length) + 720);
         container.style.transform = `rotate(${number}deg)`;
+        document.getElementById('spin-button').style.display = 'none'
     }
     renderSpin(){
         const spin = document.getElementById('spin-wheel');
         spin.innerHTML = ""
-        if (this.interval != null){
-            document.getElementById('spin-button').style.display = 'none'
-            return
-        }
-        document.getElementById('spin-button').style.display = 'flex'
         const size = player._spinItems.length
         for (let index = 0; index < size; index++) {
             const elem = document.createElement("div")
