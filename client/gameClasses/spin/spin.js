@@ -29,12 +29,12 @@ class Spin {
             if (e.target == document.getElementById("spin-wrap"))
                 this.close()
         };
+    }
+    start(){
         setInterval(() => {
             if ((player._spinTimeStamp + CVAR.spinTime < Math.trunc(Date.now() / 1000))){
                 socketClient.send('regen')
                 player._spinTimeStamp = Math.trunc(Date.now() / 1000)
-                this.close()
-                this.show()
             } else {
                 document.getElementById('spin-button').style.display = 'none'
                 if (player._isSpinActivated) {
@@ -62,6 +62,7 @@ class Spin {
     close(){
         document.getElementById("spin-wrap").style.display = "none";
         document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById('spin-wheel').style.transform = `rotate(0deg)`;
     }
     doSpin(){
         const container = document.getElementById('spin-wheel');

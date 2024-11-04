@@ -51,6 +51,7 @@ export async function main() {
     ]);
     educationMenu.start()
     buisnessMenu.init()
+    spin.start()
 
     function renderMenues() {
         shop.drawAnimalPenShop()
