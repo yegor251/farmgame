@@ -126,6 +126,7 @@ export default class AnimalPen extends Buildable{
             });
             const product = Object.keys(RES.buildings[this._type].products)[0]
             player.pushInventory(product, this._animals.length);
+            GVAR.showFloatingItem(this._animals.length, product)
             this._timeToFinish = undefined;
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
         } else{

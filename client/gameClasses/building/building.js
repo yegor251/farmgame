@@ -169,6 +169,7 @@ export default class Building extends Buildable{
         {
             const key = Object.keys(this._craftingItems[0])[0];
             if (player.getInvFullness()>=this._craftingItems[0][key]){
+                GVAR.showFloatingItem(1, key)
                 player.pushInventory(key,this._craftingItems[0][key])
                 this._craftingItems.shift()
                 this._nowWorkIndex -= 1

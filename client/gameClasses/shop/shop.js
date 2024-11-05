@@ -22,17 +22,6 @@ class Shop{
                 }, 450);
              }
         }
-        // shopWrap.addEventListener('click', function(event) {
-        //     console.log(event.target)
-        //     if (!(event.target.closest('#shop-bar') || event.target.closest('#shop-list'))) {
-        //         const slidableDiv = document.getElementById('shop');
-        //         slidableDiv.classList.add('slide-out');
-        //         setTimeout(() => {
-        //             document.getElementById("shop-wrap").style.display = "none";
-        //             document.getElementById("buttons-bar").style.display = "flex";
-        //         }, 450);
-        //     }
-        // });
         
         const categories = [
             { name: 'building', method: 'drawBuildingShop' },
@@ -75,11 +64,13 @@ class Shop{
             document.getElementById('selection-menu-wrap').style.display = 'flex'
             document.getElementById('selection-text').innerText = GVAR.localization[35][GVAR.language].replace(/\{/g, player._inventorySize < 120 ? 1 : 10)
             document.getElementById('selection-yes').onclick = () => {
-                if (player._tokenBalance >= 1000 && player._inventorySize < CVAR.maxInvSize){
+                if (player._tokenBalance >= player.getUpgInvPrice() && player._inventorySize < CVAR.maxInvSize){
                     player.upgradeInventory()
                     socketClient.send('invupgrade')
                     this.drawStash()
                     GVAR.showFloatingText(7)
+                } else {
+                    GVAR.showFloatingText(2)
                 }
                 document.getElementById('selection-menu-wrap').style.display = 'none'
             }
@@ -278,6 +269,7 @@ class Shop{
                 }
                 player.buy(RES.plants[plant].seed.price)
                 player.pushInventory(plant, 1)
+                GVAR.showFloatingItem(1, plant)
                 socketClient.send(`buy/${plant}/${1}`)
                 this.drawPlantShop()
             }

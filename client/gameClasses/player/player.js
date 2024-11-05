@@ -39,6 +39,11 @@ class Player{
         this._transactions = []
         this._buisnesses = []
     }
+    getUpgInvPrice(){
+        if (this._inventorySize < 120)
+            return 100
+        return 1000
+    }
     upgradeInventory(){
         if (this._inventorySize < 120)
             this.spendToken(100)

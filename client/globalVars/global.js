@@ -86,7 +86,28 @@ class GlobalVars{
         setTimeout(() => {
             textElement.remove();
         }, 4000);
-    }    
+    }  
+    showFloatingItem(amount, name) {
+        const content = document.createElement('div');
+        content.classList.add('floating-item-box');
+        const text = document.createElement('h3')
+        text.innerText = '+' + amount
+        const img = document.createElement('div')
+        img.className = 'floating-item'
+        img.style.backgroundImage = `url(client/assets/items/${name}.png)`
+        content.appendChild(text)
+        content.appendChild(img)
+        
+        document.body.appendChild(content);
+      
+        setTimeout(() => {
+            content.classList.add('float-away');
+        }, 50);
+      
+        setTimeout(() => {
+            content.remove();
+        }, 4000);
+    }  
     setConfirm(){
         this.confirmFlag = true;
         this.confirmTimer = setTimeout(() => {
