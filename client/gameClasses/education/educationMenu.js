@@ -197,7 +197,7 @@ class EducationMenu {
         else if (this.currentStage == 5)
             shop.show()
         else if (this.currentStage == 11)
-            orderManager.open()
+            orderManager.show()
         this.gardenBadFlag = true
         this.plantBadFlag = true
         this.breadBadFlag = true
@@ -314,7 +314,7 @@ class EducationMenu {
 
         const handleEventFirstBreadDone = (e) => {
             document.body.removeEventListener('firstBreadDone', handleEventFirstBreadDone);
-            orderManager.open()
+            orderManager.show()
             this.nextStage();
         };
 

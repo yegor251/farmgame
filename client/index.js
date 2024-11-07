@@ -53,22 +53,22 @@ export async function main() {
     buisnessMenu.init()
     spin.start()
 
-    function renderMenues() {
-        shop.drawAnimalPenShop()
-        shop.drawAnimalShop()
-        shop.drawBuildingShop()
-        shop.drawBushShop()
-        shop.drawPlantShop()
-        shop.show()
-        document.getElementById("shop-wrap").style.display = 'none'
-        const menues = [boosterMenu, buisnessMenu, orderManager, spin, transactionsMenu, dealmenu, withdraw, pm, mainMenu]
-        menues.forEach(menu => {
-            menu.show()
-            menu.close()
-        });
-    }
+    // function renderMenues() {
+    //     shop.drawAnimalPenShop()
+    //     shop.drawAnimalShop()
+    //     shop.drawBuildingShop()
+    //     shop.drawBushShop()
+    //     shop.drawPlantShop()
+    //     shop.show()
+    //     document.getElementById("shop-wrap").style.display = 'none'
+    //     const menues = [boosterMenu, buisnessMenu, orderManager, spin, transactionsMenu, dealmenu, withdraw, pm, mainMenu]
+    //     menues.forEach(menu => {
+    //         menu.show()
+    //         menu.close()
+    //     });
+    // }
 
-    renderMenues()
+    // renderMenues()
 
     // Ensure the document is scrollable
     function ensureDocumentIsScrollable() {

@@ -126,6 +126,8 @@ class SocketClient{
                 tiles[request.x][request.y].use()
             }
         }
+        if (code != 200 && this.requestQueue[0] != 'ping')
+            GVAR.showBadCodeMenu()
         console.log('код',code)
         this.requestQueue.shift()
     }
@@ -138,6 +140,7 @@ class SocketClient{
             }
             console.log(this.requestQueue)
         } else {
+            GVAR.showBadCodeMenu()
             console.log('отключился сокет')
         }
     }

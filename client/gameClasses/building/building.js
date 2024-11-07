@@ -6,6 +6,8 @@ import RES from "../../resources.js";
 import { buildingMenu } from "./buildingMenu.js";
 import CVAR from "../../globalVars/const.js";
 import socketClient from "../../init.js";
+import Calc from "../../calc.js";
+import camera from "../controller/camera.js";
 
 export default class Building extends Buildable{
     constructor(x, y, type)
@@ -169,7 +171,7 @@ export default class Building extends Buildable{
         {
             const key = Object.keys(this._craftingItems[0])[0];
             if (player.getInvFullness()>=this._craftingItems[0][key]){
-                GVAR.showFloatingItem(1, key)
+                GVAR.showFloatingItem(1, key, Calc.worldToScreen(this._x + this._w / 2, this._y + this._h / 2, camera.getPos(), GVAR.scale))
                 player.pushInventory(key,this._craftingItems[0][key])
                 this._craftingItems.shift()
                 this._nowWorkIndex -= 1

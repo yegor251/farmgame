@@ -242,6 +242,10 @@ class local{
               "ru": "Доход: ",
               "en": "Income: "
             },
+            "61": {
+              "ru": "Пожалуйста перезайдите",
+              "en": "Please re-login"
+            },
             "b0": {
               "ru": "НОУТБУК",
               "en": "LAPTOP"

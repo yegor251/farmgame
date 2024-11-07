@@ -7,6 +7,7 @@ import { animalMenu } from "./animalMenu.js";
 import socketClient from "../../init.js";
 import CVAR from "../../globalVars/const.js";
 import GVAR from "../../globalVars/global.js";
+import camera from "../controller/camera.js";
 
 export default class AnimalPen extends Buildable{
     constructor(x, y, type)
@@ -126,7 +127,7 @@ export default class AnimalPen extends Buildable{
             });
             const product = Object.keys(RES.buildings[this._type].products)[0]
             player.pushInventory(product, this._animals.length);
-            GVAR.showFloatingItem(this._animals.length, product)
+            GVAR.showFloatingItem(this._animals.length, product, Calc.worldToScreen(this._x + this._w / 2, this._y + this._h / 2, camera.getPos(), GVAR.scale))
             this._timeToFinish = undefined;
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
         } else{

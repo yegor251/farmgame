@@ -17,6 +17,11 @@ class GlobalVars{
         this.tg_name = 'qwerty123'
         this.canRerollOrders = false
     }
+    showBadCodeMenu(){
+        document.getElementById("bad-code-wrap").style.display = "flex"
+        const text = document.getElementById("relogin-text")
+        text.innerText = this.localization[61][GVAR.language]
+    }
     countBuilding(type){
         let counter = 0
         this.buildableArr.forEach(el => {
@@ -87,8 +92,10 @@ class GlobalVars{
             textElement.remove();
         }, 4000);
     }  
-    showFloatingItem(amount, name) {
+    showFloatingItem(amount, name, pos) {
         const content = document.createElement('div');
+        content.style.left = pos.x + 'px'
+        content.style.top = pos.y + 'px'
         content.classList.add('floating-item-box');
         const text = document.createElement('h3')
         text.innerText = '+' + amount

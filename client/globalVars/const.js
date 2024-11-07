@@ -10,9 +10,9 @@ class ConstVar{
         this.orderCompleteTime = 600; this.orderRerollTime = 1800;
         this.maxInvSize = 2000;
         this.redColor = 230; this.greenColor = 230;
-        this.wallet = 'UQBY9QGb8nnU80ZgMOPU6LVGqod8t0R3WFcCIyMYTUyZwYg6';
+        this.wallet = 'UQCF2EoQze-_Devg8oogD1KDNA-AdQCEpNnDFq5HIQLa6ZJh';
         this.transactionFee = 100000000
-        this.spinTime = 60
+        this.spinTime = 28800
     }
 }
 

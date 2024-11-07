@@ -6,6 +6,7 @@ import player from "../player/player.js";
 import Sprite from "../sprite/sprite.js";
 import RES from "../../resources.js";
 import GVAR from "../../globalVars/global.js";
+import camera from "../controller/camera.js";
 
 export default class Plant extends Sprite{
     constructor(x, y, w, h, plantType)
@@ -35,9 +36,8 @@ export default class Plant extends Sprite{
     {
         if (this._grown)
         {
-            const index = Calc.CanvasToIndex(this._x, this._y, CVAR.tileSide, CVAR.outlineWidth);
             player.pushInventory(this._type, RES.plants[this._type].seed.amount);
-            GVAR.showFloatingItem(RES.plants[this._type].seed.amount, this._type)
+            GVAR.showFloatingItem(RES.plants[this._type].seed.amount, this._type, Calc.worldToScreen(this._x + CVAR.tileSide / 2, this._y + CVAR.tileSide / 2, camera.getPos(), GVAR.scale))
             tiles[player._chosenTile.i][player._chosenTile.j]._structure._plant = 'none';
         }
     }
