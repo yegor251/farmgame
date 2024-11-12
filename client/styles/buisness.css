@@ -331,9 +331,6 @@ input[type="range"]::-moz-range-thumb {
     box-sizing: border-box;
     text-align: center;
     color: black;
-    /* -webkit-text-fill-color: white; */
-    /* -webkit-text-stroke: 1px black; */
-    /* -webkit-text-stroke-width: 1px; */
 }
 #buisness-active-name, #buisness-inactive-name {
     font-size: 6.3vw;

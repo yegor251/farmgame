@@ -144,7 +144,7 @@
     flex-wrap: wrap;
 }
 .main-menu-button {
-    width: 30%;
+    width: 60%;
     aspect-ratio: 1/1;
     background-size: cover;
     background-position: center;
@@ -152,8 +152,20 @@
     image-rendering: pixelated;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 5%;
     box-sizing: border-box;
+}
+.main-menu-button-text {
+    color: black;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1vw;
+    font-size: 5vw;
+}
+.main-menu-button-cont {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #open-transactions {
     background-image: url('../assets/design/button_TRANS_1.png');

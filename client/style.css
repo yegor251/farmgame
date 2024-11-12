@@ -120,6 +120,7 @@ body{
     z-index: 100;
     pointer-events: none;
     flex-direction: column;
+    overflow: visible;
 }
 #money-container, #token-container {
     padding-top: 1vw;

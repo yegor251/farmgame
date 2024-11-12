@@ -19,3 +19,11 @@
     font-size: 5vw;
     color: aliceblue;
 }
+#animal-start-button {
+    margin-top: 2vw;
+    width: 20%;
+}
+#feed-amount {
+    margin-top: 1vw;
+    font-size: 4.2vw;
+}

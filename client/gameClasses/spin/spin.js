@@ -15,8 +15,9 @@ class Spin {
                     socketClient.send('spin')
                     socketClient.send('regen')
                     setTimeout(() => {  
+                        GVAR.showFloatingItem(player._spinItems[player._spinDropIndex].amount, player._spinItems[player._spinDropIndex].item, {x: window.innerWidth / 2, y: window.innerHeight / 2})
                         this.renderSpin();
-                    }, 4500);
+                    }, 4100);
                 } else{
                     GVAR.showFloatingText(3)
                 }
@@ -32,6 +33,7 @@ class Spin {
     }
     start(){
         setInterval(() => {
+            console.log(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
             if ((player._spinTimeStamp + CVAR.spinTime < Math.trunc(Date.now() / 1000))){
                 socketClient.send('regen')
                 player._spinTimeStamp = Math.trunc(Date.now() / 1000)

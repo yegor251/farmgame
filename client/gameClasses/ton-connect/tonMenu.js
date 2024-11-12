@@ -1,3 +1,5 @@
+import dealL from "../../assets/deals/deal_l.js";
+import Calc from "../../calc.js";
 import CVAR from "../../globalVars/const.js";
 import GVAR from "../../globalVars/global.js";
 import socketClient from "../../init.js";
@@ -129,6 +131,15 @@ class DealsMenu
             if (e.target == document.getElementById("deals-wrap"))
                 this.close()
         };
+        document.getElementById("selection-deal-no").onclick = () => {
+            document.getElementById("selection-deal-wrap").style.display = "none"
+        }
+        document.getElementById("selection-deal-text").innerText = GVAR.localization[62][GVAR.language]
+        document.getElementById("selection-deal-wrap").onclick = (event) => {
+            if (event.target === event.currentTarget) {
+                this.closeBuisnessProp()
+            }
+        }
     }
     close(){
         document.getElementById("deals-wrap").style.display = "none";
@@ -152,9 +163,93 @@ class DealsMenu
             const dealImg = document.createElement('div')
             dealImg.className = 'deal'
             dealImg.style.backgroundImage = `url(client/assets/deals/${dealKey}.png)`
-            
+
+            const priceCont = document.createElement('div')
+            priceCont.className = 'deal-price-cont'
+            const price = document.createElement('h3')
+            price.className = 'deal-price'
+            const priceImg = document.createElement('div')
+            priceImg.className = 'deal-price-img'
+            if (deal.usdtPrice) {
+                price.innerText = (deal.usdtPrice / 1000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0]
+                priceImg.style.backgroundImage = `url(client/assets/design/usdt.png)`
+            } else if (deal.tonPrice) {
+                price.innerText = (deal.tonPrice / 1000000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0]
+                priceImg.style.backgroundImage = `url(client/assets/design/ton.png)`
+            }
+            priceCont.appendChild(price)
+            priceCont.appendChild(priceImg)
+            dealImg.appendChild(priceCont)
+
+            const nameCont = document.createElement('div')
+            nameCont.className = 'deal-name-cont'
+            const name = document.createElement('h3')
+            name.className = 'deal-name'
+            name.innerText = dealL.localization[dealKey][GVAR.language]
+            nameCont.appendChild(name)
+            dealImg.appendChild(nameCont)
+
+            const dealCont = document.createElement('div')
+            dealCont.className = 'deal-content'
+            dealImg.appendChild(dealCont)
+            if (deal.reward.token) {
+                const dealItem = document.createElement('div')
+                dealItem.className = 'deal-item'
+
+                const dealShadow = document.createElement('div')
+                dealShadow.className = 'deal-item-shadow'
+                dealItem.appendChild(dealShadow)
+
+                const dealItemImg = document.createElement('div')
+                dealItemImg.className = 'deal-item-img'
+                dealItemImg.style.backgroundImage = `url(client/assets/design/token.png)`
+                dealItem.appendChild(dealItemImg)
+
+                const dealItemT2 = document.createElement('h3')
+                dealItemT2.className = 'deal-item-text2'
+                dealItemT2.innerText = (deal.reward.token / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+                dealItem.appendChild(dealItemT2)
+
+                dealCont.appendChild(dealItem)
+            }
+            deal.reward.boosters.forEach(booster => {
+                const dealItem = document.createElement('div')
+                dealItem.className = 'deal-item'
+
+                const dealShadow = document.createElement('div')
+                dealShadow.className = 'deal-item-shadow'
+                dealItem.appendChild(dealShadow)
+
+                const dealItemImg = document.createElement('div')
+                dealItemImg.className = 'deal-item-img'
+                dealItemImg.style.backgroundImage = `url(client/assets/design/${booster.boosterType}.png)`
+                dealItem.appendChild(dealItemImg)
+
+                const dealItemT1 = document.createElement('h3')
+                dealItemT1.className = 'deal-item-text1'
+                dealItemT1.innerText = Calc.formatTime(booster.time)
+                dealItem.appendChild(dealItemT1)
+
+                const dealItemT2 = document.createElement('h3')
+                dealItemT2.className = 'deal-item-text2'
+                dealItemT2.innerText = 'x'
+                if (booster.boosterType == "GrowSpeed" || booster.boosterType == "WorkSpeed"){
+                    dealItemT2.innerText += 100 / (100 - booster.percentage)
+                    console.log(booster)
+                } else if (booster.boosterType == "OrderMoney"){
+                    dealItemT2.innerText += booster.percentage / 100 + 1
+                } else if (booster.boosterType == "OrderItems"){
+                    dealItemT2.innerText += booster.percentage / 100
+                }
+                dealItem.appendChild(dealItemT2)
+
+
+                dealCont.appendChild(dealItem)
+            });
+
             dealImg.onclick = () => {
-                if (GVAR.confirmFlag){
+                document.getElementById("selection-deal-wrap").style.display = "flex"
+                document.getElementById("selection-deal-yes").onclick = () => {
                     const canBuy = (deal.tonPrice && player._tonBalance >= deal.tonPrice) ||
                      (deal.usdtPrice && player._usdtBalance >= deal.usdtPrice);
                     if (canBuy){
@@ -171,9 +266,7 @@ class DealsMenu
                     } else {
                         GVAR.showFloatingText(2)
                     }
-                } else {
-                    GVAR.setConfirm()
-                    GVAR.showFloatingText(4)
+                    document.getElementById("selection-deal-wrap").style.display = "none"
                 }
             }
             dealsWrap.appendChild(dealImg);

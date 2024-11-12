@@ -18,9 +18,14 @@ class TransactionsMenu {
     show(){
         function formatTime(timeStamp) {
             const date = new Date(timeStamp * 1000);
-            const options = { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' };
+            const options = {
+                day: '2-digit',
+                month: 'short',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
             return date.toLocaleString('en-GB', options).replace(', ', ',');
-        }
+        }        
 
         const transactionsContent = document.getElementById('transactions-content');
         transactionsContent.innerHTML = ''
@@ -88,10 +93,15 @@ class TransactionsMenu {
             const amountCelltext = document.createElement('h3');
             amountCelltext.className = 'table-text'
             if (item.type === 'dep'){
-                amountCelltext.innerText = '+' + item.amount;
+                if (item.jetton_signature === "TON")
+                    amountCelltext.innerText = '+' + (item.amount / 1000000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0]
+                else if (item.jetton_signature === "USDT")
+                    amountCelltext.innerText = '+' + (item.amount / 1000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0]
+                else
+                    amountCelltext.innerText = '+' + (item.amount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                 amountCelltext.classList.add('unlocked')
             } else {
-                amountCelltext.innerText = '-' + item.amount;
+                amountCelltext.innerText = '-' + (item.amount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
                 amountCelltext.classList.add('locked')
             }
             amountCell.className = 'table-col5';

@@ -5,6 +5,8 @@ import { fieldMenu } from "../field/fieldMenu.js";
 import { buildingMenu } from "../building/buildingMenu.js";
 import { spin } from "../spin/spin.js";
 import { orderManager } from "../orders/orders.js";
+import Calc from "../../calc.js";
+import camera from "../controller/camera.js";
 
 const stages = [
     {
@@ -141,6 +143,28 @@ const stages = [
         text_pos: {x: 0, y: 0}
     },
     {
+        getZone: () => {
+            for (let i = 0; i < GVAR.buildableArr.length; i++) {
+                const el = GVAR.buildableArr[i];
+                if (el._type == 'orders_board'){
+                    const pos1 = Calc.worldToScreen(el._x, el._y, camera.getPos(), GVAR.scale)
+                    const pos2 = Calc.worldToScreen(el._x + el._w, el._y + el._h, camera.getPos(), GVAR.scale)
+                    const r = {
+                        x: (pos1.x / window.innerWidth) * 100,
+                        y: (pos1.y / window.innerHeight) * 100,
+                        w: ((pos2.x - pos1.x) / window.innerWidth) * 100,
+                        h: ((pos2.y - pos1.y) / window.innerHeight) * 100,
+                    }
+                    return r
+                }
+            }
+        },
+        event: 'click',
+        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && player._inventory['bread'] == 1),
+        text: GVAR.localization[67][GVAR.language],
+        text_pos: {x: 0, y: 12}
+    },
+    {
         getZone: () => ({
             x: (document.getElementsByClassName('order')[0].getBoundingClientRect().left / window.innerWidth) * 100,
             y: (document.getElementsByClassName('order')[0].getBoundingClientRect().top / window.innerHeight) * 100,
@@ -196,7 +220,7 @@ class EducationMenu {
             spin.show()
         else if (this.currentStage == 5)
             shop.show()
-        else if (this.currentStage == 11)
+        else if (this.currentStage == 12)
             orderManager.show()
         this.gardenBadFlag = true
         this.plantBadFlag = true
@@ -212,12 +236,18 @@ class EducationMenu {
             return;
         this.createZone(stage);
     
-        const handleEventClick = (e) => {
+        const handleEventClick = async (e) => {
             const targetElement = document.getElementById('avtiv_zone');
             const rect = targetElement.getBoundingClientRect();
     
             if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
                 document.body.removeEventListener(stage.event, handleEventClick);
+
+                if (stageNumber == 11){
+                    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
+                    await sleep(100);
+                }
+
                 this.nextStage();
             }
         };
@@ -314,7 +344,7 @@ class EducationMenu {
 
         const handleEventFirstBreadDone = (e) => {
             document.body.removeEventListener('firstBreadDone', handleEventFirstBreadDone);
-            orderManager.show()
+            // orderManager.show()
             this.nextStage();
         };
 
@@ -357,6 +387,7 @@ class EducationMenu {
     }
     createZone(stage) {
         const el = stage.getZone()
+        console.log(el)
         const block1 = document.createElement('div');
         block1.className = 'education-unactiv-zone';
         block1.style.left = '0';

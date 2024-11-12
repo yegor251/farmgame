@@ -3,64 +3,64 @@ class local{
     {
         this.localization = {
             "1": {
-                "ru": "недостаточно денег",
-                "en": "not enough money"
+                "ru": "Недостаточно денег",
+                "en": "Not enough money"
             },
             "2": {
-                "ru": "недостаточно средств",
-                "en": "not enough funds"
+                "ru": "Недостаточно средств",
+                "en": "Not enough funds"
             },
             "3": {
-                "ru": "нет места в амбаре",
-                "en": "no space in the barn"
+                "ru": "Нет места в амбаре",
+                "en": "No space in the barn"
             },
             "4": {
-                "ru": "нажмите ещё раз для подтверждения",
-                "en": "press again to confirm"
+                "ru": "Нажмите ещё раз для подтверждения",
+                "en": "Press again to confirm"
             },
             "5": {
-                "ru": "этот бустер уже активен",
-                "en": "this booster is already activated"
+                "ru": "Этот бустер уже активен",
+                "en": "This booster is already activated"
             },
             "6": {
-                "ru": "не выполнены условия крафта",
-                "en": "crafting conditions not met"
+                "ru": "Не выполнены условия крафта",
+                "en": "Crafting conditions not met"
             },
             "7": {
-                "ru": "успешно",
-                "en": "successfully"
+                "ru": "Успешно",
+                "en": "Successfully"
             },
             "8": {
                 "ru": "Улучшить",
                 "en": "Upgrade"
             },
             "9": {
-                "ru": "купить за { токенов?",
-                "en": "buy for { tokens?"
+                "ru": "Купить за { токенов?",
+                "en": "Buy for { tokens?"
             },
             "10": {
-                "ru": "невозможно установить здание",
-                "en": "unable to install building"
+                "ru": "Невозможно установить здание",
+                "en": "Unable to install building"
             },
             "11": {
-                "ru": "животное не подходит или нет места",
-                "en": "the animal is not suitable or there is no room"
+                "ru": "Животное не подходит или нет места",
+                "en": "The animal is not suitable or there is no room"
             },
             "12": {
                 "ru": "СОБРАТЬ",
                 "en": "CLAIM"
             },
             "13": {
-                "ru": "ваши транзакции:",
-                "en": "your transactions:"
+                "ru": "Ваши транзакции:",
+                "en": "Your transactions:"
             },
             "14": {
-                "ru": "пусто",
-                "en": "empty"
+                "ru": "Пусто",
+                "en": "Empty"
             },
             "15": {
-                "ru": "это общий нетворс, от него зависит количество ордеров",
-                "en": "this is the total networth, the number of orders depends on it"
+                "ru": "Это общий нетворс, от него зависит количество ордеров",
+                "en": "This is the total networth, the number of orders depends on it"
             },
             "16": {
                 "ru": "Отправляйте TON, USDT, FTC на адрес:",
@@ -87,36 +87,36 @@ class local{
                 "en": "DEPOSIT"
             },
             "22": {
-                "ru": "скопировано",
-                "en": "copied"
+                "ru": "Скопировано",
+                "en": "Copied"
             },
             "23": {
-                "ru": "неправильный ввод!",
-                "en": "wrong input!"
+                "ru": "Нeправильный ввод!",
+                "en": "Wrong input!"
             },
             "24": {
                 "ru": "Для вывода необходимо 0.1 TON для комиссии. Вывод происходит в течение часа",
                 "en": "For withdrawal you need 0.1 TON for gas. Withdrawal occurs within an hour"
             },
             "25": {
-                "ru": "адрес вывода:",
-                "en": "withdrawal address:"
+                "ru": "Адрес вывода:",
+                "en": "Withdrawal address:"
             },
             "26": {
-                "ru": "количество токенов:",
-                "en": "number of tokens:"
+                "ru": "Количество токенов:",
+                "en": "Number of tokens:"
             },
             "27": {
                 "ru": "ОТПРАВИТЬ",
                 "en": "SEND"
             },
             "28": {
-                "ru": "неправильный формат кошелька",
-                "en": "wrong wallet format"
+                "ru": "Неправильный формат кошелька",
+                "en": "Wrong wallet format"
             },
             "29": {
-              "ru": "недостаточно TON(0.1) для оплаты комиссии",
-              "en": "not enough TON(0.1) to pay gas"
+              "ru": "Недостаточно TON(0.1) для оплаты комиссии",
+              "en": "Not enough TON(0.1) to pay gas"
             },
             "30": {
               "ru": "Текущий буст +{% скорости",
@@ -187,8 +187,8 @@ class local{
               "en": "This is a free spin, click to get items"
             },
             "47": {
-              "ru": "Это доска заказов, их нужно выполнять для заработка денег и токенов. Выберите заказ нажав по нему",
-              "en": "This is an order board, you need to execute them to earn money and tokens. Select an order by clicking on it"
+              "ru": "Выполняйте заказы для заработка денег и токенов. Выберите заказ нажав по нему",
+              "en": "Complete orders to earn money and tokens. Select an order by clicking on it"
             },
             "48": {
               "ru": "Выполните заказ, нажав по галочке, вы также можете удалить заказ, нажав по мусорке",
@@ -245,6 +245,30 @@ class local{
             "61": {
               "ru": "Пожалуйста перезайдите",
               "en": "Please re-login"
+            },
+            "62": {
+              "ru": "Хотите купить это предложение?",
+              "en": "Want to buy this offer?"
+            },
+            "63": {
+              "ru": "Транзакции",
+              "en": "Transactions"
+            },
+            "64": {
+              "ru": "Бизнесы",
+              "en": "Business"
+            },
+            "65": {
+              "ru": "Бустеры",
+              "en": "Boosters"
+            },
+            "66": {
+              "ru": "Донат",
+              "en": "Deals"
+            },
+            "67": {
+              "ru": "Это доска заказов, нажмите по ней",
+              "en": "This is the order board, click on it"
             },
             "b0": {
               "ru": "НОУТБУК",

@@ -8,6 +8,7 @@ import socketClient from "../../init.js";
 import CVAR from "../../globalVars/const.js";
 import GVAR from "../../globalVars/global.js";
 import camera from "../controller/camera.js";
+import Calc from "../../calc.js";
 
 export default class AnimalPen extends Buildable{
     constructor(x, y, type)

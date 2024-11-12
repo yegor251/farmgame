@@ -29,7 +29,7 @@
 }
 #stash-capacity-text {
     position: absolute;
-    top: 65%;
+    top: 58%;
     left: 50%;
     font-size: 5vw;
     transform: translateX(-50%);
@@ -140,7 +140,7 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    font-size: 5.3vw;
+    font-size: 4.9vw;
 }
 #stash-bottom {
     width: 100%;

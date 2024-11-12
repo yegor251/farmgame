@@ -154,6 +154,14 @@ document.getElementById('referral-button').addEventListener('touchend', () => {
     document.getElementById('referral-button').style.backgroundImage = "url('client/assets/design/referral_button_1.png')";
 });
 
+document.getElementById('close-deals').addEventListener('touchstart', () => {
+    document.getElementById('close-deals').style.backgroundImage = `url('client/assets/design/deal_exit_button2.png')`
+});
+
+document.getElementById('close-deals').addEventListener('touchend', () => {
+    document.getElementById('close-deals').style.backgroundImage = "url('client/assets/design/deal_exit_button1.png')";
+});
+
 document.querySelectorAll('.upgrade-buildable-button').forEach(button => {
     button.addEventListener('touchstart', () => {
         button.style.backgroundImage = "url('client/assets/design/stash_button_upgrade_pressed.png')";

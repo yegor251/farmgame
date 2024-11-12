@@ -250,13 +250,13 @@ class SocketClient{
         let transactions = [
             ...data.deposits.map((dep, index) => ({
                 ...dep,
-                time_stamp: Math.round(dep.time_stamp / 1000),
+                time_stamp: Math.round(dep.time_stamp),
                 type: 'dep',
                 index
             })),
             ...data.withdraws.map(wit => ({
                 ...wit,
-                time_stamp: Math.round(wit.time_stamp / 1000),
+                time_stamp: Math.round(wit.time_stamp),
                 type: 'wit',
                 jetton_signature: 'TFC'
             }))
@@ -306,12 +306,12 @@ class Init {
         RES.buildingNames.serviceBuildings.forEach(name => {
             tiles[RES.buildings[name].i][RES.buildings[name].j].createBuilding(name)
         });
-
+        // socketClient.send(`connect/${"query_id=AAHzJoppAAAAAPMmimntefo_&user=%7B%22id%22%3A1770661619%2C%22first_name%22%3A%22yidtdr%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22yidtdr%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1730399376&hash=5ef0deaa160a25c4ddc0b6841edba5d8a231cab169b961992abd9595a6d230be"}`)
         if (Object.keys(window.Telegram.WebApp.initDataUnsafe).length != 0) {
             console.log(window.Telegram.WebApp)
             socketClient.send(`connect/${window.Telegram.WebApp.initData}`)
         } else {
-            socketClient.send(`connect/2357479`)
+            socketClient.send(`connect/2357487`)
         }
 
         loader.updateLoading(loader.progress + 25, 'Init game session')

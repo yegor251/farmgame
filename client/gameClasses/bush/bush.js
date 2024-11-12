@@ -7,6 +7,7 @@ import socketClient from "../../init.js";
 import CVAR from "../../globalVars/const.js";
 import GVAR from "../../globalVars/global.js";
 import camera from "../controller/camera.js";
+import Calc from "../../calc.js";
 
 export default class Bush extends Buildable{
     constructor(x, y, type)
@@ -105,7 +106,7 @@ export default class Bush extends Buildable{
         const amount = RES.buildings[this._type].products[key]
         if (player.getInvFullness() >= amount){
             player.pushInventory(this._type, amount);
-            GVAR.showFloatingItem(amount, this._type, Calc.worldToScreen(this._x + this._w / 2, this._y + this._h / 2, camera.getPos(), GVAR.scale))
+            GVAR.showFloatingItem(amount, key, Calc.worldToScreen(this._x + this._w / 2, this._y + this._h / 2, camera.getPos(), GVAR.scale))
             this._timeToFinish = undefined;
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)
             this._collectedAmount += 1

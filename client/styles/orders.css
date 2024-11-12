@@ -44,6 +44,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 #order-token-content {
     width: 50%; 
@@ -57,15 +58,20 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    overflow: hidden;
 }
 #order-money {
+    overflow: hidden;
     color: yellow;
-    font-size: 4.7vw;
+    font-size: 4.6vw;
+    /* height: 100%; */
     text-shadow: 0.25vw 0.25vw 0 black, -0.25vw -0.25vw 0 black, 0.25vw -0.25vw 0 black, -0.25vw 0.25vw 0 black;
 }
 #order-token {
+    overflow: hidden;
     color: #45BB76;
-    font-size: 4.7vw;
+    font-size: 4.6vw;
+    /* height: 100%; */
     text-shadow: 0.25vw 0.25vw 0 black, -0.25vw -0.25vw 0 black, 0.25vw -0.25vw 0 black, -0.25vw 0.25vw 0 black;
 }
 #order-details {
@@ -120,6 +126,7 @@
 }
 .order-res-amount {
     font-size: 4vw;
+    overflow: hidden;
 }
 .complete-order {
     width: 14%;

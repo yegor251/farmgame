@@ -115,10 +115,22 @@
                     </div>
                 </div>
                 <div id="main-menu-buttons">
-                    <div id="open-transactions" class="main-menu-button"></div>
-                    <div id="open-buisness" class="main-menu-button"></div>
-                    <div id="booster" class="main-menu-button"></div>
-                    <div id="open-deals" class="main-menu-button"></div>
+                    <div class="main-menu-button-cont">
+                        <div id="open-transactions" class="main-menu-button"></div>
+                        <h3 id="main-menu-transactions" class="main-menu-button-text">Transactions</h3>
+                    </div>
+                    <div class="main-menu-button-cont">
+                        <div id="open-buisness" class="main-menu-button"></div>
+                        <h3 id="main-menu-business" class="main-menu-button-text">Business</h3>
+                    </div>
+                    <div class="main-menu-button-cont">
+                        <div id="booster" class="main-menu-button"></div>
+                        <h3 id="main-menu-boosters" class="main-menu-button-text">Boosters</h3>
+                    </div>
+                    <div class="main-menu-button-cont">
+                        <div id="open-deals" class="main-menu-button"></div>
+                        <h3 id="main-menu-deals" class="main-menu-button-text">Deals</h3>
+                    </div>
                 </div>
                 <div id="referral-container">
                     <div id="referral-button">
@@ -381,6 +393,7 @@
             <div class="timer-bar">
                 <div id="animal-upgrade" class="upgrade-buildable-button"></div>
                 <div id="animal-start-button" class="interaction-button"></div>
+                <h3 id="feed-amount"></h3>
             </div>          
             <div class="buildable-bottom"></div>
         </div>
@@ -435,10 +448,10 @@
     </div>    
     <div id="deals-wrap" class="menu-wrap">
         <div id="deals">
-            <div id="deals-bar" class="buildable-menu-bar">
-                <div id="close-deals" class="buildable-close-button"></div>
+            <div id="deals-bar" class="deals-menu-bar">
+                <div id="close-deals"></div>
             </div>
-            <div class="buildable-menu-list">
+            <div class="deal-menu-list">
                 <div id="ton-wrap">
                     <div id="deal-ton-img"></div>
                     <h4 id="deal-ton-balance"></h4>
@@ -448,8 +461,19 @@
                     <h4 id="deal-usdt-balance"></h4>
                 </div>
             </div>
-            <div id="deals-list" class="buildable-menu-list"></div>
-            <div class="buildable-bottom"></div>
+            <div id="deals-list" class="deal-menu-list"></div>
+            <div class="deals-menu-bar deal-bottom"></div>
+        </div>
+    </div>
+    <div id="selection-deal-wrap" class="menu-wrap">
+        <div id="selection-deal">
+            <div id="selection-deal-text-bar">
+                <h3 id="selection-deal-text"></h3>
+            </div>
+            <div id="selection-deal-buttons-bar">
+                <div id="selection-deal-yes">yes</div>
+                <div id="selection-deal-no">no</div>
+            </div>
         </div>
     </div>
     <div id="payment-wrap" class="menu-wrap">

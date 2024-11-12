@@ -37,6 +37,14 @@ class AnimalMenu{
         startButton.style.backgroundImage = `url(client/assets/items/${feedType}.png)`
         const upgradeButton = document.getElementById('animal-upgrade');
         upgradeButton.innerText = GVAR.localization[8][GVAR.language];
+        const amountText = document.getElementById("feed-amount")
+        if (!player._inventory[feedType])
+            player._inventory[feedType] = 0
+        amountText.innerText = `${player._inventory[feedType]}/${animalPen._animals.length}`
+        if (player._inventory[feedType] >= animalPen._animals.length && animalPen._animals.length!= 0)
+            amountText.className = 'unlocked'
+        else
+            amountText.className = 'locked'
         this.renderMenu()
     }
     renderTimer(){

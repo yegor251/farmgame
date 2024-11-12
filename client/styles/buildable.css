@@ -115,7 +115,8 @@
 }
 .queue-elem-plus {
     color: white;
-    font-size: 15vw;
+    font-size: 13vw;
+    font-family: sans-serif;
 }
 .building-middle {
     width: 100%;

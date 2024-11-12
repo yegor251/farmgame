@@ -72,6 +72,10 @@ class MainManu {
         document.getElementById('token-balance').innerText = (player._tokenBalance / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
         document.getElementById('ton-balance').innerText = (player._tonBalance / 1000000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
         document.getElementById('usdt-balance').innerText = (player._usdtBalance / 1000000).toString().match(/^-?\d+(?:\.\d{0,3})?/)[0];
+        document.getElementById('main-menu-transactions').innerText = GVAR.localization[63][GVAR.language];
+        document.getElementById('main-menu-business').innerText = GVAR.localization[64][GVAR.language];
+        document.getElementById('main-menu-boosters').innerText = GVAR.localization[65][GVAR.language];
+        document.getElementById('main-menu-deals').innerText = GVAR.localization[66][GVAR.language];
     }
 }
 export const mainMenu = new MainManu();

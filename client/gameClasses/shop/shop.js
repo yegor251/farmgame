@@ -269,7 +269,7 @@ class Shop{
                 }
                 player.buy(RES.plants[plant].seed.price)
                 player.pushInventory(plant, 1)
-                GVAR.showFloatingItem(1, plant)
+                GVAR.showFloatingItem(1, plant, {x: window.innerWidth / 2, y: window.innerHeight / 2})
                 socketClient.send(`buy/${plant}/${1}`)
                 this.drawPlantShop()
             }
