@@ -270,6 +270,22 @@ class local{
               "ru": "Это доска заказов, нажмите по ней",
               "en": "This is the order board, click on it"
             },
+            "68": {
+              "ru": "Первый хлеб готов! Нажмите чтобы собрать",
+              "en": "The first bread is ready! Click to collect"
+            },
+            "69": {
+              "ru": "Это амбар для хранения предметов, нажмите по нему",
+              "en": "This is a barn for storing items, click on it"
+            },
+            "70": {
+              "ru": "Тут отображены ваши предметы и вместимость амбара, ее можно увеличить за токены, нажав кнопку улучшить",
+              "en": "Here you can see your items and the capacity of the barn, which can be increased for tokens by clicking the upgrade button"
+            },
+            "71": {
+              "ru": "Поздравляем! Обучение закончено!",
+              "en": "Congratulations! The training is complete!"
+            },
             "b0": {
               "ru": "НОУТБУК",
               "en": "LAPTOP"

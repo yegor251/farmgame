@@ -160,6 +160,10 @@ export default class Building extends Buildable{
             {
                 this._craftingItems[this._nowWorkIndex].timeToFinish = 0
                 this._nowWorkIndex += 1
+                if (player._networth == 0){
+                    const customEvent = new Event('firstBreadWait');
+                    document.body.dispatchEvent(customEvent);
+                }
             }
         }
     }
@@ -175,12 +179,12 @@ export default class Building extends Buildable{
                 player.pushInventory(key,this._craftingItems[0][key])
                 this._craftingItems.shift()
                 this._nowWorkIndex -= 1
-                if (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && player._inventory['bread'] == 1){
+                if (player._networth == 0){
                     const customEvent = new Event('firstBreadDone');
                     document.body.dispatchEvent(customEvent);
                 }
             } else {
-                GVAR.showFloatingText(3)
+                GVAR.showFloatingText(3)    
                 return false
             }
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)

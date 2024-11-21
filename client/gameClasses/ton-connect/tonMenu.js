@@ -137,7 +137,7 @@ class DealsMenu
         document.getElementById("selection-deal-text").innerText = GVAR.localization[62][GVAR.language]
         document.getElementById("selection-deal-wrap").onclick = (event) => {
             if (event.target === event.currentTarget) {
-                this.closeBuisnessProp()
+                document.getElementById("selection-deal-wrap").style.display = 'none'
             }
         }
     }
@@ -235,7 +235,6 @@ class DealsMenu
                 dealItemT2.innerText = 'x'
                 if (booster.boosterType == "GrowSpeed" || booster.boosterType == "WorkSpeed"){
                     dealItemT2.innerText += 100 / (100 - booster.percentage)
-                    console.log(booster)
                 } else if (booster.boosterType == "OrderMoney"){
                     dealItemT2.innerText += booster.percentage / 100 + 1
                 } else if (booster.boosterType == "OrderItems"){

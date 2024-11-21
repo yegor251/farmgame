@@ -341,10 +341,10 @@
     width: 100%;
 }
 .deal-item-text1 {
-    top: -5%;
+    top: -0.5vh;
 }
 .deal-item-text2 {
-    top: 77%;
+    top: 7.4vh;
 }
 .deal-price, .deal-name {
     font-size: 7vw;

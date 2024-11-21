@@ -33,7 +33,6 @@ class Spin {
     }
     start(){
         setInterval(() => {
-            console.log(player._spinTimeStamp + CVAR.spinTime - Math.trunc(Date.now() / 1000))
             if ((player._spinTimeStamp + CVAR.spinTime < Math.trunc(Date.now() / 1000))){
                 socketClient.send('regen')
                 player._spinTimeStamp = Math.trunc(Date.now() / 1000)

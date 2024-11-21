@@ -7,6 +7,7 @@ import { spin } from "../spin/spin.js";
 import { orderManager } from "../orders/orders.js";
 import Calc from "../../calc.js";
 import camera from "../controller/camera.js";
+import CVAR from "../../globalVars/const.js";
 
 const stages = [
     {
@@ -121,7 +122,7 @@ const stages = [
             }
         },
         text: GVAR.localization[45][GVAR.language],
-        text_pos: {x: 0, y: 45}
+        text_pos: {x: 10, y: 45}
     },
     {
         getZone: () => ({
@@ -133,12 +134,41 @@ const stages = [
         event: 'click',
         getCondition: () => (false),
         text: GVAR.localization[46][GVAR.language],
-        text_pos: {x: 0, y: 80}
+        text_pos: {x: 10, y: 80}
+    },
+    {
+        getZone: () => ({}),
+        event: 'firstBreadWait',
+        getCondition: () => (false),
+        text: '',
+        text_pos: {x: 0, y: 0}
+    },
+    {
+        getZone: () => {
+            for (let i = 0; i < GVAR.buildableArr.length; i++) {
+                const el = GVAR.buildableArr[i];
+                if (el._type == 'bakery'){
+                    const pos1 = Calc.worldToScreen(el._x, el._y, camera.getPos(), GVAR.scale)
+                    const pos2 = Calc.worldToScreen(el._x + el._w, el._y + el._h, camera.getPos(), GVAR.scale)
+                    const r = {
+                        x: (pos1.x / window.innerWidth) * 100,
+                        y: (pos1.y / window.innerHeight) * 100,
+                        w: ((pos2.x - pos1.x) / window.innerWidth) * 100,
+                        h: ((pos2.y - pos1.y) / window.innerHeight) * 100,
+                    }
+                    return r
+                }
+            }
+        },
+        event: 'click',
+        getCondition: () => (false),
+        text: GVAR.localization[68][GVAR.language],
+        text_pos: {x: 10, y: 50}
     },
     {
         getZone: () => ({}),
         event: 'firstBreadDone',
-        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && !player._inventory['bread']),
+        getCondition: () => (player._networth == 0 && !player._inventory['bread']),
         text: '',
         text_pos: {x: 0, y: 0}
     },
@@ -160,9 +190,9 @@ const stages = [
             }
         },
         event: 'click',
-        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && player._inventory['bread'] == 1),
+        getCondition: () => (player._networth == 0 && player._inventory['bread']),
         text: GVAR.localization[67][GVAR.language],
-        text_pos: {x: 0, y: 12}
+        text_pos: {x: 10, y: 12}
     },
     {
         getZone: () => ({
@@ -172,9 +202,9 @@ const stages = [
             h: (document.getElementsByClassName('order')[0].getBoundingClientRect().height / window.innerHeight) * 100
         }),
         event: 'click',
-        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && player._inventory['bread'] == 1),
+        getCondition: () => (player._networth == 0 && player._inventory['bread']),
         text: GVAR.localization[47][GVAR.language],
-        text_pos: {x: 0, y: 12}
+        text_pos: {x: 10, y: 12}
     },
     {
         getZone: () => ({
@@ -184,9 +214,43 @@ const stages = [
             h: (document.getElementsByClassName('complete-order')[0].getBoundingClientRect().height / window.innerHeight) * 100
         }),
         event: 'click',
-        getCondition: () => (GVAR.countBuilding('bakery') == 1 && player._networth == 0 && player._inventory['bread'] == 1),
+        getCondition: () => (player._networth == 0 && player._inventory['bread']),
         text: GVAR.localization[48][GVAR.language],
-        text_pos: {x: 0, y: 12}
+        text_pos: {x: 10, y: 12}
+    },
+    {
+        getZone: () => {
+            for (let i = 0; i < GVAR.buildableArr.length; i++) {
+                const el = GVAR.buildableArr[i];
+                if (el._type == 'barn'){
+                    const pos1 = Calc.worldToScreen(el._x, el._y, camera.getPos(), GVAR.scale)
+                    const pos2 = Calc.worldToScreen(el._x + el._w, el._y + el._h, camera.getPos(), GVAR.scale)
+                    const r = {
+                        x: (pos1.x / window.innerWidth) * 100,
+                        y: (pos1.y / window.innerHeight) * 100,
+                        w: ((pos2.x - pos1.x) / window.innerWidth) * 100,
+                        h: ((pos2.y - pos1.y) / window.innerHeight) * 100,
+                    }
+                    return r
+                }
+            }
+        },
+        event: 'click',
+        getCondition: () => (false),
+        text: GVAR.localization[69][GVAR.language],
+        text_pos: {x: 10, y: 50}
+    },
+    {
+        getZone: () => ({
+            x: (document.getElementById('stash').getBoundingClientRect().left / window.innerWidth) * 100,
+            y: (document.getElementById('stash').getBoundingClientRect().top / window.innerHeight) * 100,
+            w: (document.getElementById('stash').getBoundingClientRect().width / window.innerWidth) * 100,
+            h: (document.getElementById('stash').getBoundingClientRect().height / window.innerHeight) * 100
+        }),
+        event: 'click',
+        getCondition: () => (false),
+        text: GVAR.localization[70][GVAR.language],
+        text_pos: {x: 10, y: 10}
     }
 ]
 
@@ -220,7 +284,7 @@ class EducationMenu {
             spin.show()
         else if (this.currentStage == 5)
             shop.show()
-        else if (this.currentStage == 12)
+        else if (this.currentStage == 14)
             orderManager.show()
         this.gardenBadFlag = true
         this.plantBadFlag = true
@@ -243,11 +307,25 @@ class EducationMenu {
             if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
                 document.body.removeEventListener(stage.event, handleEventClick);
 
-                if (stageNumber == 11){
+                if (stageNumber == 13){ // номер события где клик по области экрана где ордера
                     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
                     await sleep(100);
+                } else if (stageNumber == 15) {
+                    GVAR.closeAllWindows()
+                    for (let i = 0; i < GVAR.buildableArr.length; i++) {
+                        const el = GVAR.buildableArr[i];
+                        if (el._type == 'barn'){
+                            camera._x = (el._x - CVAR.tileSide) * GVAR.scale
+                            camera._y = (el._y - 2 * CVAR.tileSide) * GVAR.scale
+                            camera.updateBoundingBox();
+                        }
+                    }
+                } else if (stageNumber == 16) {
+                    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
+                    await sleep(100);
+                } else if (stageNumber == 17) {
+                    GVAR.showFloatingText(71)
                 }
-
                 this.nextStage();
             }
         };
@@ -281,9 +359,11 @@ class EducationMenu {
             document.body.removeEventListener(stage.event, handleEventFirstPlant);
         };
 
-        const handleEventFirstPlantDone = (e) => {
+        const handleEventFirstPlantDone = async (e) => {
             if (this.plantBadFlag){
                 this.plantBadFlag = false
+                const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
+                await sleep(500);
                 fieldMenu.close()
                 shop.show()
                 this.nextStage();
@@ -328,7 +408,7 @@ class EducationMenu {
             if (this.breadBadFlag){
                 this.breadBadFlag = false
                 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms)); 
-                await sleep(1500);
+                await sleep(1000);
                 buildingMenu.close()
                 spin.show()
                 this.nextStage();
@@ -344,7 +424,28 @@ class EducationMenu {
 
         const handleEventFirstBreadDone = (e) => {
             document.body.removeEventListener('firstBreadDone', handleEventFirstBreadDone);
-            // orderManager.show()
+            for (let i = 0; i < GVAR.buildableArr.length; i++) {
+                const el = GVAR.buildableArr[i];
+                if (el._type == 'orders_board'){
+                    camera._x = (el._x - CVAR.tileSide) * GVAR.scale
+                    camera._y = (el._y - 2 * CVAR.tileSide) * GVAR.scale
+                    camera.updateBoundingBox();
+                }
+            }
+            this.nextStage();
+        };
+
+        const handleEventfirstBreadWait = (e) => {
+            document.body.removeEventListener('firstBreadWait', handleEventfirstBreadWait);
+            GVAR.closeAllWindows()
+            for (let i = 0; i < GVAR.buildableArr.length; i++) {
+                const el = GVAR.buildableArr[i];
+                if (el._type == 'bakery'){
+                    camera._x = (el._x - CVAR.tileSide) * GVAR.scale
+                    camera._y = (el._y - 2 * CVAR.tileSide) * GVAR.scale
+                    camera.updateBoundingBox();
+                }
+            }
             this.nextStage();
         };
 
@@ -376,6 +477,8 @@ class EducationMenu {
             document.body.addEventListener('firstBreadBad', handleEventFirstBreadBad);
         } else if (stage.event === 'firstBreadDone') {
             document.body.addEventListener(stage.event, handleEventFirstBreadDone);
+        } else if (stage.event === 'firstBreadWait') {
+            document.body.addEventListener(stage.event, handleEventfirstBreadWait);
         }
         
         document.getElementById('education-menu-wrap').style.display = 'flex';
@@ -387,7 +490,6 @@ class EducationMenu {
     }
     createZone(stage) {
         const el = stage.getZone()
-        console.log(el)
         const block1 = document.createElement('div');
         block1.className = 'education-unactiv-zone';
         block1.style.left = '0';

@@ -142,6 +142,7 @@ class SocketClient{
         } else {
             GVAR.showBadCodeMenu()
             console.log('отключился сокет')
+            location.reload();
         }
     }
   	regenPlayer(data){
@@ -281,6 +282,7 @@ class Init {
             window.Telegram.WebApp.disableVerticalSwipes();
             GVAR.tg_id = window.Telegram.WebApp.initDataUnsafe.user.id
             GVAR.tg_name = window.Telegram.WebApp.initDataUnsafe.user.username
+            console.log(window.Telegram.WebApp.initDataUnsafe.user.language_code)
             if (window.Telegram.WebApp.initDataUnsafe.user.language_code === 'ru') {
                 GVAR.language = 'ru'
             } else {
@@ -306,12 +308,11 @@ class Init {
         RES.buildingNames.serviceBuildings.forEach(name => {
             tiles[RES.buildings[name].i][RES.buildings[name].j].createBuilding(name)
         });
-        // socketClient.send(`connect/${"query_id=AAHzJoppAAAAAPMmimntefo_&user=%7B%22id%22%3A1770661619%2C%22first_name%22%3A%22yidtdr%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22yidtdr%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1730399376&hash=5ef0deaa160a25c4ddc0b6841edba5d8a231cab169b961992abd9595a6d230be"}`)
         if (Object.keys(window.Telegram.WebApp.initDataUnsafe).length != 0) {
             console.log(window.Telegram.WebApp)
             socketClient.send(`connect/${window.Telegram.WebApp.initData}`)
         } else {
-            socketClient.send(`connect/2357487`)
+            socketClient.send(`connect/2357501`)
         }
 
         loader.updateLoading(loader.progress + 25, 'Init game session')

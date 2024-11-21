@@ -72,7 +72,6 @@ class FieldMenu{
             plantImg.style.aspectRatio = `${this.field._plant._image.width} / ${this.field._plant._image.height}`
             plantImg.style.display = 'flex';
             document.getElementById('field-img-bar').style.aspectRatio = `${this.field._plant._image.width * 2.8} / ${this.field._plant._image.height}`
-            console.log(document.getElementById('field-img-bar').style.aspectRatio)
         } else {
             plantImg.style.display = 'none';
         }

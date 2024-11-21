@@ -1,3 +1,5 @@
+import CVAR from "./globalVars/const.js";
+
 class WebsiteLoader {
   constructor() {
     this.loadingText = document.getElementById('loading-text');
@@ -24,6 +26,10 @@ class WebsiteLoader {
     const mainContent = document.getElementById('main-content');
     loadingContainer.style.display = 'none';
     mainContent.style.display = 'none';
+    // window.Telegram.WebApp.requestFullscreen();
+    setTimeout(() => {
+      CVAR.minScale = 5 * window.innerHeight / 1000; CVAR.maxScale = 15 * window.innerHeight / 1000;
+    }, 200);
   }
 }
 

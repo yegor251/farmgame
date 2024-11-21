@@ -13,7 +13,7 @@ class GlobalVars{
         this.confirmTimer = null
         this.localization = l.localization
         this.language = 'en'
-        this.tg_id = '1770661619'
+        this.tg_id = ''
         this.tg_name = 'qwerty123'
         this.canRerollOrders = false
     }

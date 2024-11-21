@@ -19,11 +19,11 @@ class local{
                 "en": "Money Rain"
             },
             "boosterX4_ton": {
-                "ru": "Максимальный Пак Бустов",
+                "ru": "Мега Пак Бустеров",
                 "en": "Ultimate Boost Pack"
             },
             "boosterX4_usdt": {
-                "ru": "Максимальный Пак Бустов",
+                "ru": "Мега Пак Бустеров",
                 "en": "Ultimate Boost Pack"
             },
         }        

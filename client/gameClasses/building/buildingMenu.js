@@ -247,7 +247,6 @@ class BuildingMenu {
                 }
                 if (!flag)
                     dropList.appendChild(dropItems);
-                console.log(dropList)
                 const nowLevel = this.building._level;
                 const needLevel = RES.buildings[type].workTypes[product].minLevel;
                 if (nowLevel < needLevel) {

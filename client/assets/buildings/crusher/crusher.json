@@ -3,7 +3,7 @@
   "price": 10,
   "maxSlots": 2,
   "sizex": 2,
-  "sizey": 2,
+  "sizey": 1,
   "maxLevel": 4,
   "mapLimit": 3,
   "workTypes":

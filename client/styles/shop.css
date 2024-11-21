@@ -1,6 +1,8 @@
 #shop{
+    top: 0;
     width: 45%;
-    height: 95%;
+    margin-top: 10vh;
+    height: 87.5vh;
     position: absolute;
     left: 0;
     background-color: transparent;

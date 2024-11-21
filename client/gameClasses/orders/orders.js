@@ -54,6 +54,7 @@ class Orders {
             this.showTimer(order);
             this.renderOrders();
             this.clear()
+            GVAR.showFloatingText(7)
         }
     }
     rerollOrder(order){
