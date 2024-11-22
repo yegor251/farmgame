@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "соя",
-            "en": "soy"
+            "ru": "Соя",
+            "en": "Soy"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Соя",
+            "en": "Soy"
         }
     }
 }

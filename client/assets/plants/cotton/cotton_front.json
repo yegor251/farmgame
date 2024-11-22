@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "хлопок",
-            "en": "cotton"
+            "ru": "Хлопок",
+            "en": "Cotton"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Хлопок",
+            "en": "Cotton"
         }
     }
 }

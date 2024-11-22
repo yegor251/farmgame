@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "тыква",
-            "en": "pumpkin"
+            "ru": "Тыква",
+            "en": "Pumpkin"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Тыква",
+            "en": "Pumpkin"
         }
     }
 }

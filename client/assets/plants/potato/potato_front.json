@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "картошка",
-            "en": "potato"
+            "ru": "Картошка",
+            "en": "Potato"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Картошка",
+            "en": "Potato"
         }
     }
 }

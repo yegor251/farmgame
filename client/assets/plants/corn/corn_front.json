@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "кукуруза",
-            "en": "corn"
+            "ru": "Кукуруза",
+            "en": "Corn"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Кукуруза",
+            "en": "Corn"
         }
     }
 }

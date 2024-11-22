@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "пшеница",
-            "en": "wheat"
+            "ru": "Пшеница",
+            "en": "Wheat"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Пшеница",
+            "en": "Wheat"
         }
     }
 }

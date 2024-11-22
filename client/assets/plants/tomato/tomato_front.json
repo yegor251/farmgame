@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "помидор",
-            "en": "tomato"
+            "ru": "Помидор",
+            "en": "Tomato"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Помидор",
+            "en": "Tomato"
         }
     }
 }

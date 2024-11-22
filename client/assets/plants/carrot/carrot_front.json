@@ -1,12 +1,12 @@
 {
     "localization": {
         "name": {
-            "ru": "морковь",
-            "en": "carrot"
+            "ru": "Морковь",
+            "en": "Carrot"
         },
         "description": {
-            "ru": "растение",
-            "en": "plant"
+            "ru": "Морковь",
+            "en": "Carrot"
         }
     }
 }
