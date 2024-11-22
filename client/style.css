@@ -97,20 +97,6 @@ body{
     pointer-events: none;
     z-index: 1000
 }
-#buttons-bar {
-    z-index: 5;
-    position: absolute;
-    width: 100%;
-    height: 22vw;
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-}
 #money-bar {
     position: fixed;
     top: 0;
@@ -158,6 +144,8 @@ body{
     background-image: url('assets/design/token_icon.png');
 }
 #open-shop, #open-main-menu {
+    position: absolute;
+    z-index: 5;
     width: 20vw;
     aspect-ratio: 1 / 1;
     background-size: cover;
@@ -167,12 +155,15 @@ body{
     margin-bottom: 2vw;
     pointer-events: all;
     box-sizing: border-box;
+    bottom: 0;
 }
 #open-shop {
+    left: 0;
     margin-left: 2vw;
     background-image: url('assets/design/shop_button.png');
 }
 #open-main-menu {
+    right: 0;
     margin-right: 2vw;
     background-image: url('assets/design/profile_button.png');
 }

@@ -121,7 +121,7 @@ export async function main() {
 
     document.addEventListener('touchmove', (e) => {
         const targetElement = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-        const isChildOfBar = !targetElement || targetElement.closest('#buttons-bar') !== null;
+        const isChildOfBar = !targetElement || targetElement == document.getElementById('open-shop') | targetElement == document.getElementById('open-main-menu');
 
         if (canvas === targetElement || isChildOfBar) {
             if (e.touches.length == 1 && !isScaling) {
