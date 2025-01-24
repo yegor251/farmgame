@@ -63,7 +63,9 @@ class MainManu {
     }
     close(){
         document.getElementById("main-menu-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById("open-shop").style.display = "flex";
+        document.getElementById("open-main-menu").style.display = "flex";
+        document.getElementById("open-manual").style.display = "flex";
     }
     renderMenu(){
         document.getElementById('farm-name').innerText = `${GVAR.tg_name}'s farm`;

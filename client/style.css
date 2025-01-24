@@ -6,6 +6,9 @@
     user-select: none;
     overflow-x: hidden;
     overflow-y: hidden;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-overflow-scrolling: none;
 }
 html{
     overflow-x: hidden;
@@ -20,8 +23,20 @@ body{
     overflow: hidden;
     font-family: VCR;
 }
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: none;
+    touch-action: none;
+}
 #canvas{
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     image-rendering: pixelated;
     background: rgb(192, 212, 112);
     width: 100%;
@@ -143,7 +158,7 @@ body{
 #token-img {
     background-image: url('assets/design/token_icon.png');
 }
-#open-shop, #open-main-menu {
+#open-shop, #open-main-menu, #open-manual {
     position: absolute;
     z-index: 5;
     width: 20vw;
@@ -166,6 +181,13 @@ body{
     right: 0;
     margin-right: 2vw;
     background-image: url('assets/design/profile_button.png');
+}
+#open-manual {
+    left: 0;
+    bottom: 20vw;
+    margin-left: 4.5vw;
+    width: 15vw;
+    background-image: url('assets/design/manual_button.png');
 }
 #selection-menu {
     width: 60vw;

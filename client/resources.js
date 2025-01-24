@@ -20,15 +20,14 @@ class Resources {
       });
     }
     this.names.plants = ["wheat", "corn", 'soy', 'sugarCane', 'carrot', 'pumpkin', 'indigo', 'pepper', 'tomato', 'cotton', 'potato'];
-    this.names.items = ['tomatoJuice', 'brownSugar', 'pancakes', 'butterPopcorn',
-      'carrotJuice', 'blackberryCupcake', 'redScarf', 'omelet', 'applePie', 'cookie',
-      'pigFeed', 'sweetPopcorn', 'cherryJuice', 'creamCake', 'raspberryCupcake',
-      'blueCap', 'chickenFeed', 'berryJuice', 'hamburger', 'cherryPie', 'spicyPizza',
-      'carrotCake', 'appleJuice', 'cornbread', 'syrup', 'pizza', 'cheese', 'cream',
-      'whiteSugar', 'potatoBread', 'carrotPie', 'popcorn', 'chilePopcorn', 'purpleDress',
-      'blueSweater', 'bakedTomato', 'strawberryCake', 'pumpkinPie', 'cheesecake', 'bread',
-      'sweater', 'cottonFabric', 'sheepFeed', 'cowFeed', 'bakedPotato', 'shirt', 'shorts',
-      'baconPie', 'butter']; //только крафты
+    this.names.items = ['bread', 'cornbread', 'chickenFeed', 'cowFeed', 'pigFeed', 'sheepFeed',
+      'cream', 'butter', 'cheese', 'brownSugar', 'whiteSugar', 'syrup', 
+      'cookie', 'pancakes', 'popcorn', 'butterPopcorn', 'chilePopcorn', 'sweetPopcorn', 
+      'omelet', 'hamburger', 'bakedTomato', 'blackberryCupcake', 'raspberryCupcake', 
+      'carrotPie', 'pumpkinPie', 'applePie', 'baconPie', 'carrotCake', 'creamCake',
+      'sweater', 'cottonFabric', 'blueCap', 'shirt', 'cherryPie', 'cheesecake', 'strawberryCake',
+      'pizza', 'spicyPizza', 'blueSweater', 'shorts', 'purpleDress', 'redScarf', 
+      'potatoBread', 'bakedPotato', 'carrotJuice', 'appleJuice', 'cherryJuice', 'tomatoJuice', 'berryJuice']; //только крафты
     this.names.animals = ['chicken', 'cow', 'pig', 'sheep'];
     this.names.obstacles = ["small_swamp", 'medium_swamp', 'huge_swamp', 'stone_big', 'autumn_big_tree', 'autumn_tight_tree', 'autumn_tree', 'autumn_tree_fall', 'tree', 'big_stump', 'log', 'small_stump', 'stone_small', 'tree_big', 'tree_fall'];
     this.mapImgNames = ["grass_1", "grass_2"];

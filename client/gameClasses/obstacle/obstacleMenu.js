@@ -27,7 +27,9 @@ class ObstacleMenu {
     close(){
         this.obstacle = 'none'
         document.getElementById("obstacle-menu-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById("open-shop").style.display = "flex";
+        document.getElementById("open-main-menu").style.display = "flex";
+        document.getElementById("open-manual").style.display = "flex";
     }
     renderMenu() {
         const obstacleDelete = document.getElementById('obstacle-button');

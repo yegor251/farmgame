@@ -62,7 +62,9 @@ class Spin {
     }
     close(){
         document.getElementById("spin-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById("open-shop").style.display = "flex";
+        document.getElementById("open-main-menu").style.display = "flex";
+        document.getElementById("open-manual").style.display = "flex";
         document.getElementById('spin-wheel').style.transform = `rotate(0deg)`;
     }
     doSpin(){

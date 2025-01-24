@@ -195,8 +195,8 @@ class local{
               "en": "Complete the order by clicking on the check mark, you can also delete the order by clicking on the trash can"
             },
             "49": {
-              "ru": "Чтобы получить 0.5 токена приглашайте друзей!",
-              "en": "To get 0.5 token, invite your friends!"
+              "ru": "Чтобы получить 10 токенов приглашайте друзей!",
+              "en": "To get 10 tokens, invite your friends!"
             },
             "50": {
               "ru": "Пригласить друзей",

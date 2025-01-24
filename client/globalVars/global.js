@@ -63,7 +63,9 @@ class GlobalVars{
         document.getElementById("deals-wrap").style.display = "none";
         document.getElementById("payment-wrap").style.display = "none";
         document.getElementById("main-menu-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "none";
+        document.getElementById("open-shop").style.display = "none";
+        document.getElementById("open-main-menu").style.display = "none";
+        document.getElementById("open-manual").style.display = "none";
     }
     showFloatingText(code, text) {
         const existingTexts = document.querySelectorAll('.floating-text');

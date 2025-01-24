@@ -16,7 +16,9 @@ class BushMenu{
     }
     close(){
         document.getElementById("bush-menu-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById("open-shop").style.display = "flex";
+        document.getElementById("open-main-menu").style.display = "flex";
+        document.getElementById("open-manual").style.display = "flex";
         this.bush = 'none'
         let startButton = document.getElementById('bush-reset');
         let newButton = startButton.cloneNode(true);

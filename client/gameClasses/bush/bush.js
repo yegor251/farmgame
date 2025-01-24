@@ -105,7 +105,7 @@ export default class Bush extends Buildable{
         const key = Object.keys(RES.buildings[this._type].products)[0]
         const amount = RES.buildings[this._type].products[key]
         if (player.getInvFullness() >= amount){
-            player.pushInventory(this._type, amount);
+            player.pushInventory(key, amount);
             GVAR.showFloatingItem(amount, key, Calc.worldToScreen(this._x + this._w / 2, this._y + this._h / 2, camera.getPos(), GVAR.scale))
             this._timeToFinish = undefined;
             socketClient.send(`collect/${this._x/CVAR.tileSide}/${this._y/CVAR.tileSide}`)

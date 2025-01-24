@@ -7,7 +7,7 @@ class ConstVar{
         this.nextGardenPriceCoef = 1.2; this.nextBuildingPriceCoef = 100;
         this.animalPenCoef = 1.1;
         this.extraSlotPrice = 1000; this.extraSlotCoef = 10;
-        this.orderCompleteTime = 600; this.orderRerollTime = 1800;
+        this.orderCompleteTime = 60; this.orderRerollTime = 60;
         this.maxInvSize = 2000;
         this.redColor = 230; this.greenColor = 230;
         this.wallet = 'UQCF2EoQze-_Devg8oogD1KDNA-AdQCEpNnDFq5HIQLa6ZJh';

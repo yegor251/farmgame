@@ -26,7 +26,9 @@ class Orders {
         this.chosenOrderInd = 'none'
         clearInterval(this._intervalId)
         document.getElementById("orders-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById("open-shop").style.display = "flex";
+        document.getElementById("open-main-menu").style.display = "flex";
+        document.getElementById("open-manual").style.display = "flex";
     }
     show(){
         document.getElementById("orders-wrap").style.display = "flex";

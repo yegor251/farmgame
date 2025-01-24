@@ -242,14 +242,12 @@
 .buildable-bottom {
     width: 100%;
     aspect-ratio: 270 / 11;
-    position: relative;
     overflow: hidden;
     background-image: url('../assets/design/menu_bottom.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     image-rendering: pixelated;
-    font-size: 5vw;
 }
 /*     PROGRESS-BAR      */
 .timer-bar {

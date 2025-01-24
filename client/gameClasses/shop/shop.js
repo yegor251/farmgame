@@ -18,7 +18,9 @@ class Shop{
                 slidableDiv.classList.add('slide-out');
                 setTimeout(() => {
                     document.getElementById("shop-wrap").style.display = "none";
-                    document.getElementById("buttons-bar").style.display = "flex";
+                    document.getElementById("open-shop").style.display = "flex";
+                    document.getElementById("open-main-menu").style.display = "flex";
+                    document.getElementById("open-manual").style.display = "flex";
                 }, 450);
              }
         }
@@ -152,7 +154,9 @@ class Shop{
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
                             document.getElementById("shop-wrap").style.display = "none";
-                            document.getElementById("buttons-bar").style.display = "flex";
+                            document.getElementById("open-shop").style.display = "flex";
+                            document.getElementById("open-main-menu").style.display = "flex";
+                            document.getElementById("open-manual").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,
                                 structureType: 'building'
@@ -345,7 +349,9 @@ class Shop{
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
                             document.getElementById("shop-wrap").style.display = "none";
-                            document.getElementById("buttons-bar").style.display = "flex";
+                            document.getElementById("open-shop").style.display = "flex";
+                            document.getElementById("open-main-menu").style.display = "flex";
+                            document.getElementById("open-manual").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.animals[animal].price,
                                 structureType: 'animal'
@@ -452,7 +458,9 @@ class Shop{
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
                             document.getElementById("shop-wrap").style.display = "none";
-                            document.getElementById("buttons-bar").style.display = "flex";
+                            document.getElementById("open-shop").style.display = "flex";
+                            document.getElementById("open-main-menu").style.display = "flex";
+                            document.getElementById("open-manual").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,
                                 structureType: 'building'
@@ -559,7 +567,9 @@ class Shop{
                     touchTimer = setTimeout(function() {
                         if (!isScrolling) {
                             document.getElementById("shop-wrap").style.display = "none";
-                            document.getElementById("buttons-bar").style.display = "flex";
+                            document.getElementById("open-shop").style.display = "flex";
+                            document.getElementById("open-main-menu").style.display = "flex";
+                            document.getElementById("open-manual").style.display = "flex";
                             player._phantomStructure = {
                                 cost: RES.buildings[building].price,
                                 structureType: 'building'
@@ -650,7 +660,9 @@ class Shop{
     }
     closeStash(){
         document.getElementById("stash-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById("open-shop").style.display = "flex";
+        document.getElementById("open-main-menu").style.display = "flex";
+        document.getElementById("open-manual").style.display = "flex";
     }
 }
 const shop = new Shop();

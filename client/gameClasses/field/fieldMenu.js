@@ -2,6 +2,9 @@ import player from "../player/player.js";
 import GVAR from "../../globalVars/global.js";
 import RES from "../../resources.js";
 import Calc from "../../calc.js";
+import camera from "../controller/camera.js";
+import CVAR from "../../globalVars/const.js";
+import tiles from "../../globalVars/tiles.js";
 
 class FieldMenu{
     constructor() {
@@ -27,7 +30,9 @@ class FieldMenu{
     close(){
         this.field = 'none'
         document.getElementById("field-menu-wrap").style.display = "none";
-        document.getElementById("buttons-bar").style.display = "flex";
+        document.getElementById("open-shop").style.display = "flex";
+        document.getElementById("open-main-menu").style.display = "flex";
+        document.getElementById("open-manual").style.display = "flex";
     }
     renderTimer() {
         const textTime = document.getElementById("field-timeToFinish");
@@ -125,40 +130,93 @@ class FieldMenu{
                         clone.style.left = pageX - clone.offsetWidth / 2 + 'px';
                         clone.style.top = pageY - clone.offsetHeight / 2 + 'px';
                     };
-        
+                
                     const touch = e.touches[0];
                     moveAt(touch.pageX, touch.pageY);
-        
+                
+                    const isWithinBounds = () => {
+                        return isIntersecting(clone.getBoundingClientRect(), craftImg.getBoundingClientRect());
+                    };
+
+                    let isEasyGrow = false
+                
+                    let holdTimeout;
+                    if (isWithinBounds()) {
+                        holdTimeout = setTimeout(() => {
+                            isEasyGrow = true
+                            document.getElementById("field-menu-wrap").style.display = "none";
+                        }, 1000);
+                    }
+                
                     const onTouchMove = (event) => {
-                        if (!isIntersecting(clone.getBoundingClientRect(),craft.getBoundingClientRect()))
+                        if (!isIntersecting(clone.getBoundingClientRect(), craft.getBoundingClientRect()))
                             document.getElementById('drop-list').style.display = 'none';
                         const touch = event.touches[0];
                         moveAt(touch.pageX, touch.pageY);
+
+                        if (isEasyGrow){
+                            const screenPos = Calc.screenToWorld(touch.pageX, touch.pageY, camera.getPos(), GVAR.scale)
+                            const pos = Calc.CanvasToIndex(screenPos.x, screenPos.y, CVAR.tileSide, CVAR.outlineWidth)
+                            pos.i = Math.trunc(pos.i)
+                            pos.j = Math.trunc(pos.j)
+                            console.log(tiles[pos.i] , tiles[pos.i][pos.j] , tiles[pos.i][pos.j]._structure._type == 'garden' , tiles[pos.i][pos.j]._structure._plant == 'none')
+                            if (tiles[pos.i] && tiles[pos.i][pos.j] && tiles[pos.i][pos.j]._structure._type == 'garden' && tiles[pos.i][pos.j]._structure._plant == 'none'){
+                                if (player._inventory[plant]){
+                                    tiles[pos.i][pos.j]._structure.createPlant(plant)
+                                    player._inventory[plant] -= 1
+                                    if (player._inventory[plant] == 0){
+                                        thisMenu.close()
+                                        clone.remove();
+                                    }
+                                } else {
+                                    thisMenu.close()
+                                    clone.remove();
+                                }
+                            }
+                        }
+                
+                        if (!isWithinBounds() && holdTimeout) {
+                            clearTimeout(holdTimeout);
+                            holdTimeout = null;
+                        } else if (isWithinBounds() && !holdTimeout) {
+                            holdTimeout = setTimeout(() => {
+                                isEasyGrow = true
+                                document.getElementById("field-menu-wrap").style.display = "none";
+                            }, 2000);
+                        }
                     };
+                
                     const onTouchEnd = () => {
+                        if (isEasyGrow)
+                            thisMenu.close()
+
                         document.removeEventListener('touchmove', onTouchMove);
+                        if (holdTimeout) {
+                            clearTimeout(holdTimeout);
+                        }
+                
                         const cloneRect = clone.getBoundingClientRect();
                         const visualRect = document.getElementById('field-img').getBoundingClientRect();
                         if (isIntersecting(cloneRect, visualRect) && field.canCreatePlant(plant)) {
-                            if (GVAR.countBuilding('garden') == 1 && player._inventory['wheat'] == 4 && GVAR.countBuilding('bakery') == 0){
+                            if (GVAR.countBuilding('garden') == 1 && player._inventory['wheat'] == 4 && GVAR.countBuilding('bakery') == 0) {
                                 const customEvent = new Event('firstPlantDone');
                                 document.body.dispatchEvent(customEvent);
                             }
                             player._inventory[plant] -= 1;
-                            field.createPlant(plant)
-                            thisMenu.renderPlants()
+                            field.createPlant(plant);
+                            thisMenu.renderPlants();
                         } else {
-                            if (GVAR.countBuilding('garden') == 1 && player._inventory['wheat'] == 4 && GVAR.countBuilding('bakery') == 0){
+                            if (GVAR.countBuilding('garden') == 1 && player._inventory['wheat'] == 4 && GVAR.countBuilding('bakery') == 0) {
                                 const customEvent = new Event('firstPlantBad');
                                 document.body.dispatchEvent(customEvent);
                             }
                         }
                         clone.remove();
                     };
-                    
+                
                     document.addEventListener('touchmove', onTouchMove);
                     document.addEventListener('touchend', onTouchEnd, { once: true });
-                });
+                });                
             }
 
             craft.addEventListener('touchstart', (event) => {

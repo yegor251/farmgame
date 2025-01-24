@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="client/styles/transactions.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/mainMenu.css" type="text/css"/>
     <link rel="stylesheet" href="client/styles/deals_payment.css" type="text/css"/>
+    <link rel="stylesheet" href="client/styles/manual.css" type="text/css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <title>TON Farm</title>
@@ -56,6 +57,7 @@
     <canvas id="canvas"></canvas>
     <div id="open-shop"></div>
     <div id="open-main-menu"></div>
+    <div id="open-manual"></div>
     <div id="money-bar">
         <div id="money-container">
             <h3 id="money"></h3>
@@ -534,6 +536,25 @@
                 <div id="referral-yes">copy</div>
                 <div id="referral-no">close</div>
             </div>
+        </div>
+    </div>
+    <div id="manual-menu-wrap" class="menu-wrap">
+        <div id="manual-menu">
+            <div id="manual-crafts-list"></div>
+            <div id="manual-craft-description">
+                <div class="buildable-menu-bar">
+                    <div id="close-manual" class="buildable-close-button"></div>
+                </div>
+                <div id="manual-description">
+                    <div id="manual-back-button"></div>
+                    <div id="manual-img-bar"></div>
+                    <div id="manual-items-list"></div>
+                    <div id="manual-time-bar">
+                        <h3 id="manual-time"></h3>
+                    </div>
+                </div>
+            </div>
+            <div id="manual-bottom"></div>
         </div>
     </div>
     <div id="bad-code-wrap" class="menu-wrap">

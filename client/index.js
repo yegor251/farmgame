@@ -24,6 +24,7 @@ export async function main() {
         { educationMenu },
         { pm },
         { withdraw },
+        { manualMenu },
     ] = await Promise.all([
         import('./globalVars/global.js'),
         import('./globalVars/canvas.js'),
@@ -48,10 +49,12 @@ export async function main() {
         import('./gameClasses/education/educationMenu.js'),
         import('./gameClasses/ton-connect/tonMenu.js'),
         import('./gameClasses/ton-connect/tonMenu.js'),
+        import('./gameClasses/manual/manual.js'),
     ]);
     educationMenu.start()
     buisnessMenu.init()
     spin.start()
+    manualMenu.start()
 
     // function renderMenues() {
     //     shop.drawAnimalPenShop()
